@@ -6,6 +6,7 @@ const traverse = (tree) => {
     let obj = {
         props: objProps
     }
+    let __objProps = !!tree['__type'] ? objProps : obj
     Object.keys(tree).forEach(
         field => {
             let fieldVal = tree[field]
@@ -13,20 +14,39 @@ const traverse = (tree) => {
             if(field === '__type'){
                 obj["type"] = Exports.components[fieldVal]
             } else if(Array.isArray(fieldVal)){
-                objProps[field] = fieldVal.map(x => traverse(x))
+                __objProps[field] = fieldVal.map(x => traverse(x))
             } else if(typeof fieldVal == 'object' && !Array.isArray(fieldVal)){
-                objProps[field] = traverse(fieldVal)
+                __objProps[field] = traverse(fieldVal)
             } else {
-                objProps[field] = fieldVal
+                __objProps[field] = fieldVal
             }
         }
     )
 
-    return React.createElement(obj['type'], obj.props, obj['children'] ? obj['children'] : undefined);
+    return !!obj['type'] ? React.createElement(obj['type'], obj.props, obj['children'] ? obj['children'] : undefined) : obj;
 }
 
-export default (tree) => {
-    tree['__initialState'] = JSON.stringify(tree)
+//const createElement = obj => {
+//    let type = obj['type']
+//    let props = obj['props']
+//    let children = obj['children']
+//
+//    if(!!type){
+//
+//    }else{
+//
+//    }
+//}
 
-    return traverse(tree)
+export default (tree, addInitialState) => {
+    if(!!addInitialState){
+        tree['__initialState'] = JSON.stringify(tree)
+    }
+    let element = traverse(tree)
+
+
+
+    console.log(element)
+    //return React.createElement(obj['type'], obj.props, obj['children'] ? obj['children'] : undefined);
+    return element
 }

@@ -3,6 +3,7 @@ package com.cathcart93.sling.services;
 import com.cathcart93.sling.ComponentHelper;
 import com.cathcart93.sling.Controller;
 import com.cathcart93.sling.models.GreetingController;
+import com.cathcart93.sling.models.ImageGalleryController;
 import com.cathcart93.sling.models.RootController;
 import com.cathcart93.sling.models.SliderController;
 import org.apache.felix.scr.annotations.Component;
@@ -30,6 +31,7 @@ public class ComponentManager {
         controllerMap.put("Root", RootController.class);
         controllerMap.put("Greeting", GreetingController.class);
         controllerMap.put("Slider", SliderController.class);
+        controllerMap.put("ImageGallery", ImageGalleryController.class);
     }
 
     @Reference

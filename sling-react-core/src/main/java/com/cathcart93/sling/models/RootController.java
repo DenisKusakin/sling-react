@@ -31,7 +31,8 @@ public class RootController extends BaseController {
     private String title;
 
     @Expose
-    private List<Controller> components;
+    //private List<Controller> components;
+    private Par app;
 
     @OSGiService
     private ComponentManager componentManager;
@@ -40,10 +41,19 @@ public class RootController extends BaseController {
     @Override
     public void init() {
         LOGGER.info("Init called");
-        components = StreamSupport.stream(resource.getChildren().spliterator(), false)
+        app = new Par();
+
+        app.components = StreamSupport.stream(resource.getChildren().spliterator(), false)
                 .map(childResource -> componentManager.getController(childResource))
                 .collect(Collectors.toList());
 
     }
 
+    class Par {
+        @Expose
+        private String __type = "Container";
+
+        @Expose
+        private List<Controller> components;
+    }
 }

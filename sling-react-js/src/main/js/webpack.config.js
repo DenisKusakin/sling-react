@@ -29,7 +29,7 @@ devServer: {
 module: {
  loaders: [
    { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
-//   { test: /\.css$/, loader: 'style-loader!css-loader' },
+   { test: /\.css$/, loader: 'style-loader!css-loader' },
 //   { test: /\.less$/, loader: 'style-loader!css-loader!less-loader'}
  ]
 },

@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default ({app, __initialState}) => (
+const Page = ({title, app, __initialState}) => (
     <html lang="en">
         <head>
           <meta charset="utf-8"/>
-          <title>Sling-React Render</title>
+          <title>{`Sling-React Render - ${title}`}</title>
         </head>
 
         <body>
@@ -16,3 +16,5 @@ export default ({app, __initialState}) => (
         </body>
     </html>
 )
+
+export default Page;
