@@ -5,6 +5,7 @@ const Page = ({title, app, __initialState}) => (
         <head>
           <meta charset="utf-8"/>
           <title>{`Sling-React Render - ${title}`}</title>
+          <link rel="stylesheet" href="/etc/react-clientlibs/client.css"/>
         </head>
 
         <body>

@@ -49,11 +49,11 @@ public class RootController extends BaseController {
 
     }
 
-    class Par {
+    static class Par {
         @Expose
         private String __type = "Container";
 
         @Expose
-        private List<Controller> components;
+        public List<Controller> components;
     }
 }

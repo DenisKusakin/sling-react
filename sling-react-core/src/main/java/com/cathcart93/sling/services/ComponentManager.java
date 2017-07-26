@@ -2,10 +2,7 @@ package com.cathcart93.sling.services;
 
 import com.cathcart93.sling.ComponentHelper;
 import com.cathcart93.sling.Controller;
-import com.cathcart93.sling.models.GreetingController;
-import com.cathcart93.sling.models.ImageGalleryController;
-import com.cathcart93.sling.models.RootController;
-import com.cathcart93.sling.models.SliderController;
+import com.cathcart93.sling.models.*;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
@@ -32,6 +29,7 @@ public class ComponentManager {
         controllerMap.put("Greeting", GreetingController.class);
         controllerMap.put("Slider", SliderController.class);
         controllerMap.put("ImageGallery", ImageGalleryController.class);
+        controllerMap.put("Accordion", AccordionController.class);
     }
 
     @Reference
