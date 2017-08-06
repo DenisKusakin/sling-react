@@ -29,11 +29,11 @@
     </parent>
 
     <groupId>com.cathcart93.sling</groupId>
-    <artifactId>sling-react-core</artifactId>
+    <artifactId>sling-react-components</artifactId>
     <packaging>bundle</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Sling Clientlibs Core</name>
-    <description>Core</description>
+    <name>Sling React SSR Components</name>
+    <description>Sling React SSR Components</description>
     <build>
         <plugins>
             <plugin>
@@ -48,13 +48,15 @@
                         <Embed-Directory>OSGI-INF/lib</Embed-Directory>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Export-Package>
-                            com.cathcart93.sling.core*
+                            com.cathcart93.sling.components*
                         </Export-Package>
-                        <Import-Package>*;resolution:=optional</Import-Package>
+                        <Import-Package>
+                            *;resolution:=optional
+                        </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <!--<Sling-Model-Packages>-->
-                            <!--com.cathcart93.sling.components.models-->
-                        <!--</Sling-Model-Packages>-->
+                        <Sling-Model-Packages>
+                            com.cathcart93.sling.components.models
+                        </Sling-Model-Packages>
                     </instructions>
                     <failOnError>true</failOnError>
                 </configuration>
@@ -99,14 +101,14 @@
                         </configuration>
                     </execution>
                     <!--<execution>-->
-                        <!--<id>test-compile</id>-->
-                        <!--<goals> <goal>test-compile</goal> </goals>-->
-                        <!--<configuration>-->
-                            <!--<sourceDirs>-->
-                                <!--<sourceDir>${project.basedir}/src/test/kotlin</sourceDir>-->
-                                <!--<sourceDir>${project.basedir}/src/test/java</sourceDir>-->
-                            <!--</sourceDirs>-->
-                        <!--</configuration>-->
+                    <!--<id>test-compile</id>-->
+                    <!--<goals> <goal>test-compile</goal> </goals>-->
+                    <!--<configuration>-->
+                    <!--<sourceDirs>-->
+                    <!--<sourceDir>${project.basedir}/src/test/kotlin</sourceDir>-->
+                    <!--<sourceDir>${project.basedir}/src/test/java</sourceDir>-->
+                    <!--</sourceDirs>-->
+                    <!--</configuration>-->
                     <!--</execution>-->
                 </executions>
             </plugin>
@@ -134,19 +136,16 @@
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-osgi-bundle</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jre8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
+            <groupId>com.cathcart93.sling</groupId>
+            <artifactId>sling-react-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
+        <!---->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -230,7 +229,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.1</version>
+            <version>2.8.0</version>
         </dependency>
     </dependencies>
     <properties>

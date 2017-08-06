@@ -26,27 +26,10 @@ const traverse = (tree) => {
     return !!obj['type'] ? React.createElement(obj['type'], obj.props, obj['children'] ? obj['children'] : undefined) : obj;
 }
 
-//const createElement = obj => {
-//    let type = obj['type']
-//    let props = obj['props']
-//    let children = obj['children']
-//
-//    if(!!type){
-//
-//    }else{
-//
-//    }
-//}
-
 export default (tree, addInitialState) => {
     if(!!addInitialState){
         tree['__initialState'] = JSON.stringify(tree)
     }
     let element = traverse(tree)
-
-
-
-    console.log(element)
-    //return React.createElement(obj['type'], obj.props, obj['children'] ? obj['children'] : undefined);
     return element
 }

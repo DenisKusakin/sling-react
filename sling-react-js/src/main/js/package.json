@@ -19,6 +19,7 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "material-ui": "^0.18.1",
     "react": "^15.5.4",
     "react-accessible-accordion": "^0.4.0",
