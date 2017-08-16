@@ -31,9 +31,7 @@ class SelfUpdatableContainerController : IReactController {
         contentPath = resource.path
         val items = resource.children
                 .map {
-                    val item = it.adaptTo(IReactController::class.java)
-                    item?.init()
-                    item
+                    it.adaptTo(IReactController::class.java)
                 }
                 .filterNotNull()
         content.components = items

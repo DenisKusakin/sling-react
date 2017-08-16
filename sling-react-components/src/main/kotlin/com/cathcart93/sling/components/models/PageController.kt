@@ -27,7 +27,7 @@ class PageController : IReactController {
     private lateinit var resource: Resource
 
     @ReactProp
-    private var app: Container = Container()
+    private val app: Container = Container()
 
     override fun init() {
         app.components = resource.children

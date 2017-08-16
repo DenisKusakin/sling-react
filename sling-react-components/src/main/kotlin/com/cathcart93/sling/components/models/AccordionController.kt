@@ -23,9 +23,7 @@ class AccordionController : IReactController {
     override fun init() {
         items = resource!!.children
                 .map {
-                    val accordionItem = it.adaptTo(AccordionItemModel::class.java)
-                    accordionItem?.init()
-                    accordionItem
+                    it.adaptTo(AccordionItemModel::class.java)
                 }
                 .filterNotNull()
     }

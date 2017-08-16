@@ -15,17 +15,17 @@ class AccordionItemModel : IReactController {
 
     @ValueMapValue(name = "title")
     @ReactProp
-    private val title: String? = null
+    private lateinit var title: String
 
     @SlingObject
-    private val resource: Resource? = null
+    private lateinit var resource: Resource
 
     @ReactProp
     private val body = Container()
 
     @PostConstruct
     override fun init() {
-        body.components = resource!!.children
+        body.components = resource.children
                 .map { it.adaptTo(IReactController::class.java) }
                 .filterNotNull()
     }
