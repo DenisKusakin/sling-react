@@ -18,7 +18,4 @@ class GreetingController : IReactController {
     @ReactProp
     private val message: String? = null
 
-    override fun init() {
-
-    }
 }

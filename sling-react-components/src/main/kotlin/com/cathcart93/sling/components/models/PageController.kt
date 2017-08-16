@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory
  */
 @Model(adaptables = arrayOf(Resource::class, SlingHttpServletRequest::class))
 @ReactController(componentName = "Root")
-class RootController : IReactController {
+class PageController : IReactController {
 
     @ValueMapValue(name = "title", optional = true)
     @ReactProp
@@ -30,7 +30,6 @@ class RootController : IReactController {
     private var app: Container = Container()
 
     override fun init() {
-        LOGGER.info("Init called")
         app.components = resource.children
                 .map { it.adaptTo(IReactController::class.java) }
                 .filterNotNull()
@@ -38,6 +37,6 @@ class RootController : IReactController {
     }
 
     companion object {
-        private val LOGGER = LoggerFactory.getLogger(RootController::class.java)
+        private val LOGGER = LoggerFactory.getLogger(PageController::class.java)
     }
 }

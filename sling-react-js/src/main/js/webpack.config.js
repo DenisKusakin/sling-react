@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     server: ['babel-polyfill', './server-entry.js'],
     client: ['babel-polyfill', './client-entry.js'],
+    devClient: ['babel-polyfill', './client-entry.dev.js'],
     //adminClientEntry: ['babel-polyfill', './admin-client-entry.js']
   },
 output: {

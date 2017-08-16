@@ -1,9 +1,10 @@
-import Root from './root-component.js'
-import Greeting from './simple-component.js'
+import Root from './page.js'
+import Greeting from './title-component.js'
 import Slider from './slider-component.js'
 import Container from './container.js'
 import ImageGallery from './image-gallery.js'
 import Accordion from './accordion.js'
+import SelfUpdatableContainer from './self-updatable-container.js'
 
 export default {
     Root,
@@ -11,5 +12,6 @@ export default {
     Slider,
     Container,
     ImageGallery,
-    Accordion
+    Accordion,
+    SelfUpdatableContainer
 }

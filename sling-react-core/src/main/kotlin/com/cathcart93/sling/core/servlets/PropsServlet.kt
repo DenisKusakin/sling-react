@@ -39,16 +39,17 @@ class PropsServlet : SlingSafeMethodsServlet() {
     private val log = LoggerFactory.getLogger(PropsServlet::class.java)
 
     @Reference
-    private val beanSerializer: BeanSerializer? = null
+    private lateinit var beanSerializer: BeanSerializer
 
     @Throws(ServletException::class, IOException::class)
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
         val writer = response.writer
         val controller = request.adaptTo(IReactController::class.java)
-        writer.append(beanSerializer!!.convertToMap(controller!!))
+        writer.append(beanSerializer.convertToMap(controller!!))
         response.contentType = "json"
-
+        //TODO: rework
+        response.setHeader("Access-Control-Allow-Origin", "*")
     }
 
 }

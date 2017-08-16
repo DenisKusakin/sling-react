@@ -28,19 +28,13 @@ class React {
     private val resolverFactory: ResourceResolverFactory? = null
 
     @Reference
-    private val beanSerializer: BeanSerializer? = null
-
-    //    @Reference
-    //    private PropsService propsService;
+    private lateinit var beanSerializer: BeanSerializer
 
     private var nashornScriptEngine: NashornScriptEngine? = null
 
     fun renderElement(request: SlingHttpServletRequest): String {
-        val controller = request.adaptTo(IReactController::class.java)
-        if (controller == null) {
-            return "{}"
-        }
-        val props = beanSerializer!!.convertToMap(controller)
+        val controller = request.adaptTo(IReactController::class.java) ?: return "{}"
+        val props = beanSerializer.convertToMap(controller)
         return render(props)
     }
 
