@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import createReactElement from './create-react-element.js'
+//TODO: Should not be imported
 import './rerender.js'
 
 document.addEventListener("DOMContentLoaded", () => {

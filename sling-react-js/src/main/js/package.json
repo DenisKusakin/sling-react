@@ -23,6 +23,7 @@
     "material-ui": "^0.18.7",
     "react": "^15.5.4",
     "react-accessible-accordion": "^0.4.0",
+    "react-contexify": "^2.0.7",
     "react-dom": "^15.5.4",
     "react-image-gallery": "^0.8.3",
     "react-material-icons": "^1.0.2",

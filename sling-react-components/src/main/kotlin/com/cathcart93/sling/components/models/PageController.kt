@@ -1,5 +1,6 @@
 package com.cathcart93.sling.components.models
 
+import com.cathcart93.sling.components.Application
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.components.Container
@@ -26,17 +27,18 @@ class PageController : IReactController {
     @SlingObject
     private lateinit var resource: Resource
 
+    @SlingObject
+    private lateinit var request: SlingHttpServletRequest
+
     @ReactProp
-    private val app: Container = Container()
+    private val app: Application = Application()
 
     override fun init() {
-        app.components = resource.children
+        val content = Container()
+        content.components = resource.children
                 .map { it.adaptTo(IReactController::class.java) }
                 .filterNotNull()
-
-    }
-
-    companion object {
-        private val LOGGER = LoggerFactory.getLogger(PageController::class.java)
+        app.content = content
+        app.isEditMode = request.getParameter("isEdit") != null
     }
 }
