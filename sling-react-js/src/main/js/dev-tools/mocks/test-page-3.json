@@ -1,0 +1,26 @@
+{
+    "content": {
+        "components": [
+            {
+                "message": "Test Page 3",
+                "__type": "Greeting",
+                "__propTypes": {
+                    "message": {
+                        "type": "string",
+                        "value": "Test Page 3",
+                        "persistenceProps": {
+                            "contentPath": "./sdf/sdf",
+                            "name": "message"
+                        }
+                    }
+                }
+            },
+            {
+                "message": "Greeting Component",
+                "__type": "Greeting"
+            }
+        ],
+        "__type": "Container"
+    },
+    "isEditMode": true
+}
