@@ -4,9 +4,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    server: ['babel-polyfill', './server-entry.js'],
-    client: ['babel-polyfill', './client-entry.js'],
-    devClient: ['babel-polyfill', './client-entry.dev.js'],
+    server: ['babel-polyfill', './entries/server-entry.js'],
+    client: ['babel-polyfill', './entries/client-entry.js'],
+    devClient: ['babel-polyfill', './entries/client-entry.dev.js'],
     //adminClientEntry: ['babel-polyfill', './admin-client-entry.js']
   },
 output: {
