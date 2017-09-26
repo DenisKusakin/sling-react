@@ -2,12 +2,12 @@ import thunk from 'redux-thunk';
 import axios from 'axios'
 
 export const UPDATE_STATE = "UPDATE_STATE"
+export const EDIT_MODE_SWITCH = "EDIT_MODE_SWITCH"
 
 export const requestStateFromServer = (url) => {
     return (dispatch) => {
         axios.get(url)
             .then(({data: {app}}) => {
-                //ReactDOM.render(createReactElement(app), document.getElementById('app'))
                 dispatch({
                     type: UPDATE_STATE,
                     newState: app
@@ -19,5 +19,10 @@ export const requestStateFromServer = (url) => {
     }
 }
 
-// export UPDATE_STATE
-// export requestStateFromServer;
+export const switchEditMode = () => {
+    return (dispatch) => {
+        dispatch({
+            type: EDIT_MODE_SWITCH
+        })
+    }
+}

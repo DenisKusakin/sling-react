@@ -35,7 +35,7 @@ class ReactControllerSerializer : JsonSerializer<IReactController> {
         return jsonObject
     }
 
-    fun getComponentName(controller: IReactController): String? {
+    private fun getComponentName(controller: IReactController): String? {
         return controller.javaClass.getAnnotation(ReactController::class.java)?.componentName
     }
 }

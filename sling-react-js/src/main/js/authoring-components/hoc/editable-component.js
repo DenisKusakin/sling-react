@@ -1,7 +1,13 @@
 import React from 'react';
 //import './border.css';
 
-const editableComponent = (Component, Dialog) => (props) => Dialog ? <Dialog {...props}/> : <Component {...props}/>
+const editableComponent = (Component, Dialog) => (props) => {
+    if (Dialog && props.__propTypes) {
+        return <Dialog {...props} />
+    } else {
+        return <Component {...props} />
+    }
+}
 
 {/* <div className="edit-wrapper">
     <div style={{ float: 'left' }}>

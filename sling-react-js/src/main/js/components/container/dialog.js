@@ -9,6 +9,12 @@ import darkTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import Container from './container.js'
 import './border.css'
 
+const ContainerEdit = ({components}) => {
+    return <div>
+        {components.map((x, i) => <div key={i} className="edit-wrapper">{x}</div>)}
+    </div>
+}
+
 class TitleDialog extends React.Component {
 
     state = {
@@ -40,7 +46,7 @@ class TitleDialog extends React.Component {
 
         return <div>
             <div className="container-edit-mode">
-                <Container {...this.props}/>
+                <ContainerEdit {...this.props}/>
                 <MuiThemeProvider theme={darkTheme}>
                     <div>
                         <div style={{"textAlign": "center"}}>

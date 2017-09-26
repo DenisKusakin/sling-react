@@ -4,6 +4,7 @@ import com.cathcart93.sling.components.Application
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.components.Container
+import com.cathcart93.sling.components.Root
 import com.cathcart93.sling.core.ReactProp
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
@@ -33,6 +34,9 @@ class PageController : IReactController {
     @ReactProp
     private val app: Application = Application()
 
+//    @ReactProp("__initialState")
+//    private lateinit var initialState: Root
+
     override fun init() {
         val content = Container()
         content.components = resource.children
@@ -40,5 +44,7 @@ class PageController : IReactController {
                 .filterNotNull()
         app.content = content
         app.isEditMode = request.getParameter("isEdit") != null
+
+//        initialState = Root(title, app)
     }
 }

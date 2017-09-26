@@ -5,6 +5,7 @@ import App from "./components/containers/app-container.js"
 import createStore from "./redux/store.js"
 import Mocks from "./mocks"
 import injectTapEventPlugin  from "react-tap-event-plugin";
+import MobxDevTools from "mobx-react-devtools";
 
 class Root extends React.Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class Root extends React.Component {
             <Provider store={this.store}>
                 <div>
                     <DevTools/>
+                    <MobxDevTools/>
                     <App/>
                 </div>
             </Provider>
