@@ -6,6 +6,7 @@ import createStore from "./redux/store.js"
 import Mocks from "./mocks"
 import injectTapEventPlugin  from "react-tap-event-plugin";
 import MobxDevTools from "mobx-react-devtools";
+import TestPage3 from "./mocks/test-page-3.json"
 
 class Root extends React.Component {
     constructor(props) {
@@ -14,9 +15,9 @@ class Root extends React.Component {
         this.store = createStore({
             devTools: {
                 pages: Mocks,
-                currentPage: 'TestPage'
+                currentPage: 'TestPage3'
             },
-            state: {}
+            state: TestPage3
         })
         injectTapEventPlugin();
     }

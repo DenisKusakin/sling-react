@@ -6,8 +6,8 @@ class FieldSet {
 
     constructor(fields = []){
         this.fields = fields
-            .map(({name, value}) => new Field({
-                name,
+            .map(({persistenceProps, value}) => new Field({
+                persistenceProps,
                 initialValue: value
             }))
     }
@@ -15,7 +15,7 @@ class FieldSet {
     @computed get values() {
         return this.fields
             .map(field => ({
-                name: field.name,
+                persistenceProps: field.persistenceProps,
                 value: field.value
             }))
     }

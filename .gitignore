@@ -1,5 +1,7 @@
 **/node_modules
 **/target
 **/.idea
-**/*.iml
+**/.iml
 **/.history
+**/jcr_root/etc/react-clientlibs
+*.iml

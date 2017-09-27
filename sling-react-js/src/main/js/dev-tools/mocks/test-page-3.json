@@ -17,7 +17,17 @@
             },
             {
                 "message": "Greeting Component",
-                "__type": "Greeting"
+                "__type": "Greeting",
+                "__propTypes": [
+                    {
+                        "type": "string",
+                        "value": "Greeting Component",
+                        "persistenceProps": {
+                            "contentPath": "./sdf/sdf",
+                            "name": "message"
+                        }
+                    }
+                ]
             },
             {
                 "items": [

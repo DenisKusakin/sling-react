@@ -2,7 +2,7 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import EditIcon from 'react-material-icons/icons/editor/mode-edit';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import IconButton from 'material-ui/IconButton'
 import { MuiThemeProvider } from 'material-ui/styles';
 import darkTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -23,7 +23,7 @@ class SimpleDialog extends React.Component {
 
     constructor(props) {
         super(props)
-        let fields = props.fields.map(({name, value}) => ({name, value}))
+        let fields = props.fields.map(({persistenceProps, value}) => ({persistenceProps, value}))
         this.fieldSetModel = new FieldSetModel(fields)
         this.state = {
             open: false

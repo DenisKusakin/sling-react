@@ -2,10 +2,10 @@ import { observable, computed, action } from "mobx";
 
 class Field {
     @observable value = null
-    name = null
+    persistenceProps = null
 
-    constructor({initialValue, name}){
-        this.name = name
+    constructor({initialValue, persistenceProps}){
+        this.persistenceProps = persistenceProps
         this.value = initialValue
     }
 }

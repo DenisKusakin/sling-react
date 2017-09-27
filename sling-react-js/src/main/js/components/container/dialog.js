@@ -2,7 +2,7 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import AddIcon from 'react-material-icons/icons/content/add-circle-outline';
+import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import IconButton from 'material-ui/IconButton'
 import { MuiThemeProvider } from 'material-ui/styles';
 import darkTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
