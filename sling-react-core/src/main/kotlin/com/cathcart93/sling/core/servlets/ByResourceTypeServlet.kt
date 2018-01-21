@@ -1,24 +1,8 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 package com.cathcart93.sling.core.servlets
 
-import com.cathcart93.sling.core.services.React
+import com.cathcart93.sling.core.IReactController
+import com.cathcart93.sling.core.services.BeanSerializer
+import com.cathcart93.sling.core.services.ReactEngine
 import java.io.IOException
 
 import javax.servlet.ServletException
@@ -39,15 +23,26 @@ class ByResourceTypeServlet : SlingSafeMethodsServlet() {
     private val log = LoggerFactory.getLogger(ByResourceTypeServlet::class.java)
 
     @Reference
-    private val react: React? = null
+    private lateinit var react: ReactEngine
+
+    @Reference
+    private lateinit var beanSerializer: BeanSerializer
+
+    private val SOURCE_PATH = "/etc/react-clientlibs/server.js"
 
     @Throws(ServletException::class, IOException::class)
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
         val writer = response.writer
-        writer.append(react!!.renderElement(request))
+        val html = renderElement(request)
         response.contentType = "text/html"
+        writer.append(html)
+    }
 
+    fun renderElement(request: SlingHttpServletRequest): String {
+        val controller = request.adaptTo(IReactController::class.java)
+        val props = beanSerializer.convertToMap(controller!!)
+        return react.render(props, SOURCE_PATH)
     }
 
 }

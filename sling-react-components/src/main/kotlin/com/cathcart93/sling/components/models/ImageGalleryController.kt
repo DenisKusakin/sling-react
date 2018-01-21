@@ -18,7 +18,4 @@ class ImageGalleryController : IReactController {
     @ReactProp
     private val items: List<ImageGalleryItem>? = null
 
-    override fun init() {
-
-    }
 }

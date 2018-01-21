@@ -10,8 +10,8 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 
 import javax.annotation.PostConstruct
 
-@Model(adaptables = arrayOf(Resource::class))
-class AccordionItemModel : IReactController {
+@Model(adaptables = [(Resource::class)], adapters = [AccordionItemModel::class])
+class AccordionItemModel : IReactController{
 
     @ValueMapValue(name = "title")
     @ReactProp
@@ -23,10 +23,7 @@ class AccordionItemModel : IReactController {
     @ReactProp
     private val body = Container()
 
-    @PostConstruct
-    override fun init() {
-        body.components = resource.children
-                .map { it.adaptTo(IReactController::class.java) }
-                .filterNotNull()
+    @PostConstruct fun init() {
+//        body.components = resource.children.mapNotNull { it.adaptTo(IReactController::class.java) }
     }
 }

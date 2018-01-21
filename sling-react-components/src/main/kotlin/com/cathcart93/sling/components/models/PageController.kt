@@ -1,29 +1,26 @@
 package com.cathcart93.sling.components.models
 
-import com.cathcart93.sling.components.Application
+import com.cathcart93.sling.components.Container
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
-import com.cathcart93.sling.components.Container
-import com.cathcart93.sling.components.Root
 import com.cathcart93.sling.core.ReactProp
+import com.cathcart93.sling.core.services.BeanSerializer
+import com.cathcart93.sling.core.services.ReactEngine
+import org.apache.felix.scr.annotations.Reference
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
+import org.apache.sling.models.annotations.injectorspecific.OSGiService
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
-import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
-import org.slf4j.LoggerFactory
-
+import javax.annotation.PostConstruct
 
 /**
  * Created by Kusak on 7/15/2017.
  */
 @Model(adaptables = arrayOf(Resource::class, SlingHttpServletRequest::class))
-@ReactController(componentName = "Root")
+@ReactController(componentName = "Page")
 class PageController : IReactController {
-
-    @ValueMapValue(name = "title", optional = true)
-    @ReactProp
-    lateinit var title: String
+    private val SOURCE_PATH = "/etc/react-clientlibs/server.js"
 
     @SlingObject
     private lateinit var resource: Resource
@@ -31,20 +28,35 @@ class PageController : IReactController {
     @SlingObject
     private lateinit var request: SlingHttpServletRequest
 
-    @ReactProp
-    private val app: Application = Application()
+    @OSGiService
+    private lateinit var beanSerializer: BeanSerializer
 
-//    @ReactProp("__initialState")
-//    private lateinit var initialState: Root
+    @OSGiService
+    private lateinit var react: ReactEngine
 
-    override fun init() {
-        val content = Container()
-        content.components = resource.children
-                .map { it.adaptTo(IReactController::class.java) }
-                .filterNotNull()
-        app.content = content
-        app.isEditMode = request.getParameter("isEdit") != null
+    lateinit var props: String
 
-//        initialState = Root(title, app)
+    @PostConstruct
+    fun init() {
+        val components = resource.children.mapNotNull { it.adaptTo(IReactController::class.java) }
+        val container = Container(components = components, path = resource.path)
+        val isEditMode = request.getParameter("isEdit") != null
+        props = beanSerializer.convertToMap(App("${resource.path}.json?isEdit=$isEditMode", isEditMode, container))
+    }
+
+    fun getHtml(): String {
+        return react.render(props, SOURCE_PATH)
+    }
+
+    class App(url: String, isEditMode: Boolean, content: Any) {
+
+        @ReactProp
+        private val isEditMode = isEditMode
+
+        @ReactProp
+        private val content = content
+
+        @ReactProp
+        private val url = url
     }
 }

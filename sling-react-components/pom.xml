@@ -35,6 +35,7 @@
     <name>Sling React SSR Components</name>
     <description>Sling React SSR Components</description>
     <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -51,6 +52,7 @@
                             com.cathcart93.sling.components*
                         </Export-Package>
                         <Import-Package>
+                            javax.annotation;resolution:=required,
                             *;resolution:=optional
                         </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
@@ -87,18 +89,23 @@
             <!--</plugin>-->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <version>${kotlin.version}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
-                        <phase>process-sources</phase>
+                        <phase>compile</phase>
                         <goals> <goal>compile</goal> </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                            </sourceDirs>
-                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
                     </execution>
                     <!--<execution>-->
                     <!--<id>test-compile</id>-->

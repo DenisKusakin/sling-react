@@ -1,76 +1,88 @@
 package com.cathcart93.sling.core.services
 
-import com.cathcart93.sling.core.IReactController
+import com.cathcart93.sling.core.measureExecTime
+import com.google.common.cache.Cache
 import jdk.nashorn.api.scripting.NashornScriptEngine
 import org.apache.commons.io.IOUtils
 import org.apache.felix.scr.annotations.Activate
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Reference
 import org.apache.felix.scr.annotations.Service
-import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.*
 import org.osgi.service.component.ComponentContext
 import org.slf4j.LoggerFactory
+import java.io.FileNotFoundException
 import javax.script.ScriptEngineManager
-import javax.script.ScriptException
 import java.io.IOException
 import java.io.InputStream
 import java.util.HashMap
+import com.google.common.cache.CacheBuilder
+
 
 /**
  * Created by Kusak on 7/9/2017.
  */
 @Component
-@Service(React::class)
-class React {
+@Service(ReactEngine::class)
+class React : ReactEngine {
 
     @Reference
-    private val resolverFactory: ResourceResolverFactory? = null
+    private lateinit var resolverFactory: ResourceResolverFactory
 
-    @Reference
-    private lateinit var beanSerializer: BeanSerializer
+    private lateinit var enginesCache: Cache<String, NashornScriptEngine>
 
-    private var nashornScriptEngine: NashornScriptEngine? = null
+    override fun render(props: String, scriptPath: String): String {
+        val scriptEngine = getScriptEngine(scriptPath)
 
-    fun renderElement(request: SlingHttpServletRequest): String {
-        val controller = request.adaptTo(IReactController::class.java) ?: return "{}"
-        val props = beanSerializer.convertToMap(controller)
-        return render(props)
+        val (html, time) = measureExecTime {
+            try {
+                val exp = String.format(RENDER_REACT_ELEMENT_TEMPLATE, props)
+                val html = scriptEngine.eval(exp)
+                html.toString()
+            } catch (e: Exception) {
+                "Render Exception: $e"
+            }
+        }
+
+        LOGGER.info("Render time: {}", time)
+
+        return html
     }
 
-    private fun render(element: String): String {
-        try {
-            val exp = String.format(RENDER_REACT_ELEMENT_TEMPLATE, element)
-            val html = nashornScriptEngine!!.eval(exp)
-            return html.toString()
-        } catch (e: Exception) {
-            return "Render Exception: " + e.toString()
-        }
+    private fun getScriptEngine(scriptPath: String): NashornScriptEngine {
+
+        return enginesCache.get(scriptPath, {
+            val (engine, time) = measureExecTime {
+                val jsPolyfill = readFile(POLYFILL_SOURCE_PATH)
+                val jsSource = readFile(scriptPath) ?: throw FileNotFoundException("JS Source not found: $scriptPath")
+                val nashornScriptEngine = ScriptEngineManager().getEngineByName("nashorn") as NashornScriptEngine
+
+                if (jsPolyfill == null) {
+                    LOGGER.error("JS Polyfill Source is not defined")
+                }
+
+                try {
+                    if (jsPolyfill != null) {
+                        nashornScriptEngine.eval(jsPolyfill)
+                    }
+                    nashornScriptEngine.eval(jsSource)
+                } catch (e: Exception) {
+                    LOGGER.error("Script Error: {}", e.toString())
+                }
+
+                nashornScriptEngine
+            }
+            LOGGER.info("JS source parsing time: {}", time)
+            engine
+        })
 
     }
 
     @Activate
-    protected fun init(componentContext: ComponentContext) {
-        val jsSource = readFile(SOURCE_PATH)
-        val jsPolyfill = readFile(POLIFILL_SOURCE_PATH)
-
-        nashornScriptEngine = ScriptEngineManager().getEngineByName("nashorn") as NashornScriptEngine
-
-        if (jsSource == null) {
-            LOGGER.error("JS Source is not defined")
-        }
-
-        if (jsPolyfill == null) {
-            LOGGER.error("JS Polyfill Source is not defined")
-        }
-
-        try {
-            nashornScriptEngine!!.eval(jsPolyfill)
-            nashornScriptEngine!!.eval(jsSource)
-        } catch (e: ScriptException) {
-            LOGGER.error("Script Error: {}", e.toString())
-        }
-
+    private fun init(componentContext: ComponentContext) {
+        enginesCache = CacheBuilder.newBuilder()
+                .maximumSize(100)
+                .build<String, NashornScriptEngine>()
     }
 
     private fun readFile(path: String): String? {
@@ -79,17 +91,19 @@ class React {
         var resourceResolver: ResourceResolver? = null
         var jsSource: String? = null
         try {
-            resourceResolver = resolverFactory!!.getServiceResourceResolver(auth)
+            resourceResolver = resolverFactory.getServiceResourceResolver(auth)
         } catch (e: LoginException) {
             LOGGER.error("Login Exception: {}", e.toString())
             return null
         }
 
-        val sourceResource = resourceResolver.getResource(path)
+        val sourceResource = resourceResolver.getResource(path) ?: return null
         try {
-            jsSource = IOUtils.toString(sourceResource!!.adaptTo(InputStream::class.java)!!, "UTF-8")
+            jsSource = IOUtils.toString(sourceResource.adaptTo(InputStream::class.java), "UTF-8")
         } catch (e: IOException) {
             LOGGER.error("File does not exist: {}", path)
+        } finally {
+            resourceResolver.close()
         }
 
         return jsSource
@@ -97,8 +111,7 @@ class React {
 
     companion object {
 
-        private val SOURCE_PATH = "/etc/react-clientlibs/server.js"
-        private val POLIFILL_SOURCE_PATH = "/etc/react-clientlibs/nashorn-polyfill.js"
+        private val POLYFILL_SOURCE_PATH = "/etc/react-clientlibs/nashorn-polyfill.js"
         private val RENDER_REACT_ELEMENT_TEMPLATE = "renderElement(%s)"
 
         private val LOGGER = LoggerFactory.getLogger(React::class.java)

@@ -19,8 +19,8 @@ import java.util.stream.Collectors
 @Component(immediate = true)
 @Service(AdapterFactory::class)
 @Properties(
-        Property(name = "adaptables", value = *arrayOf("org.apache.sling.api.resource.Resource", "org.apache.sling.api.SlingHttpServletRequest")),
-        Property(name = "adapters", value = *arrayOf("com.cathcart93.sling.core.IReactController"))
+        Property(name = "adaptables", value = ["org.apache.sling.api.resource.Resource", "org.apache.sling.api.SlingHttpServletRequest"]),
+        Property(name = "adapters", value = ["com.cathcart93.sling.core.IReactController"])
 )
 class ControllerAdapter : AdapterFactory {
     private val LOGGER = LoggerFactory.getLogger(ControllerAdapter::class.java)
@@ -41,13 +41,13 @@ class ControllerAdapter : AdapterFactory {
             if (controllerClass !== null) {
                 if (modelFactory.canCreateFromAdaptable(adaptable, controllerClass)) {
                     val controllerInstance = modelFactory.createModel(adaptable, controllerClass) as IReactController
-                    controllerInstance.init()
                     return controllerInstance as AdapterType?
                 } else {
                     LOGGER.error("Controller class found but it can't be instantiated")
                 }
             } else {
-                LOGGER.error("Controller class not found, component: {}", componentName)
+                val res = (adaptable as? SlingHttpServletRequest)?.resource ?: adaptable as Resource
+                LOGGER.error("Controller class not found, component: {}, resource: {}", componentName, res.path)
             }
         }
         return null
@@ -68,9 +68,7 @@ class ControllerAdapter : AdapterFactory {
                     .map {
                         bundle.loadClass(it)
                     }
-                    .stream()
                     .filter { it.isAnnotationPresent(ReactController::class.java) }
-                    .collect(Collectors.toList())
         }
 
         // TODO: Do something on activation

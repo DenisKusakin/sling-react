@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Sling React</title>
+    </head>
+    <body>
+        <div id="app" data-sly-use.app="${'com.cathcart93.sling.components.models.PageController'}">
+            ${app.html @context='unsafe'}
+        </div>
+        <script src="/etc/react-clientlibs/client.js">
+        </script>
+    </body>
+</html>

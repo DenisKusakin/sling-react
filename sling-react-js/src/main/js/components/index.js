@@ -1,19 +1,11 @@
-import Root from './page.js'
-import Greeting from './title/title.js'
-import Slider from './slider-component.js'
-import Container from './container/container.js'
-import Application from './application.js'
-import ImageGallery from './image-gallery/image-gallery.js'
-import Accordion from './accordion/accordion.js'
-import SelfUpdatableContainer from './self-updatable-container.js'
+import Title from './title'
+import Subtitle from './subtitle'
+import Container from './container'
+import UpdatableContainer from './updatable-container'
 
 export default {
-    Root,
-    Application,
-    Greeting,
-    Slider,
+    Title,
+    Subtitle,
     Container,
-    ImageGallery,
-    Accordion,
-    SelfUpdatableContainer
+    UpdatableContainer
 }

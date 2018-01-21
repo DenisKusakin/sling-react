@@ -5,26 +5,25 @@ import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
+import org.apache.sling.models.annotations.injectorspecific.ChildResource
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 
 import javax.annotation.PostConstruct
 
-@Model(adaptables = arrayOf(Resource::class))
+@Model(adaptables = [Resource::class])
 @ReactController(componentName = "Accordion")
 class AccordionController : IReactController {
 
     @ReactProp
-    private var items: List<AccordionItemModel>? = null
+    private lateinit var  items: List<AccordionItemModel>
 
     @SlingObject
-    private var resource: Resource? = null
+    private lateinit var resource: Resource
 
     @PostConstruct
-    override fun init() {
-        items = resource!!.children
-                .map {
-                    it.adaptTo(AccordionItemModel::class.java)
-                }
-                .filterNotNull()
+    fun init() {
+        items = resource.children.mapNotNull {
+            it.adaptTo(AccordionItemModel::class.java)
+        }
     }
 }

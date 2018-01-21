@@ -16,8 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.cathcart93.sling.core.servlets
+package com.cathcart93.sling.components
 
+import com.cathcart93.sling.components.models.PageController
 import com.cathcart93.sling.core.services.BeanSerializer
 import com.cathcart93.sling.core.IReactController
 import org.apache.felix.scr.annotations.Properties
@@ -32,21 +33,17 @@ import org.slf4j.LoggerFactory
 import javax.servlet.ServletException
 import java.io.IOException
 
-@SlingServlet(resourceTypes = ["react/components"], extensions = ["json"])
+@SlingServlet(resourceTypes = ["sling-react/page"], extensions = ["json"])
 @Properties(Property(name = "service.description", value = "Props Servlet"), Property(name = "service.vendor", value = "Cathcart 93"))
 class PropsServlet : SlingSafeMethodsServlet() {
 
     private val log = LoggerFactory.getLogger(PropsServlet::class.java)
 
-    @Reference
-    private lateinit var beanSerializer: BeanSerializer
-
-    @Throws(ServletException::class, IOException::class)
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
         val writer = response.writer
-        val controller = request.adaptTo(IReactController::class.java)
-        writer.append(beanSerializer.convertToMap(controller!!))
+        val controller = request.adaptTo(PageController::class.java)
+        writer.append(controller!!.props)
         response.contentType = "json"
         //TODO: rework
         response.setHeader("Access-Control-Allow-Origin", "*")

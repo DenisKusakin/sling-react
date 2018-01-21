@@ -15,10 +15,11 @@ import javax.annotation.PostConstruct
 @ReactController(componentName = "SelfUpdatableContainer")
 class SelfUpdatableContainerController : IReactController {
 
-    //private var items: List<IReactController>? = null
+//    @ReactProp(name = "initialContent")
+//    private var content: Container = Container()
 
-    @ReactProp(name = "initialContent")
-    private var content: Container = Container()
+    @ReactProp
+    private var isEditMode: Boolean = false
 
     @ReactProp
     private lateinit var contentPath: String
@@ -27,13 +28,12 @@ class SelfUpdatableContainerController : IReactController {
     private lateinit var resource: Resource
 
     @PostConstruct
-    override fun init() {
+    fun init() {
         contentPath = resource.path
-        val items = resource.children
-                .map {
-                    it.adaptTo(IReactController::class.java)
-                }
-                .filterNotNull()
-        content.components = items
+        isEditMode = true//request.getParameter("isEdit") != null
+        val items = resource.children.mapNotNull {
+            it.adaptTo(IReactController::class.java)
+        }
+//        content.components = items
     }
 }
