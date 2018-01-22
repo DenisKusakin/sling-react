@@ -1,0 +1,87 @@
+{
+  "isEditMode": false,
+  "content": {
+    "__type": "Container",
+    "__dialog": {
+      "components": [
+        {
+          "name": "Title",
+          "description": "Can be used as main page title"
+        },
+        {
+          "name": "Subtitle",
+          "description": "Can be used as subtitle"
+        }
+      ]
+    },
+    "components": [
+      {
+        "__type": "Title",
+        "title": "Title",
+        "__dialog": {
+          "props": [
+            {
+              "value": "Title",
+              "title": "Component title",
+              "name": "title",
+              "path": "/path/to/node"
+            },
+            {
+              "value": "One more Property",
+              "title": "One more property title",
+              "name": "title2",
+              "path": "/path/to/node"
+            }
+          ]
+        }
+      },
+      {
+        "__type": "Subtitle",
+        "title": "First Subtitle reloaded",
+        "__dialog": {
+          "props": [
+            {
+              "value": "First Subtitle reloaded",
+              "title": "Subtitle",
+              "name": "subtitle",
+              "path": "/path/to/node",
+              "rules": "required"
+            }
+          ]
+        }
+      },
+      {
+        "__type": "Subtitle",
+        "title": "Second Subtitle"
+      },
+      {
+        "__type": "Subtitle",
+        "title": "One more Subtitle"
+      },
+      {
+        "__type": "Subtitle",
+        "title": "The next component is Updatable Container"
+      },
+      {
+        "__type": "UpdatableContainer",
+        "url": "/static/mocks/page1-updatable-component.json",
+        "components": [
+          {
+            "__type": "Subtitle",
+            "title": "Inside Updatable Container!",
+            "__dialog": {
+              "props": [
+                {
+                  "value": "Title",
+                  "title": "Component title",
+                  "name": "title",
+                  "path": "/path/to/node"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
