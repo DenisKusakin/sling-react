@@ -7,18 +7,18 @@ import com.cathcart93.sling.core.ReactProp
 @ReactController(componentName = "Container")
 class Container(@ReactProp val components: List<Any> = emptyList(),
                 availableComponents: List<ComponentElement> = defaultComponents(),
-                path: String? = null) : IReactController {
+                path: String? = null, componentsMeta: List<ComponentMeta> = emptyList()) : IReactController {
 
     @ReactProp("__dialog")
     var dialog: Dialog? = null
 
     init {
         if (path != null) {
-            dialog = Dialog(if(path.endsWith("/")) path else "$path/", availableComponents)
+            dialog = Dialog(if (path.endsWith("/")) path else "$path/", availableComponents, componentsMeta)
         }
     }
 
-    data class Dialog(val path: String, val components: List<ComponentElement>)
+    data class Dialog(val path: String, val components: List<ComponentElement>, val meta: List<ComponentMeta>)
 
     class ComponentElement(
             val name: String,
@@ -37,6 +37,8 @@ class Container(@ReactProp val components: List<Any> = emptyList(),
             this.__props.putAll(props)
         }
     }
+
+    data class ComponentMeta(val path: String)
 }
 
 fun defaultComponents(): List<Container.ComponentElement> {

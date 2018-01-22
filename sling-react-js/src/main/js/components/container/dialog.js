@@ -5,9 +5,8 @@ import {MuiThemeProvider} from 'material-ui/styles';
 import Dialog from 'material-ui/Dialog';
 import {List, ListItem} from 'material-ui/List';
 import darkTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import axios from 'axios';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-
+import {createResource, deleteResource} from './../../framework/api';
 
 const styles = {
     smallIcon: {
@@ -44,24 +43,11 @@ class ContainerDialog extends React.Component {
                                 </p>
                             }
                             onClick={() => {
-                                const data = new URLSearchParams();
-                                console.log(__props)
-                                Object.keys(__props).forEach(x => {
-                                    data.append(x, __props[x])
-                                });
-                                axios({
-                                    method: 'post',
-                                    data,
-                                    url: dialog.path,
-                                    headers: {
-                                        'Content-Type': 'application/x-www-form-urlencoded',
-                                        'Accept': 'text/html'
-                                    }
-                                })
+                                createResource({url: dialog.path, props: __props})
                                     .then(() => {
                                         this.setState({isOpen: false})
                                         this.props.updateState()
-                                    }, error => {
+                                    }, () => {
                                         this.setState({error: "Error"});
                                     })
                             }}
@@ -89,13 +75,21 @@ class ContainerDialog extends React.Component {
                     this.props.components.map((x, i) => <div key={i} className='editable-item'>
                         <div style={{float: 'left'}}>
                             <MuiThemeProvider theme={darkTheme}>
-                                <IconButton onClick={() => this.setState(({isOpen}) => ({isOpen: !isOpen}))}
-                                            iconStyle={styles.smallIcon}>
+                                <IconButton
+                                    iconStyle={styles.smallIcon}
+                                    onClick={() => {
+                                        deleteResource({url: this.props.__dialog.meta[i].path})
+                                            .then(() => {
+                                                this.props.updateState()
+                                            })
+                                    }}>
                                     <DeleteIcon/>
                                 </IconButton>
                             </MuiThemeProvider>
                         </div>
-                        {x}
+                        <div>
+                            {x}
+                        </div>
                     </div>)
                 }
                 <MuiThemeProvider theme={darkTheme}>
