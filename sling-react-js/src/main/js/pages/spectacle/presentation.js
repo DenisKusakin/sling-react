@@ -48,12 +48,12 @@ class TestComponent extends React.Component {
 }
 
 export default () => (
-                           <Deck transition={["zoom", "slide"]} transitionDuration={250} theme={theme}>
-                             <Slide transition={["zoom"]} bgColor="primary">
-                               <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+                           <Deck transition={["zoom", "slide"]} transitionDuration={250}>
+                             <Slide transition={["zoom"]} bgColor="secondary">
+                               <Heading size={1} fit caps lineHeight={1} textColor="primary">
                                  Spectacle Boilerplate
                                </Heading>
-                               <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+                               <Text textColor="tertiary" size={1} fit bold>
                                  open the presentation/index.js file to get started
                                </Text>
                              </Slide>

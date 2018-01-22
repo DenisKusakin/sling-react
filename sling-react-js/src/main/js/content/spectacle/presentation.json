@@ -1,0 +1,37 @@
+{
+  "isEditMode": false,
+  "content": {
+    "__type": "Deck",
+    "__dialog": {
+      "components": [
+
+      ]
+    },
+    "transition": ["zoom", "slide"],
+    "transitionDuration": 250,
+    "slides": [
+      {
+        "__type": "Slide2",
+        "transition": ["zoom"],
+        "bgColor": "secondary",
+        "content": [
+          {
+            "__type": "Heading",
+            "size": 1,
+            "fit": true,
+            "caps": true,
+            "lineHeight": 1,
+            "textColor": "primary"
+          },
+          {
+            "__type": "Text",
+            "textColor": "tertiary",
+            "size": 1,
+            "fit": true,
+            "bold": true
+          }
+        ]
+      }
+    ]
+  }
+}
