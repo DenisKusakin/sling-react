@@ -23,6 +23,7 @@
     "next": "^4.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "spectacle": "^4.0.5",
     "styled-jsx": "^2.2.1",
     "validatorjs": "^3.14.2"
   },
