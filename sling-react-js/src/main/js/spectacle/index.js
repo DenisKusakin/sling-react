@@ -12,8 +12,13 @@ const DynamicText = dynamic(import('./text'), {
     ssr: false
 });
 
+const DynamicSlide = dynamic(import('./slide'), {
+    ssr: false
+});
+
 export default {
     Deck: DynamicDeck,
     Heading: DynamicHeading,
-    Text: DynamicText
+    Text: DynamicText,
+    Slide: DynamicSlide
 }

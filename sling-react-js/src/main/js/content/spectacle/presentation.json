@@ -11,24 +11,58 @@
     "transitionDuration": 250,
     "children": [
       {
-        "__type": "Slide2",
+        "__type": "Slide",
         "transition": ["zoom"],
         "bgColor": "secondary",
         "children": [
           {
             "__type": "Heading",
-            "size": 1,
+            "size": 6,
             "fit": true,
             "caps": true,
             "lineHeight": 1,
-            "textColor": "primary"
+            "textColor": "primary",
+            "children": [
+              "Spectacle Boilerplate"
+            ]
           },
           {
             "__type": "Text",
             "textColor": "tertiary",
             "size": 1,
             "fit": true,
-            "bold": true
+            "bold": true,
+            "children": [
+              "open the presentation/index.js file to get started"
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
+        "transition": ["zoom"],
+        "bgColor": "secondary",
+        "children": [
+          {
+            "__type": "Heading",
+            "size": 6,
+            "fit": true,
+            "caps": true,
+            "lineHeight": 1,
+            "textColor": "primary",
+            "children": [
+              "Spectacle Boilerplate"
+            ]
+          },
+          {
+            "__type": "Text",
+            "textColor": "tertiary",
+            "size": 1,
+            "fit": true,
+            "bold": true,
+            "children": [
+              "open the presentation/index.js file to get started"
+            ]
           }
         ]
       }
