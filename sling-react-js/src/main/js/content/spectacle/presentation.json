@@ -2,6 +2,7 @@
   "isEditMode": false,
   "content": {
     "__type": "Spectacle",
+    "isEditMode": true,
     "content": {
       "renderer": "Deck",
       "__dialog": {

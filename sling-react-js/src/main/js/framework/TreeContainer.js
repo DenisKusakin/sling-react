@@ -34,7 +34,6 @@ const TreeContainer = ({tree, components, typeFieldName='__type'}) => {
         return null
     }
     const node = traverse(tree, components, typeFieldName);
-    console.log(node)
     return node
 };
 

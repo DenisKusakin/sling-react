@@ -37,19 +37,22 @@ const App = dynamic({
             Heading: import('./../../spectacle/heading'),
             Text: import('./../../spectacle/text'),
             Slide: import('./../../spectacle/slide'),
+            Container: import('./../../components/container/dialog')
         }
         return components;
 
     },
     ssr: false,
-    render: (props, { Deck, Slide, Heading, Text }) => (<Deck transition={["zoom", "slide"]} transitionDuration={250}>
+    render: (props, { Deck, Slide, Heading, Text, Container }) => (<Deck transition={["zoom", "slide"]} transitionDuration={250}>
         <Slide transition={["zoom"]} bgColor="secondary">
-            <Heading size={1} fit caps lineHeight={1} textColor="primary">
-                Spectacle Boilerplate
-            </Heading>
-            <Text textColor="tertiary" size={1} fit bold>
-                open the presentation/index.js file to get started
-            </Text>
+            <Container components={[
+                <Heading size={1} fit caps lineHeight={1} textColor="primary">
+                    Spectacle Boilerplate
+                </Heading>,
+                <Text textColor="tertiary" size={1} fit bold>
+                    open the presentation/index.js file to get started
+                </Text>
+            ]}/>
         </Slide>
     </Deck>)
 })

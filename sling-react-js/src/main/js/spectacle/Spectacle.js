@@ -1,6 +1,7 @@
 import React from 'react'
 import TreeContainer from './../framework/TreeContainer'
 import dynamic from 'next/dynamic'
+import wrapContent from './wrapContent'
 
 const Spectacle = dynamic({
     modules: props => {
@@ -9,15 +10,16 @@ const Spectacle = dynamic({
             Heading: import('./heading'),
             Text: import('./text'),
             Slide: import('./slide'),
-        }
+            Container: import('./../components/container/dialog')
+        };
+
         return components;
 
     },
     ssr: false,
-    render: ({content}, components) => {
-        console.log("content", content)
-        return (<TreeContainer components={components} tree={content} typeFieldName="renderer"/>)
+    render: ({content, isEditMode}, components) => {
+        return (<TreeContainer components={components} tree={wrapContent(content)} typeFieldName="renderer"/>)
     }
-})
+});
 
 export default Spectacle
