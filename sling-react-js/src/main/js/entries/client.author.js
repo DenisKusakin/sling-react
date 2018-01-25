@@ -6,7 +6,6 @@ import dialogs from './../components/dialog'
 
 document.addEventListener("DOMContentLoaded", () => {
     let app = window.__DATA;
-    console.log("!", app);
     ReactDOM.render(<AppAuthor content={app} components={components} dialogs={dialogs}/>, document.getElementById('app'))
 });
 

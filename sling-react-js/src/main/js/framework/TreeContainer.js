@@ -1,14 +1,14 @@
 import React from 'react'
 
-const traverse = (tree, components) => {
+const traverse = (tree, components, typeFieldName) => {
     let objProps = {};
     let obj = {
         props: objProps
     };
-    let __objProps = !!tree['__type'] ? objProps : objProps;
+    let __objProps = !!tree[typeFieldName] ? objProps : objProps;
 
     if (Array.isArray(tree)) {
-        return tree.map(x => traverse(x, components));
+        return tree.map(x => traverse(x, components, typeFieldName));
     } else if (!(typeof tree === 'object')) {
         return tree;
     }
@@ -17,31 +17,24 @@ const traverse = (tree, components) => {
         field => {
             let fieldVal = tree[field]
             //TODO: need to refactor
-            if (field === '__type') {
+            if (field === typeFieldName) {
                 obj["type"] = components[fieldVal]
-            } else if (field === 'children'){
-                obj['children'] = traverse(fieldVal, components)
+            } else if (field === 'children' && tree[typeFieldName] !== undefined){
+                obj['children'] = traverse(fieldVal, components, typeFieldName)
             } else {
-                __objProps[field] = traverse(fieldVal, components)
+                __objProps[field] = traverse(fieldVal, components, typeFieldName)
             }
         }
     );
     return !!obj['type'] ? React.createElement(obj['type'], obj.props, obj['children']) : objProps;
 };
 
-const TreeContainer = ({tree, components}) => {
+const TreeContainer = ({tree, components, typeFieldName='__type'}) => {
     if (!tree) {
         return null
     }
-    let node = traverse(tree, components);
-    ;
-
-    if (Array.isArray(tree)) {
-        return tree.map(x => traverse(x, components));
-    } else {
-        node = traverse(tree, components);
-    }
-
+    const node = traverse(tree, components, typeFieldName);
+    console.log(node)
     return node
 };
 

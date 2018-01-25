@@ -1,71 +1,74 @@
 {
   "isEditMode": false,
   "content": {
-    "__type": "Deck",
-    "__dialog": {
-      "components": [
+    "__type": "Spectacle",
+    "content": {
+      "renderer": "Deck",
+      "__dialog": {
+        "components": [
 
-      ]
-    },
-    "transition": ["zoom", "slide"],
-    "transitionDuration": 250,
-    "children": [
-      {
-        "__type": "Slide",
-        "transition": ["zoom"],
-        "bgColor": "secondary",
-        "children": [
-          {
-            "__type": "Heading",
-            "size": 6,
-            "fit": true,
-            "caps": true,
-            "lineHeight": 1,
-            "textColor": "primary",
-            "children": [
-              "Spectacle Boilerplate"
-            ]
-          },
-          {
-            "__type": "Text",
-            "textColor": "tertiary",
-            "size": 1,
-            "fit": true,
-            "bold": true,
-            "children": [
-              "open the presentation/index.js file to get started"
-            ]
-          }
         ]
       },
-      {
-        "__type": "Slide",
-        "transition": ["zoom"],
-        "bgColor": "secondary",
-        "children": [
-          {
-            "__type": "Heading",
-            "size": 6,
-            "fit": true,
-            "caps": true,
-            "lineHeight": 1,
-            "textColor": "primary",
-            "children": [
-              "Spectacle Boilerplate"
-            ]
-          },
-          {
-            "__type": "Text",
-            "textColor": "tertiary",
-            "size": 1,
-            "fit": true,
-            "bold": true,
-            "children": [
-              "open the presentation/index.js file to get started"
-            ]
-          }
-        ]
-      }
-    ]
+      "transition": ["zoom", "slide"],
+      "transitionDuration": 250,
+      "children": [
+        {
+          "renderer": "Slide",
+          "transition": ["zoom"],
+          "bgColor": "secondary",
+          "children": [
+            {
+              "renderer": "Heading",
+              "size": 6,
+              "fit": true,
+              "caps": true,
+              "lineHeight": 1,
+              "textColor": "primary",
+              "children": [
+                "Spectacle Boilerplate"
+              ]
+            },
+            {
+              "renderer": "Text",
+              "textColor": "tertiary",
+              "size": 1,
+              "fit": true,
+              "bold": true,
+              "children": [
+                "open the presentation/index.js file to get started"
+              ]
+            }
+          ]
+        },
+        {
+          "renderer": "Slide",
+          "transition": ["zoom"],
+          "bgColor": "secondary",
+          "children": [
+            {
+              "renderer": "Heading",
+              "size": 6,
+              "fit": true,
+              "caps": true,
+              "lineHeight": 1,
+              "textColor": "primary",
+              "children": [
+                "Spectacle Boilerplate"
+              ]
+            },
+            {
+              "renderer": "Text",
+              "textColor": "tertiary",
+              "size": 1,
+              "fit": true,
+              "bold": true,
+              "children": [
+                "open the presentation/index.js file to get started"
+              ]
+            }
+          ]
+        }
+      ]
+    }
   }
 }
