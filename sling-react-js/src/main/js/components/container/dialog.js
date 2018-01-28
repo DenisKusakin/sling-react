@@ -68,29 +68,38 @@ class ContainerDialog extends React.Component {
                   .editable-item:hover {
                     outline: 2px solid green;
                   }
+                  .editable-item {
+                    display: flex;
+                    align-items: center;
+                  }
                 `}
             </style>
             <div className="editable-container">
                 {
-                    this.props.components.map((x, i) => <div key={i} className='editable-item'>
-                        <div style={{float: 'left'}}>
-                            <MuiThemeProvider theme={darkTheme}>
-                                <IconButton
-                                    iconStyle={styles.smallIcon}
-                                    onClick={() => {
-                                        deleteResource({url: this.props.__dialog.meta[i].path})
-                                            .then(() => {
-                                                this.props.updateState()
-                                            })
-                                    }}>
-                                    <DeleteIcon/>
-                                </IconButton>
-                            </MuiThemeProvider>
+                    this.props.components.map((x, i) => (
+                        <div key={i} className='editable-item'>
+                            {/*
+                                TODO: zIndex looks like a hach
+                            */}
+                            <div style={{flexGrow: 0, zIndex: 1}}>
+                                <MuiThemeProvider theme={darkTheme}>
+                                    <IconButton
+                                        iconStyle={styles.smallIcon}
+                                        onClick={() => {
+                                            deleteResource({url: this.props.__dialog.meta[i].path})
+                                                .then(() => {
+                                                    this.props.updateState()
+                                                })
+                                        }}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                </MuiThemeProvider>
+                            </div>
+                            <div style={{flexGrow: 1}}>
+                                {x}
+                            </div>
                         </div>
-                        <div>
-                            {x}
-                        </div>
-                    </div>)
+                    ))
                 }
                 <MuiThemeProvider theme={darkTheme}>
                     <div>

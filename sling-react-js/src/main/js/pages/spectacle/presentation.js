@@ -44,7 +44,7 @@ const App = dynamic({
     },
     ssr: false,
     render: (props, { Deck, Slide, Heading, Text, Container }) => (<Deck transition={["zoom", "slide"]} transitionDuration={250}>
-        <Slide transition={["zoom"]} bgColor="secondary">
+        <Slide transition={["zoom"]} bgColor="primary" >
             <Container components={[
                 <Heading size={1} fit caps lineHeight={1} textColor="primary">
                     Spectacle Boilerplate

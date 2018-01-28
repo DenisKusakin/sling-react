@@ -19,21 +19,16 @@
 package com.cathcart93.sling.components
 
 import com.cathcart93.sling.components.models.PageController
-import com.cathcart93.sling.core.services.BeanSerializer
-import com.cathcart93.sling.core.IReactController
+import com.cathcart93.sling.components.models.SimplePageController
 import org.apache.felix.scr.annotations.Properties
 import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Reference
 import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.SlingHttpServletResponse
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
 import org.slf4j.LoggerFactory
 
-import javax.servlet.ServletException
-import java.io.IOException
-
-@SlingServlet(resourceTypes = ["sling-react/page"], extensions = ["json"])
+@SlingServlet(resourceTypes = ["sling-react/page", "sling-react/client-page"], extensions = ["json"])
 @Properties(Property(name = "service.description", value = "Props Servlet"), Property(name = "service.vendor", value = "Cathcart 93"))
 class PropsServlet : SlingSafeMethodsServlet() {
 
@@ -43,7 +38,7 @@ class PropsServlet : SlingSafeMethodsServlet() {
                        response: SlingHttpServletResponse) {
         val writer = response.writer
         val controller = request.adaptTo(PageController::class.java)
-        writer.append(controller!!.props)
+        writer.append(controller!!.getProps())
         response.contentType = "json"
         //TODO: rework
         response.setHeader("Access-Control-Allow-Origin", "*")

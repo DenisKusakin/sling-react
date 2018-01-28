@@ -83,8 +83,16 @@ const func = Comp => class StandartDialog extends React.Component {
         ];
 
         return <ErrorBoundary>
-            <div>
-                <div style={{float: 'left'}}>
+            <style jsx>
+                {`
+                    .container{
+                        display: flex;
+                        align-items: center;
+                    }
+                `}
+            </style>
+            <div className="container">
+                <div style={{flexGrow: 0, zIndex: 1}}>
                     <MuiThemeProvider>
                         <div>
                             <IconButton onClick={() => this.setState(({isOpen}) => ({isOpen: !isOpen}))}
@@ -107,7 +115,9 @@ const func = Comp => class StandartDialog extends React.Component {
                         </div>
                     </MuiThemeProvider>
                 </div>
-                <Comp {...this.props}/>
+                <div style={{flexGrow: 1}}>
+                    <Comp {...this.props}/>
+                </div>
             </div>
         </ErrorBoundary>
     }

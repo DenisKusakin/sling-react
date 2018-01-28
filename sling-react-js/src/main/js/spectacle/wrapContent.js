@@ -6,16 +6,19 @@ export default content => {
                 ...x,
                 children: [
                     {
-                        "renderer": "Container",
-                        "components": [...x.children]
+                        "__type": "Container",
+                        "components": [...x.children],
+                        "__dialog": content['__dialog']
+                    },
+                    {
+                        "__type": "StateToggle"
+                    },
+                    {
+                        "__type": "AddSlideButton"
                     }
                 ]
             }
-        }), {
-            "renderer": "Slide",
-            "children": []
-        }]
+        })]
     };
-    console.log(wrapped)
     return wrapped;
 }

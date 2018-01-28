@@ -4,7 +4,6 @@ import PublisherApp from './PublisherApp'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Toggle from 'material-ui/Toggle';
 import axios from 'axios'
-import dialog from "../components/dialog";
 
 const wrapComponent = (Component, updateState) => props => <Component {...props} updateState={updateState}/>;
 

@@ -1,13 +1,14 @@
 var webpack = require('webpack');
-var path = require('path')
+var path = require('path');
 
 module.exports = {
     entry: {
         server: ['babel-polyfill', './entries/server.author.js'],
-        client: ['babel-polyfill', './entries/client.author.js']
+        client: ['babel-polyfill', './entries/client.author.js'],
+        'spectacle.client': ['babel-polyfill', './spectacle/entries/client.spectacle.author']
     },
     output: {
-        path: path.resolve(__dirname + '/../jcr_root/etc/react-clientlibs'),//path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname + '/../jcr_root/etc/react-clientlibs'),
         filename: '[name].js'
     },
     resolve: {
@@ -18,7 +19,26 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        babelrc: false,
+                        presets: [
+                            [
+                                "env",
+                                {
+                                    "modules": false
+                                }
+                            ],
+                            "react",
+                            "es2015",
+                            "stage-1"
+                        ],
+                        plugins: [
+                            "styled-jsx/babel"
+                        ]
+                    }
+                }
             }
         ]
     }
