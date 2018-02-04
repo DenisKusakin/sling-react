@@ -8,7 +8,8 @@ export default content => {
                     {
                         "__type": "Container",
                         "components": [...x.children],
-                        "__dialog": content['__dialog']
+                        "__dialog": content['__dialog'],
+                        "__dialog_type": "dialogs/Container"
                     },
                     {
                         "__type": "StateToggle"

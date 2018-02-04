@@ -7,25 +7,20 @@ import Container from './../components/container'
 import ContainerDialog from './../components/container/dialog'
 import SpectacleAuthorRoot from './SpectaceAuthorRoot'
 import standartDialog from "../framework/dialogs/standartDialog";
+import SimpleDialog from '../framework/dialogs/SimpleDialog'
 
 const components = {
     Deck,
     Heading,
     Text,
     Slide,
-    Container
-};
-
-const dialogs = {
-    ...components,
-    Heading: standartDialog(Heading),
-    Text: standartDialog(Text),
-    Container: ContainerDialog
+    Container,
+    "dialogs/Container": ContainerDialog,
+    "dialogs/SimpleDialog": SimpleDialog
 };
 
 const Spectacle = props => (<SpectacleAuthorRoot
         components={components}
-        dialogs={dialogs}
         content={props.content}/>
 );
 

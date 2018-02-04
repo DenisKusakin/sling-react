@@ -2,7 +2,8 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import SpectacleAuthorRoot from './SpectaceAuthorRoot'
 import standartDialog from "../framework/dialogs/standartDialog";
-
+import SimpleDialog from '../framework/dialogs/SimpleDialog'
+import ContainerDialog from './../components/container/dialog';
 //TODO: refactoring is required
 const wrapStandartDialog = components => {
     const res = {
@@ -11,7 +12,15 @@ const wrapStandartDialog = components => {
     };
     Object.keys(components).forEach(value => {
         if (value.startsWith('__WRAP_')) {
-            res.dialogs[value.substr('__WRAP_'.length)] = standartDialog(components[value])
+            const Comp = components[value];
+            res.dialogs[value.substr('__WRAP_'.length)] = props => <SimpleDialog
+                {...props}
+                renderComp={
+                    x => <Comp {...x}/>
+                }
+            />
+            // res.dialogs[value.substr('__WRAP_'.length)] = standartDialog(components[value])
+            //standartDialog(components[value])
         } else if (value.startsWith('__')) {
             res.dialogs[value.substr(2)] = components[value];
         } else {
@@ -28,23 +37,27 @@ const Spectacle = dynamic({
             Heading: import('./heading'),
             Text: import('./text'),
             Slide: import('./slide'),
-            Container: import('./../components/container'),
-            '__Deck': import('./deck'),
-            '__WRAP_Heading': import('./heading'),
-            '__WRAP_Text': import('./text'),
-            '__Slide': import('./slide'),
-            '__Container': import('./../components/container/dialog')
+            Container: import('./../components/container')
+            // '__Deck': import('./deck'),
+            // '__WRAP_Heading': import('./heading'),
+            // '__WRAP_Text': import('./text'),
+            // '__Slide': import('./slide'),
+            // '__Container': import('./../components/container/dialog')
         }
 
     },
     ssr: false,
-    render: (props, componentsAndDialogs) => {
-        const {components, dialogs} = wrapStandartDialog(componentsAndDialogs)
+    render: (props, components) => {
+        // const {components, dialogs} = wrapStandartDialog(componentsAndDialogs)
         return (
             <SpectacleAuthorRoot
                 content={props.content}
-                components={components}
-                dialogs={dialogs}/>
+                components={{
+                    ...components,
+                    "dialogs/SimpleDialog": SimpleDialog,
+                    "dialogs/Container": ContainerDialog
+                }}
+            />
         )
     }
 });

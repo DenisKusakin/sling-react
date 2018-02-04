@@ -1,0 +1,38 @@
+{
+  "isEditMode": false,
+  "content": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": "Test Sling",
+            "size": 3,
+            "fit": false,
+            "caps": false,
+            "lineHeight": 1,
+            "__dialog": {
+              "props": [
+                {
+                  "name": "text",
+                  "value": "Test Sling",
+                  "title": "Text"
+                },
+                {
+                  "name": "textColor",
+                  "value": "",
+                  "title": "Text Color"
+                }
+              ],
+              "path": "/content/spectacle/slide1/heading1"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "Heading"
+          }
+        ],
+        "__type": "Slide"
+      }
+    ],
+    "__type": "Deck"
+  },
+  "url": "/content/spectacle.json?isEdit=false"
+}

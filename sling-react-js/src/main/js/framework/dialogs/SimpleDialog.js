@@ -24,7 +24,7 @@ const Form = observer(({form}) => (
     </form>
 ));
 
-const func = Comp => class StandartDialog extends React.Component {
+class SimpleDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,8 +53,10 @@ const func = Comp => class StandartDialog extends React.Component {
                 return updateResource({url: this.props.__dialog.path, props: this.form.values()})
                     .then(() => {
                         this.setState({isOpen: false});
+                        console.log("Call updateState")
                         this.props.updateState()
-                    }, () => {
+                    }, (e) => {
+                        console.error(e);
                         this.setState({error: "Error"});
                     })
             }
@@ -62,8 +64,9 @@ const func = Comp => class StandartDialog extends React.Component {
     }
 
     render() {
+
         if (!this.props.__dialog) {
-            return <Comp {...this.props}/>
+            return this.props.children//this.props.renderComp(this.props)
         }
 
         let actions = [
@@ -116,11 +119,11 @@ const func = Comp => class StandartDialog extends React.Component {
                     </MuiThemeProvider>
                 </div>
                 <div style={{flexGrow: 1}}>
-                    <Comp {...this.props}/>
+                    {this.props.children}
                 </div>
             </div>
         </ErrorBoundary>
     }
-};
+}
 
-export default func;
+export default SimpleDialog;

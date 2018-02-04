@@ -1,11 +1,9 @@
 {
-  "isEditMode": true,
+  "isEditMode": false,
+  "url": "/page/path.json",
   "content": {
     "__type": "Deck",
     "__dialog": {
-      "components": [
-
-      ],
       "path": "/path/to/node",
       "props": {
         "slideProp": "Slide Prop"
@@ -21,6 +19,7 @@
         "children": [
           {
             "__type": "Heading",
+            "__dialog_type": "dialogs/SimpleDialog",
             "size": 6,
             "fit": true,
             "caps": true,
