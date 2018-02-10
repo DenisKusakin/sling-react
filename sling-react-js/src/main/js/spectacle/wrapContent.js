@@ -1,14 +1,15 @@
 export default content => {
     const wrapped = {
         ...content,
-        children: [...content.children.map(x => {
+        children: [...content.children.map((x, i) => {
             return {
                 ...x,
                 children: [
                     {
+                        ...x,
+                        "children": null,
                         "__type": "Container",
                         "components": [...x.children],
-                        "__dialog": content['__dialog'],
                         "__dialog_type": "dialogs/Container"
                     },
                     {
@@ -16,6 +17,10 @@ export default content => {
                     },
                     {
                         "__type": "AddSlideButton"
+                    },
+                    {
+                        "__type": "DeleteSlideButton",
+                        "index": i
                     }
                 ]
             }

@@ -18,8 +18,32 @@ class DeckModel : IReactController {
     @ReactProp("children")
     private lateinit var slides: List<Slide>
 
+    @ReactProp("__dialog")
+    private lateinit var dialog: Dialog
+
     @PostConstruct
     fun init() {
         slides = resource.children.mapNotNull { it.adaptTo(SlideModel::class.java) }
+        dialog = Dialog(resource)
+    }
+
+    class Dialog(resource: Resource) {
+        private val path: String = "${resource.path}/"
+        private val meta: List<MetaItem> = resource.children
+                .filter {
+                    it.adaptTo(SlideModel::class.java) != null
+                }
+                .map {
+                    MetaItem(it.path)
+                }
+        private val props = HashMap<String, String>()
+
+        init {
+            props.put(":nameHint", "slide")
+            props.put(":order", "last")
+        }
+
+        class MetaItem(private val path: String)
+
     }
 }

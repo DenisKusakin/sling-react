@@ -22,6 +22,7 @@
     "mobx-react-form-devtools": "^1.8.0",
     "next": "^4.2.3",
     "react": "^16.2.0",
+    "react-beautiful-dnd": "^4.0.1",
     "react-dom": "^16.2.0",
     "spectacle": "^4.0.5",
     "styled-jsx": "^2.2.1",

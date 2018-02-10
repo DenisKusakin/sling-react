@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Toggle from 'material-ui/Toggle';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FlatButton from 'material-ui/FlatButton';
 import {createResource, deleteResource} from './../framework/api';
 import axios from "axios/index";
 
@@ -27,14 +28,26 @@ class SpectacleAuthorRoot extends React.Component {
         </MuiThemeProvider>);
 
         this.AddSlideButton = () => (<MuiThemeProvider>
-            <FloatingActionButton>
-                <ContentAdd onClick={() => {
-                    createResource({
-                        url: props.content.content.__dialog.path,
-                        props: props.content.content.__dialog.props
+            <FlatButton label="Add Slide" primary={true} onClick={() => {
+                createResource({
+                    url: props.content.content.__dialog.path,
+                    props: props.content.content.__dialog.props
+                }).then(this.updateState)
+            }}/>
+        </MuiThemeProvider>);
+
+        this.DeleteSlideButton = ({index}) => (<MuiThemeProvider>
+            <FlatButton label="Delete Slide" secondary={true} onClick={() => {
+                deleteResource({url: props.content.content.__dialog.meta[index].path})
+                    .then(() => {
+                        try {
+                            window.location.hash = window.location.hash.substr(2) - 1;
+                        } catch (e) {
+                            console.error(e)
+                        }
+                        this.updateState()
                     })
-                }}/>
-            </FloatingActionButton>
+            }}/>
         </MuiThemeProvider>);
 
         this.updateState = this.updateState.bind(this);
@@ -42,6 +55,7 @@ class SpectacleAuthorRoot extends React.Component {
             const extendedComponents = {};
             Object.keys(components).forEach(name => {
                 const Comp = components[name];
+                //TODO: refactoring is required
                 if (name.startsWith("dialogs/")) {
                     extendedComponents[name] = x => <Comp {...x} updateState={this.updateState}/>
                 } else {
@@ -69,7 +83,8 @@ class SpectacleAuthorRoot extends React.Component {
         const components = {
             ...this.props.components,
             StateToggle: this.Toggle,
-            AddSlideButton: this.state.isEditMode ? this.AddSlideButton : () => null
+            AddSlideButton: this.state.isEditMode ? this.AddSlideButton : () => null,
+            DeleteSlideButton: this.state.isEditMode ? this.DeleteSlideButton : () => null
         };
 
         if (this.state.isEditMode) {

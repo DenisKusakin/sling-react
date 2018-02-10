@@ -6,9 +6,9 @@ import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import IconButton from 'material-ui/IconButton'
 import {MuiThemeProvider} from 'material-ui/styles';
 import ErrorBoundary from './ErrorBoundary';
-import {observer} from 'mobx-react';
 import MobxForm from './form/MobxForm'
 import {updateResource} from './../api'
+import MaterialDialogForm from './MaterialDialogForm';
 
 const styles = {
     smallIcon: {
@@ -17,12 +17,17 @@ const styles = {
     }
 };
 
-const Form = observer(({form}) => (
-    <form onSubmit={form.onSubmit}>
-        {form.map((x, i) => <div key={i}><TextField {...x.bind()}/><br/></div>)}
-        <p>{form.error}</p>
-    </form>
-));
+const bindingType = (type) => {
+    if (!type || type === 'text') {
+        return "TextField"
+    }
+    if (type === "checkbox") {
+        return "MaterialCheckbox"
+    }
+    if (type === 'select') {
+        return "MaterialSelect"
+    }
+};
 
 class SimpleDialog extends React.Component {
     constructor(props) {
@@ -31,32 +36,20 @@ class SimpleDialog extends React.Component {
             isOpen: false
         };
 
-        const fields = props.__dialog && props.__dialog.props ?
-            props.__dialog.props.map(({value, name, title, rules}) => ({
-                value,
-                name,
-                label: title,
-                rules
-            })) : [];
-
-        this.form = new MobxForm({fields});
         this.onSubmitClick = this.onSubmitClick.bind(this);
     }
 
-    onSubmitClick(e) {
-        this.form.onSubmit(e, {
+    onSubmitClick(form, url) {
+        return e => form.onSubmit(e, {
             onSuccess: () => {
-                const params = new URLSearchParams();
-                const formValues = this.form.values();
-                Object.keys(formValues).forEach(x => params.append(`./${x}`, formValues[x]));
 
-                return updateResource({url: this.props.__dialog.path, props: this.form.values()})
+                console.info(form.values());
+                return updateResource({url, props: form.values()})
                     .then(() => {
                         this.setState({isOpen: false});
-                        console.log("Call updateState")
                         this.props.updateState()
-                    }, (e) => {
-                        console.error(e);
+                    }, (error) => {
+                        console.error(error);
                         this.setState({error: "Error"});
                     })
             }
@@ -66,15 +59,25 @@ class SimpleDialog extends React.Component {
     render() {
 
         if (!this.props.__dialog) {
-            return this.props.children//this.props.renderComp(this.props)
+            return this.props.children
         }
+
+        const fields = this.props.__dialog && this.props.__dialog.props ?
+            this.props.__dialog.props.map(x => ({
+                ...x,
+                label: x.title,
+                extra: x.options,
+                bindings: bindingType(x.type)
+            })) : [];
+
+        const form = new MobxForm({fields});
 
         let actions = [
             <FlatButton
                 label="Submit"
                 primary={true}
                 keyboardFocused={true}
-                onClick={this.onSubmitClick}
+                onClick={this.onSubmitClick(form, this.props.__dialog.path)}
             />,
             <FlatButton
                 label="Cancel"
@@ -112,7 +115,7 @@ class SimpleDialog extends React.Component {
                                 }}>
                                 <div>
                                     {this.state.error && <p style={{color: 'red'}}>{this.state.error}</p>}
-                                    <Form form={this.form}/>
+                                    <MaterialDialogForm form={form}/>
                                 </div>
                             </Dialog>
                         </div>

@@ -1,6 +1,5 @@
 package com.cathcart93.sling.components.models.spectacle
 
-import com.cathcart93.sling.components.models.spectacle.SimpleDialog.SelectProperty.SelectPropertyOption
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
@@ -12,23 +11,15 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController("Heading")
-class HeadingModel : IReactController, SlideComponent {
+@ReactController("Text")
+class TextModel : IReactController, SlideComponent {
     @ReactProp("children")
     @ValueMapValue
     private lateinit var text: String
 
     @ReactProp
     @ValueMapValue
-    private var size: Int = 6
-
-    @ReactProp
-    @ValueMapValue
     private var fit: Boolean = true
-
-    @ReactProp
-    @ValueMapValue
-    private var caps: Boolean = false
 
     @ReactProp
     @ValueMapValue
@@ -50,23 +41,15 @@ class HeadingModel : IReactController, SlideComponent {
     @PostConstruct
     fun init() {
         dialog = dialog(resource) {
-            text("text", "Text")
-            checkbox("caps", "Caps")
-            checkbox("fir", "Fit")
-            select("textColor", "Color") {
-                option("Red", "red")
-                option("Green", "green")
-                option("Blue", "blue")
-                option("Black", "black")
+            text(name = "text", title = "Text")
+            checkbox(name = "fit", title = "Fit")
+            select(name = "textColor", title = "Color") {
+                option(label = "Red", value = "red")
+                option(label = "Green", value = "green")
+                option(label = "Blue", value = "blue")
+                option(label = "Black", value = "black")
             }
-            select("size", "Size") {
-                option("H1", "1")
-                option("H2", "2")
-                option("H3", "3")
-                option("H4", "4")
-                option("H5", "5")
-            }
-            select("height", "Height") {
+            select(name = "lineHeight", title = "Line Height") {
                 option("1", "1")
                 option("2", "2")
                 option("3", "3")

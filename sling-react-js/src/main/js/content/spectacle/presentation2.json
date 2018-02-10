@@ -5,7 +5,83 @@
       {
         "children": [
           {
-            "children": "Test Sling",
+            "children": "Test Sling updated 1",
+            "size": 3,
+            "fit": false,
+            "caps": false,
+            "textColor": "blue",
+            "lineHeight": 1,
+            "__dialog": {
+              "props": [
+                {
+                  "name": "text",
+                  "value": "Test Sling updated 1",
+                  "title": "Text"
+                },
+                {
+                  "name": "textColor",
+                  "value": "blue",
+                  "title": "Text Color"
+                },
+                {
+                  "name": "size",
+                  "value": true,
+                  "title": "Checkbox",
+                  "type": "checkbox"
+                },
+                {
+                  "name": "color",
+                  "value": "red",
+                  "options": [
+                    {
+                      "value": "red",
+                      "label": "Red"
+                    },
+                    {
+                      "value": "green",
+                      "label": "Green"
+                    },
+                    {
+                      "value": "black",
+                      "label": "Black"
+                    }
+                  ],
+                  "title": "Select",
+                  "type": "select"
+                }
+              ],
+              "path": "/content/spectacle/slide1/heading1"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "Heading"
+          },
+          {
+            "children": "Test Sling updated 3",
+            "size": 3,
+            "fit": false,
+            "caps": false,
+            "textColor": "green",
+            "lineHeight": 1,
+            "__dialog": {
+              "props": [
+                {
+                  "name": "text",
+                  "value": "Test Sling updated 3",
+                  "title": "Text"
+                },
+                {
+                  "name": "textColor",
+                  "value": "green",
+                  "title": "Text Color"
+                }
+              ],
+              "path": "/content/spectacle/slide1/heading3"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "Heading"
+          },
+          {
+            "children": "Edit Title Here",
             "size": 3,
             "fit": false,
             "caps": false,
@@ -14,7 +90,7 @@
               "props": [
                 {
                   "name": "text",
-                  "value": "Test Sling",
+                  "value": "Edit Title Here",
                   "title": "Text"
                 },
                 {
@@ -23,15 +99,222 @@
                   "title": "Text Color"
                 }
               ],
-              "path": "/content/spectacle/slide1/heading1"
+              "path": "/content/spectacle/slide1/heading"
             },
             "__dialog_type": "dialogs/SimpleDialog",
             "__type": "Heading"
           }
         ],
+        "__dialog": {
+          "meta": [
+            {
+              "path": "/content/spectacle/slide1/heading1"
+            },
+            {
+              "path": "/content/spectacle/slide1/heading3"
+            },
+            {
+              "path": "/content/spectacle/slide1/heading"
+            }
+          ],
+          "path": "/content/spectacle/slide1/",
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Can be used as Slide Heading",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "heading",
+                ":order": "last"
+              }
+            }
+          ]
+        },
+        "__type": "Slide"
+      },
+      {
+        "children": [
+          {
+            "children": "Test Sling updated",
+            "size": 3,
+            "fit": false,
+            "caps": false,
+            "textColor": "blue",
+            "lineHeight": 1,
+            "__dialog": {
+              "props": [
+                {
+                  "name": "text",
+                  "value": "Test Sling updated",
+                  "title": "Text"
+                },
+                {
+                  "name": "textColor",
+                  "value": "blue",
+                  "title": "Text Color"
+                }
+              ],
+              "path": "/content/spectacle/slide2/heading1"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "Heading"
+          }
+        ],
+        "__dialog": {
+          "meta": [
+            {
+              "path": "/content/spectacle/slide2/heading1"
+            }
+          ],
+          "path": "/content/spectacle/slide2/",
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Can be used as Slide Heading",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "heading",
+                ":order": "last"
+              }
+            }
+          ]
+        },
+        "__type": "Slide"
+      },
+      {
+        "children": [
+          {
+            "children": "Edit Title Here",
+            "size": 3,
+            "fit": false,
+            "caps": false,
+            "lineHeight": 1,
+            "__dialog": {
+              "props": [
+                {
+                  "name": "text",
+                  "value": "Edit Title Here",
+                  "title": "Text"
+                },
+                {
+                  "name": "textColor",
+                  "value": "",
+                  "title": "Text Color"
+                }
+              ],
+              "path": "/content/spectacle/slide/heading"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "Heading"
+          }
+        ],
+        "__dialog": {
+          "meta": [
+            {
+              "path": "/content/spectacle/slide/heading"
+            }
+          ],
+          "path": "/content/spectacle/slide/",
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Can be used as Slide Heading",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "heading",
+                ":order": "last"
+              }
+            }
+          ]
+        },
+        "__type": "Slide"
+      },
+      {
+        "children": [
+
+        ],
+        "__dialog": {
+          "meta": [
+
+          ],
+          "path": "/content/spectacle/slide_492865712/",
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Can be used as Slide Heading",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "heading",
+                ":order": "last"
+              }
+            }
+          ]
+        },
+        "__type": "Slide"
+      },
+      {
+        "children": [
+
+        ],
+        "__dialog": {
+          "meta": [
+
+          ],
+          "path": "/content/spectacle/slide_891033421/",
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Can be used as Slide Heading",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "heading",
+                ":order": "last"
+              }
+            }
+          ]
+        },
         "__type": "Slide"
       }
     ],
+    "__dialog": {
+      "path": "/content/spectacle/",
+      "meta": [
+        {
+          "path": "/content/spectacle/slide1"
+        },
+        {
+          "path": "/content/spectacle/slide2"
+        },
+        {
+          "path": "/content/spectacle/slide"
+        },
+        {
+          "path": "/content/spectacle/slide_492865712"
+        },
+        {
+          "path": "/content/spectacle/slide_891033421"
+        }
+      ],
+      "props": {
+        ":nameHint": "slide",
+        ":order": "last"
+      }
+    },
     "__type": "Deck"
   },
   "url": "/content/spectacle.json?isEdit=false"

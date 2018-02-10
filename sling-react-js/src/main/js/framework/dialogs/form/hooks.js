@@ -1,8 +1,8 @@
 export default {
 
   onInit() {
-      this.each(field => field.type === 'text' &&
-        field.set('bindings', 'TextField'));
+      // this.each(field => field.type === 'text' &&
+      //   field.set('bindings', 'TextField'));
   },
 
   onSuccess(form) {
@@ -14,7 +14,7 @@ export default {
   },
 
   onSubmit(instance) {
-    console.log('-> onSubmit HOOK -', instance.path || 'form', '- isValid?', instance.isValid);
+    console.log('-> onSubmit HOOK -', instance.path || 'form', '- isValid?', instance.isValid, instance.values());
   },
 
   onClear(instance) {
