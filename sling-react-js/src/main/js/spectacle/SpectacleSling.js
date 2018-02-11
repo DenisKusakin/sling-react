@@ -6,14 +6,19 @@ import Slide from './slide'
 import Container from './../components/container'
 import ContainerDialog from './../components/container/dialog'
 import SpectacleAuthorRoot from './SpectaceAuthorRoot'
-import standartDialog from "../framework/dialogs/standartDialog";
 import SimpleDialog from '../framework/dialogs/SimpleDialog'
+import {BlockQuote, Quote, Cite, Code, CodePane} from "spectacle";
 
 const components = {
+    Code,
+    CodePane,
     Deck,
     Heading,
     Text,
     Slide,
+    BlockQuote,
+    Quote,
+    Cite,
     Container,
     "dialogs/Container": ContainerDialog,
     "dialogs/SimpleDialog": SimpleDialog

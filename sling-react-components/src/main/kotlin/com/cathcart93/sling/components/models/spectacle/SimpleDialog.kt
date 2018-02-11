@@ -1,7 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle
 
 interface SimpleDialog {
-//    fun getProps(): List<Property>
     val props: List<Property>
     val path: String
 
@@ -14,6 +13,10 @@ interface SimpleDialog {
 
     class TextProperty(override val name: String, override val value: Any?, override val title: String) : Property {
         override val type = "text"
+    }
+
+    class ColorProperty(override val name: String, override val value: Any?, override val title: String) : Property {
+        override val type = "color"
     }
 
     class CheckboxProperty(override val name: String, override val value: Boolean, override val title: String) : Property {

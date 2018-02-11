@@ -32,6 +32,11 @@ class DialogContext(@Transient private val resource: Resource) : SimpleDialog {
                 options = selectContext.options))
     }
 
+    fun color(name: String, title: String) {
+        this.props.add(SimpleDialog.ColorProperty(title = title, name = name,
+                value = resource.valueMap.get(name, String::class.java)))
+    }
+
     class SelectContext {
         val options = ArrayList<SelectPropertyOption>()
 

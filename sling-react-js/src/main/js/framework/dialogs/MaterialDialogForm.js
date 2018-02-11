@@ -4,6 +4,7 @@ import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import {SketchPicker, TwitterPicker} from 'react-color';
 
 const MaterialDialogForm = observer(({form}) => (
     <form onSubmit={form.onSubmit}>
@@ -22,8 +23,16 @@ const MaterialDialogForm = observer(({form}) => (
                     const selectProps = x.bind();
                     return <div key={i}>
                         <SelectField {...selectProps}>
-                            {selectProps.extra.map(x => <MenuItem value={x.value} primaryText={x.label} />)}
+                            {selectProps.extra.map(x => <MenuItem value={x.value} primaryText={x.label}/>)}
                         </SelectField>
+                        <br/>
+                    </div>
+                }
+                if (x.type === 'color') {
+                    const colorProps = x.bind()
+                    return <div key={i}>
+                        <p>{colorProps.label}</p>
+                        <TwitterPicker {...colorProps} color={colorProps.value}/>
                         <br/>
                     </div>
                 }

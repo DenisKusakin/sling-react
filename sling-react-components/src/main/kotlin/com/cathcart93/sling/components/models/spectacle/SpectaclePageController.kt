@@ -35,9 +35,6 @@ class SpectaclePageController : IReactController, PageController {
 
     @PostConstruct
     fun init() {
-//        val components = resource.children.mapNotNull { it.adaptTo(IReactController::class.java) }
-//        val componentsMeta = resource.children.map { Container.ComponentMeta(it.path) }
-//        val container = Container(components = components, path = resource.path, componentsMeta = componentsMeta)
         val container = resource.adaptTo(DeckModel::class.java)
         val isEditMode = request.getParameter("isEdit") != null
         props = beanSerializer.convertToMap(App("${resource.path}.json?isEdit=$isEditMode", isEditMode, container))

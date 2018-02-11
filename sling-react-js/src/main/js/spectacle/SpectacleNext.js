@@ -11,15 +11,16 @@ const Spectacle = dynamic({
             Heading: import('./heading'),
             Text: import('./text'),
             Slide: import('./slide'),
-            Container: import('./../components/container')
+            Container: import('./../components/container'),
+            Spectacle: import('spectacle')
         }
-
     },
     ssr: false,
-    render: (props, components) => {
+    render: (props, {Spectacle, ...components}) => {
         return <SpectacleAuthorRoot
             content={props.content}
             components={{
+                ...Spectacle,
                 ...components,
                 "dialogs/SimpleDialog": SimpleDialog,
                 "dialogs/Container": ContainerDialog

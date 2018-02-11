@@ -5,315 +5,608 @@
       {
         "children": [
           {
-            "children": "Test Sling updated 1",
-            "size": 3,
+            "children": "Slide 1 2 3",
+            "size": 2,
             "fit": false,
-            "caps": false,
-            "textColor": "blue",
-            "lineHeight": 1,
-            "__dialog": {
-              "props": [
-                {
-                  "name": "text",
-                  "value": "Test Sling updated 1",
-                  "title": "Text"
-                },
-                {
-                  "name": "textColor",
-                  "value": "blue",
-                  "title": "Text Color"
-                },
-                {
-                  "name": "size",
-                  "value": true,
-                  "title": "Checkbox",
-                  "type": "checkbox"
-                },
-                {
-                  "name": "color",
-                  "value": "red",
-                  "options": [
-                    {
-                      "value": "red",
-                      "label": "Red"
-                    },
-                    {
-                      "value": "green",
-                      "label": "Green"
-                    },
-                    {
-                      "value": "black",
-                      "label": "Black"
-                    }
-                  ],
-                  "title": "Select",
-                  "type": "select"
-                }
-              ],
-              "path": "/content/spectacle/slide1/heading1"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "__type": "Heading"
-          },
-          {
-            "children": "Test Sling updated 3",
-            "size": 3,
-            "fit": false,
-            "caps": false,
+            "caps": true,
             "textColor": "green",
             "lineHeight": 1,
             "__dialog": {
               "props": [
                 {
+                  "type": "text",
                   "name": "text",
-                  "value": "Test Sling updated 3",
-                  "title": "Text"
+                  "value": "Slide 1 2 3",
+                  "title": "Text",
+                  "multiLine": true
                 },
                 {
+                  "type": "checkbox",
+                  "name": "caps",
+                  "value": true,
+                  "title": "Caps"
+                },
+                {
+                  "type": "checkbox",
+                  "name": "fir",
+                  "value": false,
+                  "title": "Fit"
+                },
+                {
+                  "type": "select",
                   "name": "textColor",
                   "value": "green",
-                  "title": "Text Color"
+                  "options": [
+                    {
+                      "label": "Red",
+                      "value": "red"
+                    },
+                    {
+                      "label": "Green",
+                      "value": "green"
+                    },
+                    {
+                      "label": "Blue",
+                      "value": "blue"
+                    },
+                    {
+                      "label": "Black",
+                      "value": "black"
+                    }
+                  ],
+                  "title": "Color"
+                },
+                {
+                  "type": "select",
+                  "name": "size",
+                  "value": "2",
+                  "options": [
+                    {
+                      "label": "H1",
+                      "value": "1"
+                    },
+                    {
+                      "label": "H2",
+                      "value": "2"
+                    },
+                    {
+                      "label": "H3",
+                      "value": "3"
+                    },
+                    {
+                      "label": "H4",
+                      "value": "4"
+                    },
+                    {
+                      "label": "H5",
+                      "value": "5"
+                    }
+                  ],
+                  "title": "Size"
+                },
+                {
+                  "type": "select",
+                  "name": "height",
+                  "value": "1",
+                  "options": [
+                    {
+                      "label": "1",
+                      "value": "1"
+                    },
+                    {
+                      "label": "2",
+                      "value": "2"
+                    },
+                    {
+                      "label": "3",
+                      "value": "3"
+                    },
+                    {
+                      "label": "4",
+                      "value": "4"
+                    }
+                  ],
+                  "title": "Height"
                 }
               ],
-              "path": "/content/spectacle/slide1/heading3"
+              "path": "/content/spectacle/slide1/heading1"
             },
             "__dialog_type": "dialogs/SimpleDialog",
             "__type": "Heading"
           },
           {
-            "children": "Edit Title Here",
-            "size": 3,
-            "fit": false,
-            "caps": false,
-            "lineHeight": 1,
+            "children": [
+              {
+                "children": "Edit Quote",
+                "__type": "Quote"
+              },
+              {
+                "children": "Author",
+                "__type": "Cite"
+              }
+            ],
             "__dialog": {
               "props": [
                 {
-                  "name": "text",
-                  "value": "Edit Title Here",
-                  "title": "Text"
+                  "type": "text",
+                  "name": "quote",
+                  "value": "Edit Quote",
+                  "title": "Quote"
                 },
                 {
-                  "name": "textColor",
-                  "value": "",
-                  "title": "Text Color"
+                  "type": "text",
+                  "name": "cite",
+                  "value": "Author",
+                  "title": "Cite"
                 }
               ],
-              "path": "/content/spectacle/slide1/heading"
+              "path": "/content/spectacle/slide1/blockquote"
             },
             "__dialog_type": "dialogs/SimpleDialog",
-            "__type": "Heading"
+            "__type": "BlockQuote"
+          },
+          {
+            "source": "console.log('!!!')",
+            "lang": "javascript",
+            "__dialog": {
+              "props": [
+                {
+                  "type": "text",
+                  "name": "source",
+                  "value": "function test(){}",
+                  "title": "Source"
+                },
+                {
+                  "type": "select",
+                  "name": "lang",
+                  "value": "javascript",
+                  "options": [
+                    {
+                      "label": "Java Script",
+                      "value": "javascript"
+                    }
+                  ],
+                  "title": "Language"
+                }
+              ],
+              "path": "/content/spectacle/slide1/code"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "CodePane"
           }
         ],
         "__dialog": {
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Text Component",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "Heading",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "Text",
+              "description": "Just a text component",
+              "__props": {
+                "component": "Text",
+                "text": "Edit Text Component Here",
+                ":nameHint": "Text",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "BlockQuote",
+              "description": "Quote Block component",
+              "__props": {
+                "component": "BlockQuote",
+                "quote": "Edit Quote",
+                "cite": "Author",
+                ":nameHint": "BlockQuote",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "Code",
+              "description": "Use to show highlighted code",
+              "__props": {
+                "component": "Code",
+                "source": "function test(){}",
+                ":nameHint": "Code",
+                "lang": "javascript",
+                ":order": "last"
+              }
+            }
+          ],
           "meta": [
             {
               "path": "/content/spectacle/slide1/heading1"
             },
             {
-              "path": "/content/spectacle/slide1/heading3"
+              "path": "/content/spectacle/slide1/blockquote"
             },
             {
-              "path": "/content/spectacle/slide1/heading"
+              "path": "/content/spectacle/slide1/code"
             }
           ],
           "path": "/content/spectacle/slide1/",
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Can be used as Slide Heading",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "heading",
-                ":order": "last"
+          "theme": {
+            "props": [
+              {
+                "type": "select",
+                "name": "bgColor",
+                "value": "secondary",
+                "options": [
+                  {
+                    "label": "Primary Color",
+                    "value": "primary"
+                  },
+                  {
+                    "label": "Secondary Color",
+                    "value": "secondary"
+                  }
+                ],
+                "title": "Background Color"
+              },
+              {
+                "type": "select",
+                "name": "textColor",
+                "value": "secondary",
+                "options": [
+                  {
+                    "label": "Primary Color",
+                    "value": "primary"
+                  },
+                  {
+                    "label": "Secondary Color",
+                    "value": "secondary"
+                  }
+                ],
+                "title": "Text Color"
               }
-            }
-          ]
+            ],
+            "path": "/content/spectacle/slide1"
+          }
         },
+        "bgColor": "secondary",
+        "textColor": "secondary",
         "__type": "Slide"
       },
       {
         "children": [
           {
-            "children": "Test Sling updated",
-            "size": 3,
+            "children": "Slide 2",
+            "size": 1,
             "fit": false,
-            "caps": false,
-            "textColor": "blue",
+            "caps": true,
+            "textColor": "green",
             "lineHeight": 1,
             "__dialog": {
               "props": [
                 {
+                  "type": "text",
                   "name": "text",
-                  "value": "Test Sling updated",
+                  "value": "Slide 2",
                   "title": "Text"
                 },
                 {
+                  "type": "checkbox",
+                  "name": "caps",
+                  "value": true,
+                  "title": "Caps"
+                },
+                {
+                  "type": "checkbox",
+                  "name": "fir",
+                  "value": false,
+                  "title": "Fit"
+                },
+                {
+                  "type": "select",
                   "name": "textColor",
-                  "value": "blue",
-                  "title": "Text Color"
+                  "value": "green",
+                  "options": [
+                    {
+                      "label": "Red",
+                      "value": "red"
+                    },
+                    {
+                      "label": "Green",
+                      "value": "green"
+                    },
+                    {
+                      "label": "Blue",
+                      "value": "blue"
+                    },
+                    {
+                      "label": "Black",
+                      "value": "black"
+                    }
+                  ],
+                  "title": "Color"
+                },
+                {
+                  "type": "select",
+                  "name": "size",
+                  "value": "1",
+                  "options": [
+                    {
+                      "label": "H1",
+                      "value": "1"
+                    },
+                    {
+                      "label": "H2",
+                      "value": "2"
+                    },
+                    {
+                      "label": "H3",
+                      "value": "3"
+                    },
+                    {
+                      "label": "H4",
+                      "value": "4"
+                    },
+                    {
+                      "label": "H5",
+                      "value": "5"
+                    }
+                  ],
+                  "title": "Size"
+                },
+                {
+                  "type": "select",
+                  "name": "height",
+                  "options": [
+                    {
+                      "label": "1",
+                      "value": "1"
+                    },
+                    {
+                      "label": "2",
+                      "value": "2"
+                    },
+                    {
+                      "label": "3",
+                      "value": "3"
+                    },
+                    {
+                      "label": "4",
+                      "value": "4"
+                    }
+                  ],
+                  "title": "Height"
                 }
               ],
-              "path": "/content/spectacle/slide2/heading1"
+              "path": "/content/spectacle/slide/heading"
             },
             "__dialog_type": "dialogs/SimpleDialog",
             "__type": "Heading"
+          },
+          {
+            "children": [
+              {
+                "children": "Some QUote Block",
+                "__type": "Quote"
+              },
+              {
+                "children": "Author",
+                "__type": "Cite"
+              }
+            ],
+            "__dialog": {
+              "props": [
+                {
+                  "type": "text",
+                  "name": "quote",
+                  "value": "Some QUote Block",
+                  "title": "Quote"
+                },
+                {
+                  "type": "text",
+                  "name": "cite",
+                  "value": "Author",
+                  "title": "Cite"
+                }
+              ],
+              "path": "/content/spectacle/slide/blockquote"
+            },
+            "__dialog_type": "dialogs/SimpleDialog",
+            "__type": "BlockQuote"
           }
         ],
         "__dialog": {
-          "meta": [
+          "components": [
             {
-              "path": "/content/spectacle/slide2/heading1"
+              "name": "Heading",
+              "description": "Text Component",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "Heading",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "Text",
+              "description": "Just a text component",
+              "__props": {
+                "component": "Text",
+                "text": "Edit Text Component Here",
+                ":nameHint": "Text",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "BlockQuote",
+              "description": "Quote Block component",
+              "__props": {
+                "component": "BlockQuote",
+                "quote": "Edit Quote",
+                "cite": "Author",
+                ":nameHint": "BlockQuote",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "Code",
+              "description": "Use to show highlighted code",
+              "__props": {
+                "component": "Code",
+                "source": "function test(){}",
+                ":nameHint": "Code",
+                "lang": "javascript",
+                ":order": "last"
+              }
             }
           ],
-          "path": "/content/spectacle/slide2/",
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Can be used as Slide Heading",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "heading",
-                ":order": "last"
-              }
-            }
-          ]
-        },
-        "__type": "Slide"
-      },
-      {
-        "children": [
-          {
-            "children": "Edit Title Here",
-            "size": 3,
-            "fit": false,
-            "caps": false,
-            "lineHeight": 1,
-            "__dialog": {
-              "props": [
-                {
-                  "name": "text",
-                  "value": "Edit Title Here",
-                  "title": "Text"
-                },
-                {
-                  "name": "textColor",
-                  "value": "",
-                  "title": "Text Color"
-                }
-              ],
-              "path": "/content/spectacle/slide/heading"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "__type": "Heading"
-          }
-        ],
-        "__dialog": {
           "meta": [
             {
               "path": "/content/spectacle/slide/heading"
+            },
+            {
+              "path": "/content/spectacle/slide/blockquote"
             }
           ],
           "path": "/content/spectacle/slide/",
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Can be used as Slide Heading",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "heading",
-                ":order": "last"
+          "theme": {
+            "props": [
+              {
+                "type": "select",
+                "name": "bgColor",
+                "value": "secondary",
+                "options": [
+                  {
+                    "label": "Primary Color",
+                    "value": "primary"
+                  },
+                  {
+                    "label": "Secondary Color",
+                    "value": "secondary"
+                  }
+                ],
+                "title": "Background Color"
+              },
+              {
+                "type": "select",
+                "name": "textColor",
+                "value": "primary",
+                "options": [
+                  {
+                    "label": "Primary Color",
+                    "value": "primary"
+                  },
+                  {
+                    "label": "Secondary Color",
+                    "value": "secondary"
+                  }
+                ],
+                "title": "Text Color"
               }
-            }
-          ]
+            ],
+            "path": "/content/spectacle/slide"
+          }
         },
-        "__type": "Slide"
-      },
-      {
-        "children": [
-
-        ],
-        "__dialog": {
-          "meta": [
-
-          ],
-          "path": "/content/spectacle/slide_492865712/",
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Can be used as Slide Heading",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "heading",
-                ":order": "last"
-              }
-            }
-          ]
-        },
-        "__type": "Slide"
-      },
-      {
-        "children": [
-
-        ],
-        "__dialog": {
-          "meta": [
-
-          ],
-          "path": "/content/spectacle/slide_891033421/",
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Can be used as Slide Heading",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "heading",
-                ":order": "last"
-              }
-            }
-          ]
-        },
+        "bgColor": "secondary",
+        "textColor": "primary",
         "__type": "Slide"
       }
     ],
     "__dialog": {
-      "path": "/content/spectacle/",
+      "components": [
+        {
+          "name": "Slide",
+          "description": "",
+          "__props": {
+
+          }
+        }
+      ],
       "meta": [
         {
           "path": "/content/spectacle/slide1"
         },
         {
-          "path": "/content/spectacle/slide2"
-        },
-        {
           "path": "/content/spectacle/slide"
-        },
-        {
-          "path": "/content/spectacle/slide_492865712"
-        },
-        {
-          "path": "/content/spectacle/slide_891033421"
         }
       ],
-      "props": {
-        ":nameHint": "slide",
-        ":order": "last"
+      "path": "/content/spectacle/",
+      "theme": {
+        "props": [
+          {
+            "type": "color",
+            "name": "primaryColor",
+            "value": "#ffffff",
+            "title": "Primary Color"
+          },
+          {
+            "type": "color",
+            "name": "secondaryColor",
+            "value": "#1f2022",
+            "title": "Secondary Color"
+          },
+          {
+            "type": "color",
+            "name": "tertiaryColor",
+            "value": "#03a9fc",
+            "title": "Tertiary Color"
+          },
+          {
+            "type": "color",
+            "name": "quarternaryColor",
+            "value": "#cecece",
+            "title": "Quarternary Color"
+          },
+          {
+            "type": "select",
+            "name": "primaryFont",
+            "value": "Montserrat",
+            "options": [
+              {
+                "label": "Montserrat",
+                "value": "Montserrat"
+              },
+              {
+                "label": "Helvetica",
+                "value": "Helvetica"
+              }
+            ],
+            "title": "Primary Font"
+          },
+          {
+            "type": "select",
+            "name": "secondaryFont",
+            "value": "Helvetica",
+            "options": [
+              {
+                "label": "Montserrat",
+                "value": "Montserrat"
+              },
+              {
+                "label": "Helvetica",
+                "value": "Helvetica"
+              }
+            ],
+            "title": "Secondary Font"
+          }
+        ],
+        "path": "/content/spectacle"
       }
+    },
+    "colors": {
+      "secondary": "#1f2022",
+      "tertiary": "#03a9fc",
+      "quarternary": "#cecece",
+      "primary": "#ffffff"
+    },
+    "fonts": {
+      "secondary": "Helvetica",
+      "primary": "Montserrat"
     },
     "__type": "Deck"
   },

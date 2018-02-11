@@ -1,5 +1,5 @@
 export default content => {
-    const wrapped = {
+    return {
         ...content,
         children: [...content.children.map((x, i) => {
             return {
@@ -21,10 +21,16 @@ export default content => {
                     {
                         "__type": "DeleteSlideButton",
                         "index": i
+                    },
+                    {
+                        "__type": "SlidePropsButton",
+                        ...x['__dialog']['theme']
+                    },
+                    {
+                        "__type": "PresentationThemeButton"
                     }
                 ]
             }
         })]
     };
-    return wrapped;
 }

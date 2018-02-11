@@ -1,14 +1,17 @@
 package com.cathcart93.sling.components.models.spectacle
 
+import com.cathcart93.sling.components.Container
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
 import org.apache.sling.api.resource.Resource
+import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
-@Model(adaptables = [Resource::class])
+@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController("Slide")
 class SlideModel : IReactController, Slide {
 
@@ -21,51 +24,52 @@ class SlideModel : IReactController, Slide {
     @ReactProp("__dialog")
     private lateinit var dialog: Any
 
+    @ValueMapValue
+    @ReactProp
+    private var bgColor: String? = null
+
+    @ValueMapValue
+    @ReactProp
+    private var textColor: String? = null
+
     @PostConstruct
     fun init() {
         children = resource.children
                 .mapNotNull { it.adaptTo(IReactController::class.java) }
                 .filter { it is SlideComponent }
                 .map { it as SlideComponent }
-        dialog = Dialog(
-                resource.children
-                        .filter { it.adaptTo(IReactController::class.java) != null }
-                        .filter { it.adaptTo(IReactController::class.java) is SlideComponent },
-                "${resource.path}/",
-                defaultComponents()
-        )
-    }
 
-    class Dialog(children: List<Resource>, val path: String, val components: List<Component> = emptyList()) {
-        private val meta: List<MetaItem> = children.map {
-            MetaItem(it.path)
+        val containerDialog = containerDialog(resource) {
+            component("Heading", "Text Component") {
+                prop("text", "Edit Title Here")
+                prop("size", "3")
+                prop("size", "3")
+                prop("fit", "false")
+            }
+            component("Text", "Just a text component") {
+                prop("text", "Edit Text Component Here")
+            }
+            component("BlockQuote", "Quote Block component") {
+                prop("quote", "Edit Quote")
+                prop("cite", "Author")
+            }
+            component("CodePane", "Use to show highlighted code"){
+                prop("source", "function test(){}")
+                prop("lang", "javascript")
+            }
         }
 
-        class MetaItem(private val path: String)
-        class Component(val name: String, val description: String = name, val __props: Map<String, Any> = HashMap())
+        val theme = dialog(resource) {
+            select("bgColor", "Background Color") {
+                option("Primary Color", "primary")
+                option("Secondary Color", "secondary")
+            }
+            select("textColor", "Text Color") {
+                option("Primary Color", "primary")
+                option("Secondary Color", "secondary")
+            }
+        }
 
-    }
-
-    fun defaultComponents(): List<Dialog.Component> {
-        val list = ArrayList<Dialog.Component>()
-        val props = HashMap<String, String>()
-        props.put(":nameHint", "heading")
-        props.put(":order", "last")
-        props.put("text", "Edit Title Here")
-        props.put("size", "3")
-        props.put("fit", "false")
-        props.put("component", "Heading")
-        val heading = Dialog.Component("Heading", "Can be used as Slide Heading", props)
-        list.add(heading)
-
-        val textProps = HashMap<String, String>()
-        textProps.put(":nameHint", "heading")
-        textProps.put(":order", "last")
-        textProps.put("text", "Edit Text Component Here")
-        textProps.put("component", "Text")
-        val textComponent = Dialog.Component("Text", "Just a text component", textProps)
-        list.add(textComponent)
-
-        return list
+        dialog = ThemedContainer(containerDialog, theme)
     }
 }
