@@ -24,7 +24,7 @@ export default content => {
                     },
                     {
                         "__type": "SlidePropsButton",
-                        ...x['__dialog']['theme']
+                        ...(x['__dialog'] ? x['__dialog']['theme'] : undefined)
                     },
                     {
                         "__type": "PresentationThemeButton"

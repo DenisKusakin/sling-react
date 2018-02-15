@@ -1,7 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle
 
-import com.cathcart93.sling.components.Container
 import com.cathcart93.sling.components.models.PageController
+import com.cathcart93.sling.components.models.spectacle.api.Slide
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactProp
 import com.cathcart93.sling.core.services.BeanSerializer
@@ -35,7 +35,14 @@ class SpectaclePageController : IReactController, PageController {
 
     @PostConstruct
     fun init() {
-        val container = resource.adaptTo(DeckModel::class.java)
+//        val container = resource.adaptTo(DeckModel::class.java)
+        //        val container = if (textFromRequest == null)
+//            spectacleTemplate()
+        val container = spectacleTemplate2(
+                request.getParameter("text") ?: "Text is not defined",
+                resource.getChild("slide1")!!.adaptTo(Slide::class.java)!!
+        )
+
         val isEditMode = request.getParameter("isEdit") != null
         props = beanSerializer.convertToMap(App("${resource.path}.json?isEdit=$isEditMode", isEditMode, container))
     }

@@ -1,5 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle
 
+import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
 import org.apache.sling.api.resource.Resource
 
 fun containerDialog(resource: Resource, block: ContainerContext.() -> Unit): ContainerDialog {

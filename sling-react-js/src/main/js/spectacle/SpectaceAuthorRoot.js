@@ -130,18 +130,23 @@ class SpectacleAuthorRoot extends React.Component {
     render() {
         const {content} = this.state;
         const dialogProps = this.props.content.content.__dialog;
+        // if(!dialogProps){
+        //     return <TreeContainer
+        //         components={this.props.components}
+        //         tree={content}/>
+        // }
         const components = {
             ...this.props.components,
             StateToggle: this.Toggle,
-            AddSlideButton: () => <AddSlideButton
+            AddSlideButton: () => dialogProps ? <AddSlideButton
                 url={dialogProps.path}
                 isEditMode={this.state.isEditMode}
                 callback={this.updateState}
-                props={dialogProps.components[0].__props}/>,
-            DeleteSlideButton: ({index}) => <DeleteSlideButton
+                props={dialogProps.components[0].__props}/> : null,
+            DeleteSlideButton: ({index}) => dialogProps ? <DeleteSlideButton
                 isEditMode={this.state.isEditMode}
                 callback={this.updateState}
-                url={dialogProps.meta[index].path}/>,
+                url={dialogProps.meta[index].path}/> : null,
             SlidePropsButton: ({path, props}) => <PropsButton
                 isEditMode={this.state.isEditMode}
                 title="Slide Properties"
@@ -149,13 +154,13 @@ class SpectacleAuthorRoot extends React.Component {
                 props={props}
                 updateState={this.updateState}
             />,
-            PresentationThemeButton: () => <PropsButton
+            PresentationThemeButton: () => dialogProps ? <PropsButton
                 isEditMode={this.state.isEditMode}
                 title="Presentation Theme Properties"
                 path={dialogProps.theme.path}
                 props={dialogProps.theme.props}
                 updateState={this.updateState}
-            />
+            /> : null
         };
 
         if (this.state.isEditMode) {

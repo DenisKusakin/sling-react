@@ -1,9 +1,10 @@
 package com.cathcart93.sling.components.models.spectacle
 
+import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
+import com.cathcart93.sling.components.models.spectacle.api.SlideComponent
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
-import com.sun.org.apache.xpath.internal.operations.Quo
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model

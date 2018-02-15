@@ -1,4 +1,4 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.api
 
 interface SimpleDialog {
     val props: List<Property>

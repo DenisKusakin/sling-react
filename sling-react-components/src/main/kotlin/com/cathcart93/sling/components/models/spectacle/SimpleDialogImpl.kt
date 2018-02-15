@@ -1,6 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle
 
-import com.cathcart93.sling.components.models.spectacle.SimpleDialog.SelectProperty.SelectPropertyOption
+import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
+import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog.SelectProperty.SelectPropertyOption
 import org.apache.sling.api.resource.Resource
 
 fun dialog(resource: Resource, block: DialogContext.() -> Unit): SimpleDialog {

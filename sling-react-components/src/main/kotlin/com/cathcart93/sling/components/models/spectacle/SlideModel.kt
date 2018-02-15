@@ -1,6 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle
 
-import com.cathcart93.sling.components.Container
+import com.cathcart93.sling.components.models.spectacle.api.Slide
+import com.cathcart93.sling.components.models.spectacle.api.SlideComponent
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
@@ -11,7 +12,7 @@ import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL, adapters = [Slide::class])
 @ReactController("Slide")
 class SlideModel : IReactController, Slide {
 
@@ -19,18 +20,18 @@ class SlideModel : IReactController, Slide {
     private lateinit var resource: Resource
 
     @ReactProp
-    private lateinit var children: List<SlideComponent>
+    override lateinit var children: List<SlideComponent>
 
     @ReactProp("__dialog")
     private lateinit var dialog: Any
 
     @ValueMapValue
     @ReactProp
-    private var bgColor: String? = null
+    override var bgColor: String? = null
 
     @ValueMapValue
     @ReactProp
-    private var textColor: String? = null
+    override var textColor: String? = null
 
     @PostConstruct
     fun init() {
