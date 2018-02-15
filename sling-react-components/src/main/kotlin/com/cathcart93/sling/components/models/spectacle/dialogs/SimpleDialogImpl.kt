@@ -1,10 +1,10 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.dialogs
 
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog.SelectProperty.SelectPropertyOption
 import org.apache.sling.api.resource.Resource
 
-fun dialog(resource: Resource, block: DialogContext.() -> Unit): SimpleDialog {
+fun simpleDialog(resource: Resource, block: DialogContext.() -> Unit): SimpleDialog {
     val dialogContext = DialogContext(resource)
     block(dialogContext)
     return dialogContext

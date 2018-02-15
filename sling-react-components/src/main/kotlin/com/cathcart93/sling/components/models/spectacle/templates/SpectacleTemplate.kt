@@ -1,8 +1,10 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.templates
 
 import com.cathcart93.sling.components.models.spectacle.api.Slide
+import com.cathcart93.sling.components.models.spectacle.impl.builder.DeckImpl
+import com.cathcart93.sling.components.models.spectacle.impl.builder.spectacle
 
-fun spectacleTemplate(text: String = "Test"): Deck {
+fun spectacleTemplate(text: String = "Test"): DeckImpl {
     return spectacle {
         slides {
             slide {
@@ -27,7 +29,7 @@ fun spectacleTemplate(text: String = "Test"): Deck {
     }
 }
 
-fun spectacleTemplate2(text: String = "Test", lastSlide: Slide): Deck {
+fun spectacleTemplate2(text: String = "Test", lastSlide: Slide): DeckImpl {
     return spectacle {
         slides {
             slide {

@@ -1,7 +1,9 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
+import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.api.Slide
 import com.cathcart93.sling.components.models.spectacle.api.SlideComponent
+import com.cathcart93.sling.components.models.spectacle.dialogs.slideDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
@@ -13,7 +15,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL, adapters = [Slide::class])
-@ReactController("Slide")
+@ReactController(Constants.SLIDE)
 class SlideModel : IReactController, Slide {
 
     @SlingObject
@@ -40,37 +42,6 @@ class SlideModel : IReactController, Slide {
                 .filter { it is SlideComponent }
                 .map { it as SlideComponent }
 
-        val containerDialog = containerDialog(resource) {
-            component("Heading", "Text Component") {
-                prop("text", "Edit Title Here")
-                prop("size", "3")
-                prop("size", "3")
-                prop("fit", "false")
-            }
-            component("Text", "Just a text component") {
-                prop("text", "Edit Text Component Here")
-            }
-            component("BlockQuote", "Quote Block component") {
-                prop("quote", "Edit Quote")
-                prop("cite", "Author")
-            }
-            component("CodePane", "Use to show highlighted code"){
-                prop("source", "function test(){}")
-                prop("lang", "javascript")
-            }
-        }
-
-        val theme = dialog(resource) {
-            select("bgColor", "Background Color") {
-                option("Primary Color", "primary")
-                option("Secondary Color", "secondary")
-            }
-            select("textColor", "Text Color") {
-                option("Primary Color", "primary")
-                option("Secondary Color", "secondary")
-            }
-        }
-
-        dialog = ThemedContainer(containerDialog, theme)
+        dialog = slideDialog(resource)
     }
 }

@@ -1,7 +1,8 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.PageController
 import com.cathcart93.sling.components.models.spectacle.api.Slide
+import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate2
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactProp
 import com.cathcart93.sling.core.services.BeanSerializer

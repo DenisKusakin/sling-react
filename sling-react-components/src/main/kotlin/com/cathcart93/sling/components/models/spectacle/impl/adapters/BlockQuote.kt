@@ -1,7 +1,9 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
+import com.cathcart93.sling.components.models.spectacle.api.BlockQuote
+import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
-import com.cathcart93.sling.components.models.spectacle.api.SlideComponent
+import com.cathcart93.sling.components.models.spectacle.dialogs.simpleDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
@@ -13,16 +15,16 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController("BlockQuote")
-class BlockQuote : IReactController, SlideComponent {
+@ReactController(Constants.BLOCK_QUOTE)
+class BlockQuote : IReactController, BlockQuote {
     @ReactProp
-    private var children = ArrayList<Any>()
+    override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
 
     @ValueMapValue
-    private lateinit var quote: String
+    override lateinit var quote: String
 
     @ValueMapValue
-    private lateinit var cite: String
+    override lateinit var cite: String
 
     @ReactProp("__dialog")
     private lateinit var dialog: SimpleDialog
@@ -35,20 +37,19 @@ class BlockQuote : IReactController, SlideComponent {
 
     @PostConstruct
     fun init() {
-        children = ArrayList()
         children.add(Quote(quote))
         children.add(Cite(cite))
 
-        dialog = dialog(resource) {
+        dialog = simpleDialog(resource) {
             text(name = "quote", title = "Quote")
             text(name = "cite", title = "Cite")
         }
     }
 
     @ReactController("Quote")
-    data class Quote(@ReactProp val children: String) : IReactController
+    data class Quote(@ReactProp override val children: String) : BlockQuote.Quote
 
     @ReactController("Cite")
-    data class Cite(@ReactProp val children: String) : IReactController
+    data class Cite(@ReactProp override val children: String) : BlockQuote.Cite
 
 }

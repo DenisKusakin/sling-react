@@ -1,7 +1,9 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
+import com.cathcart93.sling.components.models.spectacle.api.Code
+import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
-import com.cathcart93.sling.components.models.spectacle.api.SlideComponent
+import com.cathcart93.sling.components.models.spectacle.dialogs.codeDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
@@ -13,16 +15,16 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController("CodePane")
-class CodeModel : IReactController, SlideComponent {
+@ReactController(Constants.CODE_PANE)
+class CodeModel : IReactController, Code {
 
     @ValueMapValue
     @ReactProp
-    private var source: String? = null
+    override var source: String? = null
 
     @ValueMapValue
     @ReactProp
-    private var lang: String? = "javascript"
+    override var lang: String? = "javascript"
 
     @ReactProp("__dialog")
     private lateinit var dialog: SimpleDialog
@@ -35,12 +37,7 @@ class CodeModel : IReactController, SlideComponent {
 
     @PostConstruct
     fun init() {
-        dialog = dialog(resource) {
-            text("source", "Source")
-            select("lang", "Language") {
-                option("Java Script", "javascript")
-            }
-        }
+        dialog = codeDialog(resource)
     }
 
 }

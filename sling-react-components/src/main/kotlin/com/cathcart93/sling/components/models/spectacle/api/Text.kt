@@ -1,10 +1,11 @@
 package com.cathcart93.sling.components.models.spectacle.api
 
-interface Heading: SlideComponent  {
+/**
+ * @author Denis_Kusakin. 2/15/2018.
+ */
+interface Text : SlideComponent {
     val children: String
-    val size: Int
     val fit: Boolean
-    val caps: Boolean
     val textColor: String?
     val lineHeight: Int
 }

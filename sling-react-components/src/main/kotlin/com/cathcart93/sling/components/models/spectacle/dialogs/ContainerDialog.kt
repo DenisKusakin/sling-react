@@ -1,4 +1,4 @@
-package com.cathcart93.sling.components.models.spectacle
+package com.cathcart93.sling.components.models.spectacle.dialogs
 
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
 import org.apache.sling.api.resource.Resource
