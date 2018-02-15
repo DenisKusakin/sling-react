@@ -7,7 +7,19 @@ import org.apache.sling.api.resource.Resource
 
 fun spectacleTemplate(rootResource: Resource): DeckImpl {
     return spectacle {
-        
+        slides {
+            //Some slides from content
+            rootResource.children.mapNotNull { it.adaptTo(Slide::class.java) }
+                    .forEach { slide(it) }
+            slide {
+                heading("One more Slide!"){
+
+                }
+                text("This slide is not a content one!"){
+                    color("green")
+                }
+            }
+        }
     }
 }
 
