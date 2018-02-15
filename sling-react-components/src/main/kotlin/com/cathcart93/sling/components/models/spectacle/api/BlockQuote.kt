@@ -5,8 +5,6 @@ package com.cathcart93.sling.components.models.spectacle.api
  */
 interface BlockQuote : SlideComponent {
     val children: List<BlockQuoteChildComponent>
-    val quote: String
-    val cite: String
 
     interface Quote : BlockQuoteChildComponent {
         val children: String

@@ -21,10 +21,10 @@ class BlockQuote : IReactController, BlockQuote {
     override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
 
     @ValueMapValue
-    override lateinit var quote: String
+    lateinit var quote: String
 
     @ValueMapValue
-    override lateinit var cite: String
+    lateinit var cite: String
 
     @ReactProp("__dialog")
     private lateinit var dialog: SimpleDialog

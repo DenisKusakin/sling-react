@@ -1,9 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder
 
-import com.cathcart93.sling.components.models.spectacle.api.Constants
-import com.cathcart93.sling.components.models.spectacle.api.Deck
-import com.cathcart93.sling.components.models.spectacle.api.Slide
-import com.cathcart93.sling.components.models.spectacle.api.SlideComponent
+import com.cathcart93.sling.components.models.spectacle.api.*
+import com.cathcart93.sling.components.models.spectacle.api.BlockQuote
 
 fun spectacle(block: SpectacleContext.() -> Unit): DeckImpl {
     val spectacleContext = SpectacleContext()
@@ -11,7 +9,8 @@ fun spectacle(block: SpectacleContext.() -> Unit): DeckImpl {
     return DeckImpl(children = spectacleContext.context.slides)
 }
 
-class SpectacleContext() {
+@Marker
+class SpectacleContext {
     val context = SlidesContext()
 
     fun slides(block: SlidesContext.() -> Unit) {
@@ -19,6 +18,7 @@ class SpectacleContext() {
     }
 }
 
+@Marker
 class SlidesContext {
     val slides = ArrayList<Slide>()
 
@@ -33,6 +33,7 @@ class SlidesContext {
     }
 }
 
+@Marker
 class SlideContext {
     var bgColor: String? = null
     var textColor: String? = null
@@ -52,11 +53,22 @@ class SlideContext {
         slideComponents.add(headingContext.getHeading())
     }
 
+    fun text(text: String, block: TextContext.() -> Unit) {
+        val textContext = TextContext(text)
+        block(textContext)
+        slideComponents.add(textContext.getText())
+    }
+
+    fun blockQuote(text: String, author: String) {
+        slideComponents.add(BlockQuoteImpl(quote = text, author = author))
+    }
+
     fun getSlide(): Slide {
         return SlideImpl(bgColor, textColor, slideComponents)
     }
 }
 
+@Marker
 class HeadingContext(val text: String) {
     var size: Int = 1
     var fit: Boolean = false
@@ -74,6 +86,31 @@ class HeadingContext(val text: String) {
     }
 }
 
+@Marker
+class TextContext(val text: String) {
+    var fit: Boolean = false
+    var lineHeight: Int = 1
+    var textColor: String? = null
+
+    fun fit() {
+        this.fit = true
+    }
+
+    fun lineHeight(lineHeight: Int) {
+        this.lineHeight = lineHeight
+    }
+
+    fun color(color: String?) {
+        this.textColor = color
+    }
+
+    fun getText(): Text {
+        return TextImpl(children = text, fit = fit, lineHeight = lineHeight, textColor = textColor)
+    }
+}
+
+@DslMarker
+annotation class Marker
 
 class SlideImpl(
         override val bgColor: String?,
@@ -103,4 +140,33 @@ class DeckImpl(
         override val colors: Map<String, String?> = emptyMap(),
         override val children: List<Slide>) : Deck {
     val __type = Constants.DECK
+}
+
+class TextImpl(
+        override val children: String,
+        override val fit: Boolean,
+        override val lineHeight: Int,
+        override val textColor: String?
+) : Text {
+    val __type = Constants.TEXT
+}
+
+class BlockQuoteImpl(quote: String, author: String) : BlockQuote {
+    val __type = Constants.BLOCK_QUOTE
+    override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
+
+    init {
+        children.add(QuoteImpl(quote))
+        children.add(CiteImpl(author))
+    }
+
+    class QuoteImpl(text: String) : BlockQuote.Quote {
+        val __type = "Quote"
+        override val children = text
+    }
+
+    class CiteImpl(author: String) : BlockQuote.Cite {
+        val __type = "Cite"
+        override val children = author
+    }
 }
