@@ -15,9 +15,8 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController(Constants.BLOCK_QUOTE)
-class BlockQuote : IReactController, BlockQuote {
-    @ReactProp
+class BlockQuote : BlockQuote {
+//    @ReactProp
     override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
 
     @ValueMapValue

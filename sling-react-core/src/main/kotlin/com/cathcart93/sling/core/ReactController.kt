@@ -1,5 +1,8 @@
 package com.cathcart93.sling.core
 
+import java.lang.annotation.Inherited
+
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
-annotation class ReactController(val componentName: String = "")
+@Inherited
+annotation class ReactController(val componentName: String)
