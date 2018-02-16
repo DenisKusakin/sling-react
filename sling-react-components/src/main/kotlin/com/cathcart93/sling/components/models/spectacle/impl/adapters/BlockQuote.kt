@@ -45,10 +45,10 @@ class BlockQuote : BlockQuote {
         }
     }
 
-    @ReactController("Quote")
-    data class Quote(@ReactProp override val children: String) : BlockQuote.Quote
+//    @ReactController("Quote")
+    data class Quote(override val children: String) : BlockQuote.Quote
 
-    @ReactController("Cite")
-    data class Cite(@ReactProp override val children: String) : BlockQuote.Cite
+//    @ReactController("Cite")
+    data class Cite(override val children: String) : BlockQuote.Cite
 
 }

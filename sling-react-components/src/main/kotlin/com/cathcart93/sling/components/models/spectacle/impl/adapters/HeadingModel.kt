@@ -15,28 +15,28 @@ import com.cathcart93.sling.components.models.spectacle.api.Heading
 import com.cathcart93.sling.components.models.spectacle.dialogs.headingDialog
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController(Constants.HEADING)
-class HeadingModel : IReactController, Heading {
+//@ReactController(Constants.HEADING)
+class HeadingModel : Heading {
     @ValueMapValue(name = "text")
     override lateinit var children: String
 
-    @ReactProp
+//    @ReactProp
     @ValueMapValue
     override var size: Int = 6
 
-    @ReactProp
+//    @ReactProp
     @ValueMapValue
     override var fit: Boolean = true
 
-    @ReactProp
+//    @ReactProp
     @ValueMapValue
     override var caps: Boolean = false
 
-    @ReactProp
+//    @ReactProp
     @ValueMapValue
     override var textColor: String? = null
 
-    @ReactProp
+//    @ReactProp
     @ValueMapValue
     override var lineHeight: Int = 1
 
