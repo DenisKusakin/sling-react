@@ -28,22 +28,22 @@ class DeckModel : IReactController, Deck {
     private lateinit var dialog: Any
 
     @ValueMapValue
-    override var primaryColor: String? = null
+    var primaryColor: String? = null
 
     @ValueMapValue
-    override var secondaryColor: String? = null
+    var secondaryColor: String? = null
 
     @ValueMapValue
-    override var tertiaryColor: String? = null
+    var tertiaryColor: String? = null
 
     @ValueMapValue
-    override var quarternaryColor: String? = null
+    var quarternaryColor: String? = null
 
     @ValueMapValue
-    override var primaryFont: String? = null
+    var primaryFont: String? = null
 
     @ValueMapValue
-    override var secondaryFont: String? = null
+    var secondaryFont: String? = null
 
     @ReactProp
     override var colors = HashMap<String, String?>()

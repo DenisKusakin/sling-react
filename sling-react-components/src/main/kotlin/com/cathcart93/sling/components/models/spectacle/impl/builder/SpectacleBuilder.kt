@@ -12,9 +12,35 @@ fun spectacle(block: SpectacleContext.() -> Unit): DeckImpl {
 @Marker
 class SpectacleContext {
     val context = SlidesContext()
+    val fonts = HashMap<String, String>()
+    val colors = HashMap<String, String>()
 
     fun slides(block: SlidesContext.() -> Unit) {
         block(context)
+    }
+
+    fun primaryFont(primaryFont: String) {
+        fonts.put("primary", primaryFont)
+    }
+
+    fun secondaryFont(secondaryFont: String) {
+        fonts.put("secondary", secondaryFont)
+    }
+
+    fun primaryColor(primaryColor: String) {
+        colors.put("primary", primaryColor)
+    }
+
+    fun secondaryColor(secondaryColor: String) {
+        colors.put("secondary", secondaryColor)
+    }
+
+    fun tertiaryColor(tertiaryColor: String) {
+        colors.put("tertiary", tertiaryColor)
+    }
+
+    fun quarternaryColor(quarternaryColor: String) {
+        colors.put("quarternary", quarternaryColor)
     }
 }
 
@@ -130,12 +156,6 @@ class HeadingImpl(
 }
 
 class DeckImpl(
-        override val primaryColor: String? = null,
-        override val secondaryColor: String? = null,
-        override val tertiaryColor: String? = null,
-        override val quarternaryColor: String? = null,
-        override val primaryFont: String? = null,
-        override val secondaryFont: String? = null,
         override val fonts: Map<String, String?> = emptyMap(),
         override val colors: Map<String, String?> = emptyMap(),
         override val children: List<Slide>) : Deck {

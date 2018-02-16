@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.PageController
 import com.cathcart93.sling.components.models.spectacle.api.Slide
+import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate
 import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate2
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactProp
@@ -39,10 +40,7 @@ class SpectaclePageController : IReactController, PageController {
 //        val container = resource.adaptTo(DeckModel::class.java)
         //        val container = if (textFromRequest == null)
 //            spectacleTemplate()
-        val container = spectacleTemplate2(
-                request.getParameter("text") ?: "Text is not defined",
-                resource.getChild("slide1")!!.adaptTo(Slide::class.java)!!
-        )
+        val container = spectacleTemplate(resource)
 
         val isEditMode = request.getParameter("isEdit") != null
         props = beanSerializer.convertToMap(App("${resource.path}.json?isEdit=$isEditMode", isEditMode, container))
