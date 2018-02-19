@@ -7,20 +7,14 @@ import com.cathcart93.sling.core.ReactProp
 /**
  * @author Denis_Kusakin. 2/15/2018.
  */
-@ReactController(Constants.BLOCK_QUOTE)
-interface BlockQuote : IReactController, SlideComponent {
-    @ReactProp
+interface BlockQuote : SlideComponent {
     val children: List<BlockQuoteChildComponent>
 
-    @ReactController("Quote")
     interface Quote : BlockQuoteChildComponent {
-        @ReactProp
         val children: String
     }
 
-    @ReactController("Cite")
     interface Cite : BlockQuoteChildComponent {
-        @ReactProp
         val children: String
     }
 

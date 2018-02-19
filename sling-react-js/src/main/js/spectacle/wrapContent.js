@@ -2,6 +2,17 @@ export default content => {
     return {
         ...content,
         children: [...content.children.map((x, i) => {
+            if(x['__dialog'] === undefined || x['__dialog'] === null){
+                return {
+                    ...x,
+                    children: [
+                        ...x.children,
+                        {
+                            "__type": "StateToggle"
+                        }
+                    ]
+                }
+            }
             return {
                 ...x,
                 children: [

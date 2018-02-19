@@ -4,23 +4,11 @@ import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
 
-@ReactController(Constants.HEADING)
-interface Heading: IReactController, SlideComponent  {
-    @ReactProp
+interface Heading: SlideComponent  {
     val children: String
-
-    @ReactProp
     val size: Int
-
-    @ReactProp
     val fit: Boolean
-
-    @ReactProp
     val caps: Boolean
-
-    @ReactProp
     val textColor: String?
-
-    @ReactProp
     val lineHeight: Int
 }

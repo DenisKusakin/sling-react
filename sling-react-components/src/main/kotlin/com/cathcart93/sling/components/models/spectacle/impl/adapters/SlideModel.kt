@@ -14,7 +14,7 @@ import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL, adapters = [Slide::class])
+@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.SLIDE)
 class SlideModel : IReactController, Slide {
 

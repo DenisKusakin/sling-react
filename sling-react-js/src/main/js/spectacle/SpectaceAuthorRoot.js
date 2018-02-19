@@ -42,6 +42,12 @@ const DeleteSlideButton = ({url, callback, isEditMode}) => {
     </MuiThemeProvider>)
 };
 
+const ToggleEditModeButton = ({onClick, isEditMode}) => {
+    return (<MuiThemeProvider>
+        <FlatButton label={isEditMode ? "Preview" : "Edit"} secondary={true} onClick={onClick}/>
+    </MuiThemeProvider>)
+};
+
 class PropsButton extends React.Component {
     constructor(props) {
         super(props);
@@ -137,7 +143,9 @@ class SpectacleAuthorRoot extends React.Component {
         // }
         const components = {
             ...this.props.components,
-            StateToggle: this.Toggle,
+            StateToggle: () => <ToggleEditModeButton
+                isEditMode={this.state.isEditMode}
+                onClick={() => this.setState({isEditMode: !this.state.isEditMode})}/>,
             AddSlideButton: () => dialogProps ? <AddSlideButton
                 url={dialogProps.path}
                 isEditMode={this.state.isEditMode}

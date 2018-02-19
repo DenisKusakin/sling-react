@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.templates
 
 import com.cathcart93.sling.components.models.spectacle.api.Slide
 import com.cathcart93.sling.components.models.spectacle.impl.adapters.DeckModel
+import com.cathcart93.sling.components.models.spectacle.impl.adapters.SlideModel
 import com.cathcart93.sling.components.models.spectacle.impl.builder.DeckImpl
 import com.cathcart93.sling.components.models.spectacle.impl.builder.spectacle
 import org.apache.sling.api.resource.Resource
@@ -11,23 +12,10 @@ fun spectacleTemplate(rootResource: Resource): DeckImpl {
     val deck = rootResource.adaptTo(DeckModel::class.java)
 
     return spectacle {
-        Optional.ofNullable(deck)
-                .map { deck!!.primaryColor }
-                .ifPresent { primaryColor(it) }
-        Optional.ofNullable(deck)
-                .map { deck!!.secondaryColor }
-                .ifPresent { secondaryColor(it) }
-        Optional.ofNullable(deck)
-                .map { deck!!.tertiaryColor }
-                .ifPresent { tertiaryColor(it) }
-        Optional.ofNullable(deck)
-                .map { deck!!.quarternaryColor }
-                .ifPresent { quarternaryColor(it) }
-
         slides {
             //Some slides from content
             rootResource.children
-                    .mapNotNull { it.adaptTo(Slide::class.java) }
+                    .mapNotNull { it.adaptTo(SlideModel::class.java) }
                     .forEach { slide(it) }
             slide {
                 heading("One more Slide!") {

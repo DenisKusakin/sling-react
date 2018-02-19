@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct
 @ReactController(Constants.TEXT)
 class TextModel : IReactController, Text {
     @ValueMapValue(name = "text")
+    @ReactProp
     override lateinit var children: String
 
     @ReactProp

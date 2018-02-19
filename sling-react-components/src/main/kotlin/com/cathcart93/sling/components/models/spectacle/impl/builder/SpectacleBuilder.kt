@@ -2,11 +2,28 @@ package com.cathcart93.sling.components.models.spectacle.impl.builder
 
 import com.cathcart93.sling.components.models.spectacle.api.*
 import com.cathcart93.sling.components.models.spectacle.api.BlockQuote
+import com.cathcart93.sling.components.models.spectacle.dialogs.DialogContext
+import org.apache.sling.api.resource.Resource
+
+//fun spectacle(deck: Deck, block: SpectacleContext.() -> Unit): Deck {
+//    val spectacleContext = SpectacleContext()
+//    block(spectacleContext)
+//    deck.children.
+//    return DeckImpl(
+//            children = spectacleContext.context.slides,
+//            fonts = spectacleContext.fonts,
+//            colors = spectacleContext.colors
+//    )
+//}
 
 fun spectacle(block: SpectacleContext.() -> Unit): DeckImpl {
     val spectacleContext = SpectacleContext()
     block(spectacleContext)
-    return DeckImpl(children = spectacleContext.context.slides)
+    return DeckImpl(
+            children = spectacleContext.context.slides,
+            fonts = spectacleContext.fonts,
+            colors = spectacleContext.colors
+    )
 }
 
 @Marker
@@ -132,6 +149,15 @@ class TextContext(val text: String) {
 
     fun getText(): Text {
         return TextImpl(children = text, fit = fit, lineHeight = lineHeight, textColor = textColor)
+    }
+}
+
+class AuthorableContext() {
+    val __dialog_type = "dialogs/SimpleDialog"
+    val __dialog: SimpleDialog
+
+    fun dialog(resource: Resource) {
+
     }
 }
 
