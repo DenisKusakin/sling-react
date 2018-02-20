@@ -1,12 +1,12 @@
 package com.cathcart93.sling.components.models.spectacle.templates
 
 import com.cathcart93.sling.components.models.spectacle.api.Slide
+import com.cathcart93.sling.components.models.spectacle.dialogs.simpleDialog
 import com.cathcart93.sling.components.models.spectacle.impl.adapters.DeckModel
 import com.cathcart93.sling.components.models.spectacle.impl.adapters.SlideModel
 import com.cathcart93.sling.components.models.spectacle.impl.builder.DeckImpl
 import com.cathcart93.sling.components.models.spectacle.impl.builder.spectacle
 import org.apache.sling.api.resource.Resource
-import java.util.*
 
 fun spectacleTemplate(rootResource: Resource): DeckImpl {
     val deck = rootResource.adaptTo(DeckModel::class.java)
@@ -23,6 +23,11 @@ fun spectacleTemplate(rootResource: Resource): DeckImpl {
                 }
                 text("This slide is not a content one!") {
                     color("green")
+                }
+                dialog {
+                    simpleDialog(resource = rootResource) {
+                        text("text", "Text")
+                    }
                 }
             }
         }

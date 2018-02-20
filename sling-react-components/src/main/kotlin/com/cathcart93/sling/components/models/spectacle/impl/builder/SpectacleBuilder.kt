@@ -2,19 +2,6 @@ package com.cathcart93.sling.components.models.spectacle.impl.builder
 
 import com.cathcart93.sling.components.models.spectacle.api.*
 import com.cathcart93.sling.components.models.spectacle.api.BlockQuote
-import com.cathcart93.sling.components.models.spectacle.dialogs.DialogContext
-import org.apache.sling.api.resource.Resource
-
-//fun spectacle(deck: Deck, block: SpectacleContext.() -> Unit): Deck {
-//    val spectacleContext = SpectacleContext()
-//    block(spectacleContext)
-//    deck.children.
-//    return DeckImpl(
-//            children = spectacleContext.context.slides,
-//            fonts = spectacleContext.fonts,
-//            colors = spectacleContext.colors
-//    )
-//}
 
 fun spectacle(block: SpectacleContext.() -> Unit): DeckImpl {
     val spectacleContext = SpectacleContext()
@@ -27,7 +14,7 @@ fun spectacle(block: SpectacleContext.() -> Unit): DeckImpl {
 }
 
 @Marker
-class SpectacleContext {
+class SpectacleContext : AuthorableContext() {
     val context = SlidesContext()
     val fonts = HashMap<String, String>()
     val colors = HashMap<String, String>()
@@ -77,7 +64,7 @@ class SlidesContext {
 }
 
 @Marker
-class SlideContext {
+class SlideContext : AuthorableContext() {
     var bgColor: String? = null
     var textColor: String? = null
     val slideComponents = ArrayList<SlideComponent>()
@@ -112,7 +99,7 @@ class SlideContext {
 }
 
 @Marker
-class HeadingContext(val text: String) {
+class HeadingContext(val text: String) : AuthorableContext() {
     var size: Int = 1
     var fit: Boolean = false
 
@@ -130,7 +117,7 @@ class HeadingContext(val text: String) {
 }
 
 @Marker
-class TextContext(val text: String) {
+class TextContext(val text: String) : AuthorableContext() {
     var fit: Boolean = false
     var lineHeight: Int = 1
     var textColor: String? = null
@@ -152,12 +139,12 @@ class TextContext(val text: String) {
     }
 }
 
-class AuthorableContext() {
+open class AuthorableContext {
     val __dialog_type = "dialogs/SimpleDialog"
-    val __dialog: SimpleDialog
+    var __dialog: SimpleDialog? = null
 
-    fun dialog(resource: Resource) {
-
+    fun dialog(block: () -> SimpleDialog) {
+        __dialog = block()
     }
 }
 
