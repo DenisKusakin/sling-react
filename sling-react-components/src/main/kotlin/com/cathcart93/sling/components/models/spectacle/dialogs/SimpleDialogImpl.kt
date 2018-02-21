@@ -20,6 +20,11 @@ class DialogContext(@Transient private val resource: Resource) : SimpleDialog {
                 value = resource.valueMap.get(name, String::class.java)))
     }
 
+    fun multilineText(name: String, title: String) {
+        this.props.add(SimpleDialog.MultilineTextProperty(title = title, name = name,
+                value = resource.valueMap.get(name, String::class.java)))
+    }
+
     fun checkbox(name: String, title: String) {
         this.props.add(SimpleDialog.CheckboxProperty(title = title, name = name,
                 value = resource.valueMap.get(name, false)))

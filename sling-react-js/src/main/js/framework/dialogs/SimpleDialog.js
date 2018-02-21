@@ -50,7 +50,7 @@ class SimpleDialog extends React.Component {
                                     this.setState({isOpen: false})
                                 }}
                                 onSuccess={() => {
-                                    this.props.updateState()
+                                    this.props.updateState();
                                     this.setState({isOpen: false})
                                 }}
                                 path={this.props.__dialog.path}

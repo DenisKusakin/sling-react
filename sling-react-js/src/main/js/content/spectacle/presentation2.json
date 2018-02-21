@@ -24,7 +24,7 @@
             "__dialog": {
               "props": [
                 {
-                  "type": "text",
+                  "type": "textarea",
                   "name": "text",
                   "value": "Slide 1 2 3 4",
                   "title": "Text"

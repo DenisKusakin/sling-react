@@ -11,6 +11,9 @@ const bindingType = (type) => {
     if (!type || type === 'text') {
         return "TextField"
     }
+    if (type === "textarea") {
+        return "MaterialTextArea"
+    }
     if (type === "checkbox") {
         return "MaterialCheckbox"
     }

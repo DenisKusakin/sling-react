@@ -13,6 +13,9 @@ const MaterialDialogForm = observer(({form}) => (
                 if (x.type === 'text') {
                     return <div key={i}><TextField {...x.bind()}/><br/></div>
                 }
+                if (x.type === 'textarea') {
+                    return <div key={i}><TextField {...x.bind()} multiLine={true}/><br/></div>
+                }
                 if (x.type === 'checkbox') {
                     return <div key={i}>
                         <Checkbox {...x.bind()}/>
@@ -29,7 +32,7 @@ const MaterialDialogForm = observer(({form}) => (
                     </div>
                 }
                 if (x.type === 'color') {
-                    const colorProps = x.bind()
+                    const colorProps = x.bind();
                     return <div key={i}>
                         <p>{colorProps.label}</p>
                         <TwitterPicker {...colorProps} color={colorProps.value}/>

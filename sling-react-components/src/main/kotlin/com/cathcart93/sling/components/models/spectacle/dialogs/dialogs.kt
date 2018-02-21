@@ -8,7 +8,7 @@ import org.apache.sling.api.resource.Resource
  */
 fun codeDialog(resource: Resource): SimpleDialog {
     return simpleDialog(resource) {
-        text("source", "Source")
+        multilineText("source", "Source")
         select("lang", "Language") {
             option("Java Script", "javascript")
         }
@@ -103,7 +103,7 @@ fun slideDialog(resource: Resource): ThemedContainer {
 
 fun textDialog(resource: Resource): SimpleDialog {
     return simpleDialog(resource) {
-        text(name = "text", title = "Text")
+        multilineText(name = "text", title = "Text")
         checkbox(name = "fit", title = "Fit")
         select(name = "textColor", title = "Color") {
             option(label = "Red", value = "red")

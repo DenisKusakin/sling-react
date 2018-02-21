@@ -15,6 +15,10 @@ interface SimpleDialog {
         override val type = "text"
     }
 
+    class MultilineTextProperty(override val name: String, override val value: Any?, override val title: String) : Property {
+        override val type = "textarea"
+    }
+
     class ColorProperty(override val name: String, override val value: Any?, override val title: String) : Property {
         override val type = "color"
     }
