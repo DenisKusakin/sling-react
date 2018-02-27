@@ -1,28 +1,24 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import SpectacleAuthorRoot from './SpectaceAuthorRoot'
-import SimpleDialog from '../framework/dialogs/SimpleDialog'
 import ContainerDialog from './../components/container/dialog';
 
 const Spectacle = dynamic({
     modules: props => {
         return {
             Deck: import('./deck'),
-            Heading: import('./heading'),
-            Text: import('./text'),
-            Slide: import('./slide'),
             Container: import('./../components/container'),
-            Spectacle: import('spectacle')
+            Spectacle: import('spectacle'),
+            "dialogs/SimpleDialog": import('../framework/dialogs/SimpleDialog'),
+            SpectacleAuthorRoot: import('./SpectaceAuthorRoot')
         }
     },
     ssr: false,
-    render: (props, {Spectacle, ...components}) => {
+    render: (props, {SpectacleAuthorRoot, Spectacle, ...components}) => {
         return <SpectacleAuthorRoot
             content={props.content}
             components={{
                 ...Spectacle,
                 ...components,
-                "dialogs/SimpleDialog": SimpleDialog,
                 "dialogs/Container": ContainerDialog
             }}
         />

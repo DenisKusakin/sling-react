@@ -4,6 +4,7 @@ import com.cathcart93.sling.components.Container
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
+import com.google.gson.annotations.SerializedName
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
@@ -14,6 +15,8 @@ import javax.annotation.PostConstruct
 @Model(adaptables = arrayOf(Resource::class, SlingHttpServletRequest::class))
 @ReactController(componentName = "SelfUpdatableContainer")
 class SelfUpdatableContainerController : IReactController {
+    @SerializedName("__type")
+    val type = "SelfUpdatableContainer"
 
 //    @ReactProp(name = "initialContent")
 //    private var content: Container = Container()

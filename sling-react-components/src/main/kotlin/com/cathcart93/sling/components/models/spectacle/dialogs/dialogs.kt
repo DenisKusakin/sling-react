@@ -6,9 +6,22 @@ import org.apache.sling.api.resource.Resource
 /**
  * @author Denis_Kusakin. 2/15/2018.
  */
+
+fun baseDialog(resource: Resource): SimpleDialog {
+    return simpleDialog(resource) {
+        checkbox("italic", "Italic")
+        checkbox("bold", "Bold")
+        checkbox("caps", "Caps")
+        text("margin", "Margin")
+        text("padding", "Padding")
+        color("textColor", "Text Color")
+        text("textSize", "Text Size")
+    }
+}
+
 fun codeDialog(resource: Resource): SimpleDialog {
     return simpleDialog(resource) {
-        multilineText("source", "Source")
+        code("source", "Source")
         select("lang", "Language") {
             option("Java Script", "javascript")
         }

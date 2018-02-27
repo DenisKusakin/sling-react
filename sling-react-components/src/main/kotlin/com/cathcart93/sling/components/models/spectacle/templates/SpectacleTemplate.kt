@@ -12,6 +12,7 @@ fun spectacleTemplate(rootResource: Resource): DeckImpl {
     val deck = rootResource.adaptTo(DeckModel::class.java)
 
     return spectacle {
+
         slides {
             //Some slides from content
             rootResource.children

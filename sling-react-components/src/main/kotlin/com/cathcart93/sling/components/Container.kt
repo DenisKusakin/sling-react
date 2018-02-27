@@ -3,13 +3,17 @@ package com.cathcart93.sling.components
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
+import com.google.gson.annotations.SerializedName
 
 @ReactController(componentName = "Container")
-class Container(@ReactProp val components: List<Any> = emptyList(),
+class Container(val components: List<Any> = emptyList(),
                 availableComponents: List<ComponentElement> = defaultComponents(),
                 path: String? = null, componentsMeta: List<ComponentMeta> = emptyList()) : IReactController {
 
-    @ReactProp("__dialog")
+    @SerializedName("__type")
+    val type = "Container"
+
+    @SerializedName("__dialog")
     var dialog: Dialog? = null
 
     init {

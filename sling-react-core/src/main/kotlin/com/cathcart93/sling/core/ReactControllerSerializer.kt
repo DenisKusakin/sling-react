@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory
 import java.lang.reflect.Type
 import com.google.gson.JsonElement
 
-
+@Deprecated("Custom serializer will not be used anymore")
 class ReactControllerSerializer : JsonSerializer<IReactController> {
     private val LOGGER = LoggerFactory.getLogger(ReactControllerSerializer::class.java)
 
@@ -22,6 +22,7 @@ class ReactControllerSerializer : JsonSerializer<IReactController> {
                     val fieldName = field.getAnnotation(ReactProp::class.java).name
                     jsonObject.add(if (fieldName.isEmpty()) field.name else fieldName, context.serialize(fieldValue))
                 }
+                val el = context.serialize(fieldValue)
             } catch (e: IllegalAccessException) {
                 LOGGER.error(e.message, e)
             }

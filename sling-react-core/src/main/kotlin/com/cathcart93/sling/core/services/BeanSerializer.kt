@@ -8,6 +8,9 @@ import com.google.gson.GsonBuilder
 import org.apache.felix.scr.annotations.Activate
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Service
+import org.apache.sling.api.SlingHttpServletRequest
+import org.apache.sling.api.resource.Resource
+import org.osgi.service.component.ComponentContext
 import org.slf4j.LoggerFactory
 
 /**
@@ -16,9 +19,19 @@ import org.slf4j.LoggerFactory
 @Component
 @Service(BeanSerializer::class)
 class BeanSerializer {
-    private val gson = GsonBuilder()
-            .registerTypeHierarchyAdapter(IReactController::class.java, ReactControllerSerializer())
-            .create()
+    private lateinit var gson: Gson
+
+    @Activate
+    private fun init(componentContext: ComponentContext) {
+        gson = GsonBuilder()
+//                .setExclusionStrategies(
+//                        SlingExclusionStrategy(
+//                                Resource::class.java, SlingHttpServletRequest::class.java, BeanSerializer::class.java
+//                        )
+//                )
+                .serializeNulls()
+                .create()
+    }
 
     fun convertToMap(bean: Any): String {
         val (result, time) = measureExecTime { gson.toJson(bean) }

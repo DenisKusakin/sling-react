@@ -25,6 +25,11 @@ class DialogContext(@Transient private val resource: Resource) : SimpleDialog {
                 value = resource.valueMap.get(name, String::class.java)))
     }
 
+    fun code(name: String, title: String) {
+        this.props.add(SimpleDialog.CodeProperty(title = title, name = name,
+                value = resource.valueMap.get(name, String::class.java)))
+    }
+
     fun checkbox(name: String, title: String) {
         this.props.add(SimpleDialog.CheckboxProperty(title = title, name = name,
                 value = resource.valueMap.get(name, false)))

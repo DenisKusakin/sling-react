@@ -7,7 +7,6 @@ import {List, ListItem} from 'material-ui/List';
 import darkTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import {createResource, deleteResource} from './../../framework/api';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 const styles = {
     smallIcon: {
@@ -16,34 +15,13 @@ const styles = {
     }
 };
 
-const getListStyle = isDraggingOver => ({
-    // background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
-    // width: 250,
-});
-
-const grid = 8;
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
-    // change background colour if dragging
-    // background: isDragging ? 'lightgreen' : 'grey',
-
-    // styles we need to apply on draggables
-    ...draggableStyle,
-});
-
 class ContainerDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isOpen: false,
             error: null
-        }
+        };
         this.renderItem = this.renderItem.bind(this)
     }
 
@@ -81,6 +59,7 @@ class ContainerDialog extends React.Component {
         </div>
     }
 
+    //TODO: should be extracted to a separate component
     renderItem(item, index) {
         return (<div>
             <style jsx>
@@ -128,39 +107,6 @@ class ContainerDialog extends React.Component {
                 `}
             </style>
             <div className="editable-container">
-                {/*<DragDropContext onDragEnd={() => {*/}
-                {/*}}>*/}
-                    {/*<Droppable droppableId="droppable">*/}
-                        {/*{(provided, snapshot) => (*/}
-                            {/*<div*/}
-                                {/*ref={provided.innerRef}*/}
-                                {/*style={getListStyle(snapshot.isDraggingOver)}*/}
-                            {/*>*/}
-                                {/*{this.props.components.map((item, index) => (*/}
-                                    {/*<Draggable key={item.index} draggableId={index} index={index}>*/}
-                                        {/*{(provided, snapshot) => (*/}
-                                            {/*<div>*/}
-                                                {/*<div*/}
-                                                    {/*ref={provided.innerRef}*/}
-                                                    {/*{...provided.draggableProps}*/}
-                                                    {/*{...provided.dragHandleProps}*/}
-                                                    {/*style={getItemStyle(*/}
-                                                        {/*snapshot.isDragging,*/}
-                                                        {/*provided.draggableProps.style*/}
-                                                    {/*)}*/}
-                                                {/*>*/}
-                                                    {/*{this.renderItem(item, index)}*/}
-                                                {/*</div>*/}
-                                                {/*{provided.placeholder}*/}
-                                            {/*</div>*/}
-                                        {/*)}*/}
-                                    {/*</Draggable>*/}
-                                {/*))}*/}
-                                {/*{provided.placeholder}*/}
-                            {/*</div>*/}
-                        {/*)}*/}
-                    {/*</Droppable>*/}
-                {/*</DragDropContext>*/}
                 {this.props.components.map(this.renderItem)}
                 <MuiThemeProvider theme={darkTheme}>
                     <div>

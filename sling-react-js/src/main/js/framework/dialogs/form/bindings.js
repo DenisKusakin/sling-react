@@ -67,5 +67,14 @@ export default {
         color: $try(props.value, field.value),
         label: $try(props.label, field.label),
         onChange: val => field.set('value', val.hex)
+    }),
+    AceCodeEditor: ({$try, field, props}) => ({
+        id: $try(props.id, field.id),
+        name: $try(props.name, field.name),
+        type: $try(props.type, field.type),
+        value: $try(props.value, field.value),
+        color: $try(props.value, field.value),
+        label: $try(props.label, field.label),
+        onChange: val => field.set('value', val)
     })
 }

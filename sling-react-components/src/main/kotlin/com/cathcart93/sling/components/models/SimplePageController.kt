@@ -6,6 +6,7 @@ import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
 import com.cathcart93.sling.core.services.BeanSerializer
 import com.cathcart93.sling.core.services.ReactEngine
+import com.google.gson.annotations.SerializedName
 import org.apache.felix.scr.annotations.Reference
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
@@ -25,6 +26,8 @@ import javax.annotation.PostConstruct
 @ReactController(componentName = "Page")
 class SimplePageController : IReactController, PageController {
     private val SOURCE_PATH = "/etc/react-clientlibs/server.js"
+    @SerializedName("Page")
+    val type = "Page"
 
     @SlingObject
     private lateinit var resource: Resource

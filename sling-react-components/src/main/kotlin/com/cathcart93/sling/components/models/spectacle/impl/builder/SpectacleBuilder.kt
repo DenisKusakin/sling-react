@@ -152,9 +152,9 @@ open class AuthorableContext {
 annotation class Marker
 
 class SlideImpl(
-        override val bgColor: String?,
-        override val textColor:
-        String?, override val children: List<SlideComponent>) : Slide {
+        override var bgColor: String?,
+        override var textColor:
+        String?, override var children: List<SlideComponent>) : Slide {
     val __type = Constants.SLIDE
 }
 

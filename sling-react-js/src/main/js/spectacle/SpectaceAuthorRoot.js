@@ -2,7 +2,6 @@ import React from 'react'
 import wrapContent from './wrapContent'
 import TreeContainer from './../framework/TreeContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Toggle from 'material-ui/Toggle';
 import FlatButton from 'material-ui/FlatButton';
 import {createResource, deleteResource} from './../framework/api';
 import axios from "axios/index";
@@ -68,21 +67,23 @@ class PropsButton extends React.Component {
         }
 
         return (<MuiThemeProvider>
-            <FlatButton label={title} secondary={true} onClick={() => {
-                this.setState({isOpen: true})
-            }}/>
-            <Dialog
-                isOpen={this.state.isOpen}
-                path={path}
-                props={props}
-                onRequestClose={() => {
-                    this.setState({isOpen: false})
-                }}
-                onSuccess={() => {
-                    updateState();
-                    this.setState({isOpen: false})
-                }}
-            />
+            <div>
+                <FlatButton label={title} secondary={true} onClick={() => {
+                    this.setState({isOpen: true})
+                }}/>
+                <Dialog
+                    isOpen={this.state.isOpen}
+                    path={path}
+                    props={props}
+                    onRequestClose={() => {
+                        this.setState({isOpen: false})
+                    }}
+                    onSuccess={() => {
+                        updateState();
+                        this.setState({isOpen: false})
+                    }}
+                />
+            </div>
         </MuiThemeProvider>)
     }
 }
@@ -94,16 +95,6 @@ class SpectacleAuthorRoot extends React.Component {
             isEditMode: props.content.isEditMode,
             content: props.content.content
         };
-
-        this.Toggle = () => (<MuiThemeProvider>
-            <Toggle
-                label="Edit mode"
-                toggled={this.state.isEditMode}
-                onToggle={(x, isToggled) => {
-                    this.setState({isEditMode: isToggled})
-                }}
-            />
-        </MuiThemeProvider>);
 
         this.updateState = this.updateState.bind(this);
         this.extendDialogs = components => {
@@ -136,11 +127,6 @@ class SpectacleAuthorRoot extends React.Component {
     render() {
         const {content} = this.state;
         const dialogProps = this.props.content.content.__dialog;
-        // if(!dialogProps){
-        //     return <TreeContainer
-        //         components={this.props.components}
-        //         tree={content}/>
-        // }
         const components = {
             ...this.props.components,
             StateToggle: () => <ToggleEditModeButton

@@ -1,7 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle.api
 
 interface Slide {
-    val bgColor: String?
-    val textColor: String?
-    val children: List<SlideComponent>
+    var bgColor: String?
+    var textColor: String?
+    var children: List<SlideComponent>
 }

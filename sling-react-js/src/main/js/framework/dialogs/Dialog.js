@@ -23,6 +23,9 @@ const bindingType = (type) => {
     if (type === 'color') {
         return "ColorPicker"
     }
+    if (type === 'code') {
+        return 'AceCodeEditor'
+    }
 };
 
 class SimpleDialogForm extends React.Component {

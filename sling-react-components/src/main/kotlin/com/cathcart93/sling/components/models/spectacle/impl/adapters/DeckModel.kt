@@ -7,6 +7,7 @@ import com.cathcart93.sling.components.models.spectacle.dialogs.deckDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
+import com.google.gson.annotations.SerializedName
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -18,13 +19,17 @@ import javax.annotation.PostConstruct
 @ReactController(Constants.DECK)
 class DeckModel : IReactController, Deck {
 
+//    @SerializedName("__type")
+    val __type = Constants.DECK
+
     @SlingObject
+    @Transient
     private lateinit var resource: Resource
 
     @ReactProp
-    override lateinit var children: List<Slide>
+    override lateinit var children: List<SlideModel>
 
-    @ReactProp("__dialog")
+    @SerializedName("__dialog")
     private lateinit var dialog: Any
 
     @ValueMapValue
@@ -45,10 +50,8 @@ class DeckModel : IReactController, Deck {
     @ValueMapValue
     var secondaryFont: String? = null
 
-    @ReactProp
     override var colors = HashMap<String, String?>()
 
-    @ReactProp
     override var fonts = HashMap<String, String?>()
 
     @PostConstruct

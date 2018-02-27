@@ -7,6 +7,7 @@ import com.cathcart93.sling.components.models.spectacle.dialogs.codeDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
+import com.google.gson.annotations.SerializedName
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -18,18 +19,19 @@ import javax.annotation.PostConstruct
 @ReactController(Constants.CODE_PANE)
 class CodeModel : IReactController, Code {
 
+    @SerializedName("__type")
+    val type = Constants.CODE_PANE
+
     @ValueMapValue
-    @ReactProp
     override var source: String? = null
 
     @ValueMapValue
-    @ReactProp
     override var lang: String? = "javascript"
 
-    @ReactProp("__dialog")
+    @SerializedName("__dialog")
     private lateinit var dialog: SimpleDialog
 
-    @ReactProp("__dialog_type")
+    @SerializedName("__dialog_type")
     private val dialogType = "dialogs/SimpleDialog"
 
     @SlingObject

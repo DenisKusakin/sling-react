@@ -1,6 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.PageController
+import com.cathcart93.sling.components.models.spectacle.api.Deck
 import com.cathcart93.sling.components.models.spectacle.api.Slide
 import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate
 import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate2
@@ -25,22 +26,25 @@ import javax.annotation.PostConstruct
 class SpectaclePageController : IReactController, PageController {
 
     @SlingObject
+    @Transient
     private lateinit var resource: Resource
 
     @SlingObject
+    @Transient
     private lateinit var request: SlingHttpServletRequest
 
     @OSGiService
+    @Transient
     private lateinit var beanSerializer: BeanSerializer
 
     private lateinit var props: String
 
     @PostConstruct
     fun init() {
-//        val container = resource.adaptTo(DeckModel::class.java)
+        val container = resource.adaptTo(DeckModel::class.java)
         //        val container = if (textFromRequest == null)
 //            spectacleTemplate()
-        val container = spectacleTemplate(resource)
+//        val container = spectacleTemplate(resource)
 
         val isEditMode = request.getParameter("isEdit") != null
         props = beanSerializer.convertToMap(App("${resource.path}.json?isEdit=$isEditMode", isEditMode, container))
@@ -56,13 +60,10 @@ class SpectaclePageController : IReactController, PageController {
 
     class App(url: String, isEditMode: Boolean, content: Any?) {
 
-        @ReactProp
         private val isEditMode = isEditMode
 
-        @ReactProp
         private val content = content
 
-        @ReactProp
         private val url = url
     }
 }

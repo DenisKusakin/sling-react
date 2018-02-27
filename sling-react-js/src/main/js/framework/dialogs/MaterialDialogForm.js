@@ -6,6 +6,12 @@ import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import {SketchPicker, TwitterPicker} from 'react-color';
 
+// import brace from 'brace';
+import AceEditor from 'react-ace';
+
+// import 'brace/mode/java';
+// import 'brace/theme/github';
+
 const MaterialDialogForm = observer(({form}) => (
     <form onSubmit={form.onSubmit}>
         {
@@ -38,6 +44,15 @@ const MaterialDialogForm = observer(({form}) => (
                         <TwitterPicker {...colorProps} color={colorProps.value}/>
                         <br/>
                     </div>
+                }
+                if (x.type === 'code') {
+                    return <AceEditor
+                        mode="javascript"
+                        theme="github"
+                        name="UNIQUE_ID_OF_DIV"
+                        editorProps={{$blockScrolling: true}}
+                        {...x.bind()}
+                    />
                 }
             })
         }

@@ -1,16 +1,6 @@
 {
   "isEditMode": false,
   "content": {
-    "__type": "Deck",
-    "fonts": {
-
-    },
-    "colors": {
-      "secondary": "#1f2022",
-      "tertiary": "#03a9fc",
-      "quarternary": "#cecece",
-      "primary": "#ffffff"
-    },
     "children": [
       {
         "children": [
@@ -24,7 +14,7 @@
             "__dialog": {
               "props": [
                 {
-                  "type": "textarea",
+                  "type": "text",
                   "name": "text",
                   "value": "Slide 1 2 3 4",
                   "title": "Text"
@@ -130,7 +120,7 @@
                 "__type": "Quote"
               },
               {
-                "children": "Denis",
+                "children": "Denis 2",
                 "__type": "Cite"
               }
             ],
@@ -145,7 +135,7 @@
                 {
                   "type": "text",
                   "name": "cite",
-                  "value": "Denis",
+                  "value": "Denis 2",
                   "title": "Cite"
                 }
               ],
@@ -153,77 +143,6 @@
             },
             "__dialog_type": "dialogs/SimpleDialog",
             "__type": "BlockQuote"
-          },
-          {
-            "fit": false,
-            "textColor": "green",
-            "lineHeight": 1,
-            "__dialog": {
-              "props": [
-                {
-                  "type": "text",
-                  "name": "text",
-                  "value": "Edit Text Component Here",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "fit",
-                  "value": false,
-                  "title": "Fit"
-                },
-                {
-                  "type": "select",
-                  "name": "textColor",
-                  "value": "green",
-                  "options": [
-                    {
-                      "label": "Red",
-                      "value": "red"
-                    },
-                    {
-                      "label": "Green",
-                      "value": "green"
-                    },
-                    {
-                      "label": "Blue",
-                      "value": "blue"
-                    },
-                    {
-                      "label": "Black",
-                      "value": "black"
-                    }
-                  ],
-                  "title": "Color"
-                },
-                {
-                  "type": "select",
-                  "name": "lineHeight",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Line Height"
-                }
-              ],
-              "path": "/content/spectacle/slide1/text"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "__type": "Text"
           }
         ],
         "__dialog": {
@@ -279,9 +198,6 @@
             },
             {
               "path": "/content/spectacle/slide1/blockquote"
-            },
-            {
-              "path": "/content/spectacle/slide1/text"
             }
           ],
           "path": "/content/spectacle/slide1/",
@@ -306,7 +222,7 @@
               {
                 "type": "select",
                 "name": "textColor",
-                "value": "secondary",
+                "value": "primary",
                 "options": [
                   {
                     "label": "Primary Color",
@@ -324,20 +240,20 @@
           }
         },
         "bgColor": "primary",
-        "textColor": "secondary",
+        "textColor": "primary",
         "__type": "Slide"
       },
       {
         "children": [
           {
-            "source": "() => console.log(\"Test 2!!!\")",
+            "source": "<form onSubmit={form.onSubmit}>\n    {\n        form.map((x, i) => {\n            if (x.type === 'text') {\n                return <div key={i}><TextField {...x.bind()}/><br/></div>\n            if (x.type === 'checkbox') \n            if (x.type === 'select') {\n                const selectProps = x.bind();\n                return <div key={i}>\n                    <SelectField {...selectProps}>\n                        {selectProps.extra.map(x => <MenuItem value={x.value} primaryText={x.label}/>)}\n                    </SelectField>\n                    <br/>\n                </div>\n            }\n        })\n    }\n    !!!\n</form>",
             "lang": "javascript",
             "__dialog": {
               "props": [
                 {
-                  "type": "text",
+                  "type": "code",
                   "name": "source",
-                  "value": "() => console.log(\"Test 2!!!\")",
+                  "value": "<form onSubmit={form.onSubmit}>\n    {\n        form.map((x, i) => {\n            if (x.type === 'text') {\n                return <div key={i}><TextField {...x.bind()}/><br/></div>\n            if (x.type === 'checkbox') \n            if (x.type === 'select') {\n                const selectProps = x.bind();\n                return <div key={i}>\n                    <SelectField {...selectProps}>\n                        {selectProps.extra.map(x => <MenuItem value={x.value} primaryText={x.label}/>)}\n                    </SelectField>\n                    <br/>\n                </div>\n            }\n        })\n    }\n    !!!\n</form>",
                   "title": "Source"
                 },
                 {
@@ -417,7 +333,7 @@
               {
                 "type": "select",
                 "name": "bgColor",
-                "value": "secondary",
+                "value": "primary",
                 "options": [
                   {
                     "label": "Primary Color",
@@ -433,7 +349,7 @@
               {
                 "type": "select",
                 "name": "textColor",
-                "value": "primary",
+                "value": "secondary",
                 "options": [
                   {
                     "label": "Primary Color",
@@ -450,31 +366,199 @@
             "path": "/content/spectacle/slide"
           }
         },
-        "bgColor": "secondary",
-        "textColor": "primary",
+        "bgColor": "primary",
+        "textColor": "secondary",
         "__type": "Slide"
       },
       {
-        "__type": "Slide",
         "children": [
+
+        ],
+        "__dialog": {
+          "components": [
+            {
+              "name": "Heading",
+              "description": "Text Component",
+              "__props": {
+                "fit": "false",
+                "component": "Heading",
+                "size": "3",
+                "text": "Edit Title Here",
+                ":nameHint": "Heading",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "Text",
+              "description": "Just a text component",
+              "__props": {
+                "component": "Text",
+                "text": "Edit Text Component Here",
+                ":nameHint": "Text",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "BlockQuote",
+              "description": "Quote Block component",
+              "__props": {
+                "component": "BlockQuote",
+                "quote": "Edit Quote",
+                "cite": "Author",
+                ":nameHint": "BlockQuote",
+                ":order": "last"
+              }
+            },
+            {
+              "name": "CodePane",
+              "description": "Use to show highlighted code",
+              "__props": {
+                "component": "CodePane",
+                "source": "function test(){}",
+                ":nameHint": "CodePane",
+                "lang": "javascript",
+                ":order": "last"
+              }
+            }
+          ],
+          "meta": [
+
+          ],
+          "path": "/content/spectacle/2_1519462396644/",
+          "theme": {
+            "props": [
+              {
+                "type": "select",
+                "name": "bgColor",
+                "options": [
+                  {
+                    "label": "Primary Color",
+                    "value": "primary"
+                  },
+                  {
+                    "label": "Secondary Color",
+                    "value": "secondary"
+                  }
+                ],
+                "title": "Background Color"
+              },
+              {
+                "type": "select",
+                "name": "textColor",
+                "options": [
+                  {
+                    "label": "Primary Color",
+                    "value": "primary"
+                  },
+                  {
+                    "label": "Secondary Color",
+                    "value": "secondary"
+                  }
+                ],
+                "title": "Text Color"
+              }
+            ],
+            "path": "/content/spectacle/2_1519462396644"
+          }
+        },
+        "__type": "Slide"
+      }
+    ],
+    "__dialog": {
+      "components": [
+        {
+          "name": "Slide",
+          "description": "",
+          "__props": {
+
+          }
+        }
+      ],
+      "meta": [
+        {
+          "path": "/content/spectacle/slide1"
+        },
+        {
+          "path": "/content/spectacle/slide"
+        },
+        {
+          "path": "/content/spectacle/2_1519462396644"
+        }
+      ],
+      "path": "/content/spectacle/",
+      "theme": {
+        "props": [
           {
-            "__type": "Heading",
-            "children": "One more Slide!",
-            "size": 1,
-            "caps": false,
-            "lineHeight": 1,
-            "fit": false
+            "type": "color",
+            "name": "primaryColor",
+            "value": "#ffffff",
+            "title": "Primary Color"
           },
           {
-            "__type": "Text",
-            "children": "This slide is not a content one!",
-            "fit": false,
-            "lineHeight": 1,
-            "textColor": "green"
+            "type": "color",
+            "name": "secondaryColor",
+            "value": "#1f2022",
+            "title": "Secondary Color"
+          },
+          {
+            "type": "color",
+            "name": "tertiaryColor",
+            "value": "#03a9fc",
+            "title": "Tertiary Color"
+          },
+          {
+            "type": "color",
+            "name": "quarternaryColor",
+            "value": "#cecece",
+            "title": "Quarternary Color"
+          },
+          {
+            "type": "select",
+            "name": "primaryFont",
+            "value": "Montserrat",
+            "options": [
+              {
+                "label": "Montserrat",
+                "value": "Montserrat"
+              },
+              {
+                "label": "Helvetica",
+                "value": "Helvetica"
+              }
+            ],
+            "title": "Primary Font"
+          },
+          {
+            "type": "select",
+            "name": "secondaryFont",
+            "value": "Helvetica",
+            "options": [
+              {
+                "label": "Montserrat",
+                "value": "Montserrat"
+              },
+              {
+                "label": "Helvetica",
+                "value": "Helvetica"
+              }
+            ],
+            "title": "Secondary Font"
           }
-        ]
+        ],
+        "path": "/content/spectacle"
       }
-    ]
+    },
+    "colors": {
+      "secondary": "#1f2022",
+      "tertiary": "#03a9fc",
+      "quarternary": "#cecece",
+      "primary": "#ffffff"
+    },
+    "fonts": {
+      "secondary": "Helvetica",
+      "primary": "Montserrat"
+    },
+    "__type": "Deck"
   },
   "url": "/content/spectacle.json?isEdit=false"
 }
