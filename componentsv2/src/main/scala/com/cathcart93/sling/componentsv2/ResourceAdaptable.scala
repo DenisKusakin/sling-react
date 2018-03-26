@@ -5,7 +5,7 @@ import org.apache.sling.api.resource.Resource
 object ResourceAdaptable {
 
   implicit class AdaptableResource(resource: Resource) {
-    def adaptUsing[T](adapter: ResourceAdapter[T]): T = {
+    def adapt[T](implicit adapter: ResourceAdapter[T]): T = {
       adapter.adapt(resource)
     }
   }

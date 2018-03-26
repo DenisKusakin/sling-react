@@ -11,7 +11,7 @@ object SlideAdapter extends ResourceAdapter[SlideModel] {
     val valueMap = resource.getValueMap
     val bgColor = valueMap.get("bgColor", classOf[String])
     val textColor = valueMap.get("textColor", classOf[String])
-    val components = resource.getChildren.asScala.map(_ adaptUsing HeadingAdapter).toSeq
+    val components = resource.getChildren.asScala.map(_ adapt HeadingAdapter).toSeq
     SlideModel(bgColor = bgColor, textColor = textColor, components = components)
   }
 }

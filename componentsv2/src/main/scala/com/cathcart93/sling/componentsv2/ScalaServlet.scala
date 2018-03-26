@@ -5,7 +5,8 @@ import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.{SlingHttpServletRequest, SlingHttpServletResponse}
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
 import ResourceAdaptable._
-import com.cathcart93.sling.componentsv2.adapters.HeadingAdapter
+import com.cathcart93.sling.componentsv2.adapters.{HeadingAdapter, Implicits}
+import com.cathcart93.sling.componentsv2.models.HeadingModel
 
 @SlingServlet(
   selectors = Array("scalaservlet"),
@@ -17,10 +18,10 @@ import com.cathcart93.sling.componentsv2.adapters.HeadingAdapter
   Array(new Property(name = "service.description", value = Array("Scala Test Servlet")),
     new Property(name = "service.vendor", value = Array("Cathcart 93")))
 )
-class ScalaServlet extends SlingSafeMethodsServlet {
+class ScalaServlet extends SlingSafeMethodsServlet with Implicits {
   override def doGet(request: SlingHttpServletRequest, response: SlingHttpServletResponse): Unit = {
     val resource = request.getResource
-    response.getWriter.append((resource adaptUsing HeadingAdapter).toString)
+    response.getWriter.append(resource.adapt[HeadingModel].toString)
     response.setContentType("json")
   }
 }
