@@ -1,7 +1,7 @@
 package com.cathcart93.sling.componentsv2.adapters
 
 import com.cathcart93.sling.componentsv2.ResourceAdapter
-import org.apache.sling.api.resource.Resource
+import org.apache.sling.api.resource.{Resource, ValueMap}
 
 trait ResourceAdaptableImplicits {
   implicit class AdaptableResource(resource: Resource) {
@@ -9,6 +9,8 @@ trait ResourceAdaptableImplicits {
       adapter.adapt(resource)
     }
   }
+
   implicit val headingAdapter: HeadingAdapter.type = HeadingAdapter
   implicit val componentAdapter: ComponentAdapter.type = ComponentAdapter
+  implicit val slideAdapter: SlideAdapter.type = SlideAdapter
 }
