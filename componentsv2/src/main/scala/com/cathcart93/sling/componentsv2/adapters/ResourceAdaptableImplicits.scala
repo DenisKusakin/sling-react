@@ -1,7 +1,7 @@
 package com.cathcart93.sling.componentsv2.adapters
 
 import com.cathcart93.sling.componentsv2.ResourceAdapter
-import org.apache.sling.api.resource.{Resource, ValueMap}
+import org.apache.sling.api.resource.Resource
 
 trait ResourceAdaptableImplicits {
   implicit class AdaptableResource(resource: Resource) {

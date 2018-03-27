@@ -1,15 +1,9 @@
 package com.cathcart93.sling.componentsv2.adapters
 
-import org.apache.sling.api.resource.{Resource, ValueMap}
-import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
 import com.cathcart93.sling.componentsv2.models.{HeadingModel, SlideModel, Component => ComponentModel}
-import org.apache.sling.testing.mock.sling.ResourceResolverType
 import org.apache.sling.testing.mock.sling.builder.ContentBuilder
-import org.apache.sling.testing.mock.sling.junit.SlingContext
-import org.scalatest.Assertions._
-import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.testing.mock.sling.MockSling
 
 import scala.collection.JavaConverters._
