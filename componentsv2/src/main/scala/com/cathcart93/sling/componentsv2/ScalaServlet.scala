@@ -4,8 +4,7 @@ import org.apache.felix.scr.annotations.{Properties, Property}
 import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.{SlingHttpServletRequest, SlingHttpServletResponse}
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
-import ResourceAdaptable._
-import com.cathcart93.sling.componentsv2.adapters.{HeadingAdapter, Implicits}
+import com.cathcart93.sling.componentsv2.adapters.{HeadingAdapter, ResourceAdaptableImplicits}
 import com.cathcart93.sling.componentsv2.models.HeadingModel
 
 @SlingServlet(
@@ -18,7 +17,7 @@ import com.cathcart93.sling.componentsv2.models.HeadingModel
   Array(new Property(name = "service.description", value = Array("Scala Test Servlet")),
     new Property(name = "service.vendor", value = Array("Cathcart 93")))
 )
-class ScalaServlet extends SlingSafeMethodsServlet with Implicits {
+class ScalaServlet extends SlingSafeMethodsServlet with ResourceAdaptableImplicits {
   override def doGet(request: SlingHttpServletRequest, response: SlingHttpServletResponse): Unit = {
     val resource = request.getResource
     response.getWriter.append(resource.adapt[HeadingModel].toString)
