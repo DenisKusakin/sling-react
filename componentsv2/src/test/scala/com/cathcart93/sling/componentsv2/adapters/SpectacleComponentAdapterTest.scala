@@ -8,7 +8,7 @@ import org.apache.sling.testing.mock.sling.MockSling
 
 import scala.collection.JavaConverters._
 
-class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoSugar with ResourceAdaptableImplicit {
+class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoSugar with SpectacleComponentAdapter {
 
   val headingComponentProps: Map[String, AnyRef] = Map(
     "component" -> "Heading",

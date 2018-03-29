@@ -6,7 +6,9 @@ import org.apache.sling.api.resource.Resource
 
 import scala.collection.JavaConverters._
 
-trait SlideAdapter extends ResourceAdapter[SlideModel] with ResourceAdaptableImplicit with SpectacleComponentAdapter {
+trait SlideAdapter extends ResourceAdapter[SlideModel] with ResourceAdaptableImplicit {
+  implicit object SpectacleComponentAdapter extends SpectacleComponentAdapter
+
   override def adapt: Resource => SlideModel = resource => {
     val valueMap = resource.getValueMap
     val bgColor = valueMap.get("bgColor", classOf[String])

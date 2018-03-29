@@ -4,7 +4,7 @@ import com.cathcart93.sling.componentsv2.{ResourceAdapter}
 import com.cathcart93.sling.componentsv2.models.{Component, HeadingModel}
 import org.apache.sling.api.resource.Resource
 
-trait SpectacleComponentAdapter extends ResourceAdapter[Component] with ResourceAdaptableImplicit
+trait SpectacleComponentAdapter extends ResourceAdapter[Component] with ResourceAdaptableImplicit with SpectacleAdapters
   with HeadingAdapter {
   override def adapt: Resource => Component = (resource: Resource) => {
     val valueMap = resource.getValueMap
