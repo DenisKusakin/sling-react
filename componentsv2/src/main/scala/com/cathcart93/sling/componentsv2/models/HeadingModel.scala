@@ -4,6 +4,4 @@ case class HeadingModel(
                          text: String,
                          size: Int,
                          fit: Boolean,
-                         lineHeight: Int) extends Component {
-
-}
+                         lineHeight: Int) extends Component
