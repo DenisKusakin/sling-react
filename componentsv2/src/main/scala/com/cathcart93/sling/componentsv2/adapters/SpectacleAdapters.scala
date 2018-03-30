@@ -1,9 +1,14 @@
 package com.cathcart93.sling.componentsv2.adapters
 
+import com.cathcart93.sling.componentsv2.ResourceAdapter
+import com.cathcart93.sling.componentsv2.models.{BlockQuote, Component, HeadingModel, SlideModel}
+
 /**
   * @author Denis_Kusakin. 3/29/2018.
   */
-trait SpectacleAdapters extends HeadingAdapter with BlockQuoteAdapter{
-  implicit object HeadingAdapter extends HeadingAdapter
-  implicit object BlockQuoteAdapter extends BlockQuoteAdapter
+trait SpectacleAdapters extends ResourceAdaptableImplicit{
+  implicit val headingAdapter: ResourceAdapter[HeadingModel] = HeadingAdapter
+  implicit val blockQuoteAdapter: ResourceAdapter[BlockQuote] = BlockQuoteAdapter
+  implicit val componentAdapter: ResourceAdapter[Component] = SpectacleComponentAdapter
+  implicit val slideAdapter: ResourceAdapter[SlideModel] = SlideAdapter
 }

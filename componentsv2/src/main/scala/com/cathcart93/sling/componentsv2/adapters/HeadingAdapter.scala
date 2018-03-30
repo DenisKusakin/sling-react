@@ -4,7 +4,7 @@ import com.cathcart93.sling.componentsv2.ResourceAdapter
 import com.cathcart93.sling.componentsv2.models.HeadingModel
 import org.apache.sling.api.resource.Resource
 
-trait HeadingAdapter extends ResourceAdapter[HeadingModel] {
+object HeadingAdapter extends ResourceAdapter[HeadingModel] {
   override def adapt: Resource => HeadingModel = (resource: Resource) => {
     val valueMap = resource.getValueMap
     val text = valueMap.get("text", classOf[String])

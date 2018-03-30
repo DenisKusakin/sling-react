@@ -6,8 +6,8 @@ import org.apache.sling.api.resource.Resource
 
 import scala.collection.JavaConverters._
 
-trait SlideAdapter extends ResourceAdapter[SlideModel] with ResourceAdaptableImplicit {
-  implicit object SpectacleComponentAdapter extends SpectacleComponentAdapter
+object SlideAdapter extends ResourceAdapter[SlideModel] with ResourceAdaptableImplicit {
+  implicit val componentAdapter: ResourceAdapter[ComponentModel] = SpectacleComponentAdapter
 
   override def adapt: Resource => SlideModel = resource => {
     val valueMap = resource.getValueMap
