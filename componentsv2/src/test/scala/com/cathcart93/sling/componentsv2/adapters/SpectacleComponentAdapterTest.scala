@@ -5,8 +5,10 @@ import org.scalatest.{FlatSpec, Matchers}
 import com.cathcart93.sling.componentsv2.models.{BlockQuote, DeckModel, HeadingModel, SlideModel, Component => ComponentModel}
 import org.apache.sling.testing.mock.sling.builder.ContentBuilder
 import org.apache.sling.testing.mock.sling.MockSling
+import org.json4s.NoTypeHints
 
 import scala.collection.JavaConverters._
+import org.json4s.native.Serialization.{write => swrite}
 
 class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoSugar with SpectacleAdapters {
 
@@ -72,5 +74,11 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     val adaptationResult = deckResourceMock.adapt[DeckModel]
     val expectedSlide = SlideModel(bgColor = "green", textColor = "black", components = Seq(headingComponent))
     adaptationResult should be(DeckModel(slides = Seq(expectedSlide)))
+  }
+
+  it should "test" in {
+    implicit val formats = org.json4s.native.Serialization.formats(NoTypeHints)
+    val map = Map("a" -> "1", "b" -> Map("a" -> "11"))
+    println(swrite(map))
   }
 }
