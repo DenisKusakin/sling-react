@@ -9,8 +9,12 @@ import scala.collection.JavaConverters._
 object DeckAdapter extends ResourceAdapter[DeckModel] with ResourceAdaptableImplicit {
   implicit val slideAdapter: ResourceAdapter[SlideModel] = SlideAdapter
 
-  override def adapt: Resource => DeckModel = resource => {
-    val components = resource.getChildren.asScala.map(x => x.adapt[SlideModel]).toSeq
-    DeckModel(slides = components)
+  override def adapt: Resource => Option[DeckModel] = resource => {
+    val components = resource.getChildren.asScala
+      .map(x => x.adapt[SlideModel])
+      .filter(_.isDefined)
+      .map(x => x.get)
+      .toSeq
+    Some(DeckModel(slides = components))
   }
 }

@@ -28,7 +28,7 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
       .resource("/text", headingComponentProps.asJava)
 
     val adaptationResult = resourceMock.adapt[ComponentModel]
-    adaptationResult should be(headingComponent)
+    adaptationResult should be(Some(headingComponent))
   }
 
   it should "be adaptable to Slide" in {
@@ -43,7 +43,7 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     contentBuilder
       .resource("/slide/comp1", headingComponentProps.asJava)
     val adaptationResult = slideResourceMock.adapt[SlideModel]
-    adaptationResult should be(SlideModel(bgColor = "green", textColor = "black", components = Seq(headingComponent)))
+    adaptationResult should be(Some(SlideModel(bgColor = "green", textColor = "black", components = Seq(headingComponent))))
   }
 
   it should "be adaptable to BlockQuote" in {
@@ -56,7 +56,7 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     val slideResourceMock = contentBuilder
       .resource("/quote", selfProps.asJava)
     val adaptationResult = slideResourceMock.adapt[BlockQuote]
-    adaptationResult should be(BlockQuote(quote = "Quote", cite = "Author"))
+    adaptationResult should be(Some(BlockQuote(quote = "Quote", cite = "Author")))
   }
 
   it should "be adaptable to Deck" in {
@@ -73,12 +73,17 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
       .resource("/deck/slide/comp1", headingComponentProps.asJava)
     val adaptationResult = deckResourceMock.adapt[DeckModel]
     val expectedSlide = SlideModel(bgColor = "green", textColor = "black", components = Seq(headingComponent))
-    adaptationResult should be(DeckModel(slides = Seq(expectedSlide)))
+    adaptationResult should be(Some(DeckModel(slides = Seq(expectedSlide))))
   }
 
-  it should "test" in {
-    implicit val formats = org.json4s.native.Serialization.formats(NoTypeHints)
-    val map = Map("a" -> "1", "b" -> Map("a" -> "11"))
-    println(swrite(map))
+  "ComponentAdapter" should " BlockQuote" in {
+    val resolver = MockSling.newResourceResolver
+    val contentBuilder = new ContentBuilder(resolver)
+    val props: Map[String, AnyRef] = Map("cite" -> "Cite", "quote" -> "Quote")
+    val blockQuoteResource = contentBuilder.resource("/block", props.asJava)
+    val adaptationResult = blockQuoteResource.adapt[ComponentModel]
+    adaptationResult should be(Some(BlockQuote(cite = "Cite", quote = "Quote")))
   }
+
+
 }

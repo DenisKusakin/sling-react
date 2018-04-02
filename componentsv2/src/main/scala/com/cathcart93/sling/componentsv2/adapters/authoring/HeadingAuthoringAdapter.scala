@@ -1,10 +1,10 @@
-package com.cathcart93.sling.componentsv2.adapters
+package com.cathcart93.sling.componentsv2.adapters.authoring
 
 import com.cathcart93.sling.componentsv2.ResourceAdapter
 import com.cathcart93.sling.componentsv2.models.HeadingModel
 import org.apache.sling.api.resource.Resource
 
-object HeadingAdapter extends ResourceAdapter[HeadingModel] {
+object HeadingAuthoringAdapter extends ResourceAdapter[HeadingModel] {
   override def adapt: Resource => Option[HeadingModel] = (resource: Resource) => {
     val valueMap = resource.getValueMap
     val text = valueMap.get("text", classOf[String])

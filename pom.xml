@@ -30,8 +30,8 @@
 
     <modules>
         <module>sling-react-js</module>
-        <module>sling-react-core</module>
-        <module>sling-react-components</module>
+        <!--<module>sling-react-core</module>-->
+        <!--<module>sling-react-components</module>-->
         <module>componentsv2</module>
     </modules>
 
