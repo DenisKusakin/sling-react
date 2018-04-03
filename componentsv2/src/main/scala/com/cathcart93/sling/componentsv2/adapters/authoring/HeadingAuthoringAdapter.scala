@@ -15,11 +15,13 @@ object HeadingAuthoringAdapter extends ResourceAdapter[SimpleDialogModel] with R
       CheckboxProperty(name = "fit", value = headingModel.exists(_.fit), title = "Fit"),
       SelectProperty(
         name = "size",
+        title = "Size",
         value = headingModel.map(x => s"${x.size}").getOrElse("1"),
         options = (1 to 5).map(x => SelectPropertyOption(value = s"$x", title = s"H$x"))),
       SelectProperty(
         name = "height",
         value = "1",
+        title = "Height",
         options = (1 to 4).map(x => SelectPropertyOption(value = s"$x", title = s"$x"))
       )
     )
