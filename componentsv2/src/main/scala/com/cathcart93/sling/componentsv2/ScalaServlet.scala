@@ -6,7 +6,7 @@ import org.apache.sling.api.{SlingHttpServletRequest, SlingHttpServletResponse}
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
 import com.cathcart93.sling.componentsv2.adapters.{HeadingAdapter, ResourceAdaptableImplicit, SpectacleAdapters, SpectacleComponentAdapter}
 import com.cathcart93.sling.componentsv2.json.ReactToJsonConverters
-import com.cathcart93.sling.componentsv2.models.{DeckModel, HeadingModel}
+import com.cathcart93.sling.componentsv2.models.{Component, DeckModel, HeadingModel}
 import com.cathcart93.sling.componentsv2.react.{ErrorReactComponent, ReactComponent, SpectacleReactAdapters}
 import org.json4s.NoTypeHints
 import org.json4s.native.Serialization.{write => swrite}
@@ -26,7 +26,7 @@ class ScalaServlet extends SlingSafeMethodsServlet with SpectacleAdapters
 
   override def doGet(request: SlingHttpServletRequest, response: SlingHttpServletResponse): Unit = {
     val resource = request.getResource
-    val deck = resource.adapt[DeckModel]
+    val deck = resource.adapt[Component]
     val deckReact: ReactComponent = deck
       .map(componentToReactAdapter.toReact)
       .getOrElse(ErrorReactComponent("Error"))

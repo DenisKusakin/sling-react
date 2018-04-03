@@ -79,7 +79,7 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
   "ComponentAdapter" should " BlockQuote" in {
     val resolver = MockSling.newResourceResolver
     val contentBuilder = new ContentBuilder(resolver)
-    val props: Map[String, AnyRef] = Map("cite" -> "Cite", "quote" -> "Quote")
+    val props: Map[String, AnyRef] = Map("cite" -> "Cite", "quote" -> "Quote", "component" -> "BlockQuote")
     val blockQuoteResource = contentBuilder.resource("/block", props.asJava)
     val adaptationResult = blockQuoteResource.adapt[ComponentModel]
     adaptationResult should be(Some(BlockQuote(cite = "Cite", quote = "Quote")))

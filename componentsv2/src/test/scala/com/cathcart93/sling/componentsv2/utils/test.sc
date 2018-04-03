@@ -1,3 +1,1 @@
-val s = Seq("1")
-s :+ "2"
-println(s)
+var a = (1 to 5).map(x => s"H${x}").toSeq
