@@ -9,4 +9,8 @@ trait ResourceAdaptableImplicit {
       adapter.adapt(resource)
     }
   }
+
+  class Wrapper{
+
+  }
 }
