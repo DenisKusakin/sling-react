@@ -1,16 +1,15 @@
-package com.cathcart93.sling.componentsv2.adapters.authoring
+package com.cathcart93.sling.componentsv2.adapters
 
-import com.cathcart93.sling.componentsv2.ResourceAdapter
-import com.cathcart93.sling.componentsv2.adapters.{ResourceAdaptableImplicit, SpectacleAdapters}
-import com.cathcart93.sling.componentsv2.models.HeadingModel
 import com.cathcart93.sling.componentsv2.models.dialog._
 import org.apache.sling.api.resource.Resource
 
-object HeadingAuthoringAdapter extends ResourceAdapter[SimpleDialogModel] with ResourceAdaptableImplicit
-  with SpectacleAdapters {
-  override def adapt: Resource => Option[SimpleDialogModel] = (resource: Resource) => {
-    val headingModel = resource.adapt[HeadingModel]
-    val props = Seq(
+/**
+  * @author Denis_Kusakin. 4/10/2018.
+  */
+trait Dialogs extends ResourceAdaptableImplicit{
+  val headingDialog: Resource => Seq[SimpleDialogProp] = { resource: Resource =>
+    val headingModel = resource.adapt(HeadingAdapter)
+    Seq(
       TextProp(name = "text", value = headingModel.map(_.text).getOrElse(""), title = "Text"),
       CheckboxProperty(name = "fit", value = headingModel.exists(_.fit), title = "Fit"),
       SelectProperty(
@@ -25,6 +24,5 @@ object HeadingAuthoringAdapter extends ResourceAdapter[SimpleDialogModel] with R
         options = (1 to 4).map(x => SelectPropertyOption(value = s"$x", title = s"$x"))
       )
     )
-    headingModel.map(x => SimpleDialogModel(path = resource.getPath, props = props, component = x))
   }
 }
