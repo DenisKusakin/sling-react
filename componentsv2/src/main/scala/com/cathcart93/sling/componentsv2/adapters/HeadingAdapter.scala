@@ -1,7 +1,7 @@
 package com.cathcart93.sling.componentsv2.adapters
 
 import com.cathcart93.sling.componentsv2.ResourceAdapter
-import com.cathcart93.sling.componentsv2.models.{EditableComponentAdapter, HeadingModel}
+import com.cathcart93.sling.componentsv2.models.{HeadingModel}
 import org.apache.sling.api.resource.Resource
 
 object HeadingAdapter extends ResourceAdapter[HeadingModel] {
