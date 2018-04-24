@@ -3,6 +3,7 @@ package com.cathcart93.sling.componentsv2.adapters
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
 import com.cathcart93.sling.componentsv2.models.{BlockQuote, DeckModel, HeadingModel, SlideModel, Component => ComponentModel}
+import org.apache.sling.api.resource.Resource
 import org.apache.sling.testing.mock.sling.builder.ContentBuilder
 import org.apache.sling.testing.mock.sling.MockSling
 import org.json4s.NoTypeHints
@@ -19,7 +20,8 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     "fit" -> false.asInstanceOf[java.lang.Boolean],
     "lineHeight" -> 2.asInstanceOf[Integer]
   )
-  val headingComponent = HeadingModel(text = "Text", size = 3, fit = false, lineHeight = 2)
+  val headingComponent: Resource => HeadingModel =
+    resource => HeadingModel(text = "Text", size = 3, fit = false, lineHeight = 2)
 
   "Resource" should "be adaptable to component" in {
     val resolver = MockSling.newResourceResolver
@@ -27,8 +29,8 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     val resourceMock = contentBuilder
       .resource("/text", headingComponentProps.asJava)
 
-    val adaptationResult = resourceMock.adapt[ComponentModel]
-    adaptationResult should be(Some(headingComponent))
+    val adaptationResult = resourceMock.adapt(HeadingAdapter)
+    adaptationResult.map(x => x.copy(dialog = None)) should be(Some(headingComponent(resourceMock)))
   }
 
   it should "be adaptable to Slide" in {
@@ -43,7 +45,16 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     contentBuilder
       .resource("/slide/comp1", headingComponentProps.asJava)
     val adaptationResult = slideResourceMock.adapt[SlideModel]
-    adaptationResult should be(Some(SlideModel(bgColor = "green", textColor = "black", components = Seq(headingComponent))))
+    adaptationResult should be(
+      Some(
+        SlideModel(
+          bgColor = "green",
+          textColor = "black",
+          components = Seq(
+            slideResourceMock.getChild("comp1").adapt(HeadingAdapter).get
+          ))
+      )
+    )
   }
 
   it should "be adaptable to BlockQuote" in {
@@ -72,7 +83,13 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     contentBuilder
       .resource("/deck/slide/comp1", headingComponentProps.asJava)
     val adaptationResult = deckResourceMock.adapt[DeckModel]
-    val expectedSlide = SlideModel(bgColor = "green", textColor = "black", components = Seq(headingComponent))
+    val expectedSlide = SlideModel(
+      bgColor = "green",
+      textColor = "black",
+      components = Seq(
+        deckResourceMock.getChild("slide").getChild("comp1").adapt(HeadingAdapter).get
+      )
+    )
     adaptationResult should be(Some(DeckModel(slides = Seq(expectedSlide))))
   }
 
@@ -84,6 +101,4 @@ class SpectacleComponentAdapterTest extends FlatSpec with Matchers with MockitoS
     val adaptationResult = blockQuoteResource.adapt[ComponentModel]
     adaptationResult should be(Some(BlockQuote(cite = "Cite", quote = "Quote")))
   }
-
-
 }
