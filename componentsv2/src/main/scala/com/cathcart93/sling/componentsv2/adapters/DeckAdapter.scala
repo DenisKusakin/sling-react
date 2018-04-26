@@ -25,16 +25,24 @@ object DeckAdapter extends ResourceAdapter[DeckModel] with ResourceAdaptableImpl
           .flatMap(x => Color.valueOf(x))
     }
 
+    val primary = propNameToColor("primaryColor")
+    val secondary = propNameToColor("secondaryColor")
+    val tertiary = propNameToColor("tertiaryColor")
+    val quarternary = propNameToColor("quarternaryColor")
+
     val dialogProps = Seq(
-      ColorProperty(name = "primaryColor", title = "Primary Color", value = )
+      ColorProperty(name = "primaryColor", title = "Primary Color", value = primary),
+      ColorProperty(name = "secondaryColor", title = "Secondary Color", value = secondary),
+      ColorProperty(name = "tertiaryColor", title = "Tertiary Color", value = tertiary),
+      ColorProperty(name = "quarternaryColor", title = "Qertiary Color", value = quarternary)
     )
 
     Some(DeckModel(
       slides = components,
-      primary = propNameToColor("primaryColor"),
-      secondary = propNameToColor("secondaryColor"),
-      tertiary = propNameToColor("tertiaryColor"),
-      quarternary = propNameToColor("quarternaryColor")
+      primary = primary,
+      secondary = secondary,
+      tertiary = tertiary,
+      quarternary = quarternary
     ))
   }
 }
