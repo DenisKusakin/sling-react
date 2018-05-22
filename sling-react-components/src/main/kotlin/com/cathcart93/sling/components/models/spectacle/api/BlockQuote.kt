@@ -7,7 +7,7 @@ import com.cathcart93.sling.core.ReactProp
 /**
  * @author Denis_Kusakin. 2/15/2018.
  */
-interface BlockQuote : SlideComponent {
+interface BlockQuote : SlideComponent, Base {
     val children: List<BlockQuoteChildComponent>
 
     interface Quote : BlockQuoteChildComponent {

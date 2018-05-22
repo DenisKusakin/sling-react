@@ -43,6 +43,10 @@ class DialogContext(@Transient private val resource: Resource) : SimpleDialog {
                 value = resource.valueMap.get(name, String::class.java)))
     }
 
+    fun dialog(dialog: SimpleDialog){
+        this.props.addAll(dialog.props)
+    }
+
     class SelectContext {
         val options = ArrayList<SelectPropertyOption>()
 

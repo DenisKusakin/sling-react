@@ -2,8 +2,6 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
-import com.cathcart93.sling.components.models.spectacle.api.Text
-import com.cathcart93.sling.components.models.spectacle.dialogs.textDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
 import com.cathcart93.sling.core.ReactProp
@@ -13,25 +11,26 @@ import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import javax.annotation.PostConstruct
+import com.cathcart93.sling.components.models.spectacle.api.Heading
+import com.cathcart93.sling.components.models.spectacle.api.Link
+import com.cathcart93.sling.components.models.spectacle.dialogs.headingDialog
+import com.cathcart93.sling.components.models.spectacle.dialogs.linkDialog
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController(Constants.TEXT)
-class TextModel : IReactController, Text, BaseModel() {
+@ReactController(Constants.LINK)
+class LinkModel : IReactController, Link, BaseModel() {
+
+    @ReactProp
     @ValueMapValue(name = "text")
-    @ReactProp
-    override lateinit var children: String
-
-//    @ReactProp
-    @ValueMapValue
-    override var fit: Boolean = true
-//
-//    @ReactProp
-//    @ValueMapValue
-//    override var textColor: String? = null
+    override var children: String? = ""
 
     @ReactProp
     @ValueMapValue
-    override var lineHeight: Int = 1
+    override var href: String? = ""
+
+    @ReactProp
+    @ValueMapValue
+    override var target: String? = "self"
 
     @ReactProp("__dialog")
     lateinit var dialog: SimpleDialog
@@ -44,7 +43,7 @@ class TextModel : IReactController, Text, BaseModel() {
 
     @PostConstruct
     fun init() {
-        dialog = textDialog(resource)
+        dialog = linkDialog(resource)
     }
 
 }

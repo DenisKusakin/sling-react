@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.SLIDE)
-class SlideModel : IReactController, Slide {
+class SlideModel : IReactController, Slide, BaseModel() {
 
     @SlingObject
     private lateinit var resource: Resource
@@ -25,15 +25,7 @@ class SlideModel : IReactController, Slide {
     override lateinit var children: List<SlideComponent>
 
     @ReactProp("__dialog")
-    private lateinit var dialog: Any
-
-    @ValueMapValue
-    @ReactProp
-    override var bgColor: String? = null
-
-    @ValueMapValue
-    @ReactProp
-    override var textColor: String? = null
+    lateinit var dialog: Any
 
     @PostConstruct
     fun init() {

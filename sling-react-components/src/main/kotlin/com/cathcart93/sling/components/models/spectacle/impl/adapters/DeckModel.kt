@@ -25,25 +25,25 @@ class DeckModel : IReactController, Deck {
     override lateinit var children: List<Slide>
 
     @ReactProp("__dialog")
-    private lateinit var dialog: Any
+    lateinit var dialog: Any
 
     @ValueMapValue
-    var primaryColor: String? = null
+    private var primaryColor: String? = null
 
     @ValueMapValue
-    var secondaryColor: String? = null
+    private var secondaryColor: String? = null
 
     @ValueMapValue
-    var tertiaryColor: String? = null
+    private var tertiaryColor: String? = null
 
     @ValueMapValue
-    var quarternaryColor: String? = null
+    private var quarternaryColor: String? = null
 
     @ValueMapValue
-    var primaryFont: String? = null
+    private var primaryFont: String? = null
 
     @ValueMapValue
-    var secondaryFont: String? = null
+    private var secondaryFont: String? = null
 
     @ReactProp
     override var colors = HashMap<String, String?>()

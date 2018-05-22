@@ -154,17 +154,29 @@ annotation class Marker
 class SlideImpl(
         override val bgColor: String?,
         override val textColor:
-        String?, override val children: List<SlideComponent>) : Slide {
+        String?, override val children: List<SlideComponent>) : Slide, BaseImpl() {
     val __type = Constants.SLIDE
+}
+
+open class BaseImpl : Base{
+    override val italic: Boolean? = false
+    override val bold: Boolean? = false
+    override val caps: Boolean? = false
+    override val margin: Int? = null
+    override val padding: Int? = null
+    override val textColor: String? = null
+    override val textSize: String? = null
+    override val textAlign: String? = null
+    override val textFont: String? = null
+    override val bgColor: String? = null
+    override val bgDarken: Float? = null
 }
 
 class HeadingImpl(
         override val children: String,
         override val size: Int = 1,
-        override val caps: Boolean = false,
-        override val textColor: String? = null,
         override val lineHeight: Int = 1,
-        override val fit: Boolean = false) : com.cathcart93.sling.components.models.spectacle.api.Heading {
+        override val fit: Boolean = false) : com.cathcart93.sling.components.models.spectacle.api.Heading, BaseImpl() {
     val __type = Constants.HEADING
 }
 
@@ -180,11 +192,11 @@ class TextImpl(
         override val fit: Boolean,
         override val lineHeight: Int,
         override val textColor: String?
-) : Text {
+) : Text, BaseImpl() {
     val __type = Constants.TEXT
 }
 
-class BlockQuoteImpl(quote: String, author: String) : BlockQuote {
+class BlockQuoteImpl(quote: String, author: String) : BlockQuote, BaseImpl() {
     val __type = Constants.BLOCK_QUOTE
     override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
 

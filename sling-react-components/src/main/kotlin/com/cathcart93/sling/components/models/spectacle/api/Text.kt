@@ -1,11 +1,17 @@
 package com.cathcart93.sling.components.models.spectacle.api
 
+import com.cathcart93.sling.core.ReactProp
+
 /**
  * @author Denis_Kusakin. 2/15/2018.
  */
-interface Text : SlideComponent {
+interface Text : SlideComponent, Base {
+//    @ReactProp
     val children: String
+//    @ReactProp
     val fit: Boolean
-    val textColor: String?
+//    @ReactProp
+//    val textColor: String?
+//    @ReactProp
     val lineHeight: Int
 }

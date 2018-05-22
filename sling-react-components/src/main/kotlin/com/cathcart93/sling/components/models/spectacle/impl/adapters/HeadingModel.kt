@@ -16,36 +16,28 @@ import com.cathcart93.sling.components.models.spectacle.dialogs.headingDialog
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.HEADING)
-class HeadingModel : IReactController, Heading {
+class HeadingModel : IReactController, Heading, BaseModel() {
     @ValueMapValue(name = "text")
     @ReactProp
     override lateinit var children: String
 
-    @ReactProp
     @ValueMapValue
+    @ReactProp
     override var size: Int = 6
 
-    @ReactProp
     @ValueMapValue
+    @ReactProp
     override var fit: Boolean = true
 
-    @ReactProp
     @ValueMapValue
-    override var caps: Boolean = false
-
     @ReactProp
-    @ValueMapValue
-    override var textColor: String? = null
-
-    @ReactProp
-    @ValueMapValue
     override var lineHeight: Int = 1
 
     @ReactProp("__dialog")
-    private lateinit var dialog: SimpleDialog
+    lateinit var dialog: SimpleDialog
 
     @ReactProp("__dialog_type")
-    private val dialogType = "dialogs/SimpleDialog"
+    val dialogType = "dialogs/SimpleDialog"
 
     @SlingObject
     private lateinit var resource: Resource

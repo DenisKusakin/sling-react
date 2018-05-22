@@ -12,5 +12,7 @@ class Constants {
         const val CODE = "Code"
         const val CODE_PANE = "CodePane"
         const val BLOCK_QUOTE = "BlockQuote"
+        const val LINK = "Link"
+        const val IMAGE = "Image"
     }
 }

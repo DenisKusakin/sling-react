@@ -1,7 +1,11 @@
 package com.cathcart93.sling.components.models.spectacle.api
 
-interface Slide {
-    val bgColor: String?
-    val textColor: String?
+import com.cathcart93.sling.core.ReactProp
+
+interface Slide : Base{
+//    @ReactProp
+//    val bgColor: String?
+//    @ReactProp
+//    val textColor: String?
     val children: List<SlideComponent>
 }

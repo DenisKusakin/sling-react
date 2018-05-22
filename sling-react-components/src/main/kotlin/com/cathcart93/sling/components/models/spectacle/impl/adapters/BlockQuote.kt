@@ -3,6 +3,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 import com.cathcart93.sling.components.models.spectacle.api.BlockQuote
 import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
+import com.cathcart93.sling.components.models.spectacle.dialogs.baseDialog
 import com.cathcart93.sling.components.models.spectacle.dialogs.simpleDialog
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
@@ -16,21 +17,21 @@ import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.BLOCK_QUOTE)
-class BlockQuote : IReactController, BlockQuote {
+class BlockQuote : IReactController, BlockQuote, BaseModel() {
     @ReactProp
     override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
 
     @ValueMapValue
-    lateinit var quote: String
+    private lateinit var quote: String
 
     @ValueMapValue
-    lateinit var cite: String
+    private lateinit var cite: String
 
     @ReactProp("__dialog")
-    private lateinit var dialog: SimpleDialog
+    lateinit var dialog: SimpleDialog
 
     @ReactProp("__dialog_type")
-    private val dialogType = "dialogs/SimpleDialog"
+    val dialogType = "dialogs/SimpleDialog"
 
     @SlingObject
     private lateinit var resource: Resource
@@ -43,6 +44,7 @@ class BlockQuote : IReactController, BlockQuote {
         dialog = simpleDialog(resource) {
             text(name = "quote", title = "Quote")
             text(name = "cite", title = "Cite")
+            dialog(baseDialog(resource))
         }
     }
 

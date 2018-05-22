@@ -4,7 +4,52 @@ import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import {SketchPicker, TwitterPicker} from 'react-color';
+import {SketchPicker, TwitterPicker, HuePicker, GithubPicker} from 'react-color';
+import reactCSS from 'reactcss'
+
+
+class ColorPicker extends React.Component {
+    state = {
+        displayColorPicker: false
+    };
+
+    handleClick = () => {
+        this.setState({displayColorPicker: !this.state.displayColorPicker})
+    };
+
+    handleClose = () => {
+        this.setState({displayColorPicker: false})
+    };
+
+    render() {
+        const styles = {
+            width: '36px',
+            height: '14px',
+            borderRadius: '2px',
+            background: `${this.props.color}`,
+            boxShadow: '0 0 0 1px rgba(0,0,0,.1)'
+        };
+        const cover = {
+            position: 'fixed',
+            top: '0px',
+            right: '0px',
+            bottom: '0px',
+            left: '0px',
+        };
+
+        return (
+            <div style={{display: 'flex'}}>
+                <div style={styles} onClick={this.handleClick}/>
+                {
+                    this.state.displayColorPicker && <div>
+                        <div style={cover} onClick={this.handleClose}></div>
+                        <SketchPicker {...this.props.colorProps} color={this.props.color}/>
+                    </div>
+                }
+            </div>
+        )
+    }
+}
 
 const MaterialDialogForm = observer(({form}) => (
     <form onSubmit={form.onSubmit}>
@@ -35,7 +80,7 @@ const MaterialDialogForm = observer(({form}) => (
                     const colorProps = x.bind();
                     return <div key={i}>
                         <p>{colorProps.label}</p>
-                        <TwitterPicker {...colorProps} color={colorProps.value}/>
+                        <ColorPicker color={colorProps.value} colorProps={colorProps}/>
                         <br/>
                     </div>
                 }

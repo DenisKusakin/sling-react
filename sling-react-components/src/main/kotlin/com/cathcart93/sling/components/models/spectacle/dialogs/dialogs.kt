@@ -6,12 +6,37 @@ import org.apache.sling.api.resource.Resource
 /**
  * @author Denis_Kusakin. 2/15/2018.
  */
+
+fun baseDialog(resource: Resource): SimpleDialog {
+    return simpleDialog(resource) {
+        checkbox("italic", "Italic")
+        checkbox("bold", "Bold")
+        checkbox("caps", "Caps")
+        text("margin", "Margin")
+        text("padding", "Padding")
+        color("textColor", "Text Color")
+        text("textSize", "Text Size")
+        select("textAlign", "Text Align") {
+            option("center", "center")
+            option("justify", "justify")
+            option("left", "left")
+            option("right", "right")
+            option("auto", "auto")
+            option("inherit", "inherit")
+            option("start", "start")
+            option("end", "end")
+        }
+        color("bgColor", "Background Color")
+    }
+}
+
 fun codeDialog(resource: Resource): SimpleDialog {
     return simpleDialog(resource) {
         multilineText("source", "Source")
         select("lang", "Language") {
             option("Java Script", "javascript")
         }
+        dialog(baseDialog(resource))
     }
 }
 
@@ -42,14 +67,7 @@ fun deckDialog(resource: Resource): ThemedContainer {
 fun headingDialog(resource: Resource): SimpleDialog {
     return simpleDialog(resource) {
         text("text", "Text")
-        checkbox("caps", "Caps")
-        checkbox("fir", "Fit")
-        select("textColor", "Color") {
-            option("Red", "red")
-            option("Green", "green")
-            option("Blue", "blue")
-            option("Black", "black")
-        }
+        dialog(baseDialog(resource))
         select("size", "Size") {
             option("H1", "1")
             option("H2", "2")
@@ -63,6 +81,29 @@ fun headingDialog(resource: Resource): SimpleDialog {
             option("3", "3")
             option("4", "4")
         }
+    }
+}
+
+fun linkDialog(resource: Resource): SimpleDialog {
+    return simpleDialog(resource) {
+        text("href", "Href")
+        text("text", "Text")
+        select("target", "Target"){
+            option("Blank", "_blank")
+            option("Self", "_self")
+            option("Parent", "_parent")
+            option("Top", "_top")
+        }
+        dialog(baseDialog(resource))
+    }
+}
+
+fun imageDialog(resource: Resource): SimpleDialog {
+    return simpleDialog(resource){
+        text("src", "Image src")
+        text("width", "Width")
+        text("height", "Height")
+        dialog(baseDialog(resource))
     }
 }
 
@@ -85,17 +126,24 @@ fun slideDialog(resource: Resource): ThemedContainer {
             prop("source", "function test(){}")
             prop("lang", "javascript")
         }
+        component("Link", "Simple Link component"){
+            prop("href", "http://example.com")
+        }
+        component("Image", "Image component"){
+
+        }
     }
 
     val theme = simpleDialog(resource) {
-        select("bgColor", "Background Color") {
-            option("Primary Color", "primary")
-            option("Secondary Color", "secondary")
-        }
-        select("textColor", "Text Color") {
-            option("Primary Color", "primary")
-            option("Secondary Color", "secondary")
-        }
+        //        select("bgColor", "Background Color") {
+//            option("Primary Color", "primary")
+//            option("Secondary Color", "secondary")
+//        }
+//        select("textColor", "Text Color") {
+//            option("Primary Color", "primary")
+//            option("Secondary Color", "secondary")
+//        }
+        dialog(baseDialog(resource))
     }
 
     return ThemedContainer(containerDialog, theme)
@@ -104,13 +152,14 @@ fun slideDialog(resource: Resource): ThemedContainer {
 fun textDialog(resource: Resource): SimpleDialog {
     return simpleDialog(resource) {
         multilineText(name = "text", title = "Text")
+        dialog(baseDialog(resource))
         checkbox(name = "fit", title = "Fit")
-        select(name = "textColor", title = "Color") {
-            option(label = "Red", value = "red")
-            option(label = "Green", value = "green")
-            option(label = "Blue", value = "blue")
-            option(label = "Black", value = "black")
-        }
+//        select(name = "textColor", title = "Color") {
+//            option(label = "Red", value = "red")
+//            option(label = "Green", value = "green")
+//            option(label = "Blue", value = "blue")
+//            option(label = "Black", value = "black")
+//        }
         select(name = "lineHeight", title = "Line Height") {
             option("1", "1")
             option("2", "2")

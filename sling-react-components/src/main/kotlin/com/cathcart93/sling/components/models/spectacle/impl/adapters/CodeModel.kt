@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.CODE_PANE)
-class CodeModel : IReactController, Code {
+class CodeModel : IReactController, Code, BaseModel() {
 
     @ValueMapValue
     @ReactProp
@@ -27,10 +27,10 @@ class CodeModel : IReactController, Code {
     override var lang: String? = "javascript"
 
     @ReactProp("__dialog")
-    private lateinit var dialog: SimpleDialog
+    lateinit var dialog: SimpleDialog
 
     @ReactProp("__dialog_type")
-    private val dialogType = "dialogs/SimpleDialog"
+    val dialogType = "dialogs/SimpleDialog"
 
     @SlingObject
     private lateinit var resource: Resource
