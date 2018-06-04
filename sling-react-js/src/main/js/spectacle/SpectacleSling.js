@@ -3,11 +3,12 @@ import Deck from './deck'
 import Heading from './heading'
 import Text from './text'
 import Slide from './slide'
-import Container from './../components/container'
-import ContainerDialog from './../components/container/dialog'
+import Container from './dialogs/Container'
 import SpectacleAuthorRoot from './SpectaceAuthorRoot'
-import SimpleDialog from '../framework/dialogs/SimpleDialog'
-import {BlockQuote, Quote, Cite, Code, CodePane, Link, Image} from "spectacle";
+import {BlockQuote, Quote, Cite, Code, CodePane, Link, Image, Appear} from "spectacle";
+import EditDialog from './dialogs/EditDialog'
+import TreeContainer from './../framework/TreeContainer'
+import EditModeToggler from './dialogs/EditModeToggler'
 
 const components = {
     Code,
@@ -21,14 +22,19 @@ const components = {
     Quote,
     Cite,
     Image,
+    Appear,
     Container,
-    "dialogs/Container": ContainerDialog,
-    "dialogs/SimpleDialog": SimpleDialog
+    EditDialog,
+    EditModeToggler
 };
 
-const Spectacle = props => (<SpectacleAuthorRoot
+components['SpectacleAuthorRoot'] = x => <SpectacleAuthorRoot
+    {...x}
+    renderTree={y => <TreeContainer components={components} tree={y}/>}/>;
+
+const Spectacle = props => (<TreeContainer
         components={components}
-        content={props.content}/>
+        tree={props.content}/>
 );
 
 export default Spectacle

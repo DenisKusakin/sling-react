@@ -36,6 +36,13 @@ const traverse = (tree, components, typeFieldName, dialogTypeFieldName) => {
         if (obj['dialog'] && dialogTypeFieldName) {
             return React.createElement(obj['dialog'], {...obj.props}, React.createElement(obj['type'], {...obj.props}, obj['children']))
         }
+        // if(obj.props.test === "test"){
+        //     debugger;
+        // }
+        // let children = obj['children'];
+        // if(children && children.length === 1){
+        //     children = children[0];
+        // }
         return React.createElement(obj['type'], obj.props, obj['children'])
     } else {
         return objProps;
@@ -44,6 +51,7 @@ const traverse = (tree, components, typeFieldName, dialogTypeFieldName) => {
 };
 
 const TreeContainer = ({tree, components, typeFieldName = '__type', dialogTypeFieldName = null}) => {
+    console.log("TreeContainer render");
     if (!tree) {
         return null
     }

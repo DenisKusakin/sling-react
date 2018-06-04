@@ -1,57 +1,52 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.spectacle.api.BlockQuote
 import com.cathcart93.sling.components.models.spectacle.api.Constants
-import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
-import com.cathcart93.sling.components.models.spectacle.dialogs.baseDialog
-import com.cathcart93.sling.components.models.spectacle.dialogs.simpleDialog
+import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
-import com.cathcart93.sling.core.ReactProp
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
-import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.BLOCK_QUOTE)
-class BlockQuote : IReactController, BlockQuote, BaseModel() {
-    @ReactProp
-    override val children = ArrayList<BlockQuote.BlockQuoteChildComponent>()
+class BlockQuote : IReactController, BaseModel(), ReactModel {
+    @ValueMapValue
+    private var quote: String? = null
 
     @ValueMapValue
-    private lateinit var quote: String
-
-    @ValueMapValue
-    private lateinit var cite: String
-
-    @ReactProp("__dialog")
-    lateinit var dialog: SimpleDialog
-
-    @ReactProp("__dialog_type")
-    val dialogType = "dialogs/SimpleDialog"
+    private var cite: String? = null
 
     @SlingObject
     private lateinit var resource: Resource
 
-    @PostConstruct
-    fun init() {
-        children.add(Quote(quote))
-        children.add(Cite(cite))
+    override fun toReact(isEditMode: Boolean): SpectacleTag {
+        val component = blockQuote {
+            italic = this@BlockQuote.italic
+            bold = this@BlockQuote.bold
+            caps = this@BlockQuote.caps
+            if (this@BlockQuote.quote != null) {
+                quote(this@BlockQuote.quote!!) {
 
-        dialog = simpleDialog(resource) {
-            text(name = "quote", title = "Quote")
-            text(name = "cite", title = "Cite")
-            dialog(baseDialog(resource))
+                }
+            }
+            if (this@BlockQuote.cite != null) {
+                cite(this@BlockQuote.cite!!) {
+
+                }
+            }
         }
+        return if(!isEditMode)
+            component
+        else
+            component.edit {
+                editUrl = resource.path
+                deleteUrl = resource.path
+                text(name = "quote", title = "Quote", value = if(quote == null) "" else quote!!)
+                text(name = "cite", title = "Cite", value = if(cite == null) "" else cite!!)
+            }
     }
-
-    @ReactController("Quote")
-    data class Quote(@ReactProp override val children: String) : BlockQuote.Quote
-
-    @ReactController("Cite")
-    data class Cite(@ReactProp override val children: String) : BlockQuote.Cite
 
 }

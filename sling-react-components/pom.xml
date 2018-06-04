@@ -218,6 +218,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit</artifactId>
+            <version>1.1.51</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.day.jcr.vault</groupId>
             <artifactId>content-package-maven-plugin</artifactId>
             <version>0.5.1</version>

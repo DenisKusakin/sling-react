@@ -13,35 +13,42 @@ import javax.annotation.PostConstruct
 import com.cathcart93.sling.components.models.spectacle.dialogs.headingDialog
 import com.cathcart93.sling.components.models.spectacle.dialogs.imageDialog
 import com.cathcart93.sling.components.models.spectacle.dialogs.linkDialog
+import com.cathcart93.sling.components.models.spectacle.impl.builder.SpectacleTag
+import com.cathcart93.sling.components.models.spectacle.impl.builder.edit
+import com.cathcart93.sling.components.models.spectacle.impl.builder.image
+import com.cathcart93.sling.components.models.spectacle.impl.builder.text
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.IMAGE)
-class ImageModel : IReactController, Image, BaseModel() {
+class ImageModel : IReactController, BaseModel(), ReactModel {
 
-    @ReactProp
     @ValueMapValue
-    override var src: String? = ""
+    var src: String = ""
 
-    @ReactProp
     @ValueMapValue
-    override var height: String? = null
+    var height: String? = null
 
-    @ReactProp
     @ValueMapValue
-    override val width: String? = null
-
-    @ReactProp("__dialog")
-    lateinit var dialog: SimpleDialog
-
-    @ReactProp("__dialog_type")
-    val dialogType = "dialogs/SimpleDialog"
+    var width: String? = null
 
     @SlingObject
     private lateinit var resource: Resource
 
-    @PostConstruct
-    fun init() {
-        dialog = imageDialog(resource)
+    override fun toReact(isEditMode: Boolean): SpectacleTag {
+        val component = image(src) {
+            height = this@ImageModel.height
+            width = this@ImageModel.width
+        }
+        return if (!isEditMode)
+            component
+        else
+            component.edit {
+                deleteUrl = resource.path
+                editUrl = resource.path
+                text(name = "src", title = "src", value = src)
+                text(name = "height", title = "Height", value = if (height == null) "" else height!!)
+                text(name = "width", title = "Width", value = if (width == null) "" else width!!)
+            }
     }
 
 }

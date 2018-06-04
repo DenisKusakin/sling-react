@@ -1,1567 +1,614 @@
 {
-  "isEditMode": false,
+  "__type": "SpectacleAuthorRoot",
+  "url": "/content/spectacle.json",
   "content": {
-    "children": [
-      {
-        "children": [
-          {
-            "children": "Slide 1",
-            "__dialog": {
-              "props": [
-                {
-                  "type": "text",
-                  "name": "text",
-                  "value": "Slide 1",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": true,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": true,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": false,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "value": "#ff6900",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                },
-                {
-                  "type": "select",
-                  "name": "size",
-                  "value": "3",
-                  "options": [
-                    {
-                      "label": "H1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "H2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "H3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "H4",
-                      "value": "4"
-                    },
-                    {
-                      "label": "H5",
-                      "value": "5"
-                    }
-                  ],
-                  "title": "Size"
-                },
-                {
-                  "type": "select",
-                  "name": "height",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Height"
-                }
-              ],
-              "path": "/content/spectacle/slide1/heading"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "fit": false,
-            "lineHeight": 1,
-            "size": 3,
-            "bold": true,
-            "caps": false,
-            "italic": true,
-            "textColor": "#ff6900",
-            "__type": "Heading"
-          },
-          {
-            "children": "Edit Text Component Here",
-            "__dialog": {
-              "props": [
-                {
-                  "type": "textarea",
-                  "name": "text",
-                  "value": "Edit Text Component Here",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": false,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": false,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": false,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "fit",
-                  "value": false,
-                  "title": "Fit"
-                },
-                {
-                  "type": "select",
-                  "name": "lineHeight",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Line Height"
-                }
-              ],
-              "path": "/content/spectacle/slide1/text"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "lineHeight": 1,
-            "bold": false,
-            "caps": false,
-            "italic": false,
-            "__type": "Text"
-          }
-        ],
-        "__dialog": {
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Text Component",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "Heading",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "Text",
-              "description": "Just a text component",
-              "__props": {
-                "component": "Text",
-                "text": "Edit Text Component Here",
-                ":nameHint": "Text",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "BlockQuote",
-              "description": "Quote Block component",
-              "__props": {
-                "component": "BlockQuote",
-                "quote": "Edit Quote",
-                "cite": "Author",
-                ":nameHint": "BlockQuote",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "CodePane",
-              "description": "Use to show highlighted code",
-              "__props": {
-                "component": "CodePane",
-                "source": "function test(){}",
-                ":nameHint": "CodePane",
-                "lang": "javascript",
-                ":order": "last"
-              }
-            }
-          ],
-          "meta": [
-            {
-              "path": "/content/spectacle/slide1/heading"
-            },
-            {
-              "path": "/content/spectacle/slide1/text"
-            }
-          ],
-          "path": "/content/spectacle/slide1/",
-          "theme": {
-            "props": [
-              {
-                "type": "checkbox",
-                "name": "italic",
-                "value": false,
-                "title": "Italic"
-              },
-              {
-                "type": "checkbox",
-                "name": "bold",
-                "value": false,
-                "title": "Bold"
-              },
-              {
-                "type": "checkbox",
-                "name": "caps",
-                "value": false,
-                "title": "Caps"
-              },
-              {
-                "type": "text",
-                "name": "margin",
-                "title": "Margin"
-              },
-              {
-                "type": "text",
-                "name": "padding",
-                "title": "Padding"
-              },
-              {
-                "type": "color",
-                "name": "textColor",
-                "value": "#8ed1fc",
-                "title": "Text Color"
-              },
-              {
-                "type": "text",
-                "name": "textSize",
-                "title": "Text Size"
-              },
-              {
-                "type": "select",
-                "name": "textAlign",
-                "options": [
-                  {
-                    "label": "center",
-                    "value": "center"
-                  },
-                  {
-                    "label": "justify",
-                    "value": "justify"
-                  },
-                  {
-                    "label": "left",
-                    "value": "left"
-                  },
-                  {
-                    "label": "right",
-                    "value": "right"
-                  },
-                  {
-                    "label": "auto",
-                    "value": "auto"
-                  },
-                  {
-                    "label": "inherit",
-                    "value": "inherit"
-                  },
-                  {
-                    "label": "start",
-                    "value": "start"
-                  },
-                  {
-                    "label": "end",
-                    "value": "end"
-                  }
-                ],
-                "title": "Text Align"
-              },
-              {
-                "type": "color",
-                "name": "bgColor",
-                "value": "#fcb900",
-                "title": "Background Color"
-              }
-            ],
-            "path": "/content/spectacle/slide1"
-          }
-        },
-        "bgColor": "#fcb900",
-        "bgDarken": 0.2,
-        "bold": false,
-        "caps": false,
-        "italic": false,
-        "textColor": "#8ed1fc",
-        "__type": "Slide"
-      },
-      {
-        "children": [
-          {
-            "children": "Slide 2",
-            "__dialog": {
-              "props": [
-                {
-                  "type": "text",
-                  "name": "text",
-                  "value": "Slide 2",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": true,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": true,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": false,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "value": "green",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "value": "end",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                },
-                {
-                  "type": "select",
-                  "name": "size",
-                  "value": "3",
-                  "options": [
-                    {
-                      "label": "H1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "H2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "H3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "H4",
-                      "value": "4"
-                    },
-                    {
-                      "label": "H5",
-                      "value": "5"
-                    }
-                  ],
-                  "title": "Size"
-                },
-                {
-                  "type": "select",
-                  "name": "height",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Height"
-                }
-              ],
-              "path": "/content/spectacle/1_1526731323164/heading"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "fit": false,
-            "lineHeight": 1,
-            "size": 3,
-            "bold": true,
-            "caps": false,
-            "italic": true,
-            "textAlign": "end",
-            "textColor": "green",
-            "__type": "Heading"
-          },
-          {
-            "children": [
-              {
-                "children": "Edit Quote",
-                "__type": "Quote"
-              },
-              {
-                "children": "Author",
-                "__type": "Cite"
-              }
-            ],
-            "__dialog": {
-              "props": [
-                {
-                  "type": "text",
-                  "name": "quote",
-                  "value": "Edit Quote",
-                  "title": "Quote"
-                },
-                {
-                  "type": "text",
-                  "name": "cite",
-                  "value": "Author",
-                  "title": "Cite"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": true,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": true,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": false,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "value": "#f78da7",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "value": "end",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                }
-              ],
-              "path": "/content/spectacle/1_1526731323164/blockquote"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "bold": true,
-            "caps": false,
-            "italic": true,
-            "textAlign": "end",
-            "textColor": "#f78da7",
-            "__type": "BlockQuote"
-          },
-          {
-            "children": "Edit Text Component Here",
-            "__dialog": {
-              "props": [
-                {
-                  "type": "textarea",
-                  "name": "text",
-                  "value": "Edit Text Component Here",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": false,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": true,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": false,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "value": "#00d084",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "value": "left",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "fit",
-                  "value": true,
-                  "title": "Fit"
-                },
-                {
-                  "type": "select",
-                  "name": "lineHeight",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Line Height"
-                }
-              ],
-              "path": "/content/spectacle/1_1526731323164/text"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "lineHeight": 1,
-            "bold": true,
-            "caps": false,
-            "italic": false,
-            "textAlign": "left",
-            "textColor": "#00d084",
-            "__type": "Text"
-          }
-        ],
-        "__dialog": {
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Text Component",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "Heading",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "Text",
-              "description": "Just a text component",
-              "__props": {
-                "component": "Text",
-                "text": "Edit Text Component Here",
-                ":nameHint": "Text",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "BlockQuote",
-              "description": "Quote Block component",
-              "__props": {
-                "component": "BlockQuote",
-                "quote": "Edit Quote",
-                "cite": "Author",
-                ":nameHint": "BlockQuote",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "CodePane",
-              "description": "Use to show highlighted code",
-              "__props": {
-                "component": "CodePane",
-                "source": "function test(){}",
-                ":nameHint": "CodePane",
-                "lang": "javascript",
-                ":order": "last"
-              }
-            }
-          ],
-          "meta": [
-            {
-              "path": "/content/spectacle/1_1526731323164/heading"
-            },
-            {
-              "path": "/content/spectacle/1_1526731323164/blockquote"
-            },
-            {
-              "path": "/content/spectacle/1_1526731323164/text"
-            }
-          ],
-          "path": "/content/spectacle/1_1526731323164/",
-          "theme": {
-            "props": [
-              {
-                "type": "checkbox",
-                "name": "italic",
-                "value": false,
-                "title": "Italic"
-              },
-              {
-                "type": "checkbox",
-                "name": "bold",
-                "value": false,
-                "title": "Bold"
-              },
-              {
-                "type": "checkbox",
-                "name": "caps",
-                "value": true,
-                "title": "Caps"
-              },
-              {
-                "type": "text",
-                "name": "margin",
-                "title": "Margin"
-              },
-              {
-                "type": "text",
-                "name": "padding",
-                "title": "Padding"
-              },
-              {
-                "type": "color",
-                "name": "textColor",
-                "value": "primary",
-                "title": "Text Color"
-              },
-              {
-                "type": "text",
-                "name": "textSize",
-                "title": "Text Size"
-              },
-              {
-                "type": "select",
-                "name": "textAlign",
-                "value": "right",
-                "options": [
-                  {
-                    "label": "center",
-                    "value": "center"
-                  },
-                  {
-                    "label": "justify",
-                    "value": "justify"
-                  },
-                  {
-                    "label": "left",
-                    "value": "left"
-                  },
-                  {
-                    "label": "right",
-                    "value": "right"
-                  },
-                  {
-                    "label": "auto",
-                    "value": "auto"
-                  },
-                  {
-                    "label": "inherit",
-                    "value": "inherit"
-                  },
-                  {
-                    "label": "start",
-                    "value": "start"
-                  },
-                  {
-                    "label": "end",
-                    "value": "end"
-                  }
-                ],
-                "title": "Text Align"
-              },
-              {
-                "type": "color",
-                "name": "bgColor",
-                "value": "secondary",
-                "title": "Background Color"
-              }
-            ],
-            "path": "/content/spectacle/1_1526731323164"
-          }
-        },
-        "bgColor": "secondary",
-        "bold": false,
-        "caps": true,
-        "italic": false,
-        "textAlign": "right",
-        "textColor": "primary",
-        "__type": "Slide"
-      },
-      {
-        "children": [
-          {
-            "children": "Slide 3",
-            "__dialog": {
-              "props": [
-                {
-                  "type": "text",
-                  "name": "text",
-                  "value": "Slide 3",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": false,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": false,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": true,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "value": "green",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                },
-                {
-                  "type": "select",
-                  "name": "size",
-                  "value": "3",
-                  "options": [
-                    {
-                      "label": "H1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "H2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "H3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "H4",
-                      "value": "4"
-                    },
-                    {
-                      "label": "H5",
-                      "value": "5"
-                    }
-                  ],
-                  "title": "Size"
-                },
-                {
-                  "type": "select",
-                  "name": "height",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Height"
-                }
-              ],
-              "path": "/content/spectacle/1_1526839456118/heading"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "fit": false,
-            "lineHeight": 1,
-            "size": 3,
-            "bold": false,
-            "caps": true,
-            "italic": false,
-            "textColor": "green",
-            "__type": "Heading"
-          },
-          {
-            "children": "Edit Text Component Here",
-            "__dialog": {
-              "props": [
-                {
-                  "type": "textarea",
-                  "name": "text",
-                  "value": "Edit Text Component Here",
-                  "title": "Text"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "italic",
-                  "value": false,
-                  "title": "Italic"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "bold",
-                  "value": false,
-                  "title": "Bold"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "caps",
-                  "value": false,
-                  "title": "Caps"
-                },
-                {
-                  "type": "text",
-                  "name": "margin",
-                  "title": "Margin"
-                },
-                {
-                  "type": "text",
-                  "name": "padding",
-                  "title": "Padding"
-                },
-                {
-                  "type": "color",
-                  "name": "textColor",
-                  "value": "#7bdcb5",
-                  "title": "Text Color"
-                },
-                {
-                  "type": "text",
-                  "name": "textSize",
-                  "title": "Text Size"
-                },
-                {
-                  "type": "select",
-                  "name": "textAlign",
-                  "options": [
-                    {
-                      "label": "center",
-                      "value": "center"
-                    },
-                    {
-                      "label": "justify",
-                      "value": "justify"
-                    },
-                    {
-                      "label": "left",
-                      "value": "left"
-                    },
-                    {
-                      "label": "right",
-                      "value": "right"
-                    },
-                    {
-                      "label": "auto",
-                      "value": "auto"
-                    },
-                    {
-                      "label": "inherit",
-                      "value": "inherit"
-                    },
-                    {
-                      "label": "start",
-                      "value": "start"
-                    },
-                    {
-                      "label": "end",
-                      "value": "end"
-                    }
-                  ],
-                  "title": "Text Align"
-                },
-                {
-                  "type": "color",
-                  "name": "bgColor",
-                  "title": "Background Color"
-                },
-                {
-                  "type": "checkbox",
-                  "name": "fit",
-                  "value": false,
-                  "title": "Fit"
-                },
-                {
-                  "type": "select",
-                  "name": "lineHeight",
-                  "options": [
-                    {
-                      "label": "1",
-                      "value": "1"
-                    },
-                    {
-                      "label": "2",
-                      "value": "2"
-                    },
-                    {
-                      "label": "3",
-                      "value": "3"
-                    },
-                    {
-                      "label": "4",
-                      "value": "4"
-                    }
-                  ],
-                  "title": "Line Height"
-                }
-              ],
-              "path": "/content/spectacle/1_1526839456118/text"
-            },
-            "__dialog_type": "dialogs/SimpleDialog",
-            "lineHeight": 1,
-            "bold": false,
-            "caps": false,
-            "italic": false,
-            "textColor": "#7bdcb5",
-            "__type": "Text"
-          }
-        ],
-        "__dialog": {
-          "components": [
-            {
-              "name": "Heading",
-              "description": "Text Component",
-              "__props": {
-                "fit": "false",
-                "component": "Heading",
-                "size": "3",
-                "text": "Edit Title Here",
-                ":nameHint": "Heading",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "Text",
-              "description": "Just a text component",
-              "__props": {
-                "component": "Text",
-                "text": "Edit Text Component Here",
-                ":nameHint": "Text",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "BlockQuote",
-              "description": "Quote Block component",
-              "__props": {
-                "component": "BlockQuote",
-                "quote": "Edit Quote",
-                "cite": "Author",
-                ":nameHint": "BlockQuote",
-                ":order": "last"
-              }
-            },
-            {
-              "name": "CodePane",
-              "description": "Use to show highlighted code",
-              "__props": {
-                "component": "CodePane",
-                "source": "function test(){}",
-                ":nameHint": "CodePane",
-                "lang": "javascript",
-                ":order": "last"
-              }
-            }
-          ],
-          "meta": [
-            {
-              "path": "/content/spectacle/1_1526839456118/heading"
-            },
-            {
-              "path": "/content/spectacle/1_1526839456118/text"
-            }
-          ],
-          "path": "/content/spectacle/1_1526839456118/",
-          "theme": {
-            "props": [
-              {
-                "type": "checkbox",
-                "name": "italic",
-                "value": false,
-                "title": "Italic"
-              },
-              {
-                "type": "checkbox",
-                "name": "bold",
-                "value": false,
-                "title": "Bold"
-              },
-              {
-                "type": "checkbox",
-                "name": "caps",
-                "value": false,
-                "title": "Caps"
-              },
-              {
-                "type": "text",
-                "name": "margin",
-                "title": "Margin"
-              },
-              {
-                "type": "text",
-                "name": "padding",
-                "title": "Padding"
-              },
-              {
-                "type": "color",
-                "name": "textColor",
-                "title": "Text Color"
-              },
-              {
-                "type": "text",
-                "name": "textSize",
-                "title": "Text Size"
-              },
-              {
-                "type": "select",
-                "name": "textAlign",
-                "options": [
-                  {
-                    "label": "center",
-                    "value": "center"
-                  },
-                  {
-                    "label": "justify",
-                    "value": "justify"
-                  },
-                  {
-                    "label": "left",
-                    "value": "left"
-                  },
-                  {
-                    "label": "right",
-                    "value": "right"
-                  },
-                  {
-                    "label": "auto",
-                    "value": "auto"
-                  },
-                  {
-                    "label": "inherit",
-                    "value": "inherit"
-                  },
-                  {
-                    "label": "start",
-                    "value": "start"
-                  },
-                  {
-                    "label": "end",
-                    "value": "end"
-                  }
-                ],
-                "title": "Text Align"
-              },
-              {
-                "type": "color",
-                "name": "bgColor",
-                "value": "secondary",
-                "title": "Background Color"
-              }
-            ],
-            "path": "/content/spectacle/1_1526839456118"
-          }
-        },
-        "bgColor": "secondary",
-        "bold": false,
-        "caps": false,
-        "italic": false,
-        "__type": "Slide"
-      }
+    "__type": "Deck",
+    "transition": [
+      "zoom",
+      "slide"
     ],
+    "controls": true,
+    "progress": "number",
     "colors": {
-      "secondary": "#1f2022",
-      "tertiary": "#03a9fc",
-      "quarternary": "#abb8c3",
-      "primary": "#abb8c3"
-    },
-    "__dialog": {
-      "components": [
-        {
-          "name": "Slide",
-          "description": "",
-          "__props": {
 
-          }
-        }
-      ],
-      "meta": [
-        {
-          "path": "/content/spectacle/slide1"
-        },
-        {
-          "path": "/content/spectacle/1_1526731323164"
-        },
-        {
-          "path": "/content/spectacle/1_1526839456118"
-        }
-      ],
-      "path": "/content/spectacle/",
-      "theme": {
-        "props": [
-          {
-            "type": "color",
-            "name": "primaryColor",
-            "value": "#abb8c3",
-            "title": "Primary Color"
-          },
-          {
-            "type": "color",
-            "name": "secondaryColor",
-            "value": "#1f2022",
-            "title": "Secondary Color"
-          },
-          {
-            "type": "color",
-            "name": "tertiaryColor",
-            "value": "#03a9fc",
-            "title": "Tertiary Color"
-          },
-          {
-            "type": "color",
-            "name": "quarternaryColor",
-            "value": "#abb8c3",
-            "title": "Quarternary Color"
-          },
-          {
-            "type": "select",
-            "name": "primaryFont",
-            "value": "Montserrat",
-            "options": [
-              {
-                "label": "Montserrat",
-                "value": "Montserrat"
-              },
-              {
-                "label": "Helvetica",
-                "value": "Helvetica"
-              }
-            ],
-            "title": "Primary Font"
-          },
-          {
-            "type": "select",
-            "name": "secondaryFont",
-            "value": "Helvetica",
-            "options": [
-              {
-                "label": "Montserrat",
-                "value": "Montserrat"
-              },
-              {
-                "label": "Helvetica",
-                "value": "Helvetica"
-              }
-            ],
-            "title": "Secondary Font"
-          }
-        ],
-        "path": "/content/spectacle"
-      }
     },
     "fonts": {
-      "secondary": "Helvetica",
-      "primary": "Montserrat"
+      "primary": "Helvetica",
+      "secondary": "Helvetica"
     },
-    "__type": "Deck"
-  },
-  "url": "/content/spectacle.json?isEdit=false"
+    "children": [
+      {
+        "__type": "Slide",
+        "children": [
+          {
+            "__type": "Container",
+            "resourcePath": "/content/spectacle/slide1/",
+            "components": [
+              {
+                "props": {
+                  ":nameHint": "Heading",
+                  ":order": "last",
+                  "component": "Heading"
+                },
+                "title": "Heading",
+                "description": "Heading component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Text",
+                  ":order": "last",
+                  "component": "Text"
+                },
+                "title": "Text",
+                "description": "Text component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Link",
+                  ":order": "last",
+                  "component": "Link"
+                },
+                "title": "Link",
+                "description": "Link component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Image",
+                  ":order": "last",
+                  "component": "Image"
+                },
+                "title": "Image",
+                "description": "Image component"
+              },
+              {
+                "props": {
+                  ":nameHint": "BlockQuote",
+                  ":order": "last",
+                  "component": "BlockQuote"
+                },
+                "title": "BlockQuote",
+                "description": "BlockQuote component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Code",
+                  ":order": "last",
+                  "component": "Code"
+                },
+                "title": "Code",
+                "description": "Code component"
+              }
+            ],
+            "children": [
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide1/image",
+                "deleteUrl": "/content/spectacle/slide1/image",
+                "editDialog": [
+                  {
+                    "name": "src",
+                    "title": "src",
+                    "value": "https://st.kp.yandex.net/images/film_iphone/iphone360_597687.jpg",
+                    "type": "text"
+                  },
+                  {
+                    "name": "height",
+                    "title": "Height",
+                    "value": "300",
+                    "type": "text"
+                  },
+                  {
+                    "name": "width",
+                    "title": "Width",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Image",
+                    "src": "https://st.kp.yandex.net/images/film_iphone/iphone360_597687.jpg",
+                    "height": "300"
+                  }
+                ]
+              },
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide1/link",
+                "deleteUrl": "/content/spectacle/slide1/link",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Link Text",
+                    "value": "X-Men",
+                    "type": "text"
+                  },
+                  {
+                    "name": "href",
+                    "title": "Href",
+                    "value": "https://www.kinopoisk.ru/film/lyudi-iks-dni-minuvshego-budushchego-2014-597687/",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Blank",
+                        "value": "_blank"
+                      },
+                      {
+                        "label": "Self",
+                        "value": "_self"
+                      },
+                      {
+                        "label": "Parent",
+                        "value": "_parent"
+                      },
+                      {
+                        "label": "Top",
+                        "value": "_top"
+                      }
+                    ],
+                    "value": "_blank",
+                    "name": "target",
+                    "title": "Target"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Link",
+                    "href": "https://www.kinopoisk.ru/film/lyudi-iks-dni-minuvshego-budushchego-2014-597687/",
+                    "target": "_blank",
+                    "italic": false,
+                    "bold": false,
+                    "caps": false,
+                    "children": [
+                      "X-Men"
+                    ]
+                  }
+                ]
+              },
+              {
+                "__type": "EditModeToggler"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
+        "children": [
+          {
+            "__type": "Container",
+            "resourcePath": "/content/spectacle/1_1526731323164/",
+            "components": [
+              {
+                "props": {
+                  ":nameHint": "Heading",
+                  ":order": "last",
+                  "component": "Heading"
+                },
+                "title": "Heading",
+                "description": "Heading component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Text",
+                  ":order": "last",
+                  "component": "Text"
+                },
+                "title": "Text",
+                "description": "Text component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Link",
+                  ":order": "last",
+                  "component": "Link"
+                },
+                "title": "Link",
+                "description": "Link component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Image",
+                  ":order": "last",
+                  "component": "Image"
+                },
+                "title": "Image",
+                "description": "Image component"
+              },
+              {
+                "props": {
+                  ":nameHint": "BlockQuote",
+                  ":order": "last",
+                  "component": "BlockQuote"
+                },
+                "title": "BlockQuote",
+                "description": "BlockQuote component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Code",
+                  ":order": "last",
+                  "component": "Code"
+                },
+                "title": "Code",
+                "description": "Code component"
+              }
+            ],
+            "children": [
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/1_1526731323164/blockquote",
+                "deleteUrl": "/content/spectacle/1_1526731323164/blockquote",
+                "editDialog": [
+                  {
+                    "name": "quote",
+                    "title": "Quote",
+                    "value": "Edit Quote",
+                    "type": "text"
+                  },
+                  {
+                    "name": "cite",
+                    "title": "Cite",
+                    "value": "Author",
+                    "type": "text"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "BlockQuote",
+                    "children": [
+                      {
+                        "__type": "Quote",
+                        "children": [
+                          "Edit Quote"
+                        ]
+                      },
+                      {
+                        "__type": "Cite",
+                        "children": [
+                          "Author"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/1_1526731323164/codepane",
+                "deleteUrl": "/content/spectacle/1_1526731323164/codepane",
+                "editDialog": [
+                  {
+                    "name": "source",
+                    "title": "Source",
+                    "value": "import React from 'react'\nimport {AuthorContext} from './dialogs/context'\nimport axios from 'axios'\nimport {MuiThemeProvider} from 'material-ui/styles';",
+                    "type": "textarea"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "JavaScript",
+                        "value": "javascript"
+                      }
+                    ],
+                    "value": "javascript",
+                    "name": "lang",
+                    "title": "Language"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "CodePane",
+                    "source": "import React from 'react'\nimport {AuthorContext} from './dialogs/context'\nimport axios from 'axios'\nimport {MuiThemeProvider} from 'material-ui/styles';",
+                    "lang": "javascript"
+                  }
+                ]
+              },
+              {
+                "__type": "EditModeToggler"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
+        "children": [
+          {
+            "__type": "Container",
+            "resourcePath": "/content/spectacle/1_1526839456118/",
+            "components": [
+              {
+                "props": {
+                  ":nameHint": "Heading",
+                  ":order": "last",
+                  "component": "Heading"
+                },
+                "title": "Heading",
+                "description": "Heading component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Text",
+                  ":order": "last",
+                  "component": "Text"
+                },
+                "title": "Text",
+                "description": "Text component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Link",
+                  ":order": "last",
+                  "component": "Link"
+                },
+                "title": "Link",
+                "description": "Link component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Image",
+                  ":order": "last",
+                  "component": "Image"
+                },
+                "title": "Image",
+                "description": "Image component"
+              },
+              {
+                "props": {
+                  ":nameHint": "BlockQuote",
+                  ":order": "last",
+                  "component": "BlockQuote"
+                },
+                "title": "BlockQuote",
+                "description": "BlockQuote component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Code",
+                  ":order": "last",
+                  "component": "Code"
+                },
+                "title": "Code",
+                "description": "Code component"
+              }
+            ],
+            "children": [
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/1_1526839456118/heading",
+                "deleteUrl": "/content/spectacle/1_1526839456118/heading",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Text",
+                    "value": "Slide 3",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "H1",
+                        "value": "1"
+                      },
+                      {
+                        "label": "H2",
+                        "value": "2"
+                      },
+                      {
+                        "label": "H3",
+                        "value": "3"
+                      },
+                      {
+                        "label": "H4",
+                        "value": "4"
+                      },
+                      {
+                        "label": "H5",
+                        "value": "5"
+                      }
+                    ],
+                    "value": "1",
+                    "name": "size",
+                    "title": "Size"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "color",
+                    "name": "textColor",
+                    "title": "Text Color",
+                    "value": "#0e5d1b"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Heading",
+                    "fit": false,
+                    "lineHeight": 1,
+                    "size": 1,
+                    "italic": false,
+                    "bold": false,
+                    "caps": false,
+                    "textColor": "#0e5d1b",
+                    "children": [
+                      "Slide 3"
+                    ]
+                  }
+                ]
+              },
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/1_1526839456118/text",
+                "deleteUrl": "/content/spectacle/1_1526839456118/text",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Text",
+                    "value": "Edit Text Component",
+                    "type": "text"
+                  },
+                  {
+                    "name": "fit",
+                    "title": "Fit",
+                    "value": true,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": true,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "color",
+                    "name": "textColor",
+                    "title": "Text Color",
+                    "value": "#260bbf"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Text",
+                    "fit": true,
+                    "italic": false,
+                    "bold": false,
+                    "caps": true,
+                    "textColor": "#260bbf",
+                    "children": [
+                      "Edit Text Component"
+                    ]
+                  }
+                ]
+              },
+              {
+                "__type": "EditModeToggler"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
+        "children": [
+          {
+            "__type": "Container",
+            "resourcePath": "/content/spectacle/1_1526966685685/",
+            "components": [
+              {
+                "props": {
+                  ":nameHint": "Heading",
+                  ":order": "last",
+                  "component": "Heading"
+                },
+                "title": "Heading",
+                "description": "Heading component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Text",
+                  ":order": "last",
+                  "component": "Text"
+                },
+                "title": "Text",
+                "description": "Text component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Link",
+                  ":order": "last",
+                  "component": "Link"
+                },
+                "title": "Link",
+                "description": "Link component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Image",
+                  ":order": "last",
+                  "component": "Image"
+                },
+                "title": "Image",
+                "description": "Image component"
+              },
+              {
+                "props": {
+                  ":nameHint": "BlockQuote",
+                  ":order": "last",
+                  "component": "BlockQuote"
+                },
+                "title": "BlockQuote",
+                "description": "BlockQuote component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Code",
+                  ":order": "last",
+                  "component": "Code"
+                },
+                "title": "Code",
+                "description": "Code component"
+              }
+            ],
+            "children": [
+              {
+                "__type": "EditModeToggler"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

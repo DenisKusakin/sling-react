@@ -1,50 +1,65 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.Constants
-import com.cathcart93.sling.components.models.spectacle.api.SimpleDialog
-import com.cathcart93.sling.components.models.spectacle.api.Text
-import com.cathcart93.sling.components.models.spectacle.dialogs.textDialog
+import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import com.cathcart93.sling.core.IReactController
 import com.cathcart93.sling.core.ReactController
-import com.cathcart93.sling.core.ReactProp
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
-import javax.annotation.PostConstruct
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @ReactController(Constants.TEXT)
-class TextModel : IReactController, Text, BaseModel() {
-    @ValueMapValue(name = "text")
-    @ReactProp
-    override lateinit var children: String
-
-//    @ReactProp
+class TextModel : IReactController, BaseModel(), ReactModel {
     @ValueMapValue
-    override var fit: Boolean = true
-//
-//    @ReactProp
-//    @ValueMapValue
-//    override var textColor: String? = null
+    private var text: String? = null
 
-    @ReactProp
     @ValueMapValue
-    override var lineHeight: Int = 1
+    private var fit: Boolean? = null
 
-    @ReactProp("__dialog")
-    lateinit var dialog: SimpleDialog
-
-    @ReactProp("__dialog_type")
-    val dialogType = "dialogs/SimpleDialog"
+    @ValueMapValue
+    private var lineHeight: Int? = null
 
     @SlingObject
     private lateinit var resource: Resource
 
-    @PostConstruct
-    fun init() {
-        dialog = textDialog(resource)
+    override fun toReact(isEditMode: Boolean): SpectacleTag {
+        val component = text(if (text == null) "" else text!!) {
+            lineHeight = this@TextModel.lineHeight
+            fit = this@TextModel.fit
+            italic = this@TextModel.italic
+            bold = this@TextModel.bold
+            caps = this@TextModel.caps
+            margin = this@TextModel.margin
+            padding = this@TextModel.padding
+            if (this@TextModel.textColor != null) {
+                textColor = HexColor(this@TextModel.textColor!!)
+            }
+        }
+        return if (isEditMode)
+            component.edit {
+                editUrl = resource.path
+                deleteUrl = resource.path
+                text(name = "text", title = "Text", value = if (text == null) "" else text!!)
+                checkbox(name = "fit", title = "Fit", value = if (fit == null) false else fit!!)
+                checkbox(name = "italic", value = if (italic != null) italic!! else false, title = "Italic")
+                checkbox(name = "bold", value = if (bold != null) bold!! else false, title = "Bold")
+                checkbox(name = "caps", value = if (caps != null) caps!! else false, title = "Caps")
+                select(
+                        name = "textColor",
+                        title = "Text Color",
+                        value = if (textColor == null) "" else textColor!!,
+                        options = listOf(
+                                SelectOption(label = "Primary", value = "primary"),
+                                SelectOption(label = "Secondary", value = "secondary"),
+                                SelectOption(label = "Tertiary", value = "tertiary"),
+                                SelectOption(label = "Quarternary", value = "quarternary"),
+                                SelectOption(label = "Default", value = "")
+                        )
+                )
+            }
+        else component
     }
-
 }

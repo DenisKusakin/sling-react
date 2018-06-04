@@ -109,7 +109,7 @@ fun imageDialog(resource: Resource): SimpleDialog {
 
 fun slideDialog(resource: Resource): ThemedContainer {
     val containerDialog = containerDialog(resource) {
-        component("Heading", "Text Component") {
+        component("IHeading", "Text Component") {
             prop("text", "Edit Title Here")
             prop("size", "3")
             prop("size", "3")
@@ -130,6 +130,9 @@ fun slideDialog(resource: Resource): ThemedContainer {
             prop("href", "http://example.com")
         }
         component("Image", "Image component"){
+
+        }
+        component("Appear", "Appear"){
 
         }
     }
