@@ -53,13 +53,13 @@ class HeadingModel : IReactController, BaseModel(), ReactModel {
                     value = size.toString(),
                     options = (1..5).map { SelectOption(label = "H$it", value = it.toString()) }
             )
-            checkbox(name = "italic", value = if (italic != null) italic!! else false, title = "Italic")
-            checkbox(name = "bold", value = if (bold != null) bold!! else false, title = "Bold")
-            checkbox(name = "caps", value = if (caps != null) caps!! else false, title = "Caps")
+            checkbox(name = "italic", value = italic ?: false, title = "Italic")
+            checkbox(name = "bold", value = bold ?: false, title = "Bold")
+            checkbox(name = "caps", value = caps ?: false, title = "Caps")
             select(
                     name = "textColor",
                     title = "Text Color",
-                    value = if (textColor == null) "" else textColor!!,
+                    value = textColor ?: "",
                     options = listOf(
                             SelectOption(label = "Primary", value = "primary"),
                             SelectOption(label = "Secondary", value = "secondary"),
