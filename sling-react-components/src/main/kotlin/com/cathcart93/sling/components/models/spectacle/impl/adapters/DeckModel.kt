@@ -18,24 +18,6 @@ class DeckModel : IReactController, ReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-//    @ValueMapValue
-//    private var primaryColor: String? = null
-//
-//    @ValueMapValue
-//    private var secondaryColor: String? = null
-//
-//    @ValueMapValue
-//    private var tertiaryColor: String? = null
-//
-//    @ValueMapValue
-//    private var quarternaryColor: String? = null
-//
-//    @ValueMapValue
-//    private var primaryFont: String? = null
-//
-//    @ValueMapValue
-//    private var secondaryFont: String? = null
-
     @ValueMapValue
     private var transitionDuration: Int? = null
 
@@ -66,6 +48,34 @@ class DeckModel : IReactController, ReactModel {
                     .filter { it is com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
                     .map { it as com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
             (if (!isEditMode) slides else slides + lastSlide).forEach { slide(it) }
+        }
+    }
+
+    fun propertiesButton(): SlidePropertiesButton {
+        return com.cathcart93.sling.components.models.spectacle.impl.builder.propertiesButton(resource.path) {
+            text(
+                    name = "transition",
+                    title = "Transition (slide, zoom, fade, spin)",
+                    value = if (this@DeckModel.transition == null) "" else this@DeckModel.transition!!
+            )
+            text(
+                    name = "transitionDuration",
+                    title = "Transition Duration",
+                    value = if (this@DeckModel.transitionDuration == null)
+                        ""
+                    else this@DeckModel.transitionDuration!!.toString()
+            )
+            select(
+                    name = "progress",
+                    title = "Progress icon",
+                    value = if(this@DeckModel.progress == null) "pacman" else this@DeckModel.progress!!,
+                    options = listOf(
+                            SelectOption(label = "Pacman", value = "pacman"),
+                            SelectOption(label = "Bar", value = "bar"),
+                            SelectOption(label = "Number", value = "number"),
+                            SelectOption(label = "Node", value = "none")
+                    )
+            )
         }
     }
 

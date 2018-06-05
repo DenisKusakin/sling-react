@@ -1,6 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder
 
-object FirstTheme : Theme() {
+object FirstTheme : ExtendedDefaultTheme() {
     override var primaryColor: String? = "white"
     override var secondaryColor: String? = "#1F2022"
     override var tertiaryColor: String? = "#03A9FC"

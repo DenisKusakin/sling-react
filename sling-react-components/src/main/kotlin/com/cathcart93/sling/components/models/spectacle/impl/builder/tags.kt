@@ -10,7 +10,7 @@ interface SpectacleTag {
 }
 
 //@TagMarker
-class Deck(val theme: Theme) : SpectacleTag {
+class Deck(val theme: ExtendedDefaultTheme) : SpectacleTag {
     override fun toReactElement(): ReactElement {
         val colors = mutableMapOf(
                 "primary" to theme.primaryColor?.toReactProp(),
@@ -48,7 +48,7 @@ class Deck(val theme: Theme) : SpectacleTag {
 //    var secondaryFont: String? = null
 }
 
-open class Theme {
+open class ExtendedDefaultTheme {
     open var primaryColor: String? = null
     open var secondaryColor: String? = null
     open var tertiaryColor: String? = null
@@ -292,7 +292,7 @@ fun BlockQuote.cite(text: String, block: Cite.() -> Unit) {
  *
  */
 //@TagMarker
-fun deck(theme: Theme, block: Deck.() -> Unit): Deck {
+fun deck(theme: ExtendedDefaultTheme, block: Deck.() -> Unit): Deck {
     val deck = Deck(theme)
     block(deck)
     return deck

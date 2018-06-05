@@ -111,7 +111,8 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
                                             title = "Slide ID",
                                             value = if (id == null) "" else this@SlideModel.id!!
                                     )
-                                }
+                                },
+                                resource.parent?.adaptTo(DeckModel::class.java)!!.propertiesButton()
                         )
                 )
             } else {
