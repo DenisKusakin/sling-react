@@ -27,6 +27,9 @@ class BlockQuote : IReactController, BaseModel(), ReactModel {
             italic = this@BlockQuote.italic
             bold = this@BlockQuote.bold
             caps = this@BlockQuote.caps
+            if (this@BlockQuote.textColor != null) {
+                textColor = HexColor(this@BlockQuote.textColor!!)
+            }
             if (this@BlockQuote.quote != null) {
                 quote(this@BlockQuote.quote!!) {
 
@@ -46,6 +49,18 @@ class BlockQuote : IReactController, BaseModel(), ReactModel {
                 deleteUrl = resource.path
                 text(name = "quote", title = "Quote", value = if(quote == null) "" else quote!!)
                 text(name = "cite", title = "Cite", value = if(cite == null) "" else cite!!)
+                select(
+                        name = "textColor",
+                        title = "Text Color",
+                        value = if (textColor == null) "" else textColor!!,
+                        options = listOf(
+                                SelectOption(label = "Primary", value = "primary"),
+                                SelectOption(label = "Secondary", value = "secondary"),
+                                SelectOption(label = "Tertiary", value = "tertiary"),
+                                SelectOption(label = "Quarternary", value = "quarternary"),
+                                SelectOption(label = "Default", value = "")
+                        )
+                )
             }
     }
 

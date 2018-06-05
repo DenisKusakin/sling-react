@@ -34,6 +34,9 @@ class LinkModel : IReactController, BaseModel(), ReactModel {
             caps = this@LinkModel.caps
             margin = this@LinkModel.margin
             padding = this@LinkModel.padding
+            if (this@LinkModel.textColor != null) {
+                textColor = HexColor(this@LinkModel.textColor!!)
+            }
         }
         return if (!isEditMode)
             component

@@ -9,6 +9,10 @@ import {BlockQuote, Quote, Cite, Code, CodePane, Link, Image, Appear} from "spec
 import EditDialog from './dialogs/EditDialog'
 import TreeContainer from './../framework/TreeContainer'
 import EditModeToggler from './dialogs/EditModeToggler'
+import SlidePropertiesButton from './dialogs/SlidePropertiesButton'
+import SystemButtonsContainer from './dialogs/SystemButtonsContainer'
+import AddSlideButton from './dialogs/AddSlideButton'
+import DeleteSlideButton from './dialogs/DeleteSlideButton'
 
 const components = {
     Code,
@@ -25,7 +29,11 @@ const components = {
     Appear,
     Container,
     EditDialog,
-    EditModeToggler
+    EditModeToggler,
+    SlidePropertiesButton,
+    SystemButtonsContainer,
+    AddSlideButton,
+    DeleteSlideButton
 };
 
 components['SpectacleAuthorRoot'] = x => <SpectacleAuthorRoot

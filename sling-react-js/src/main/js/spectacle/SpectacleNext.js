@@ -4,6 +4,10 @@ import SpectacleAuthorRoot from './SpectaceAuthorRoot'
 import EditDialog from './dialogs/EditDialog'
 import TreeContainer from './../framework/TreeContainer'
 import EditModeToggler from './dialogs/EditModeToggler'
+import SlidePropertiesButton from './dialogs/SlidePropertiesButton'
+import SystemButtonsContainer from './dialogs/SystemButtonsContainer'
+import AddSlideButton from './dialogs/AddSlideButton'
+import DeleteSlideButton from './dialogs/DeleteSlideButton'
 
 const Spectacle = dynamic({
     modules: props => {
@@ -22,7 +26,11 @@ const Spectacle = dynamic({
             ...Spectacle,
             ...components,
             EditDialog,
-            EditModeToggler
+            EditModeToggler,
+            SlidePropertiesButton,
+            SystemButtonsContainer,
+            AddSlideButton,
+            DeleteSlideButton
         };
         resultComponents['SpectacleAuthorRoot'] = x => <SpectacleAuthorRoot
             {...x}

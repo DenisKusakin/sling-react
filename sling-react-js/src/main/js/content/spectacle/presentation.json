@@ -185,9 +185,45 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "__type": "SystemButtonsContainer",
+            "children": [
               {
                 "__type": "EditModeToggler"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/slide1/image",
+                "editDialog": [
+                  {
+                    "name": "src",
+                    "title": "src",
+                    "value": "Slide",
+                    "type": "text"
+                  },
+                  {
+                    "name": "height",
+                    "title": "Height",
+                    "value": "300",
+                    "type": "text"
+                  },
+                  {
+                    "name": "width",
+                    "title": "Width",
+                    "value": "",
+                    "type": "text"
+                  }
+                ]
+              },
+              {
+                "__type": "AddSlideButton",
+                "url": "/path/to/resource/",
+                "props": {
+                  ":nameHint": "slide"
+                }
               }
             ]
           }

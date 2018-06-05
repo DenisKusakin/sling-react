@@ -7,11 +7,11 @@ class EditModeToggler extends React.Component {
         return <AuthorContext.Consumer>
             {
                 ({toggleEdit, isEditMode}) => {
-                    return <div><RaisedButton
+                    return <RaisedButton
                         label={`${isEditMode ? 'Preview' : 'Edit'}`}
                         primary={true}
                         onClick={toggleEdit}
-                    /></div>
+                    />
                 }
             }
         </AuthorContext.Consumer>

@@ -2,7 +2,11 @@ package com.cathcart93.sling.components.models.spectacle.impl.builder
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.*
 
-class EditDialog : SpectacleTag {
+open class SimpleDialogBuilder {
+    val props: MutableList<ReactProp> = mutableListOf()
+}
+
+class EditDialog : SpectacleTag, SimpleDialogBuilder() {
     override fun toReactElement(): ReactElement {
         if (component == null) {
             return ReactElement("Error")
@@ -23,7 +27,7 @@ class EditDialog : SpectacleTag {
     var component: SpectacleTag? = null
     var editUrl: String? = null
     var deleteUrl: String? = null
-    val props: MutableList<ReactProp> = mutableListOf()
+    //val props: MutableList<ReactProp> = mutableListOf()
 }
 
 class Container(val children: List<SpectacleTag>, val resourcePath: String, val components: List<ContainerComponent> = mutableListOf()) : SpectacleTag {
@@ -64,7 +68,7 @@ fun SpectacleTag.edit(block: EditDialog.() -> Unit): EditDialog {
     return edit
 }
 
-fun EditDialog.text(name: String, title: String, value: String) {
+fun SimpleDialogBuilder.text(name: String, title: String, value: String) {
     this.props.add(ObjectProps(mapOf(
             "name" to name.toReactProp(),
             "title" to title.toReactProp(),
@@ -73,7 +77,7 @@ fun EditDialog.text(name: String, title: String, value: String) {
     )))
 }
 
-fun EditDialog.multilineText(name: String, title: String, value: String) {
+fun SimpleDialogBuilder.multilineText(name: String, title: String, value: String) {
     this.props.add(ObjectProps(mapOf(
             "name" to name.toReactProp(),
             "title" to title.toReactProp(),
@@ -82,7 +86,7 @@ fun EditDialog.multilineText(name: String, title: String, value: String) {
     )))
 }
 
-fun EditDialog.checkbox(name: String, title: String, value: Boolean) {
+fun SimpleDialogBuilder.checkbox(name: String, title: String, value: Boolean) {
     this.props.add(ObjectProps(mapOf(
             "name" to name.toReactProp(),
             "title" to title.toReactProp(),
@@ -91,7 +95,7 @@ fun EditDialog.checkbox(name: String, title: String, value: Boolean) {
     )))
 }
 
-fun EditDialog.color(name: String, title: String, value: String?) {
+fun SimpleDialogBuilder.color(name: String, title: String, value: String?) {
     this.props.add(ObjectProps(mapOf(
             "type" to "color".toReactProp(),
             "name" to name.toReactProp(),
@@ -100,7 +104,7 @@ fun EditDialog.color(name: String, title: String, value: String?) {
     ).filter { it.value != null }.map { it.key to it.value!! }.toMap()))
 }
 
-fun EditDialog.select(name: String, title: String, value: String, options: List<SelectOption>) {
+fun SimpleDialogBuilder.select(name: String, title: String, value: String, options: List<SelectOption>) {
     this.props.add(ObjectProps(mapOf(
             "type" to "select".toReactProp(),
             "options" to ArrayProp(options.map {
@@ -121,4 +125,44 @@ object EditModeToggler : SpectacleTag {
     override fun toReactElement(): ReactElement {
         return ReactElement(name = "EditModeToggler")
     }
+}
+
+class SystemButtonsContainer(private vararg val buttons: SpectacleTag) : SpectacleTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(name = "SystemButtonsContainer", children = buttons.map { it.toReactElement() })
+    }
+}
+
+class SlidePropertiesButton(val editUrl: String, val props: List<ReactProp>) : SpectacleTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(name = "SlidePropertiesButton", props = mapOf(
+                "editUrl" to editUrl.toReactProp(),
+                "editDialog" to ArrayProp(this.props)
+        ))
+    }
+}
+
+class AddSlideButton(val resourcePath: String) : SpectacleTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(name = "AddSlideButton", props = mapOf(
+                "url" to resourcePath.toReactProp(),
+                "props" to ObjectProps(mapOf(
+                        ":nameHint" to "slide".toReactProp()
+                ))
+        ))
+    }
+}
+
+class DeleteSlideButton(val resourcePath: String) : SpectacleTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(name = "DeleteSlideButton", props = mapOf(
+                "url" to resourcePath.toReactProp()
+        ))
+    }
+}
+
+fun propertiesButton(editUrl: String, block: SimpleDialogBuilder.() -> Unit): SlidePropertiesButton {
+    val builder = SimpleDialogBuilder()
+    block(builder)
+    return SlidePropertiesButton(editUrl, builder.props)
 }

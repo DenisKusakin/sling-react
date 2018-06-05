@@ -55,10 +55,68 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
             bgColor = this@SlideModel.bgColor
             if (isEditMode) {
                 comp(Container(children = children, components = components, resourcePath = "${resource.path}/"))
+                comp(
+                        SystemButtonsContainer(
+                                EditModeToggler,
+                                DeleteSlideButton(resource.path),
+                                propertiesButton(resource.path) {
+                                    select(
+                                            name = "textColor",
+                                            title = "Text Color",
+                                            value = if (this@SlideModel.textColor == null) "" else this@SlideModel.textColor!!,
+                                            options = listOf(
+                                                    SelectOption(label = "Primary", value = "primary"),
+                                                    SelectOption(label = "Secondary", value = "secondary"),
+                                                    SelectOption(label = "Tertiary", value = "tertiary"),
+                                                    SelectOption(label = "Quarternary", value = "quarternary"),
+                                                    SelectOption(label = "Default", value = "")
+                                            )
+                                    )
+                                    select(
+                                            name = "bgColor",
+                                            title = "Background Color",
+                                            value = if (this@SlideModel.bgColor == null) "" else this@SlideModel.bgColor!!,
+                                            options = listOf(
+                                                    SelectOption(label = "Primary", value = "primary"),
+                                                    SelectOption(label = "Secondary", value = "secondary"),
+                                                    SelectOption(label = "Tertiary", value = "tertiary"),
+                                                    SelectOption(label = "Quarternary", value = "quarternary"),
+                                                    SelectOption(label = "Default", value = "")
+                                            )
+                                    )
+                                    text(
+                                            name = "transition",
+                                            title = "Transition (slide, zoom, fade, spin)",
+                                            value = if (this@SlideModel.transition == null) "" else this@SlideModel.transition!!
+                                    )
+                                    text(
+                                            name = "transitionDuration",
+                                            title = "Transition Duration",
+                                            value = if (this@SlideModel.transitionDuration == null)
+                                                ""
+                                            else this@SlideModel.transitionDuration!!.toString()
+                                    )
+                                    text(
+                                            name = "align",
+                                            title = "Align",
+                                            value = if (align == null) "" else this@SlideModel.align!!
+                                    )
+                                    multilineText(
+                                            name = "notes",
+                                            title = "Notes",
+                                            value = if (notes == null) "" else this@SlideModel.notes!!
+                                    )
+                                    text(
+                                            name = "id",
+                                            title = "Slide ID",
+                                            value = if (id == null) "" else this@SlideModel.id!!
+                                    )
+                                }
+                        )
+                )
             } else {
                 children.forEach { comp(it) }
             }
-            comp(EditModeToggler)
         }
     }
 

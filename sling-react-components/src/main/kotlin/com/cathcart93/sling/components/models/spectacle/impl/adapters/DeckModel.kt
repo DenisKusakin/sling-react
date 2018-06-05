@@ -49,17 +49,23 @@ class DeckModel : IReactController, ReactModel {
     private var controls: Boolean = true
 
     override fun toReact(isEditMode: Boolean): SpectacleTag {
+        val lastSlide = slide {
+            heading("This Slide does not exist in content. Would you like to create it?") {
+
+            }
+            comp(AddSlideButton(resourcePath = "${resource.path}/"))
+        }
         return deck(FirstTheme) {
             transitionDuration = this@DeckModel.transitionDuration
             transition = this@DeckModel.transition?.toSlideTransition()
             controls = this@DeckModel.controls
             progress = this@DeckModel.progress?.toProgress()
-            resource.children
+            val slides = resource.children
                     .mapNotNull { it.adaptTo(SlideModel::class.java) }
                     .map { (it as ReactModel).toReact(isEditMode) }
                     .filter { it is com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
                     .map { it as com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
-                    .forEach { slide(it) }
+            (if (!isEditMode) slides else slides + lastSlide).forEach { slide(it) }
         }
     }
 
