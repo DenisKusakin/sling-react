@@ -56,14 +56,12 @@ class DeckModel : IReactController, ReactModel {
             text(
                     name = "transition",
                     title = "Transition (slide, zoom, fade, spin)",
-                    value = if (this@DeckModel.transition == null) "" else this@DeckModel.transition!!
+                    value = transition ?: ""
             )
             text(
                     name = "transitionDuration",
                     title = "Transition Duration",
-                    value = if (this@DeckModel.transitionDuration == null)
-                        ""
-                    else this@DeckModel.transitionDuration!!.toString()
+                    value = transitionDuration?.toString() ?: ""
             )
             select(
                     name = "progress",
