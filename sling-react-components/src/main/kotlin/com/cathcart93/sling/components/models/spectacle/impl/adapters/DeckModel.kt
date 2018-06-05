@@ -45,14 +45,14 @@ class DeckModel : IReactController, ReactModel {
             val slides = resource.children
                     .mapNotNull { it.adaptTo(SlideModel::class.java) }
                     .map { (it as ReactModel).toReact(isEditMode) }
-                    .filter { it is com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
-                    .map { it as com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
+                    .filter { it is Slide }
+                    .map { it as Slide }
             (if (!isEditMode) slides else slides + lastSlide).forEach { slide(it) }
         }
     }
 
     fun propertiesButton(): SlidePropertiesButton {
-        return com.cathcart93.sling.components.models.spectacle.impl.builder.propertiesButton(resource.path) {
+        return propertiesButton(resource.path) {
             text(
                     name = "transition",
                     title = "Transition (slide, zoom, fade, spin)",

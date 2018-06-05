@@ -31,15 +31,16 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
     @ValueMapValue
     private var notes: String? = null
 
+    private val components = listOf(
+            ContainerComponent(name = "Heading", description = "Heading component"),
+            ContainerComponent(name = "Text", description = "Text component"),
+            ContainerComponent(name = "Link", description = "Link component"),
+            ContainerComponent(name = "Image", description = "Image component"),
+            ContainerComponent(name = "BlockQuote", description = "BlockQuote component"),
+            ContainerComponent(name = "Code", description = "Code component")
+    )
+
     override fun toReact(isEditMode: Boolean): SpectacleTag {
-        val components = listOf(
-                ContainerComponent(name = "Heading", description = "Heading component"),
-                ContainerComponent(name = "Text", description = "Text component"),
-                ContainerComponent(name = "Link", description = "Link component"),
-                ContainerComponent(name = "Image", description = "Image component"),
-                ContainerComponent(name = "BlockQuote", description = "BlockQuote component"),
-                ContainerComponent(name = "Code", description = "Code component")
-        )
         val children = resource.children
                 .mapNotNull { it.adaptTo(IReactController::class.java) }
                 .filter { it is ReactModel }
@@ -54,6 +55,7 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
             notes = this@SlideModel.notes
             bgColor = this@SlideModel.bgColor
             if (isEditMode) {
+                val deckPropertiesButton = resource.parent?.adaptTo(DeckModel::class.java)!!.propertiesButton()
                 comp(Container(children = children, components = components, resourcePath = "${resource.path}/"))
                 comp(
                         SystemButtonsContainer(
@@ -112,7 +114,7 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
                                             value = if (id == null) "" else this@SlideModel.id!!
                                     )
                                 },
-                                resource.parent?.adaptTo(DeckModel::class.java)!!.propertiesButton()
+                                deckPropertiesButton
                         )
                 )
             } else {
