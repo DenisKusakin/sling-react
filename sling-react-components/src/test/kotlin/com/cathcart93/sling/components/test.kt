@@ -8,7 +8,7 @@ import org.junit.Test
 open class Test {
     @Test
     fun test() {
-        val deck = deck {
+        val deck = deck(FirstTheme) {
             slide {
                 heading("Heading 1") {
                     italic = false
@@ -18,7 +18,7 @@ open class Test {
 
         val expectedReactElement = ReactElement("Deck", children = listOf(
                 ReactElement("Slide", children = listOf(
-                        ReactElement("Heading", mapOf("italic" to BooleanProp(false)), listOf(StringProp("Heading 1")))
+                        ReactElement("Heading", mapOf("italic" to BooleanProp(false)), StringProp("Heading 1"))
                 ))
         ))
 
@@ -27,7 +27,7 @@ open class Test {
 
     @Test
     fun deckTest() {
-        val deck = deck {
+        val deck = deck(FirstTheme) {
             transition = SlideTransition(listOf(ZoomTransitionType, FadeTransitionType))
             transitionDuration = 100
             progress = Pacman
@@ -54,8 +54,8 @@ open class Test {
         }
 
         val expectedReactElement = ReactElement(name = "BlockQuote", children = listOf(
-                ReactElement(name = "Quote", children = listOf("Test".toReactProp())),
-                ReactElement(name = "Cite", children = listOf("Test Cite".toReactProp()))
+                ReactElement(name = "Quote", children = "Test".toReactProp()),
+                ReactElement(name = "Cite", children = "Test Cite".toReactProp())
         ))
         Assert.assertEquals(expectedReactElement, blockQuote.toReactElement())
     }
@@ -69,7 +69,7 @@ open class Test {
         }
 
         val expectedReactElement = ReactElement(name = "Appear", children = listOf(
-                ReactElement(name = "Heading", children = listOf("Test".toReactProp()), props = mapOf("italic" to true.toReactProp()))
+                ReactElement(name = "Heading", children = "Test".toReactProp(), props = mapOf("italic" to true.toReactProp()))
         ), props = mapOf("transitionDuration" to 500.toReactProp()))
 
         Assert.assertEquals(expectedReactElement, appear.toReactElement())
@@ -87,7 +87,7 @@ open class Test {
                 "italic" to true.toReactProp(),
                 "bold" to true.toReactProp(),
                 "textAlign" to CenterAlign.toReactProp()
-        ), children = listOf("Google".toReactProp()))
+        ), children = "Google".toReactProp())
 
         Assert.assertEquals(expectedReactElement, link.toReactElement())
     }
@@ -101,6 +101,6 @@ open class Test {
                 ReactElement(name = "Child")
         ))
 
-        println(element.toMap())
+        println(element.toJson())
     }
 }

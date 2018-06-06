@@ -37,7 +37,7 @@ class TextModel : IReactController, BaseModel(), ReactModel {
             if (this@TextModel.textColor != null) {
                 textColor = HexColor(this@TextModel.textColor!!)
             }
-        }
+        }.appear(shouldAppear)
         return if (isEditMode)
             component.edit {
                 editUrl = resource.path
@@ -59,6 +59,7 @@ class TextModel : IReactController, BaseModel(), ReactModel {
                                 SelectOption(label = "Default", value = "")
                         )
                 )
+                checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
             }
         else component
     }

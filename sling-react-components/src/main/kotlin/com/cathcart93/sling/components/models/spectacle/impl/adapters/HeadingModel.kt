@@ -42,7 +42,7 @@ class HeadingModel : IReactController, BaseModel(), ReactModel {
             if (this@HeadingModel.textColor != null) {
                 textColor = HexColor(this@HeadingModel.textColor!!)
             }
-        }
+        }.appear(shouldAppear)
         return if (isEditMode) component.edit {
             editUrl = resource.path
             deleteUrl = resource.path
@@ -68,6 +68,7 @@ class HeadingModel : IReactController, BaseModel(), ReactModel {
                             SelectOption(label = "Default", value = "")
                     )
             )
+            checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
         } else component
     }
 

@@ -40,4 +40,7 @@ abstract class BaseModel {
     @ValueMapValue
     var bgDarken: Float? = null
 
+    @ValueMapValue
+    var shouldAppear: Boolean = false
+
 }

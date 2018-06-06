@@ -121,7 +121,7 @@ class Heading(private val text: String) : SpectacleTag, BaseTag() {
         props.putAll(baseProps())
         return ReactElement(
                 name = "Heading",
-                children = listOf(StringProp(text)), props = props.filter { it.value != null }.map { it.key to it.value!! }.toMap()
+                children = StringProp(text), props = props.filter { it.value != null }.map { it.key to it.value!! }.toMap()
         )
     }
 
@@ -143,13 +143,13 @@ class BlockQuote : BaseTag(), SpectacleTag {
 
 class Quote(val quote: String) : BaseTag(), SpectacleTag {
     override fun toReactElement(): ReactElement {
-        return ReactElement(name = "Quote", children = listOf(quote.toReactProp()), props = baseProps())
+        return ReactElement(name = "Quote", children = quote.toReactProp(), props = baseProps())
     }
 }
 
 class Cite(val cite: String) : BaseTag(), SpectacleTag {
     override fun toReactElement(): ReactElement {
-        return ReactElement(name = "Cite", children = listOf(cite.toReactProp()), props = baseProps())
+        return ReactElement(name = "Cite", children = cite.toReactProp(), props = baseProps())
     }
 }
 
@@ -178,7 +178,7 @@ class Link(val href: String, val text: String) : SpectacleTag, BaseTag() {
         )
         ownProps.putAll(baseProps())
         val props = ownProps.filter { it.value != null }.map { it.key to it.value!! }.toMap()
-        return ReactElement(name = "Link", props = props, children = listOf(text.toReactProp()))
+        return ReactElement(name = "Link", props = props, children = text.toReactProp())
     }
 
     var target: LinkTarget? = null
@@ -192,7 +192,7 @@ class Text(val text: String) : SpectacleTag, BaseTag() {
         )
         ownProps.putAll(baseProps())
         val props = ownProps.filter { it.value != null }.map { it.key to it.value!! }.toMap()
-        return ReactElement(name = "Text", props = props, children = listOf(text.toReactProp()))
+        return ReactElement(name = "Text", props = props, children = text.toReactProp())
     }
 
     var lineHeight: Int? = null
@@ -204,7 +204,7 @@ class Appear(val child: SpectacleTag) : SpectacleTag {
         val props = mapOf(
                 "transitionDuration" to transitionDuration?.toReactProp()
         ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
-        return ReactElement(name = "Appear", props = props, children = listOf(child.toReactElement()))
+        return ReactElement(name = "Appear", props = props, children = child.toReactElement())
     }
 
     var transitionDuration: Int? = null
@@ -287,6 +287,9 @@ fun BlockQuote.cite(text: String, block: Cite.() -> Unit) {
     this.cite = cite
 }
 
+fun SpectacleTag.appear(shouldAppear: Boolean = true): SpectacleTag {
+    return if (shouldAppear) Appear(this) else this
+}
 
 /**
  *

@@ -37,7 +37,7 @@ class LinkModel : IReactController, BaseModel(), ReactModel {
             if (this@LinkModel.textColor != null) {
                 textColor = HexColor(this@LinkModel.textColor!!)
             }
-        }
+        }.appear(shouldAppear)
         return if (!isEditMode)
             component
         else
@@ -72,6 +72,7 @@ class LinkModel : IReactController, BaseModel(), ReactModel {
                                 SelectOption(label = "Default", value = "")
                         )
                 )
+                checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
             }
     }
 

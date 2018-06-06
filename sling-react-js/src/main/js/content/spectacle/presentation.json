@@ -3,22 +3,25 @@
   "url": "/content/spectacle.json",
   "content": {
     "__type": "Deck",
-    "transition": [
-      "zoom",
-      "slide"
-    ],
     "controls": true,
     "progress": "number",
     "colors": {
-
+      "primary": "white",
+      "secondary": "#1F2022",
+      "tertiary": "#03A9FC",
+      "quarternary": "#CECECE"
     },
     "fonts": {
-      "primary": "Helvetica",
+      "primary": "Montserrat",
       "secondary": "Helvetica"
     },
     "children": [
       {
         "__type": "Slide",
+        "transitionDuration": 2000,
+        "notes": "Some notes\nregarding the slide",
+        "id": "X-Men",
+        "bgColor": "secondary",
         "children": [
           {
             "__type": "Container",
@@ -102,6 +105,12 @@
                     "title": "Width",
                     "value": "",
                     "type": "text"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
                   }
                 ],
                 "children": [
@@ -113,78 +122,17 @@
                 ]
               },
               {
-                "__type": "EditDialog",
-                "editUrl": "/content/spectacle/slide1/link",
-                "deleteUrl": "/content/spectacle/slide1/link",
-                "editDialog": [
-                  {
-                    "name": "text",
-                    "title": "Link Text",
-                    "value": "X-Men",
-                    "type": "text"
-                  },
-                  {
-                    "name": "href",
-                    "title": "Href",
-                    "value": "https://www.kinopoisk.ru/film/lyudi-iks-dni-minuvshego-budushchego-2014-597687/",
-                    "type": "text"
-                  },
-                  {
-                    "type": "select",
-                    "options": [
-                      {
-                        "label": "Blank",
-                        "value": "_blank"
-                      },
-                      {
-                        "label": "Self",
-                        "value": "_self"
-                      },
-                      {
-                        "label": "Parent",
-                        "value": "_parent"
-                      },
-                      {
-                        "label": "Top",
-                        "value": "_top"
-                      }
-                    ],
-                    "value": "_blank",
-                    "name": "target",
-                    "title": "Target"
-                  },
-                  {
-                    "name": "italic",
-                    "title": "Italic",
-                    "value": false,
-                    "type": "checkbox"
-                  },
-                  {
-                    "name": "bold",
-                    "title": "Bold",
-                    "value": false,
-                    "type": "checkbox"
-                  },
-                  {
-                    "name": "caps",
-                    "title": "Caps",
-                    "value": false,
-                    "type": "checkbox"
-                  }
-                ],
-                "children": [
-                  {
-                    "__type": "Link",
-                    "href": "https://www.kinopoisk.ru/film/lyudi-iks-dni-minuvshego-budushchego-2014-597687/",
-                    "target": "_blank",
-                    "italic": false,
-                    "bold": false,
-                    "caps": false,
-                    "children": [
-                      "X-Men"
-                    ]
-                  }
-                ]
+                "__type": "Appear",
+                "children": {
+                  "__type": "Link",
+                  "href": "https://www.kinopoisk.ru/film/lyudi-iks-dni-minuvshego-budushchego-2014-597687/",
+                  "target": "_blank",
+                  "italic": false,
+                  "bold": false,
+                  "caps": false,
+                  "textColor": "tertiary",
+                  "children": "X-Men"
+                }
               }
             ]
           },
@@ -195,35 +143,144 @@
                 "__type": "EditModeToggler"
               },
               {
-                "__type": "SlidePropertiesButton",
-                "editUrl": "/content/spectacle/slide1/image",
-                "editDialog": [
-                  {
-                    "name": "src",
-                    "title": "src",
-                    "value": "Slide",
-                    "type": "text"
-                  },
-                  {
-                    "name": "height",
-                    "title": "Height",
-                    "value": "300",
-                    "type": "text"
-                  },
-                  {
-                    "name": "width",
-                    "title": "Width",
-                    "value": "",
-                    "type": "text"
-                  }
-                ]
+                "__type": "DeleteSlideButton",
+                "url": "/content/spectacle/slide1"
               },
               {
-                "__type": "AddSlideButton",
-                "url": "/path/to/resource/",
-                "props": {
-                  ":nameHint": "slide"
-                }
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/slide1",
+                "editDialog": [
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "#8ed1fc",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "secondary",
+                    "name": "bgColor",
+                    "title": "Background Color"
+                  },
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "2000",
+                    "type": "text"
+                  },
+                  {
+                    "name": "align",
+                    "title": "Align",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "notes",
+                    "title": "Notes",
+                    "value": "Some notes\nregarding the slide",
+                    "type": "textarea"
+                  },
+                  {
+                    "name": "id",
+                    "title": "Slide ID",
+                    "value": "X-Men",
+                    "type": "text"
+                  }
+                ],
+                "title": "Slide Properties"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle",
+                "editDialog": [
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Pacman",
+                        "value": "pacman"
+                      },
+                      {
+                        "label": "Bar",
+                        "value": "bar"
+                      },
+                      {
+                        "label": "Number",
+                        "value": "number"
+                      },
+                      {
+                        "label": "Node",
+                        "value": "none"
+                      }
+                    ],
+                    "value": "number",
+                    "name": "progress",
+                    "title": "Progress icon"
+                  }
+                ],
+                "title": "Presentation Properties"
               }
             ]
           }
@@ -231,6 +288,8 @@
       },
       {
         "__type": "Slide",
+        "id": "text",
+        "bgColor": "secondary",
         "children": [
           {
             "__type": "Container",
@@ -308,6 +367,34 @@
                     "title": "Cite",
                     "value": "Author",
                     "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "secondary",
+                    "name": "textColor",
+                    "title": "Text Color"
                   }
                 ],
                 "children": [
@@ -316,15 +403,11 @@
                     "children": [
                       {
                         "__type": "Quote",
-                        "children": [
-                          "Edit Quote"
-                        ]
+                        "children": "Edit Quote"
                       },
                       {
                         "__type": "Cite",
-                        "children": [
-                          "Author"
-                        ]
+                        "children": "Author"
                       }
                     ]
                   }
@@ -361,9 +444,154 @@
                     "lang": "javascript"
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "__type": "SystemButtonsContainer",
+            "children": [
               {
                 "__type": "EditModeToggler"
+              },
+              {
+                "__type": "DeleteSlideButton",
+                "url": "/content/spectacle/1_1526731323164"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/1_1526731323164",
+                "editDialog": [
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "primary",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "secondary",
+                    "name": "bgColor",
+                    "title": "Background Color"
+                  },
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "align",
+                    "title": "Align",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "notes",
+                    "title": "Notes",
+                    "value": "",
+                    "type": "textarea"
+                  },
+                  {
+                    "name": "id",
+                    "title": "Slide ID",
+                    "value": "text",
+                    "type": "text"
+                  }
+                ],
+                "title": "Slide Properties"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle",
+                "editDialog": [
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Pacman",
+                        "value": "pacman"
+                      },
+                      {
+                        "label": "Bar",
+                        "value": "bar"
+                      },
+                      {
+                        "label": "Number",
+                        "value": "number"
+                      },
+                      {
+                        "label": "Node",
+                        "value": "none"
+                      }
+                    ],
+                    "value": "number",
+                    "name": "progress",
+                    "title": "Progress icon"
+                  }
+                ],
+                "title": "Presentation Properties"
               }
             ]
           }
@@ -371,6 +599,9 @@
       },
       {
         "__type": "Slide",
+        "transitionDuration": 2000,
+        "id": "Tomb-Raider",
+        "bgColor": "secondary",
         "children": [
           {
             "__type": "Container",
@@ -440,7 +671,7 @@
                   {
                     "name": "text",
                     "title": "Text",
-                    "value": "Slide 3",
+                    "value": "Tomb Raider",
                     "type": "text"
                   },
                   {
@@ -490,10 +721,38 @@
                     "type": "checkbox"
                   },
                   {
-                    "type": "color",
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "primary",
                     "name": "textColor",
-                    "title": "Text Color",
-                    "value": "#0e5d1b"
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
                   }
                 ],
                 "children": [
@@ -505,10 +764,8 @@
                     "italic": false,
                     "bold": false,
                     "caps": false,
-                    "textColor": "#0e5d1b",
-                    "children": [
-                      "Slide 3"
-                    ]
+                    "textColor": "primary",
+                    "children": "Tomb Raider"
                   }
                 ]
               },
@@ -548,10 +805,38 @@
                     "type": "checkbox"
                   },
                   {
-                    "type": "color",
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "tertiary",
                     "name": "textColor",
-                    "title": "Text Color",
-                    "value": "#260bbf"
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
                   }
                 ],
                 "children": [
@@ -561,15 +846,303 @@
                     "italic": false,
                     "bold": false,
                     "caps": true,
-                    "textColor": "#260bbf",
-                    "children": [
-                      "Edit Text Component"
-                    ]
+                    "textColor": "tertiary",
+                    "children": "Edit Text Component"
                   }
                 ]
               },
               {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/1_1526839456118/image",
+                "deleteUrl": "/content/spectacle/1_1526839456118/image",
+                "editDialog": [
+                  {
+                    "name": "src",
+                    "title": "src",
+                    "value": "https://st.kp.yandex.net/images/film_iphone/iphone360_446136.jpg",
+                    "type": "text"
+                  },
+                  {
+                    "name": "height",
+                    "title": "Height",
+                    "value": "250",
+                    "type": "text"
+                  },
+                  {
+                    "name": "width",
+                    "title": "Width",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Image",
+                    "src": "https://st.kp.yandex.net/images/film_iphone/iphone360_446136.jpg",
+                    "height": "250"
+                  }
+                ]
+              },
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/1_1526839456118/link",
+                "deleteUrl": "/content/spectacle/1_1526839456118/link",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Link Text",
+                    "value": "Tomb Raider",
+                    "type": "text"
+                  },
+                  {
+                    "name": "href",
+                    "title": "Href",
+                    "value": "https://www.kinopoisk.ru/film/tomb-raider-lara-kroft-2018-446136/",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Blank",
+                        "value": "_blank"
+                      },
+                      {
+                        "label": "Self",
+                        "value": "_self"
+                      },
+                      {
+                        "label": "Parent",
+                        "value": "_parent"
+                      },
+                      {
+                        "label": "Top",
+                        "value": "_top"
+                      }
+                    ],
+                    "value": "_blank",
+                    "name": "target",
+                    "title": "Target"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": true,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "primary",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Link",
+                    "href": "https://www.kinopoisk.ru/film/tomb-raider-lara-kroft-2018-446136/",
+                    "target": "_blank",
+                    "italic": false,
+                    "bold": false,
+                    "caps": true,
+                    "textColor": "primary",
+                    "children": "Tomb Raider"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "__type": "SystemButtonsContainer",
+            "children": [
+              {
                 "__type": "EditModeToggler"
+              },
+              {
+                "__type": "DeleteSlideButton",
+                "url": "/content/spectacle/1_1526839456118"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/1_1526839456118",
+                "editDialog": [
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "primary",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "secondary",
+                    "name": "bgColor",
+                    "title": "Background Color"
+                  },
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "2000",
+                    "type": "text"
+                  },
+                  {
+                    "name": "align",
+                    "title": "Align",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "notes",
+                    "title": "Notes",
+                    "value": "",
+                    "type": "textarea"
+                  },
+                  {
+                    "name": "id",
+                    "title": "Slide ID",
+                    "value": "Tomb-Raider",
+                    "type": "text"
+                  }
+                ],
+                "title": "Slide Properties"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle",
+                "editDialog": [
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Pacman",
+                        "value": "pacman"
+                      },
+                      {
+                        "label": "Bar",
+                        "value": "bar"
+                      },
+                      {
+                        "label": "Number",
+                        "value": "number"
+                      },
+                      {
+                        "label": "Node",
+                        "value": "none"
+                      }
+                    ],
+                    "value": "number",
+                    "name": "progress",
+                    "title": "Progress icon"
+                  }
+                ],
+                "title": "Presentation Properties"
               }
             ]
           }
@@ -577,10 +1150,11 @@
       },
       {
         "__type": "Slide",
+        "bgColor": "secondary",
         "children": [
           {
             "__type": "Container",
-            "resourcePath": "/content/spectacle/1_1526966685685/",
+            "resourcePath": "/content/spectacle/slide/",
             "components": [
               {
                 "props": {
@@ -639,9 +1213,491 @@
             ],
             "children": [
               {
-                "__type": "EditModeToggler"
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide/heading",
+                "deleteUrl": "/content/spectacle/slide/heading",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Text",
+                    "value": "Created Slide",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "H1",
+                        "value": "1"
+                      },
+                      {
+                        "label": "H2",
+                        "value": "2"
+                      },
+                      {
+                        "label": "H3",
+                        "value": "3"
+                      },
+                      {
+                        "label": "H4",
+                        "value": "4"
+                      },
+                      {
+                        "label": "H5",
+                        "value": "5"
+                      }
+                    ],
+                    "value": "1",
+                    "name": "size",
+                    "title": "Size"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": true,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Heading",
+                    "fit": true,
+                    "lineHeight": 1,
+                    "size": 1,
+                    "italic": false,
+                    "bold": false,
+                    "caps": true,
+                    "children": "Created Slide"
+                  }
+                ]
               }
             ]
+          },
+          {
+            "__type": "SystemButtonsContainer",
+            "children": [
+              {
+                "__type": "EditModeToggler"
+              },
+              {
+                "__type": "DeleteSlideButton",
+                "url": "/content/spectacle/slide"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/slide",
+                "editDialog": [
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "primary",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "secondary",
+                    "name": "bgColor",
+                    "title": "Background Color"
+                  },
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "align",
+                    "title": "Align",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "notes",
+                    "title": "Notes",
+                    "value": "",
+                    "type": "textarea"
+                  },
+                  {
+                    "name": "id",
+                    "title": "Slide ID",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "title": "Slide Properties"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle",
+                "editDialog": [
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Pacman",
+                        "value": "pacman"
+                      },
+                      {
+                        "label": "Bar",
+                        "value": "bar"
+                      },
+                      {
+                        "label": "Number",
+                        "value": "number"
+                      },
+                      {
+                        "label": "Node",
+                        "value": "none"
+                      }
+                    ],
+                    "value": "number",
+                    "name": "progress",
+                    "title": "Progress icon"
+                  }
+                ],
+                "title": "Presentation Properties"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
+        "children": [
+          {
+            "__type": "Container",
+            "resourcePath": "/content/spectacle/slide_279535694/",
+            "components": [
+              {
+                "props": {
+                  ":nameHint": "Heading",
+                  ":order": "last",
+                  "component": "Heading"
+                },
+                "title": "Heading",
+                "description": "Heading component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Text",
+                  ":order": "last",
+                  "component": "Text"
+                },
+                "title": "Text",
+                "description": "Text component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Link",
+                  ":order": "last",
+                  "component": "Link"
+                },
+                "title": "Link",
+                "description": "Link component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Image",
+                  ":order": "last",
+                  "component": "Image"
+                },
+                "title": "Image",
+                "description": "Image component"
+              },
+              {
+                "props": {
+                  ":nameHint": "BlockQuote",
+                  ":order": "last",
+                  "component": "BlockQuote"
+                },
+                "title": "BlockQuote",
+                "description": "BlockQuote component"
+              },
+              {
+                "props": {
+                  ":nameHint": "Code",
+                  ":order": "last",
+                  "component": "Code"
+                },
+                "title": "Code",
+                "description": "Code component"
+              }
+            ],
+            "children": [
+
+            ]
+          },
+          {
+            "__type": "SystemButtonsContainer",
+            "children": [
+              {
+                "__type": "EditModeToggler"
+              },
+              {
+                "__type": "DeleteSlideButton",
+                "url": "/content/spectacle/slide_279535694"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/slide_279535694",
+                "editDialog": [
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "bgColor",
+                    "title": "Background Color"
+                  },
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "align",
+                    "title": "Align",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "notes",
+                    "title": "Notes",
+                    "value": "",
+                    "type": "textarea"
+                  },
+                  {
+                    "name": "id",
+                    "title": "Slide ID",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "title": "Slide Properties"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle",
+                "editDialog": [
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Pacman",
+                        "value": "pacman"
+                      },
+                      {
+                        "label": "Bar",
+                        "value": "bar"
+                      },
+                      {
+                        "label": "Number",
+                        "value": "number"
+                      },
+                      {
+                        "label": "Node",
+                        "value": "none"
+                      }
+                    ],
+                    "value": "number",
+                    "name": "progress",
+                    "title": "Progress icon"
+                  }
+                ],
+                "title": "Presentation Properties"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
+        "children": [
+          {
+            "__type": "Text",
+            "children": "This Slide does not exist in content. Would you like to create it?"
+          },
+          {
+            "__type": "AddSlideButton",
+            "url": "/content/spectacle/",
+            "props": {
+              ":nameHint": "slide"
+            }
           }
         ]
       }
