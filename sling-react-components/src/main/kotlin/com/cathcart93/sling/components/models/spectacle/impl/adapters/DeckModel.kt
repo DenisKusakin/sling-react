@@ -45,8 +45,8 @@ class DeckModel : IReactController, ReactModel {
             val slides = resource.children
                     .mapNotNull { it.adaptTo(SlideModel::class.java) }
                     .map { (it as ReactModel).toReact(isEditMode) }
-                    .filter { it is com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
-                    .map { it as com.cathcart93.sling.components.models.spectacle.impl.builder.Slide }
+                    .filter { it is Slide }
+                    .map { it as Slide }
             (if (!isEditMode) slides else slides + lastSlide).forEach { slide(it) }
         }
     }
@@ -56,14 +56,12 @@ class DeckModel : IReactController, ReactModel {
             text(
                     name = "transition",
                     title = "Transition (slide, zoom, fade, spin)",
-                    value = if (this@DeckModel.transition == null) "" else this@DeckModel.transition!!
+                    value = transition ?: ""
             )
             text(
                     name = "transitionDuration",
                     title = "Transition Duration",
-                    value = if (this@DeckModel.transitionDuration == null)
-                        ""
-                    else this@DeckModel.transitionDuration!!.toString()
+                    value = transitionDuration?.toString() ?: ""
             )
             select(
                     name = "progress",
