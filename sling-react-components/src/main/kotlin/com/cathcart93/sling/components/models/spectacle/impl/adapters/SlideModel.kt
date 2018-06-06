@@ -59,7 +59,7 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
                         SystemButtonsContainer(
                                 EditModeToggler,
                                 DeleteSlideButton(resource.path),
-                                propertiesButton(resource.path) {
+                                propertiesButton("Slide Properties", resource.path) {
                                     select(
                                             name = "textColor",
                                             title = "Text Color",

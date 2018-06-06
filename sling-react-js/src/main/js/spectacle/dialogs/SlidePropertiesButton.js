@@ -2,10 +2,10 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 import EditForm from './EditForm'
 
-const SlidePropertiesButton = props => <EditForm {...props}>
+const SlidePropertiesButton = ({title, ...props}) => <EditForm {...props}>
     {
         ({showDialog}) => <RaisedButton
-            label={'Slide Properties'}
+            label={title}
             primary={false}
             onClick={showDialog}
         />

@@ -133,11 +133,12 @@ class SystemButtonsContainer(private vararg val buttons: SpectacleTag) : Spectac
     }
 }
 
-class SlidePropertiesButton(val editUrl: String, val props: List<ReactProp>) : SpectacleTag {
+class SlidePropertiesButton(val title: String, val editUrl: String, val props: List<ReactProp>) : SpectacleTag {
     override fun toReactElement(): ReactElement {
         return ReactElement(name = "SlidePropertiesButton", props = mapOf(
                 "editUrl" to editUrl.toReactProp(),
-                "editDialog" to ArrayProp(this.props)
+                "editDialog" to ArrayProp(this.props),
+                "title" to title.toReactProp()
         ))
     }
 }
@@ -161,8 +162,8 @@ class DeleteSlideButton(val resourcePath: String) : SpectacleTag {
     }
 }
 
-fun propertiesButton(editUrl: String, block: SimpleDialogBuilder.() -> Unit): SlidePropertiesButton {
+fun propertiesButton(title: String, editUrl: String, block: SimpleDialogBuilder.() -> Unit): SlidePropertiesButton {
     val builder = SimpleDialogBuilder()
     block(builder)
-    return SlidePropertiesButton(editUrl, builder.props)
+    return SlidePropertiesButton(title, editUrl, builder.props)
 }

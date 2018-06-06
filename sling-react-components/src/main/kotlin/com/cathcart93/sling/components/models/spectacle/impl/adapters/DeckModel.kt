@@ -52,7 +52,7 @@ class DeckModel : IReactController, ReactModel {
     }
 
     fun propertiesButton(): SlidePropertiesButton {
-        return com.cathcart93.sling.components.models.spectacle.impl.builder.propertiesButton(resource.path) {
+        return propertiesButton("Presentation Properties", resource.path) {
             text(
                     name = "transition",
                     title = "Transition (slide, zoom, fade, spin)",
