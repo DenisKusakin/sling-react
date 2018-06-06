@@ -2,14 +2,14 @@
     <head>
         <title>Sling React Spectacle</title>
     </head>
-    <body>
+    <body data-sly-use.app="${'com.cathcart93.sling.components.models.spectacle.impl.adapters.SpectaclePageController'}">
         <div id="app">
 
         </div>
-        <script data-sly-use.app="${'com.cathcart93.sling.components.models.spectacle.impl.adapters.SpectaclePageController'}">
+        <script>
             window.__DATA=${app.data @context='unsafe'}
         </script>
-        <script src="/etc/react-clientlibs/spectacle.client.js">
+        <script src="${app.jsUrl}">
         </script>
     </body>
 </html>

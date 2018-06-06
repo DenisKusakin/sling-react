@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import Spectacle from './../SpectacleSling'
+import SpectacleSlingAuthor from './../SpectacleSlingAuthor'
 
 document.addEventListener("DOMContentLoaded", () => {
     let app = window.__DATA;
-    ReactDOM.render(<Spectacle content={app} />, document.getElementById('app'))
+    ReactDOM.render(<SpectacleSlingAuthor content={app} />, document.getElementById('app'))
 });
 

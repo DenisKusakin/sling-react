@@ -26,12 +26,23 @@ const components = {
     Quote,
     Cite,
     Image,
-    Appear
+    Appear,
+    Container,
+    EditDialog,
+    EditModeToggler,
+    SlidePropertiesButton,
+    SystemButtonsContainer,
+    AddSlideButton,
+    DeleteSlideButton
 };
 
-const Spectacle = ({content}) => (<TreeContainer
+components['SpectacleAuthorRoot'] = x => <SpectacleAuthorRoot
+    {...x}
+    renderTree={y => <TreeContainer components={components} tree={y}/>}/>;
+
+const Spectacle = props => (<TreeContainer
         components={components}
-        tree={content}/>
+        tree={props.content}/>
 );
 
 export default Spectacle
