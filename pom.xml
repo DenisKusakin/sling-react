@@ -30,7 +30,6 @@
 
     <modules>
         <module>sling-react-js</module>
-        <module>sling-react-core</module>
         <module>sling-react-components</module>
     </modules>
 

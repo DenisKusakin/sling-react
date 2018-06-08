@@ -2,17 +2,19 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
-import com.cathcart93.sling.core.IReactController
-import com.cathcart93.sling.core.ReactController
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController(Constants.BLOCK_QUOTE)
-class BlockQuote : IReactController, BaseModel(), ReactModel {
+@Model(
+        adaptables = [Resource::class],
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+        adapters = [BlockQuote::class, ReactModel::class],
+        resourceType = [Constants.BLOCK_QUOTE]
+)
+class BlockQuote : BaseModel(), ReactModel {
     @ValueMapValue
     private var quote: String? = null
 
@@ -41,14 +43,14 @@ class BlockQuote : IReactController, BaseModel(), ReactModel {
                 }
             }
         }
-        return if(!isEditMode)
+        return if (!isEditMode)
             component
         else
             component.edit {
                 editUrl = resource.path
                 deleteUrl = resource.path
-                text(name = "quote", title = "Quote", value = if(quote == null) "" else quote!!)
-                text(name = "cite", title = "Cite", value = if(cite == null) "" else cite!!)
+                text(name = "quote", title = "Quote", value = if (quote == null) "" else quote!!)
+                text(name = "cite", title = "Cite", value = if (cite == null) "" else cite!!)
                 select(
                         name = "textColor",
                         title = "Text Color",

@@ -1,8 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.Constants
-import com.cathcart93.sling.core.IReactController
-import com.cathcart93.sling.core.ReactController
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -10,9 +8,13 @@ import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController(Constants.LINK)
-class LinkModel : IReactController, BaseModel(), ReactModel {
+@Model(
+        adaptables = [Resource::class],
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+        adapters = [LinkModel::class, ReactModel::class],
+        resourceType = [Constants.LINK]
+)
+class LinkModel : BaseModel(), ReactModel {
 
     @ValueMapValue
     var text: String? = null

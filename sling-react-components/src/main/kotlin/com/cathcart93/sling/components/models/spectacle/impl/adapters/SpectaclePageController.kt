@@ -7,9 +7,6 @@ import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJso
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toReactProp
 //import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate
 //import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate2
-import com.cathcart93.sling.core.IReactController
-import com.cathcart93.sling.core.ReactProp
-import com.cathcart93.sling.core.services.BeanSerializer
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
@@ -26,16 +23,13 @@ import javax.annotation.PostConstruct
         adapters = [PageController::class],
         resourceType = ["sling-react/client-page"]
 )
-class SpectaclePageController : IReactController, PageController {
+class SpectaclePageController : PageController {
 
     @SlingObject
     private lateinit var resource: Resource
 
     @SlingObject
     private lateinit var request: SlingHttpServletRequest
-
-    @OSGiService
-    private lateinit var beanSerializer: BeanSerializer
 
     private lateinit var props: String
 

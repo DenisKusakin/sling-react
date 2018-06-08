@@ -5,14 +5,11 @@ package com.cathcart93.sling.components.models.spectacle.api
  */
 class Constants {
     companion object {
-        const val DECK = "Deck"
-        const val HEADING = "Heading"
-        const val SLIDE = "Slide"
-        const val TEXT = "Text"
-        const val CODE = "Code"
-        const val CODE_PANE = "CodePane"
-        const val BLOCK_QUOTE = "BlockQuote"
-        const val LINK = "Link"
-        const val IMAGE = "Image"
+        const val HEADING = "spectacle/components/Heading"
+        const val TEXT = "spectacle/components/Text"
+        const val CODE_PANE = "spectacle/components/CodePane"
+        const val BLOCK_QUOTE = "spectacle/components/BlockQuote"
+        const val LINK = "spectacle/components/Link"
+        const val IMAGE = "spectacle/components/Image"
     }
 }

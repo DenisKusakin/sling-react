@@ -6,6 +6,22 @@ import org.junit.Assert
 import org.junit.Test
 
 open class Test {
+    private val colors = mutableMapOf(
+            "primary" to FirstTheme.primaryColor?.toReactProp(),
+            "secondary" to FirstTheme.secondaryColor?.toReactProp(),
+            "tertiary" to FirstTheme.tertiaryColor?.toReactProp(),
+            "quarternary" to FirstTheme.quarternaryColor?.toReactProp()
+    ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
+    private val fonts = mutableMapOf(
+            "primary" to FirstTheme.primaryFont?.toReactProp(),
+            "secondary" to FirstTheme.secondaryFont?.toReactProp()
+    ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
+
+    private val firstThemeColorsFonts = mapOf(
+            "colors" to ObjectProps(colors),
+            "fonts" to ObjectProps(fonts)
+    )
+
     @Test
     fun test() {
         val deck = deck(FirstTheme) {
@@ -16,7 +32,7 @@ open class Test {
             }
         }
 
-        val expectedReactElement = ReactElement("Deck", children = listOf(
+        val expectedReactElement = ReactElement("Deck", props = firstThemeColorsFonts, children = listOf(
                 ReactElement("Slide", children = listOf(
                         ReactElement("Heading", mapOf("italic" to BooleanProp(false)), StringProp("Heading 1"))
                 ))
@@ -33,11 +49,14 @@ open class Test {
             progress = Pacman
         }
 
-        val expectedReactElement = ReactElement(name = "Deck", props = mapOf(
-                "transition" to StringProp("zoom fade"),
+        val expectedProps = mutableMapOf(
+                "transition" to ArrayProp(listOf("zoom", "fade").map { StringProp(it) }),
                 "transitionDuration" to NumberProp(100),
                 "progress" to StringProp("pacman")
-        ), children = emptyList())
+        )
+        expectedProps.putAll(firstThemeColorsFonts);
+
+        val expectedReactElement = ReactElement(name = "Deck", props = expectedProps, children = emptyList())
 
         Assert.assertEquals(expectedReactElement, deck.toReactElement())
     }
@@ -68,9 +87,14 @@ open class Test {
             transitionDuration = 500
         }
 
-        val expectedReactElement = ReactElement(name = "Appear", children = listOf(
-                ReactElement(name = "Heading", children = "Test".toReactProp(), props = mapOf("italic" to true.toReactProp()))
-        ), props = mapOf("transitionDuration" to 500.toReactProp()))
+        val expectedReactElement = ReactElement(
+                name = "Appear",
+                children = ReactElement(
+                        name = "Heading",
+                        children = "Test".toReactProp(),
+                        props = mapOf("italic" to true.toReactProp())
+                ),
+                props = mapOf("transitionDuration" to 500.toReactProp()))
 
         Assert.assertEquals(expectedReactElement, appear.toReactElement())
     }
