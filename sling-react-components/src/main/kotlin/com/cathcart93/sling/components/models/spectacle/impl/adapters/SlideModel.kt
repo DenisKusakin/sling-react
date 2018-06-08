@@ -2,17 +2,17 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.Constants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
-import com.cathcart93.sling.core.IReactController
-import com.cathcart93.sling.core.ReactController
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-@ReactController(Constants.SLIDE)
-class SlideModel : IReactController, ReactModel, BaseModel() {
+@Model(
+        adaptables = [Resource::class],
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
+)
+class SlideModel : ReactModel, BaseModel() {
     @SlingObject
     private lateinit var resource: Resource
 
@@ -42,9 +42,7 @@ class SlideModel : IReactController, ReactModel, BaseModel() {
 
     override fun toReact(isEditMode: Boolean): SpectacleTag {
         val children = resource.children
-                .mapNotNull { it.adaptTo(IReactController::class.java) }
-                .filter { it is ReactModel }
-                .map { it as ReactModel }
+                .mapNotNull { it.adaptTo(ReactModel::class.java) }
                 .map { it.toReact(isEditMode) }
         val deckPropertiesButton = resource.parent?.adaptTo(DeckModel::class.java)!!.propertiesButton()
         val systemButtons by lazy {

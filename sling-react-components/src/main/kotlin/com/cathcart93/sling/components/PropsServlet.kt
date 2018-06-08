@@ -19,7 +19,6 @@
 package com.cathcart93.sling.components
 
 import com.cathcart93.sling.components.models.PageController
-import com.cathcart93.sling.components.models.SimplePageController
 import org.apache.felix.scr.annotations.Properties
 import org.apache.felix.scr.annotations.Property
 import org.apache.felix.scr.annotations.sling.SlingServlet
