@@ -43,3 +43,19 @@ export const createResource = ({url, props}) => {
         }
     })
 };
+
+export const moveResource = ({url, orderBefore}) => {
+    const params = new URLSearchParams();
+    //Object.keys(props).forEach(x => params.append(x, props[x]));
+    params.append(":order", `before ${orderBefore}`);
+
+    return axios({
+        method: 'post',
+        data: params,
+        url: url,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'text/html'
+        }
+    })
+};

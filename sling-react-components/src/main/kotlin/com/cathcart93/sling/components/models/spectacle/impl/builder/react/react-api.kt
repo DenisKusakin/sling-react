@@ -94,11 +94,3 @@ fun ReactElement.addProps(props: Map<String, ReactProp>): ReactElement {
     newProps.putAll(props)
     return this.copy(props = newProps)
 }
-
-//fun List<ReactProp>.toReactChildren(): ReactChildren {
-//    return ChildrenList(this)
-//}
-//
-//fun ReactProp.toReactChild(): ReactChildren {
-//    return
-//}

@@ -30,7 +30,13 @@ class EditDialog : SpectacleTag, SimpleDialogBuilder() {
     //val props: MutableList<ReactProp> = mutableListOf()
 }
 
-class Container(val children: List<SpectacleTag>, val resourcePath: String, val components: List<ContainerComponent> = mutableListOf()) : SpectacleTag {
+data class MoveInfoItem(val name: String, val url: String)
+
+class Container(
+        val children: List<SpectacleTag>,
+        val resourcePath: String,
+        val components: List<ContainerComponent> = mutableListOf(),
+        val moveInfo: List<MoveInfoItem> = emptyList()) : SpectacleTag {
     override fun toReactElement(): ReactElement {
         return ReactElement(
                 name = "Container",
@@ -47,6 +53,14 @@ class Container(val children: List<SpectacleTag>, val resourcePath: String, val 
                                             )),
                                             "title" to it.title.toReactProp(),
                                             "description" to it.description?.toReactProp()
+                                    ))
+                                }
+                        ),
+                        "moveInfo" to ArrayProp(
+                                moveInfo.map {
+                                    ObjectProps(mapOf(
+                                            "url" to it.url.toReactProp(),
+                                            "nodeName" to it.name.toReactProp()
                                     ))
                                 }
                         )

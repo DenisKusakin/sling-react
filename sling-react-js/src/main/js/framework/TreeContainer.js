@@ -1,6 +1,6 @@
 import React from 'react'
 
-const traverse = (tree, components, typeFieldName, dialogTypeFieldName) => {
+const traverse = (tree, components, typeFieldName) => {
     if (tree === null || tree === undefined) {
         return null
     }
@@ -11,7 +11,7 @@ const traverse = (tree, components, typeFieldName, dialogTypeFieldName) => {
     let __objProps = !!tree[typeFieldName] ? objProps : objProps;
 
     if (Array.isArray(tree)) {
-        return tree.map(x => traverse(x, components, typeFieldName, dialogTypeFieldName));
+        return tree.map(x => traverse(x, components, typeFieldName));
     } else if (!(typeof tree === 'object')) {
         return tree;
     }
@@ -19,43 +19,33 @@ const traverse = (tree, components, typeFieldName, dialogTypeFieldName) => {
     Object.keys(tree).forEach(
         field => {
             let fieldVal = tree[field];
-            if (dialogTypeFieldName && field === dialogTypeFieldName) {
-                obj["dialog"] = components[fieldVal]
-            }
             if (field === typeFieldName) {
                 obj["type"] = components[fieldVal]
             } else if (field === 'children' && tree[typeFieldName] !== undefined) {
-                obj['children'] = traverse(fieldVal, components, typeFieldName, dialogTypeFieldName)
+                obj['children'] = traverse(fieldVal, components, typeFieldName)
             } else {
-                __objProps[field] = traverse(fieldVal, components, typeFieldName, dialogTypeFieldName)
+                __objProps[field] = traverse(fieldVal, components, typeFieldName)
             }
         }
     );
 
     if (obj['type']) {
-        if (obj['dialog'] && dialogTypeFieldName) {
-            return React.createElement(obj['dialog'], {...obj.props}, React.createElement(obj['type'], {...obj.props}, obj['children']))
-        }
-        // if(obj.props.test === "test"){
-        //     debugger;
-        // }
-        // let children = obj['children'];
-        // if(children && children.length === 1){
-        //     children = children[0];
-        // }
-        return React.createElement(obj['type'], obj.props, obj['children'])
+        let Component = obj['type'];
+        return <Component {...obj.props}>
+            {
+                Array.isArray(obj.children) ? obj.children.map((x, i) => React.cloneElement(x, {key: i})) : obj.children
+            }
+        </Component>
     } else {
         return objProps;
     }
-    // return !!obj['type'] ? React.createElement(obj['type'], obj.props, obj['children']) : objProps;
 };
 
-const TreeContainer = ({tree, components, typeFieldName = '__type', dialogTypeFieldName = null}) => {
-    console.log("TreeContainer render");
+const TreeContainer = ({tree, components, typeFieldName = '__type'}) => {
     if (!tree) {
         return null
     }
-    return traverse(tree, components, typeFieldName, dialogTypeFieldName);
+    return traverse(tree, components, typeFieldName);
 };
 
 export default TreeContainer;

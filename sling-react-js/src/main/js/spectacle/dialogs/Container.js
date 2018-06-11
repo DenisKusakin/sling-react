@@ -1,19 +1,42 @@
 import React from 'react'
 import {AuthorContext} from './context'
-import {createResource} from "../../framework/api";
+import {createResource, moveResource} from "../../framework/api";
 import {List, ListItem} from 'material-ui/List';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import IconButton from 'material-ui/IconButton'
 import Dialog from 'material-ui/Dialog';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 class ContainerDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isOpen: false,
-            error: null
+            error: null,
+            children: props.children
         };
-        this.renderComponentList = this.renderComponentList.bind(this)
+        this.renderComponentList = this.renderComponentList.bind(this);
+        this.reorder = this.reorder.bind(this);
+    }
+
+    reorder(sourceIndex, destinationIndex) {
+        this.setState(({children}) => {
+            let childrenArray = React.Children.toArray(children);
+            let copy = React.Children.map(childrenArray, x => React.cloneElement(x));
+            let sourceElement = copy[sourceIndex];
+            copy.splice(sourceIndex, 1);
+            copy.splice(destinationIndex, 0, sourceElement);
+            return {
+                children: copy
+            }
+        });
+        return sourceIndex > destinationIndex ? moveResource({
+            url: this.props.moveInfo[sourceIndex].url,
+            orderBefore: this.props.moveInfo[destinationIndex].nodeName
+        }) : moveResource({
+            url: this.props.moveInfo[destinationIndex].url,
+            orderBefore: this.props.moveInfo[sourceIndex].nodeName
+        })
     }
 
     renderComponentList(updateFromServer) {
@@ -80,15 +103,39 @@ class ContainerDialog extends React.Component {
                                 `}
                             </style>
                             <div className="editable-container">
-                                {
-                                    this.props.children && this.props.children.map((x, i) => <div
-                                        className='editable-item'
-                                        key={i}>
-                                        <div>
-                                            {x}
-                                        </div>
-                                    </div>)
-                                }
+                                <DragDropContext
+                                    onDragEnd={(x) => {
+                                        if (x.destination !== null) {
+                                            this.reorder(x.source.index, x.destination.index)
+                                                .then(updateFromServer)
+                                        }
+                                    }}>
+                                    <Droppable droppableId="droppable">
+                                        {
+                                            (provided, snapshot) => <div ref={provided.innerRef}>
+                                                {
+                                                    this.state.children && this.state.children.map((x, i) =>
+                                                        <Draggable key={i} draggableId={i} index={i}>
+                                                            {
+                                                                (provided, snapshot) =>
+                                                                    <div
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}>
+                                                                        <div
+                                                                            className='editable-item'>
+                                                                            <div>
+                                                                                {x}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            }
+                                                        </Draggable>)
+                                                }
+                                            </div>
+                                        }
+                                    </Droppable>
+                                </DragDropContext>
                                 <div style={{"textAlign": "center"}}>
                                     <IconButton onClick={() => {
                                         this.setState({isOpen: true})
@@ -99,7 +146,7 @@ class ContainerDialog extends React.Component {
                             </div>
                         </div>
                     }
-                    return this.props.children
+                    return this.state.children
                 }
             }
         </AuthorContext.Consumer>

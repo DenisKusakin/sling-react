@@ -112,7 +112,7 @@ class SlideModel : ReactModel, BaseModel() {
             notes = this@SlideModel.notes
             bgColor = this@SlideModel.bgColor
             if (isEditMode) {
-                comp(Container(children = children, components = components, resourcePath = "${resource.path}/"))
+                comp(Container(children = children, components = components, resourcePath = "${resource.path}/", moveInfo = resource.toMoveInfo()))
                 comp(systemButtons)
             } else {
                 children.forEach { comp(it) }
@@ -136,5 +136,9 @@ class SlideModel : ReactModel, BaseModel() {
             arr.size == 1 -> SlideAlign(stringToAlign(arr[0]), Center)
             else -> SlideAlign(Center, Center)
         }
+    }
+
+    private fun Resource.toMoveInfo(): List<MoveInfoItem> {
+        return this.children.map { MoveInfoItem(name = it.name, url = it.path) }
     }
 }

@@ -5,7 +5,8 @@ module.exports = {
     entry: {
         server: ['babel-polyfill', './entries/server.author.js'],
         client: ['babel-polyfill', './entries/client.author.js'],
-        'spectacle.client': ['babel-polyfill', './spectacle/entries/client.spectacle.author']
+        'spectacle.client.author': ['babel-polyfill', './spectacle/entries/client.spectacle.author'],
+        'spectacle.client': ['babel-polyfill', './spectacle/entries/client.spectacle']
     },
     output: {
         path: path.resolve(__dirname + '/../jcr_root/etc/react-clientlibs'),
