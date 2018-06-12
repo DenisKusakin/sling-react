@@ -13,7 +13,7 @@ data class ReactElement(
         override val props: Map<String, ReactProp> = mutableMapOf(),
         override val children: ReactChildren = NoChildren) : IReactElement, ReactProp {
     constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: ReactProp) : this(name, props, OnlyChild(children))
-//    constructor(name: String, props: Map<String, ReactProp>, child: ReactElement) : this(name, props, OnlyChild(child))
+//    constructor(resourceType: String, props: Map<String, ReactProp>, child: ReactElement) : this(resourceType, props, OnlyChild(child))
     constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: List<ReactElement>) : this(name, props, ChildrenList(children))
 }
 

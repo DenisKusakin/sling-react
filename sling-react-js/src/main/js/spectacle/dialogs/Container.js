@@ -20,6 +20,7 @@ class ContainerDialog extends React.Component {
     }
 
     reorder(sourceIndex, destinationIndex) {
+        //TODO: Reordering is not used, should be fixed in future 
         this.setState(({children}) => {
             let childrenArray = React.Children.toArray(children);
             let copy = React.Children.map(childrenArray, x => React.cloneElement(x));
@@ -114,7 +115,7 @@ class ContainerDialog extends React.Component {
                                         {
                                             (provided, snapshot) => <div ref={provided.innerRef}>
                                                 {
-                                                    this.state.children && this.state.children.map((x, i) =>
+                                                    this.props.children && this.props.children.map((x, i) =>
                                                         <Draggable key={i} draggableId={i} index={i}>
                                                             {
                                                                 (provided, snapshot) =>
@@ -146,7 +147,7 @@ class ContainerDialog extends React.Component {
                             </div>
                         </div>
                     }
-                    return this.state.children
+                    return this.props.children
                 }
             }
         </AuthorContext.Consumer>

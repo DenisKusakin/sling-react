@@ -49,7 +49,7 @@ class Container(
                                             "props" to ObjectProps(mapOf(
                                                     ":nameHint" to it.nameHint.toReactProp(),
                                                     ":order" to "last".toReactProp(),
-                                                    "component" to it.name.toReactProp()
+                                                    "sling:resourceType" to it.resourceType.toReactProp()
                                             )),
                                             "title" to it.title.toReactProp(),
                                             "description" to it.description?.toReactProp()
@@ -70,9 +70,9 @@ class Container(
 }
 
 class ContainerComponent(
-        val name: String,
-        val nameHint: String = name,
-        val title: String = name,
+        val resourceType: String,
+        val nameHint: String = resourceType,
+        val title: String = resourceType,
         val description: String? = null)
 
 fun SpectacleTag.edit(block: EditDialog.() -> Unit): EditDialog {

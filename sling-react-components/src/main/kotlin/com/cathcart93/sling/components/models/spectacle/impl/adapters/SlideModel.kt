@@ -32,12 +32,12 @@ class SlideModel : ReactModel, BaseModel() {
     private var notes: String? = null
 
     private val components = listOf(
-            ContainerComponent(name = "Heading", description = "Heading component"),
-            ContainerComponent(name = "Text", description = "Text component"),
-            ContainerComponent(name = "Link", description = "Link component"),
-            ContainerComponent(name = "Image", description = "Image component"),
-            ContainerComponent(name = "BlockQuote", description = "BlockQuote component"),
-            ContainerComponent(name = "Code", description = "Code component")
+            ContainerComponent(title = "Heading", description = "Heading component", resourceType = Constants.HEADING),
+            ContainerComponent(title = "Text", description = "Text component", resourceType = Constants.TEXT),
+            ContainerComponent(title = "Link", description = "Link component", resourceType = Constants.LINK),
+            ContainerComponent(title = "Image", description = "Image component", resourceType = Constants.IMAGE),
+            ContainerComponent(title = "Block Quote", description = "BlockQuote component", resourceType = Constants.BLOCK_QUOTE),
+            ContainerComponent(title = "Code", description = "Code component", resourceType = Constants.CODE_PANE)
     )
 
     override fun toReact(isEditMode: Boolean): SpectacleTag {

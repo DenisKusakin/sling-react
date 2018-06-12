@@ -606,6 +606,16 @@
           {
             "__type": "Container",
             "resourcePath": "/content/spectacle/1_1526839456118/",
+            "moveInfo": [
+              {
+                "url": "/content/path/to/node",
+                "nodeName": "node"
+              },
+              {
+                "url": "/content/path/to/node2",
+                "nodeName": "node2"
+              }
+            ],
             "components": [
               {
                 "props": {
