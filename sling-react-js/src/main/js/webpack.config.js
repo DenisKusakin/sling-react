@@ -3,8 +3,6 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        server: ['babel-polyfill', './entries/server.author.js'],
-        client: ['babel-polyfill', './entries/client.author.js'],
         'spectacle.client.author': ['babel-polyfill', './spectacle/entries/client.spectacle.author'],
         'spectacle.client': ['babel-polyfill', './spectacle/entries/client.spectacle']
     },
