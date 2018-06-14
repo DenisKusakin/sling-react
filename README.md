@@ -3,7 +3,7 @@
 The goal of this project is to develop authoring environment for [Spectacle](https://formidable.com/open-source/spectacle/) library.
 Spectacle - [React](https://reactjs.org/) based library for creating presentations.
 Apache Sling framework is used as backend framework.
-Actually, this project is not only about Spectacle library, this is mostly a POC project about using [React](https://reactjs.org/) with Apache Sling(AEM).
+Actually, this project is not only about Spectacle library, this is mostly a POC project about using [React](https://reactjs.org/) with Apache Sling or AEM.
 
 Adobe Experience Manager(AEM) is CMS build on top of Apache Sling, it has its own understanding about what component is, their approach have a lot of advantages, but it also have some disadvantages.
 Developer experience is one AEM disadvantages, especially for frontend developers.
@@ -23,10 +23,12 @@ The idea is to separate frontend and backend development as much as possible. Th
 AEM developers should get the following features:
 * No need to think about HTML/CSS/JS at all.
 * Another notion of component comparing to AEM components, this approach should help to build reusable components.
-* More convenient approach for building authorable components comparing to AEM.
+* More convenient approach for building configurable components comparing to AEM.
 
 ## Built With
 
 * [Apache Sling](https://sling.apache.org/)
 * [ReactJS](https://reactjs.org/)
-* [Material UI](https://material-ui.com/) - used for building athoring dialogs
+* [Material UI](https://material-ui.com/) - used for building authoring dialogs
+* [Kotlin](https://kotlinlang.org/) - kotlin is used mostly because of its ability for building DSLs
+* [NextJS](https://github.com/zeit/next.js/) - used as developer environment for frontend developers

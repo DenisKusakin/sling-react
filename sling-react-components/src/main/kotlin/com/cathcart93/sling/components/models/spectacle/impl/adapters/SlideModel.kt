@@ -37,7 +37,8 @@ class SlideModel : ReactModel, BaseModel() {
             ContainerComponent(title = "Link", description = "Link component", resourceType = Constants.LINK),
             ContainerComponent(title = "Image", description = "Image component", resourceType = Constants.IMAGE),
             ContainerComponent(title = "Block Quote", description = "BlockQuote component", resourceType = Constants.BLOCK_QUOTE),
-            ContainerComponent(title = "Code", description = "Code component", resourceType = Constants.CODE_PANE)
+            ContainerComponent(title = "Code", description = "Code component", resourceType = Constants.CODE_PANE),
+            ContainerComponent(title = "Markdown", description = "Markdown", resourceType = Constants.MARKDOWN)
     )
 
     override fun toReact(isEditMode: Boolean): SpectacleTag {

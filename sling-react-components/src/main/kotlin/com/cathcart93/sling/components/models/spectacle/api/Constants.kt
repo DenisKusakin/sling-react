@@ -11,5 +11,6 @@ class Constants {
         const val BLOCK_QUOTE = "spectacle/components/BlockQuote"
         const val LINK = "spectacle/components/Link"
         const val IMAGE = "spectacle/components/Image"
+        const val MARKDOWN = "spectacle/components/Markdown"
     }
 }

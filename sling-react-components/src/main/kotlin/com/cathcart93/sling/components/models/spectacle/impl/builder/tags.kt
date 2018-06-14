@@ -219,6 +219,14 @@ class Code(val source: String, val lang: String) : SpectacleTag, BaseTag() {
     }
 }
 
+class Markdown(val source: String) : SpectacleTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(name = "Markdown", props = mapOf(
+                "source" to source.toReactProp()
+        ))
+    }
+}
+
 //@TagMarker
 fun Deck.slide(block: Slide.() -> Unit) {
     val slide = Slide()
@@ -273,6 +281,10 @@ fun Slide.comp(child: SpectacleTag) {
 
 fun Slide.code(source: String, lang: String) {
     this.children.add(Code(source = source, lang = lang))
+}
+
+fun Slide.markdown(source: String) {
+    this.children.add(Markdown(source))
 }
 
 fun BlockQuote.quote(text: String, block: Quote.() -> Unit) {
@@ -347,4 +359,8 @@ fun code(source: String, lang: String, block: Code.() -> Unit): Code {
     val code = Code(source = source, lang = lang)
     block(code)
     return code
+}
+
+fun markdown(source: String): Markdown {
+    return Markdown(source)
 }
