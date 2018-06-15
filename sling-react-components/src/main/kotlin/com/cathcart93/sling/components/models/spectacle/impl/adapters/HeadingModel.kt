@@ -45,9 +45,7 @@ class HeadingModel : BaseModel(), ReactModel {
                 textColor = HexColor(this@HeadingModel.textColor!!)
             }
         }.appear(shouldAppear)
-        return if (isEditMode) component.edit {
-            editUrl = resource.path
-            deleteUrl = resource.path
+        return if (isEditMode) component.edit(resource) {
             text(name = "text", title = "Text", value = text)
             select(
                     name = "size",

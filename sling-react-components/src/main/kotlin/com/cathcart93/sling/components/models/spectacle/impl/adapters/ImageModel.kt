@@ -36,9 +36,7 @@ class ImageModel : BaseModel(), ReactModel {
         return if (!isEditMode)
             component
         else
-            component.edit {
-                deleteUrl = resource.path
-                editUrl = resource.path
+            component.edit(resource) {
                 text(name = "src", title = "src", value = src)
                 text(name = "height", title = "Height", value = if (height == null) "" else height!!)
                 text(name = "width", title = "Width", value = if (width == null) "" else width!!)

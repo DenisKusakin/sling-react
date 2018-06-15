@@ -13,7 +13,6 @@ data class ReactElement(
         override val props: Map<String, ReactProp> = mutableMapOf(),
         override val children: ReactChildren = NoChildren) : IReactElement, ReactProp {
     constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: ReactProp) : this(name, props, OnlyChild(children))
-//    constructor(resourceType: String, props: Map<String, ReactProp>, child: ReactElement) : this(resourceType, props, OnlyChild(child))
     constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: List<ReactElement>) : this(name, props, ChildrenList(children))
 }
 
@@ -77,20 +76,4 @@ fun ReactElement.toJson(): String {
         return map
     }
     return Gson().toJson(reactElementToMap(this))
-}
-
-fun ReactElement.addProp(propName: String, provValue: ReactProp): ReactElement {
-    val currentProps = this.props
-    val newProps = mutableMapOf(propName to provValue)
-    newProps.putAll(currentProps)
-    newProps[propName] = provValue
-    return this.copy(props = newProps)
-}
-
-fun ReactElement.addProps(props: Map<String, ReactProp>): ReactElement {
-    val currentProps = this.props
-    val newProps = mutableMapOf<String, ReactProp>()
-    newProps.putAll(currentProps)
-    newProps.putAll(props)
-    return this.copy(props = newProps)
 }

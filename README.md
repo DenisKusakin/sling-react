@@ -8,8 +8,7 @@ Actually, this project is not only about Spectacle library, this is mostly a POC
 ## Motivation
 
 Adobe Experience Manager(AEM) is CMS build on top of Apache Sling, it has its own understanding about what component is, their approach have a lot of advantages, but it also have some disadvantages.
-Developer experience is one AEM disadvantages, especially for frontend developers.
-In their work have to deal with a lot of AEM specific stuff like clientlibraries, HTL, it is also not a simple task to use modern js libraries, frameworks, tools.
+Developer experience is one AEM disadvantages, especially for frontend developers, they have to deal with a lot of AEM specific stuff like clientlibraries, HTL, it is also not a simple task to use modern js libraries, frameworks, tools.
 In many projects frontend developers still have to have their own developer AEM server which brings a lot of problems into development process.
 There are some projects which tries to bring modern frontend libraries into AEM like [aem-react](https://github.com/sinnerschrader/aem-react) which allows you to use React along with other components which
 is really good for existing projects since they could involve React components into their code but it is still too AEM specific.

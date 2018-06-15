@@ -46,9 +46,7 @@ class BlockQuote : BaseModel(), ReactModel {
         return if (!isEditMode)
             component
         else
-            component.edit {
-                editUrl = resource.path
-                deleteUrl = resource.path
+            component.edit(resource) {
                 text(name = "quote", title = "Quote", value = if (quote == null) "" else quote!!)
                 text(name = "cite", title = "Cite", value = if (cite == null) "" else cite!!)
                 select(

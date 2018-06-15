@@ -37,9 +37,7 @@ class CodeModel : BaseModel(), ReactModel {
         return if (!isEditMode)
             component
         else
-            component.edit {
-                deleteUrl = resource.path
-                editUrl = resource.path
+            component.edit(resource) {
                 multilineText(name = "source", title = "Source", value = if (source == null) "" else source!!)
                 select(name = "lang", title = "Language", value = lang, options = listOf(
                         SelectOption(label = "JavaScript", value = "javascript"),

@@ -1,6 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.*
+import org.apache.sling.api.resource.Resource
 
 open class SimpleDialogBuilder {
     val props: MutableList<ReactProp> = mutableListOf()
@@ -75,8 +76,10 @@ class ContainerComponent(
         val title: String = resourceType,
         val description: String? = null)
 
-fun SpectacleTag.edit(block: EditDialog.() -> Unit): EditDialog {
+fun SpectacleTag.edit(resource: Resource, block: EditDialog.() -> Unit): EditDialog {
     val edit = EditDialog()
+    edit.editUrl = resource.path
+    edit.deleteUrl = resource.path
     edit.component = this
     block(edit)
     return edit

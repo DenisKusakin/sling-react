@@ -23,7 +23,7 @@ open class Test {
     )
 
     @Test
-    fun test() {
+    fun simpleSlideWithHeading() {
         val deck = deck(DarkTheme) {
             slide {
                 heading("Heading 1") {
@@ -42,7 +42,7 @@ open class Test {
     }
 
     @Test
-    fun deckTest() {
+    fun deckWithProperties() {
         val deck = deck(DarkTheme) {
             transition = SlideTransition(listOf(ZoomTransitionType, FadeTransitionType))
             transitionDuration = 100
@@ -114,17 +114,5 @@ open class Test {
         ), children = "Google".toReactProp())
 
         Assert.assertEquals(expectedReactElement, link.toReactElement())
-    }
-
-    @Test
-    fun testJson() {
-        val element = ReactElement(name = "Test", props = mapOf(
-                "k" to "v".toReactProp(),
-                "r" to ReactElement(name = "Test2", props = mutableMapOf("x" to "y".toReactProp()))
-        ), children = listOf(
-                ReactElement(name = "Child")
-        ))
-
-        println(element.toJson())
     }
 }

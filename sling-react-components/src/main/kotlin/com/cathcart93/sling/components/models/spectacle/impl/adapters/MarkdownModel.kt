@@ -29,9 +29,7 @@ class MarkdownModel : ReactModel {
         return if (!isEditMode)
             component
         else
-            component.edit {
-                editUrl = resource.path
-                deleteUrl = resource.path
+            component.edit(resource) {
                 multilineText(name = "source", title = "Source", value = source)
             }
 

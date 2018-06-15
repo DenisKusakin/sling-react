@@ -41,9 +41,7 @@ class TextModel :  BaseModel(), ReactModel {
             }
         }.appear(shouldAppear)
         return if (isEditMode)
-            component.edit {
-                editUrl = resource.path
-                deleteUrl = resource.path
+            component.edit(resource) {
                 text(name = "text", title = "Text", value = if (text == null) "" else text!!)
                 checkbox(name = "fit", title = "Fit", value = if (fit == null) false else fit!!)
                 checkbox(name = "italic", value = if (italic != null) italic!! else false, title = "Italic")

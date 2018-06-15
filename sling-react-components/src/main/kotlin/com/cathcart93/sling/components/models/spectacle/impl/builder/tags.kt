@@ -39,13 +39,6 @@ class Deck(val theme: ExtendedDefaultTheme) : SpectacleTag {
     var transitionDuration: Int? = null
     var progress: Progress? = null
     var controls: Boolean? = null
-
-//    var primaryColor: String? = null
-//    var secondaryColor: String? = null
-//    var tertiaryColor: String? = null
-//    var quarternaryColor: String? = null
-//    var primaryFont: String? = null
-//    var secondaryFont: String? = null
 }
 
 open class ExtendedDefaultTheme {

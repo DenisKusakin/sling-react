@@ -43,9 +43,7 @@ class LinkModel : BaseModel(), ReactModel {
         return if (!isEditMode)
             component
         else
-            component.edit {
-                deleteUrl = resource.path
-                editUrl = resource.path
+            component.edit(resource) {
                 text(name = "text", title = "Link Text", value = if (text == null) "" else text!!)
                 text(name = "href", title = "Href", value = if (href == null) "" else href!!)
                 select(
