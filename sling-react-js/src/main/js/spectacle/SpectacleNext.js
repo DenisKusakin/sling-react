@@ -13,9 +13,6 @@ const Spectacle = dynamic({
     modules: props => {
         return {
             Deck: import('./deck'),
-            Heading: import('./heading'),
-            Text: import('./text'),
-            Slide: import('./slide'),
             Container: import('./dialogs/Container'),
             Spectacle: import('spectacle')
         }

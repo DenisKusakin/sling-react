@@ -7,14 +7,14 @@ import org.junit.Test
 
 open class Test {
     private val colors = mutableMapOf(
-            "primary" to FirstTheme.primaryColor?.toReactProp(),
-            "secondary" to FirstTheme.secondaryColor?.toReactProp(),
-            "tertiary" to FirstTheme.tertiaryColor?.toReactProp(),
-            "quarternary" to FirstTheme.quarternaryColor?.toReactProp()
+            "primary" to DarkTheme.primaryColor?.toReactProp(),
+            "secondary" to DarkTheme.secondaryColor?.toReactProp(),
+            "tertiary" to DarkTheme.tertiaryColor?.toReactProp(),
+            "quarternary" to DarkTheme.quarternaryColor?.toReactProp()
     ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
     private val fonts = mutableMapOf(
-            "primary" to FirstTheme.primaryFont?.toReactProp(),
-            "secondary" to FirstTheme.secondaryFont?.toReactProp()
+            "primary" to DarkTheme.primaryFont?.toReactProp(),
+            "secondary" to DarkTheme.secondaryFont?.toReactProp()
     ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
 
     private val firstThemeColorsFonts = mapOf(
@@ -24,7 +24,7 @@ open class Test {
 
     @Test
     fun test() {
-        val deck = deck(FirstTheme) {
+        val deck = deck(DarkTheme) {
             slide {
                 heading("Heading 1") {
                     italic = false
@@ -43,7 +43,7 @@ open class Test {
 
     @Test
     fun deckTest() {
-        val deck = deck(FirstTheme) {
+        val deck = deck(DarkTheme) {
             transition = SlideTransition(listOf(ZoomTransitionType, FadeTransitionType))
             transitionDuration = 100
             progress = Pacman

@@ -210,11 +210,12 @@ class Appear(val child: SpectacleTag) : SpectacleTag {
     var transitionDuration: Int? = null
 }
 
-class Code(val source: String, val lang: String) : SpectacleTag, BaseTag() {
+class CodePane(val source: String, val lang: CodeLang, val theme: CodeTheme = DarkCodeTheme) : SpectacleTag, BaseTag() {
     override fun toReactElement(): ReactElement {
         return ReactElement(name = "CodePane", props = mapOf(
                 "source" to source.toReactProp(),
-                "lang" to lang.toReactProp()
+                "lang" to lang.toPrismValue().toReactProp(),
+                "theme" to theme.toReactValue().toReactProp()
         ))
     }
 }
@@ -279,8 +280,8 @@ fun Slide.comp(child: SpectacleTag) {
     this.children.add(child)
 }
 
-fun Slide.code(source: String, lang: String) {
-    this.children.add(Code(source = source, lang = lang))
+fun Slide.code(source: String, lang: CodeLang, theme: CodeTheme = DarkCodeTheme) {
+    this.children.add(CodePane(source = source, lang = lang, theme = theme))
 }
 
 fun Slide.markdown(source: String) {
@@ -355,8 +356,8 @@ fun text(text: String, block: Text.() -> Unit): Text {
     return textTag
 }
 
-fun code(source: String, lang: String, block: Code.() -> Unit): Code {
-    val code = Code(source = source, lang = lang)
+fun code(source: String, lang: CodeLang, theme: CodeTheme = DarkCodeTheme, block: CodePane.() -> Unit): CodePane {
+    val code = CodePane(source = source, lang = lang, theme = theme)
     block(code)
     return code
 }

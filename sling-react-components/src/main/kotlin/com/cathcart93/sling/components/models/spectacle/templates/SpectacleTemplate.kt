@@ -1,7 +1,7 @@
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 
 fun spectacleTemplate(text: String = "Test"): Deck {
-    return deck(FirstTheme) {
+    return deck(DarkTheme) {
         transition = SlideTransition(listOf(SlideTransitionType, ZoomTransitionType))
         slide {
             heading(text) {

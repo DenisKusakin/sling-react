@@ -26,6 +26,9 @@ class DeckModel : ReactModel {
     @ValueMapValue
     private var controls: Boolean = true
 
+    @ValueMapValue
+    private var theme: String = "default"
+
     override fun toReact(isEditMode: Boolean): SpectacleTag {
         val slides = resource.children
                 .mapNotNull { it.adaptTo(SlideModel::class.java) }
@@ -43,7 +46,7 @@ class DeckModel : ReactModel {
             }
             comp(AddSlideButton(resourcePath = "${resource.path}/"))
         }
-        return deck(FirstTheme) {
+        return deck(theme.toTheme()) {
             transitionDuration = this@DeckModel.transitionDuration
             transition = this@DeckModel.transition?.toSlideTransition()
             controls = this@DeckModel.controls
@@ -75,6 +78,16 @@ class DeckModel : ReactModel {
                             SelectOption(label = "Node", value = "none")
                     )
             )
+            select(
+                    name = "theme",
+                    title = "Theme",
+                    value = this@DeckModel.theme,
+                    options = listOf(
+                            SelectOption(label = "Dark", value = "dark"),
+                            SelectOption(label = "Pink", value = "pink"),
+                            SelectOption(label = "Default", value = "default")
+                    )
+            )
         }
     }
 
@@ -85,6 +98,15 @@ class DeckModel : ReactModel {
             "number" -> Number
             "none" -> None
             else -> Pacman
+        }
+    }
+
+    private fun String.toTheme(): ExtendedDefaultTheme {
+        return when (this) {
+            "dark" -> DarkTheme
+            "pink" -> PinkTheme
+            "default" -> DefaultTheme
+            else -> DarkTheme
         }
     }
 }
