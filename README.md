@@ -5,14 +5,16 @@ Spectacle - [React](https://reactjs.org/) based library for creating presentatio
 Apache Sling framework is used as backend framework.
 Actually, this project is not only about Spectacle library, this is mostly a POC project about using [React](https://reactjs.org/) with Apache Sling or AEM.
 
+## Motivation
+
 Adobe Experience Manager(AEM) is CMS build on top of Apache Sling, it has its own understanding about what component is, their approach have a lot of advantages, but it also have some disadvantages.
 Developer experience is one AEM disadvantages, especially for frontend developers.
-Frontend developers during their work have to deal with a lot of AEM specific stuff like clientlibraries, HTL, it is also not a simple task to use modern js libraries, frameworks, tools.
+In their work have to deal with a lot of AEM specific stuff like clientlibraries, HTL, it is also not a simple task to use modern js libraries, frameworks, tools.
 In many projects frontend developers still have to have their own developer AEM server which brings a lot of problems into development process.
-There are some projects which tries to bring modern frontend libraries into AEM, e.g [aem-react](https://github.com/sinnerschrader/aem-react), this project allows you to use React along with other components which
+There are some projects which tries to bring modern frontend libraries into AEM like [aem-react](https://github.com/sinnerschrader/aem-react) which allows you to use React along with other components which
 is really good for existing projects since they could involve React components into their code but it is still too AEM specific.
 
-Backend developers have their own disadvantages in AEM component model, among them: developer have to deal with HTML frequently, it is hard to reuse components and their dialogs.
+Backend developers have their own disadvantages in AEM component model, among them: developer have to deal with HTML frequently, it is hard to reuse components and dialogs.
 
 This project use another approach for bringing modern frontend into AEM. The approach is rather trivial, actually.
 The idea is to separate frontend and backend development as much as possible. The goal is to provide frontend developers with following features:
@@ -24,6 +26,21 @@ AEM developers should get the following features:
 * No need to think about HTML/CSS/JS at all.
 * Another notion of component comparing to AEM components, this approach should help to build reusable components.
 * More convenient approach for building configurable components comparing to AEM.
+
+## Development
+
+### AEM
+
+From the project root run
+```
+mvn clean install -P autoInstallBundle,autoInstallPackage
+```
+
+### Frontend development environment
+Go to sling-react-js/src/main/js
+```
+npm run dev-next
+```
 
 ## Built With
 
