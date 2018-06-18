@@ -41,6 +41,17 @@ Go to sling-react-js/src/main/js
 npm run dev-next
 ```
 
+## How to Install
+
+* build from sources
+
+    ```
+    mvn clean install -P autoInstallBundle,autoInstallPackage
+    ```
+* using package manager
+
+    JCR package could be loaded from releases tab
+
 ## Built With
 
 * [Apache Sling](https://sling.apache.org/)
