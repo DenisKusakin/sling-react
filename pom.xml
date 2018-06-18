@@ -5,7 +5,7 @@
     <groupId>com.cathcart93.sling</groupId>
     <artifactId>sling-clientlibs-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.1</version>
+    <version>0.2.SNAPSHOT</version>
     <name>Sling Spectacle Parent</name>
     <description>Sling Spectacle Parent. POC Project</description>
 
