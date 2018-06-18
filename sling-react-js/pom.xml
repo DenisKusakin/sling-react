@@ -7,13 +7,12 @@
     <parent>
         <groupId>com.cathcart93.sling</groupId>
         <artifactId>sling-clientlibs-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>sling-react-js</artifactId>
     <name>Sling Clientlibs JS</name>
-    <version>1.0-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
     <properties>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/etc/react-clientlibs"/>
-    <filter root="/apps/sling-react"/>
+    <filter root="/etc/sling-spectacle"/>
+    <filter root="/apps/sling-spectacle/client-page"/>
+    <filter root="/apps/sling-spectacle/install"/>
 </workspaceFilter>

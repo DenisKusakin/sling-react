@@ -21,7 +21,7 @@ import javax.annotation.PostConstruct
 @Model(
         adaptables = [Resource::class, SlingHttpServletRequest::class],
         adapters = [PageController::class],
-        resourceType = ["sling-react/client-page"]
+        resourceType = ["sling-spectacle/client-page"]
 )
 class SpectaclePageController : PageController {
 
@@ -33,9 +33,9 @@ class SpectaclePageController : PageController {
 
     private lateinit var props: String
 
-    private val authorJsUrl = "/etc/react-clientlibs/spectacle.client.author.js"
+    private val authorJsUrl = "/etc/sling-spectacle/spectacle.client.author.js"
 
-    private val previewJsUrl = "/etc/react-clientlibs/spectacle.client.js"
+    private val previewJsUrl = "/etc/sling-spectacle/spectacle.client.js"
 
     private var isPreviewMode = false
 

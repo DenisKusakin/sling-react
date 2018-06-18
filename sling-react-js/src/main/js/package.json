@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "const": "^1.0.0",
     "isomorphic-unfetch": "^2.0.0",

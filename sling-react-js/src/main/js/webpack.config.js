@@ -7,7 +7,7 @@ module.exports = {
         'spectacle.client': ['babel-polyfill', './spectacle/entries/client.spectacle']
     },
     output: {
-        path: path.resolve(__dirname + '/../jcr_root/etc/react-clientlibs'),
+        path: path.resolve(__dirname + '/../jcr_root/etc/sling-spectacle'),
         filename: '[name].js'
     },
     resolve: {
