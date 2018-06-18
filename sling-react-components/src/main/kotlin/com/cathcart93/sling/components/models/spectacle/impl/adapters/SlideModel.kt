@@ -1,6 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.spectacle.api.Constants
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
@@ -32,13 +32,13 @@ class SlideModel : ReactModel, BaseModel() {
     private var notes: String? = null
 
     private val components = listOf(
-            ContainerComponent(title = "Heading", description = "Heading component", resourceType = Constants.HEADING),
-            ContainerComponent(title = "Text", description = "Text component", resourceType = Constants.TEXT),
-            ContainerComponent(title = "Link", description = "Link component", resourceType = Constants.LINK),
-            ContainerComponent(title = "Image", description = "Image component", resourceType = Constants.IMAGE),
-            ContainerComponent(title = "Block Quote", description = "BlockQuote component", resourceType = Constants.BLOCK_QUOTE),
-            ContainerComponent(title = "Code", description = "Code component", resourceType = Constants.CODE_PANE),
-            ContainerComponent(title = "Markdown", description = "Markdown", resourceType = Constants.MARKDOWN)
+            ContainerComponent(title = "Heading", description = "Heading component", resourceType = ResourceTypesConstants.HEADING),
+            ContainerComponent(title = "Text", description = "Text component", resourceType = ResourceTypesConstants.TEXT),
+            ContainerComponent(title = "Link", description = "Link component", resourceType = ResourceTypesConstants.LINK),
+            ContainerComponent(title = "Image", description = "Image component", resourceType = ResourceTypesConstants.IMAGE),
+            ContainerComponent(title = "Block Quote", description = "BlockQuote component", resourceType = ResourceTypesConstants.BLOCK_QUOTE),
+            ContainerComponent(title = "Code", description = "Code component", resourceType = ResourceTypesConstants.CODE_PANE),
+            ContainerComponent(title = "Markdown", description = "Markdown", resourceType = ResourceTypesConstants.MARKDOWN)
     )
 
     override fun toReact(isEditMode: Boolean): SpectacleTag {

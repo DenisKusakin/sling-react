@@ -115,8 +115,6 @@ class MeduzaDeckModel : ReactModel {
         val xmlDoc: Document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(InputSource(StringReader(xml)))
         xmlDoc.documentElement.normalize()
 
-        println("Root Node:" + xmlDoc.documentElement.nodeName)
-
         val items: NodeList = xmlDoc.getElementsByTagName("item")
         val resultItems = mutableListOf<NewsItem>()
         for (i in 0 until items.length) {

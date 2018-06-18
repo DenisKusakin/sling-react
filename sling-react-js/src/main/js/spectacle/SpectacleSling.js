@@ -1,8 +1,5 @@
 import React from 'react'
 import Deck from './deck'
-import Heading from './heading'
-import Text from './text'
-import Slide from './slide'
 import Container from './dialogs/Container'
 import SpectacleAuthorRoot from './SpectaceAuthorRoot'
 import {BlockQuote, Quote, Cite, Code, CodePane, Link, Image, Appear} from "spectacle";
@@ -18,9 +15,6 @@ const components = {
     Code,
     CodePane,
     Deck,
-    Heading,
-    Text,
-    Slide,
     Link,
     BlockQuote,
     Quote,

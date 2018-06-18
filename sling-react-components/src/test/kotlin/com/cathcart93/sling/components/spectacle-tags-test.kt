@@ -5,7 +5,7 @@ import com.cathcart93.sling.components.models.spectacle.impl.builder.react.*
 import org.junit.Assert
 import org.junit.Test
 
-open class Test {
+open class SpectacleTagsTest {
     private val colors = mutableMapOf(
             "primary" to DarkTheme.primaryColor?.toReactProp(),
             "secondary" to DarkTheme.secondaryColor?.toReactProp(),

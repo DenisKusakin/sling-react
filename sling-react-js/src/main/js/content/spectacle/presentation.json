@@ -4,13 +4,21 @@
   "content": {
     "__type": "Deck",
     "controls": true,
-    "progress": "pacman",
-    "colors": {},
-    "fonts": {},
+    "progress": "number",
+    "colors": {
+      "primary": "white",
+      "secondary": "#1F2022",
+      "tertiary": "#03A9FC",
+      "quarternary": "#CECECE"
+    },
+    "fonts": {
+      "primary": "Montserrat",
+      "secondary": "Helvetica"
+    },
     "children": [
       {
         "__type": "Slide",
-        "bgColor": "primary",
+        "bgColor": "tertiary",
         "children": [
           {
             "__type": "Container",
@@ -82,11 +90,124 @@
             ],
             "moveInfo": [
               {
+                "url": "/content/spectacle/slide1/spectacle_components_1296685305",
+                "nodeName": "spectacle_components_1296685305"
+              },
+              {
                 "url": "/content/spectacle/slide1/spectacle_components",
                 "nodeName": "spectacle_components"
+              },
+              {
+                "url": "/content/spectacle/slide1/spectacle_components_479395116",
+                "nodeName": "spectacle_components_479395116"
               }
             ],
             "children": [
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide1/spectacle_components_1296685305",
+                "deleteUrl": "/content/spectacle/slide1/spectacle_components_1296685305",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Link Text",
+                    "value": "Test",
+                    "type": "text"
+                  },
+                  {
+                    "name": "href",
+                    "title": "Href",
+                    "value": "https://meduza.io",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Blank",
+                        "value": "_blank"
+                      },
+                      {
+                        "label": "Self",
+                        "value": "_self"
+                      },
+                      {
+                        "label": "Parent",
+                        "value": "_parent"
+                      },
+                      {
+                        "label": "Top",
+                        "value": "_top"
+                      }
+                    ],
+                    "value": "",
+                    "name": "target",
+                    "title": "Target"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Link",
+                    "href": "https://meduza.io",
+                    "italic": false,
+                    "bold": false,
+                    "caps": false,
+                    "children": "Test"
+                  }
+                ]
+              },
               {
                 "__type": "EditDialog",
                 "editUrl": "/content/spectacle/slide1/spectacle_components",
@@ -95,7 +216,7 @@
                   {
                     "name": "source",
                     "title": "Source",
-                    "value": "@Model(\n        adaptables \u003d [Resource::class],\n        defaultInjectionStrategy \u003d DefaultInjectionStrategy.OPTIONAL,\n        adapters \u003d [CodeModel::class, ReactModel::class],\n        resourceType \u003d [Constants.CODE_PANE]\n)\nclass CodeModel : BaseModel(), ReactModel {\n\n    @ValueMapValue\n    var source: String? \u003d null\n\n    @ValueMapValue\n    var lang: String \u003d \"javascript\"\n\n    @SlingObject\n    private lateinit var resource: Resource\n\n    override fun toReact(isEditMode: Boolean): SpectacleTag {\n        val component \u003d code(source \u003d if (source \u003d\u003d null) \"\" else source!!, lang \u003d lang.toCodeLang()) {\n            italic \u003d this@CodeModel.italic\n            bold \u003d this@CodeModel.bold\n            caps \u003d this@CodeModel.caps\n        }\n        return if (!isEditMode)\n            component\n        else\n            component.edit {\n                deleteUrl \u003d resource.path\n                editUrl \u003d resource.path\n                multilineText(name \u003d \"source\", title \u003d \"Source\", value \u003d if (source \u003d\u003d null) \"\" else source!!)\n                select(name \u003d \"lang\", title \u003d \"Language\", value \u003d lang, options \u003d listOf(\n                        SelectOption(label \u003d \"JavaScript\", value \u003d \"javascript\"),\n                        SelectOption(label \u003d \"JSX\", value \u003d \"jsx\"),\n                        SelectOption(label \u003d \"Kotlin\", value \u003d \"kotlin\")\n                ))\n            }\n    }\n\n    private fun String.toCodeLang(): CodeLang {\n        return when (this) {\n            \"javascript\" -\u003e JavaScript\n            \"jsx\" -\u003e ReactJSX\n            \"kotlin\" -\u003e Kotlin\n            else -\u003e JavaScript\n        }\n    }\n\n}",
+                    "value": "ReactDOM.render(\u003cSpectacleSlingAuthor content\u003d{app} /\u003e, document.getElementById(\u0027app\u0027))",
                     "type": "textarea"
                   },
                   {
@@ -110,20 +231,147 @@
                         "value": "jsx"
                       },
                       {
-                        "label": "Kotlin",
-                        "value": "kotlin"
+                        "label": "JSON",
+                        "value": "json"
                       }
                     ],
-                    "value": "kotlin",
+                    "value": "jsx",
                     "name": "lang",
                     "title": "Language"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Dark",
+                        "value": "dark"
+                      },
+                      {
+                        "label": "Light",
+                        "value": "light"
+                      },
+                      {
+                        "label": "External",
+                        "value": "external"
+                      }
+                    ],
+                    "value": "dark",
+                    "name": "theme",
+                    "title": "Theme"
                   }
                 ],
                 "children": [
                   {
                     "__type": "CodePane",
-                    "source": "<test/>",
-                    "lang": "jsx"
+                    "source": "ReactDOM.render(\u003cSpectacleSlingAuthor content\u003d{app} /\u003e, document.getElementById(\u0027app\u0027))",
+                    "lang": "jsx",
+                    "theme": "dark"
+                  }
+                ]
+              },
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide1/spectacle_components_479395116",
+                "deleteUrl": "/content/spectacle/slide1/spectacle_components_479395116",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Link Text",
+                    "value": "REactJS",
+                    "type": "text"
+                  },
+                  {
+                    "name": "href",
+                    "title": "Href",
+                    "value": "https://reactjs.org/",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Blank",
+                        "value": "_blank"
+                      },
+                      {
+                        "label": "Self",
+                        "value": "_self"
+                      },
+                      {
+                        "label": "Parent",
+                        "value": "_parent"
+                      },
+                      {
+                        "label": "Top",
+                        "value": "_top"
+                      }
+                    ],
+                    "value": "_blank",
+                    "name": "target",
+                    "title": "Target"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": true,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Link",
+                    "href": "https://reactjs.org/",
+                    "target": "_blank",
+                    "italic": false,
+                    "bold": false,
+                    "caps": true,
+                    "children": "REactJS"
                   }
                 ]
               }
@@ -195,7 +443,7 @@
                         "value": ""
                       }
                     ],
-                    "value": "primary",
+                    "value": "tertiary",
                     "name": "bgColor",
                     "title": "Background Color"
                   },
@@ -268,7 +516,7 @@
                         "value": "none"
                       }
                     ],
-                    "value": "pacman",
+                    "value": "number",
                     "name": "progress",
                     "title": "Progress icon"
                   },
@@ -288,7 +536,7 @@
                         "value": "default"
                       }
                     ],
-                    "value": "default",
+                    "value": "dark",
                     "name": "theme",
                     "title": "Theme"
                   }
@@ -375,6 +623,10 @@
               {
                 "url": "/content/spectacle/slide/spectacle_components",
                 "nodeName": "spectacle_components"
+              },
+              {
+                "url": "/content/spectacle/slide/spectacle_components_1316734406",
+                "nodeName": "spectacle_components_1316734406"
               }
             ],
             "children": [
@@ -483,6 +735,111 @@
                     "children": "Slide 2"
                   }
                 ]
+              },
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide/spectacle_components_1316734406",
+                "deleteUrl": "/content/spectacle/slide/spectacle_components_1316734406",
+                "editDialog": [
+                  {
+                    "name": "text",
+                    "title": "Text",
+                    "value": "Slide 2 2 ",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "H1",
+                        "value": "1"
+                      },
+                      {
+                        "label": "H2",
+                        "value": "2"
+                      },
+                      {
+                        "label": "H3",
+                        "value": "3"
+                      },
+                      {
+                        "label": "H4",
+                        "value": "4"
+                      },
+                      {
+                        "label": "H5",
+                        "value": "5"
+                      }
+                    ],
+                    "value": "6",
+                    "name": "size",
+                    "title": "Size"
+                  },
+                  {
+                    "name": "italic",
+                    "title": "Italic",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "bold",
+                    "title": "Bold",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "name": "caps",
+                    "title": "Caps",
+                    "value": false,
+                    "type": "checkbox"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "name": "shouldAppear",
+                    "title": "Should Appear",
+                    "value": false,
+                    "type": "checkbox"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Heading",
+                    "fit": true,
+                    "lineHeight": 1,
+                    "size": 6,
+                    "italic": false,
+                    "bold": false,
+                    "caps": false,
+                    "children": "Slide 2 2 "
+                  }
+                ]
               }
             ]
           },
@@ -524,7 +881,7 @@
                         "value": ""
                       }
                     ],
-                    "value": "",
+                    "value": "quarternary",
                     "name": "textColor",
                     "title": "Text Color"
                   },
@@ -625,7 +982,7 @@
                         "value": "none"
                       }
                     ],
-                    "value": "pacman",
+                    "value": "number",
                     "name": "progress",
                     "title": "Progress icon"
                   },
@@ -645,7 +1002,7 @@
                         "value": "default"
                       }
                     ],
-                    "value": "default",
+                    "value": "dark",
                     "name": "theme",
                     "title": "Theme"
                   }
@@ -658,7 +1015,275 @@
       },
       {
         "__type": "Slide",
-        "bgColor": "tertiary",
+        "children": [
+          {
+            "__type": "Container",
+            "resourcePath": "/content/spectacle/slide_1931626973/",
+            "components": [
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/Heading",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/Heading"
+                },
+                "title": "Heading",
+                "description": "Heading component"
+              },
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/Text",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/Text"
+                },
+                "title": "Text",
+                "description": "Text component"
+              },
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/Link",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/Link"
+                },
+                "title": "Link",
+                "description": "Link component"
+              },
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/Image",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/Image"
+                },
+                "title": "Image",
+                "description": "Image component"
+              },
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/BlockQuote",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/BlockQuote"
+                },
+                "title": "Block Quote",
+                "description": "BlockQuote component"
+              },
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/CodePane",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/CodePane"
+                },
+                "title": "Code",
+                "description": "Code component"
+              },
+              {
+                "props": {
+                  ":nameHint": "spectacle/components/Markdown",
+                  ":order": "last",
+                  "sling:resourceType": "spectacle/components/Markdown"
+                },
+                "title": "Markdown",
+                "description": "Markdown"
+              }
+            ],
+            "moveInfo": [
+              {
+                "url": "/content/spectacle/slide_1931626973/spectacle_components",
+                "nodeName": "spectacle_components"
+              }
+            ],
+            "children": [
+              {
+                "__type": "EditDialog",
+                "editUrl": "/content/spectacle/slide_1931626973/spectacle_components",
+                "deleteUrl": "/content/spectacle/slide_1931626973/spectacle_components",
+                "editDialog": [
+                  {
+                    "name": "source",
+                    "title": "Source",
+                    "value": "",
+                    "type": "textarea"
+                  }
+                ],
+                "children": [
+                  {
+                    "__type": "Markdown",
+                    "source": " "
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "__type": "SystemButtonsContainer",
+            "children": [
+              {
+                "__type": "EditModeToggler"
+              },
+              {
+                "__type": "DeleteSlideButton",
+                "url": "/content/spectacle/slide_1931626973"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle/slide_1931626973",
+                "editDialog": [
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "textColor",
+                    "title": "Text Color"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Primary",
+                        "value": "primary"
+                      },
+                      {
+                        "label": "Secondary",
+                        "value": "secondary"
+                      },
+                      {
+                        "label": "Tertiary",
+                        "value": "tertiary"
+                      },
+                      {
+                        "label": "Quarternary",
+                        "value": "quarternary"
+                      },
+                      {
+                        "label": "Default",
+                        "value": ""
+                      }
+                    ],
+                    "value": "",
+                    "name": "bgColor",
+                    "title": "Background Color"
+                  },
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "align",
+                    "title": "Align",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "notes",
+                    "title": "Notes",
+                    "value": "",
+                    "type": "textarea"
+                  },
+                  {
+                    "name": "id",
+                    "title": "Slide ID",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "title": "Slide Properties"
+              },
+              {
+                "__type": "SlidePropertiesButton",
+                "editUrl": "/content/spectacle",
+                "editDialog": [
+                  {
+                    "name": "transition",
+                    "title": "Transition (slide, zoom, fade, spin)",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "name": "transitionDuration",
+                    "title": "Transition Duration",
+                    "value": "",
+                    "type": "text"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Pacman",
+                        "value": "pacman"
+                      },
+                      {
+                        "label": "Bar",
+                        "value": "bar"
+                      },
+                      {
+                        "label": "Number",
+                        "value": "number"
+                      },
+                      {
+                        "label": "Node",
+                        "value": "none"
+                      }
+                    ],
+                    "value": "number",
+                    "name": "progress",
+                    "title": "Progress icon"
+                  },
+                  {
+                    "type": "select",
+                    "options": [
+                      {
+                        "label": "Dark",
+                        "value": "dark"
+                      },
+                      {
+                        "label": "Pink",
+                        "value": "pink"
+                      },
+                      {
+                        "label": "Default",
+                        "value": "default"
+                      }
+                    ],
+                    "value": "dark",
+                    "name": "theme",
+                    "title": "Theme"
+                  }
+                ],
+                "title": "Presentation Properties"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__type": "Slide",
         "children": [
           {
             "__type": "Text",

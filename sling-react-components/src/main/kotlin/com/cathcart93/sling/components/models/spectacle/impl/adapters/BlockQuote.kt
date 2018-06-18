@@ -1,6 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.spectacle.api.Constants
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
@@ -12,7 +12,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
         adaptables = [Resource::class],
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
         adapters = [BlockQuote::class, ReactModel::class],
-        resourceType = [Constants.BLOCK_QUOTE]
+        resourceType = [ResourceTypesConstants.BLOCK_QUOTE]
 )
 class BlockQuote : BaseModel(), ReactModel {
     @ValueMapValue

@@ -1,6 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.spectacle.api.Constants
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -12,7 +12,7 @@ import com.cathcart93.sling.components.models.spectacle.impl.builder.*
         adaptables = [Resource::class],
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
         adapters = [LinkModel::class, ReactModel::class],
-        resourceType = [Constants.LINK]
+        resourceType = [ResourceTypesConstants.LINK]
 )
 class LinkModel : BaseModel(), ReactModel {
 

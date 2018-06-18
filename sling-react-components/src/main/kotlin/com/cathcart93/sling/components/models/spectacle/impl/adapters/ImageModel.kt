@@ -12,7 +12,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
         adaptables = [Resource::class],
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
         adapters = [ImageModel::class, ReactModel::class],
-        resourceType = [Constants.IMAGE]
+        resourceType = [ResourceTypesConstants.IMAGE]
 )
 class ImageModel : BaseModel(), ReactModel {
 

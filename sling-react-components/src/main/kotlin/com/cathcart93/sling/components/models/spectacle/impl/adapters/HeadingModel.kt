@@ -1,6 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.spectacle.api.Constants
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
@@ -12,7 +12,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
         adaptables = [Resource::class],
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
         adapters = [HeadingModel::class, ReactModel::class],
-        resourceType = [Constants.HEADING]
+        resourceType = [ResourceTypesConstants.HEADING]
 )
 class HeadingModel : BaseModel(), ReactModel {
 

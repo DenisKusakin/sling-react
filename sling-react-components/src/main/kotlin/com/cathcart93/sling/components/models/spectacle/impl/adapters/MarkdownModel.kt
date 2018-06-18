@@ -1,6 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.spectacle.api.Constants
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.SpectacleTag
 import com.cathcart93.sling.components.models.spectacle.impl.builder.edit
 import com.cathcart93.sling.components.models.spectacle.impl.builder.markdown
@@ -15,11 +15,12 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
         adaptables = [Resource::class],
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
         adapters = [MarkdownModel::class, ReactModel::class],
-        resourceType = [Constants.MARKDOWN]
+        resourceType = [ResourceTypesConstants.MARKDOWN]
 )
 class MarkdownModel : ReactModel {
     @ValueMapValue
-    var source: String = ""
+    //Empty string is not working with Markdown component
+    var source: String = " "
 
     @SlingObject
     private lateinit var resource: Resource

@@ -133,11 +133,13 @@
                             <builtContentDirectory>target/classes</builtContentDirectory>
                             <failOnError>true</failOnError>
                             <filterSource>src/main/META-INF/vault/filter.xml</filterSource>
-                            <targetURL>http://localhost:8080/bin/cpm/package.service.html</targetURL>
+                            <targetURL>${sling.package-manager-url}</targetURL>
                             <useProxy>false</useProxy>
                             <failOnMissingEmbed>true</failOnMissingEmbed>
                             <userId>admin</userId>
                             <password>admin</password>
+                            <embeddeds>
+                            </embeddeds>
                             <!-- parameters and values common to all goals, as required -->
                         </configuration>
                         <executions>
