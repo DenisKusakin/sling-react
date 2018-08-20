@@ -2,5 +2,9 @@
 <workspaceFilter version="1.0">
     <filter root="/etc/sling-spectacle"/>
     <filter root="/apps/sling-spectacle/client-page"/>
-    <filter root="/apps/sling-spectacle/install"/>
+    <filter root="/apps/sling-spectacle/install" mode="merge"/>
+
+    <filter root="/apps/aem-poc"/>
+    <filter root="/etc/aem-poc-clientlibs"/>
+    <filter root="/conf/aem-poc"/>
 </workspaceFilter>

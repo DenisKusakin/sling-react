@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Page">
+
+    <wcm jcr:primaryType="nt:unstructured">
+        <foundation jcr:primaryType="nt:unstructured">
+            <components jcr:primaryType="nt:unstructured">
+                <page jcr:primaryType="nt:unstructured">
+                    <jcr:content
+                            jcr:primaryType="nt:unstructured"
+                            mergeList="{Boolean}true"/>
+                    <default
+                            jcr:description="Policy of the default page"
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Default Page"
+                            sling:resourceType="wcm/core/components/policy/policy"
+                            clientlibs="[wcm.foundation.components.page.responsive]">
+                        <jcr:content
+                                jcr:primaryType="nt:unstructured"
+                                mergeList="{Boolean}true"/>
+                    </default>
+                </page>
+                <parsys jcr:primaryType="nt:unstructured">
+                    <aem-poc-policy jcr:primaryType="nt:unstructured"
+                            jcr:title="AEM POC Policy"
+                            sling:resourceType="wcm/core/components/policy/policy"
+                            components="[group:AEM-React POC]">
+                        <!--<cq:authoring jcr:primaryType="nt:unstructured">-->
+                            <!--<assetToComponentMapping jcr:primaryType="nt:unstructured">-->
+                                <!--<image-->
+                                        <!--jcr:primaryType="nt:unstructured"-->
+                                        <!--assetGroup="media"-->
+                                        <!--assetMimetype="image/*"-->
+                                        <!--droptarget="image"-->
+                                        <!--resourceType="toryburch/components/spa/image"-->
+                                        <!--type="Images"/>-->
+                            <!--</assetToComponentMapping>-->
+                        <!--</cq:authoring>-->
+                        <jcr:content jcr:primaryType="nt:unstructured"/>
+                        <section jcr:primaryType="nt:unstructured"/>
+                    </aem-poc-policy>
+                </parsys>
+            </components>
+        </foundation>
+    </wcm>
+    <!-- No page policies required cause there is no need to add custom clienlibs or extra styles on Tory Burch/Sport pages -->
+</jcr:root>

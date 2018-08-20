@@ -19,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <kotlin.version>1.2.41</kotlin.version>
-        <sling.server>http://localhost:4504</sling.server>
+        <sling.server>http://eprupetw1009.petersburg.epam.com:4502</sling.server>
         <!--<sling.package-manager-url>${sling.server}/bin/cpm/package.service.html</sling.package-manager-url>-->
         <sling.package-manager-url>${sling.server}/crx/packmgr/service.jsp</sling.package-manager-url>
     </properties>

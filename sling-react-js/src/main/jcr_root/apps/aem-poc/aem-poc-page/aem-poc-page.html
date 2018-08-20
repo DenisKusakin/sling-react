@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/etc/aem-poc-clientlibs/aem-poc.client.author.js"></script>
+        <sly data-sly-include="head.html" />
+    </head>
+    <body>
+        <h1>AEM POC PAGE</h1>
+        <main id="root-layout">
+            <div data-sly-resource="${'content' @ resourceType='wcm/foundation/components/parsys'}"></div>
+        </main>
+    </body>
+</html>

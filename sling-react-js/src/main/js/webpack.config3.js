@@ -3,10 +3,11 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        'aem-poc.client.author': ['babel-polyfill', './aem-poc/entries/client.aem-poc.author']
+        'spectacle.client.author': ['babel-polyfill', './spectacle/entries/client.spectacle.author'],
+        'spectacle.client': ['babel-polyfill', './spectacle/entries/client.spectacle']
     },
     output: {
-        path: path.resolve(__dirname + '/../jcr_root/etc/aem-poc-clientlibs'),
+        path: path.resolve(__dirname + '/../jcr_root/etc/sling-spectacle'),
         filename: '[name].js'
     },
     resolve: {
