@@ -18,7 +18,7 @@
  */
 package com.cathcart93.sling.components
 
-import com.cathcart93.sling.components.models.PageController
+import com.cathcart93.sling.components.models.aempoc.AEMReactModel
 import org.apache.felix.scr.annotations.Properties
 import org.apache.felix.scr.annotations.Property
 import org.apache.felix.scr.annotations.sling.SlingServlet
@@ -27,8 +27,8 @@ import org.apache.sling.api.SlingHttpServletResponse
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
 import org.slf4j.LoggerFactory
 
-@SlingServlet(resourceTypes = ["sling-react/page", "sling-react/client-page"], extensions = ["json"])
-@Properties(Property(name = "service.description", value = "Props Servlet"), Property(name = "service.vendor", value = "Cathcart 93"))
+@SlingServlet(resourceTypes = ["aem-poc/components/base-poc-component"], extensions = ["json"], selectors = ["props"])
+@Properties(Property(name = "service.description", value = "Props Servlet"), Property(name = "service.vendor", value = "DK"))
 class PropsServlet : SlingSafeMethodsServlet() {
 
     private val log = LoggerFactory.getLogger(PropsServlet::class.java)
@@ -36,11 +36,14 @@ class PropsServlet : SlingSafeMethodsServlet() {
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
         val writer = response.writer
-        val controller = request.adaptTo(PageController::class.java)
-        writer.append(controller!!.getProps())
+        val model = request.resource.adaptTo(AEMReactModel::class.java)
+        if (model == null) {
+            response.sendError(400)
+            return
+        }
+        //val controller = request.adaptTo(PageController::class.java)
+        writer.append(model.toJson())
         response.contentType = "json"
-        //TODO: rework
-        response.setHeader("Access-Control-Allow-Origin", "*")
     }
 
 }
