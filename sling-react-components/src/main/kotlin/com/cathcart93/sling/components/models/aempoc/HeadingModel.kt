@@ -1,6 +1,5 @@
 package com.cathcart93.sling.components.models.aempoc
 
-import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.Heading
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.ReactTag
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
