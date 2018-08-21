@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="/etc/aem-poc-clientlibs/aem-poc.client.author.js"></script>
+        <script data-sly-test="${!wcmmode.disabled}" src="/etc/aem-poc-clientlibs/aem-poc.client.author.js"></script>
+        <script data-sly-test="${wcmmode.disabled}" src="/etc/aem-poc-clientlibs/aem-poc.client.publish.js"></script>
         <sly data-sly-include="head.html" />
     </head>
     <body>
-        <h1>AEM POC PAGE</h1>
-        <main id="root-layout">
+        <main id="root-layout" data-sly-test="${!wcmmode.disabled}">
             <div data-sly-resource="${'content' @ resourceType='wcm/foundation/components/parsys'}"></div>
         </main>
+        <script data-sly-test="${wcmmode.disabled}" data-sly-use.model="com.cathcart93.sling.components.models.aempoc.AemReactPageModel">
+            window.__INITIAL_STATE = ${model.initialStateJson @ context='unsafe'}
+        </script>
+        <div data-sly-test="${wcmmode.disabled}" id="react-root">
+
+        </div>
     </body>
 </html>

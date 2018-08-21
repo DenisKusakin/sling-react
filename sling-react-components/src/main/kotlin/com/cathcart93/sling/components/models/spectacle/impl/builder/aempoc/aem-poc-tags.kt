@@ -15,3 +15,13 @@ class Heading(private val text: String) : ReactTag {
         )
     }
 }
+
+class Parsys(private val children: List<ReactElement>) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "Parsys",
+                children = children
+        )
+    }
+
+}

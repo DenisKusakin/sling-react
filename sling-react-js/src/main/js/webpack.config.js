@@ -3,7 +3,8 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        'aem-poc.client.author': ['babel-polyfill', './aem-poc/entries/client.aem-poc.author']
+        'aem-poc.client.author': ['babel-polyfill', './aem-poc/entries/client.aem-poc.author'],
+        'aem-poc.client.publish': ['babel-polyfill', './aem-poc/entries/client.aem-poc.publish']
     },
     output: {
         path: path.resolve(__dirname + '/../jcr_root/etc/aem-poc-clientlibs'),

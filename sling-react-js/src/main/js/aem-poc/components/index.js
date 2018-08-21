@@ -1,5 +1,7 @@
 import Heading from './heading'
+import Parsys from './parsys'
 
 export default {
-    Heading
+    Heading,
+    Parsys
 }
