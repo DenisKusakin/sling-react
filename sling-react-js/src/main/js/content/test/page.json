@@ -6,6 +6,10 @@
       "heading": "test1"
     },
     {
+      "__type": "NarrowBanner",
+      "title": "Narrow Banner"
+    },
+    {
       "__type": "Heading",
       "heading": "test1"
     },
