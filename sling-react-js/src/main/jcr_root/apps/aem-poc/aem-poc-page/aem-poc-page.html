@@ -5,15 +5,15 @@
         <script data-sly-test="${wcmmode.disabled}" src="/etc/aem-poc-clientlibs/aem-poc.client.publish.js"></script>
         <sly data-sly-include="head.html" />
     </head>
-    <body>
+    <body data-sly-use.model="com.cathcart93.sling.components.models.aempoc.AemReactPageModel">
         <main id="root-layout" data-sly-test="${!wcmmode.disabled}">
             <div data-sly-resource="${'content' @ resourceType='wcm/foundation/components/parsys'}"></div>
         </main>
-        <script data-sly-test="${wcmmode.disabled}" data-sly-use.model="com.cathcart93.sling.components.models.aempoc.AemReactPageModel">
+        <script data-sly-test="${wcmmode.disabled}">
             window.__INITIAL_STATE = ${model.initialStateJson @ context='unsafe'}
         </script>
         <div data-sly-test="${wcmmode.disabled}" id="react-root">
-
+            ${model.html @ context='unsafe'}
         </div>
     </body>
 </html>
