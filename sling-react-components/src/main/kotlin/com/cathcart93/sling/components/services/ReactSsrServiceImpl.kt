@@ -45,11 +45,13 @@ class ReactSsrServiceImpl : ReactSsrService {
     private fun getScriptEngine(resourceResolver: ResourceResolver, scriptPath: String): ScriptEngine {
 
         return enginesCache.get(scriptPath) {
+            val polyfillSource = readFile(resourceResolver, "/etc/aem-poc-clientlibs/nashorn-polyfill.js")
             val jsSource = readFile(resourceResolver, scriptPath)
                     ?: throw FileNotFoundException("JS Source not found: $scriptPath")
             val nashornScriptEngine = ScriptEngineManager().getEngineByName("nashorn")
 
             try {
+                nashornScriptEngine.eval(polyfillSource)
                 nashornScriptEngine.eval(jsSource)
             } catch (e: Exception) {
                 LOGGER.error("Script Error: {}", e.toString())
@@ -77,7 +79,7 @@ class ReactSsrServiceImpl : ReactSsrService {
         } catch (e: IOException) {
             LOGGER.error("File does not exist: {}", path)
         } finally {
-            resourceResolver.close()
+//            resourceResolver.close()
         }
 
         return jsSource

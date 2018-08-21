@@ -12,8 +12,6 @@
         <script data-sly-test="${wcmmode.disabled}">
             window.__INITIAL_STATE = ${model.initialStateJson @ context='unsafe'}
         </script>
-        <div data-sly-test="${wcmmode.disabled}" id="react-root">
-            ${model.html @ context='unsafe'}
-        </div>
+        <div data-sly-test="${wcmmode.disabled}" id="react-root">${model.html @ context='unsafe'}</div>
     </body>
 </html>

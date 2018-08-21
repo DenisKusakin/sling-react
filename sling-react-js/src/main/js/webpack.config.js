@@ -5,7 +5,7 @@ module.exports = {
     entry: {
         'aem-poc.client.author': ['babel-polyfill', './aem-poc/entries/client.aem-poc.author'],
         'aem-poc.client.publish': ['babel-polyfill', './aem-poc/entries/client.aem-poc.publish'],
-        'aem-poc.server': ['./nashorn-polyfill', 'babel-polyfill', './aem-poc/entries/client.aem-poc.publish']
+        'aem-poc.server': ['babel-polyfill', './aem-poc/entries/server.aem-poc']
     },
     output: {
         path: path.resolve(__dirname + '/../jcr_root/etc/aem-poc-clientlibs'),
@@ -39,14 +39,6 @@ module.exports = {
                         ]
                     }
                 }
-            },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-                loader: 'file-loader'
             }
         ]
     }
