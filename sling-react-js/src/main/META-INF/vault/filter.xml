@@ -7,4 +7,5 @@
     <filter root="/apps/aem-poc"/>
     <filter root="/etc/aem-poc-clientlibs"/>
     <filter root="/conf/aem-poc"/>
+    <filter root="/content/aem-react-poc" mode="merge"/>
 </workspaceFilter>
