@@ -1,0 +1,23 @@
+.ds-narrow-banner {
+  min-height: 102px;
+  padding: 28px 0;
+  color: #fff;
+  position: relative;
+}
+
+.ds-narrow-banner:after{
+  position: absolute;
+  background: #0077c8;
+  content: '';
+  top: 0;
+  right: 50%;
+  bottom: 0;
+  z-index: -2;
+  width: 100vw;
+  transform: translateX(50%);
+  backface-visibility: hidden;
+}
+
+.ds-narrow-banner .ds-h1 {
+  font-size: 60px;
+}
