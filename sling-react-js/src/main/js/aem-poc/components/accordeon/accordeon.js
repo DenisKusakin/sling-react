@@ -1,6 +1,6 @@
 import { UnmountClosed } from 'react-collapse';
 import React from 'react';
-import './accordeon.css';
+import './accordeon.less';
 
 class Accordeon extends React.Component {
     constructor(props) {
