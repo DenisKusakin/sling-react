@@ -2,18 +2,29 @@ package com.cathcart93.sling.components.models.aempoc
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJson
+import com.cathcart93.sling.components.services.ReactSsrService
+import com.cathcart93.sling.components.services.ReactSsrServiceImpl
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
+import org.apache.sling.models.annotations.injectorspecific.OSGiService
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import javax.annotation.PostConstruct
+import javax.inject.Inject
 
 @Model(
-        adaptables = [Resource::class, SlingHttpServletRequest::class]
+        adaptables = [Resource::class, SlingHttpServletRequest::class],
+        adapters = [AemReactPageModel::class, AEMReactModel::class],
+        resourceType = ["aem-poc/aem-poc-page"]
 )
-class AemReactPageModel {
+class AemReactPageModel : AEMReactModel {
     @SlingObject
     private lateinit var resource: Resource
+
+    @OSGiService
+    private lateinit var reactSsrService: ReactSsrService
+
+    private val jsFilePath = "/etc/aem-poc-clientlibs/aem-poc.server.js"
 
     private var reactRoot: ReactElement? = null
 
@@ -24,5 +35,13 @@ class AemReactPageModel {
 
     fun getInitialStateJson(): String {
         return reactRoot!!.toJson()
+    }
+
+    fun getHtml(): String {
+        return reactSsrService.renderToHtmlString(resource.resourceResolver, jsFilePath, reactRoot!!.toJson())
+    }
+
+    override fun toReact(): ReactElement {
+        return reactRoot!!
     }
 }
