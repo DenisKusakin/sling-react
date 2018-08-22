@@ -1,6 +1,5 @@
 import React from 'react'
-import Page from '../aem-poc/components/page';
 import data from '../content/components/page2.json';
-import menu from '../content/components/menu.json';
+import AemPublishRootComponent from '../aem-poc/components/aem-publish-component';
 
-export default () => <Page pages={menu.pages} isNext data={data}/>
+export default () => <AemPublishRootComponent config={data}/>

@@ -3,12 +3,12 @@ import Menu from './menu/menu';
 import AemPublishRootComponent from './aem-publish-component';
 import "./previewPage/previewPage.less";
 
-export default ({ data, pages, isNext }) => <div>
+export default ({ navigation, content, isNext }) => <div>
     <div className="preview">
-        <Menu pages={pages} isNext />
+        { navigation }
         <div className="preview-container">
             <div className="preview-content">
-                <AemPublishRootComponent config={data}/>
+                { content }
             </div>
         </div>
     </div>
