@@ -1,5 +1,5 @@
 import React from 'react';
-import './narrowBanner.css';
+import './narrowBanner.less';
 
 const NarrowBanner = ({ title, noH1Tag }) =>
   <div className="ds-narrow-banner">

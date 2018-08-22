@@ -131,12 +131,12 @@
             <artifactId>kotlin-stdlib-jre8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.cathcart93.sling</groupId>
-            <artifactId>sling-react-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.cathcart93.sling</groupId>-->
+            <!--<artifactId>sling-react-core</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
         <!---->
         <dependency>
             <groupId>javax.servlet</groupId>
