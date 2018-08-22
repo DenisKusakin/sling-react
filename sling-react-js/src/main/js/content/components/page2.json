@@ -1,0 +1,27 @@
+{
+  "__type": "Parsys",
+  "children": [
+    {
+      "__type": "Heading",
+      "heading": "Page2"
+    },
+    {
+      "__type": "NarrowBanner",
+      "title": "Page2"
+    },
+    {
+      "__type": "Heading",
+      "heading": "test1"
+    },
+    {
+      "__type": "Accordeon",
+      "headline": "Accoordeon Component",
+      "header": "Accoordeon Header",
+      "isOpen": true,
+      "children":  [{
+        "__type": "Heading",
+        "heading": "Accoordeon Content"
+      }]
+    }
+  ]
+}
