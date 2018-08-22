@@ -27,7 +27,7 @@ import org.apache.sling.api.SlingHttpServletResponse
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
 import org.slf4j.LoggerFactory
 
-@SlingServlet(resourceTypes = ["aem-poc/components/base-poc-component"], extensions = ["json"], selectors = ["props"])
+@SlingServlet(resourceTypes = ["aem-poc/aem-poc-page"], extensions = ["json"], selectors = ["props"])
 @Properties(Property(name = "service.description", value = "Props Servlet"), Property(name = "service.vendor", value = "DK"))
 class PropsServlet : SlingSafeMethodsServlet() {
 

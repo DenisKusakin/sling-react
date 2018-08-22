@@ -13,9 +13,11 @@ import javax.annotation.PostConstruct
 import javax.inject.Inject
 
 @Model(
-        adaptables = [Resource::class, SlingHttpServletRequest::class]
+        adaptables = [Resource::class, SlingHttpServletRequest::class],
+        adapters = [AemReactPageModel::class, AEMReactModel::class],
+        resourceType = ["aem-poc/aem-poc-page"]
 )
-class AemReactPageModel {
+class AemReactPageModel : AEMReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
@@ -37,5 +39,9 @@ class AemReactPageModel {
 
     fun getHtml(): String {
         return reactSsrService.renderToHtmlString(resource.resourceResolver, jsFilePath, reactRoot!!.toJson())
+    }
+
+    override fun toReact(): ReactElement {
+        return reactRoot!!
     }
 }
