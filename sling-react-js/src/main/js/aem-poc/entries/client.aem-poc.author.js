@@ -14,10 +14,13 @@ const AUTHOR_API = {
     afterEditComponent: (component) => {
         console.log("After Edit!");
         const elem = component.dom.find("[data-author-component]")[0];
-        const {dataset: {config}} = elem;
-        ReactDOM.render(<AemAuthorComponent config={JSON.parse(config)} />, elem);
         AUTHOR_API.getUpdatedPreviewComponent()
             .then(response => ReactDOM.render(<AemAuthorComponent config={response.data} />, AUTHOR_API.getPreviewComponentRoot()))
+        if(!elem){
+            return;
+        }
+        const {dataset: {config}} = elem;
+        ReactDOM.render(<AemAuthorComponent config={JSON.parse(config)} />, elem);
     }
 };
 
