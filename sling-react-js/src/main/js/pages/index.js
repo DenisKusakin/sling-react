@@ -1,7 +1,5 @@
-import AemPublishRootComponent from '../aem-poc/components/aem-publish-component';
-import data from '../content/test/page.json';
+import React from 'react'
+import PreviewPage from '../aem-poc/components/previewPage/previewPage';
+import data from '../content/components/parsys.json';
 
-export default () => <div>
-    <link rel="stylesheet" href="/_next/static/style.css" />
-    <AemPublishRootComponent config={data}/>
-</div>
+export default () => <PreviewPage name="Parsys Component" data={data}/>

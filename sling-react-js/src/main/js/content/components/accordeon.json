@@ -1,0 +1,10 @@
+{
+  "__type": "Accordeon",
+  "headline": "Accoordeon Component",
+  "header": "Accoordeon Header",
+  "isOpen": true,
+  "children":  [{
+    "__type": "Heading",
+    "heading": "Accoordeon Content"
+  }]
+}
