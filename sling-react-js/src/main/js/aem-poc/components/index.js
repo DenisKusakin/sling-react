@@ -5,10 +5,12 @@ import Accordeon from './accordeon/accordeon';
 import NarrowBanner from './narrowBanner/narrowBanner';
 import Menu from './menu/menu';
 import Page from './page';
+import AuthorWrapper from './authorWrapper';
 import './author.less'
 import './main.less'
 
 export default {
+    AuthorWrapper,
     Heading,
     Parsys,
     ImageGallery,
