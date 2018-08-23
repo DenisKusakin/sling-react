@@ -30,6 +30,8 @@ class AemReactPageModel : AEMReactModel {
 
     @PostConstruct
     fun init() {
+        //val navigationReactElement = resource.adaptTo(NavigationModel::class.java)!!.toReact()
+
         reactRoot = resource.getChild("content")?.adaptTo(ParsysModel::class.java)?.toReact()
     }
 

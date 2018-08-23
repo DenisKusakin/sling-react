@@ -28,6 +28,33 @@ class Parsys(private val children: List<ReactElement>) : ReactTag {
 
 }
 
+data class Link(val href: String, val title: String)
+
+class Navigation(private val links: List<Link>) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "Navigation",
+                props = mapOf(
+                        "links" to ArrayProp(
+                                links.map {
+                                    ObjectProps(mapOf(
+                                            "href" to it.href.toReactProp(),
+                                            "title" to it.title.toReactProp()
+                                    ))
+                                }
+                        )
+                )
+        )
+    }
+
+}
+
+//class Page() : ReactTag {
+//    override fun toReactElement(): ReactElement {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
+//}
+
 data class ImageGalleryItem(val original: String, val thumbnail: String)
 
 class ImageGallery(private val slides: List<ImageGalleryItem>) : ReactTag {
