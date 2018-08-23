@@ -49,11 +49,26 @@ class Navigation(private val links: List<Link>) : ReactTag {
 
 }
 
-//class Page() : ReactTag {
-//    override fun toReactElement(): ReactElement {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//}
+class AuthorWrapper(private val url: String) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "AuthorWrapper",
+                props = mapOf("url" to url.toReactProp())
+        )
+    }
+}
+
+class Page(private val navigation: ReactElement, private val content: ReactElement) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "Page",
+                props = mapOf(
+                        "navigation" to navigation,
+                        "content" to content
+                )
+        )
+    }
+}
 
 data class ImageGalleryItem(val original: String, val thumbnail: String)
 

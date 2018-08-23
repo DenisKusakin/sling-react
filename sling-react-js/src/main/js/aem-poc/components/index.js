@@ -3,11 +3,11 @@ import Parsys from './parsys';
 import ImageGallery from './imageGallery/imageGallery';
 import Accordeon from './accordeon/accordeon';
 import NarrowBanner from './narrowBanner/narrowBanner';
-import Menu from './menu/menu';
+import Navigation from './menu/menu';
 import Page from './page';
 import AuthorWrapper from './authorWrapper';
-import './author.less'
-import './main.less'
+import './author.less';
+import './main.less';
 
 export default {
     AuthorWrapper,
@@ -15,7 +15,7 @@ export default {
     Parsys,
     ImageGallery,
     NarrowBanner,
-    Menu,
+    Navigation,
     Page,
     Accordeon
 }
