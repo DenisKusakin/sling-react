@@ -31,6 +31,8 @@
     "react-color": "^2.13.8",
     "react-dom": "^16.4.0",
     "react-image-gallery": "^0.8.10",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "reactcss": "^1.2.3",
     "spectacle": "^4.0.5",
     "styled-jsx": "^2.2.1",

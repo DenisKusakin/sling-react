@@ -1,0 +1,46 @@
+{
+  "__type": "Page",
+  "navigation": {
+    "__type": "Menu",
+    "pages": [
+      {
+        "title": "page1",
+        "link": "/"
+      },
+      {
+        "title": "page2",
+        "link": "/page2"
+      }
+    ]
+  },
+  "content": {
+    "__type": "Parsys",
+    "children": [
+      {
+        "__type": "Heading",
+        "heading": "Page2"
+      },
+      {
+        "__type": "NarrowBanner",
+        "title": "Page2"
+      },
+      {
+        "__type": "ImageGallery",
+        "images": [
+          {
+            "original": "https://cdn.pixabay.com/photo/2017/05/09/21/49/gecko-2299365_960_720.jpg",
+            "thumbnail": "https://cdn.pixabay.com/photo/2017/05/09/21/49/gecko-2299365_960_720.jpg"
+          },
+          {
+            "original": "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg",
+            "thumbnail": "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"
+          },
+          {
+            "original": "https://i.pinimg.com/originals/5a/e5/8f/5ae58f5036997cfd4636917403c3c951.jpg",
+            "thumbnail": "https://i.pinimg.com/originals/5a/e5/8f/5ae58f5036997cfd4636917403c3c951.jpg"
+          }
+        ]
+      }
+    ]
+  }
+}
