@@ -8,9 +8,7 @@
     </head>
     <body data-sly-use.model="com.cathcart93.sling.components.models.aempoc.AemReactPageModel">
         <!--This block should be hidden in preview-->
-        <main id="root-layout" data-sly-test="${!wcmmode.disabled}">
-            <div data-sly-resource="${'content' @ resourceType='wcm/foundation/components/parsys'}"></div>
-        </main>
+
         <!--This block should be shown in preview-->
         <div data-sly-test="${!wcmmode.disabled}"
              id="react-root-preview"
@@ -21,6 +19,6 @@
         <script data-sly-test="${wcmmode.disabled}">
             window.__INITIAL_STATE = ${model.initialStateJson @ context='unsafe'}
         </script>
-        <div data-sly-test="${wcmmode.disabled}" id="react-root">${model.html @ context='unsafe'}</div>
+        <div id="react-root">${model.html @ context='unsafe'}</div>
     </body>
 </html>
