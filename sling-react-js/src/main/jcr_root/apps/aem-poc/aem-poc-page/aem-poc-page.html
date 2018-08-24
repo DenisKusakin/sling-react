@@ -11,14 +11,15 @@
 
         <!--This block should be shown in preview-->
         <div data-sly-test="${!wcmmode.disabled}"
-             id="react-root-preview"
+             id="react-root"
              data-author-component="true"
              data-config='${model.initialStateJson}'
              data-conf-url="${resource.path}.props.json">
         </div>
+
         <script data-sly-test="${wcmmode.disabled}">
             window.__INITIAL_STATE = ${model.initialStateJson @ context='unsafe'}
         </script>
-        <div id="react-root">${model.html @ context='unsafe'}</div>
+        <div data-sly-test="${wcmmode.disabled}" id="react-root">${model.html @ context='unsafe'}</div>
     </body>
 </html>

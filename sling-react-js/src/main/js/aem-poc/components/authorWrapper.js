@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import AuthorHooks from '../utils/authorHooks';
 
 class AuthorWrapperComponent extends React.Component {
     constructor(props) {
@@ -11,20 +12,14 @@ class AuthorWrapperComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        if (window && window.parent) {
-            const elem = window.parent.document.querySelector('iframe#ContentFrame')
-            if (elem) {
-                elem.dispatchEvent(new Event('load'));
-            }
-        }
+        AuthorHooks.upadeIframe();
     }
 
     componentDidMount() {
         axios.get(this.props.url)
-            .then(response => {
-                this.setState({html: response.data, isPending: false});
-            });
-    }
+            .then(response => this.setState({html: response.data, isPending: false}));
+    };
+
 
     render() {
         return !this.state.isPending && <div dangerouslySetInnerHTML={{__html: this.state.html}}/>;
