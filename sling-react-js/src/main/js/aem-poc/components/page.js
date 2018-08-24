@@ -1,9 +1,7 @@
 import React from 'react';
-import Menu from './menu/menu';
-import AemPublishRootComponent from './aem-publish-component';
 import "./previewPage/previewPage.less";
 
-export default ({ navigation, content, isNext }) => <div>
+export default ({ navigation, content }) => <div>
     <div className="preview">
         { navigation }
         <div className="preview-container">
