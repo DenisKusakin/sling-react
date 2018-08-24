@@ -36,7 +36,7 @@ class PropsServlet : SlingSafeMethodsServlet() {
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
         val writer = response.writer
-        val model = request.resource.adaptTo(AEMReactModel::class.java)
+        val model = request.adaptTo(AEMReactModel::class.java)
         if (model == null) {
             response.sendError(400)
             return

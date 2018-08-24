@@ -10,7 +10,11 @@
         <!--This block should be hidden in preview-->
 
         <!--This block should be shown in preview-->
-        <div data-sly-test="${!wcmmode.disabled}" id="react-root-preview" data-conf-url="${resource.path}.props.json">
+        <div data-sly-test="${!wcmmode.disabled}"
+             id="react-root-preview"
+             data-author-component="true"
+             data-config='${model.initialStateJson}'
+             data-conf-url="${resource.path}.props.json">
         </div>
         <script data-sly-test="${wcmmode.disabled}">
             window.__INITIAL_STATE = ${model.initialStateJson @ context='unsafe'}

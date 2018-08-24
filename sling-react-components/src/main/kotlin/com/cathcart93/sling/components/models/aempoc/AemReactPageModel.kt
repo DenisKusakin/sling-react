@@ -1,16 +1,16 @@
 package com.cathcart93.sling.components.models.aempoc
 
+import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.AuthorWrapper
+import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.Page
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJson
 import com.cathcart93.sling.components.services.ReactSsrService
-import com.cathcart93.sling.components.services.ReactSsrServiceImpl
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.OSGiService
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import javax.annotation.PostConstruct
-import javax.inject.Inject
 
 @Model(
         adaptables = [Resource::class, SlingHttpServletRequest::class],
@@ -19,6 +19,8 @@ import javax.inject.Inject
 )
 class AemReactPageModel : AEMReactModel {
     @SlingObject
+    private lateinit var request: SlingHttpServletRequest
+
     private lateinit var resource: Resource
 
     @OSGiService
@@ -30,7 +32,14 @@ class AemReactPageModel : AEMReactModel {
 
     @PostConstruct
     fun init() {
-        reactRoot = resource.getChild("content")?.adaptTo(ParsysModel::class.java)?.toReact()
+        resource = request.resource
+        val navigationReactElement = resource.adaptTo(NavigationModel::class.java)!!.toReact()
+        val isWcmModeDisabled = request.getParameter("wcmmode") == "disabled"
+        val content = resource.getChild("content")?.adaptTo(ParsysModel::class.java)?.toReact()
+        reactRoot = Page(
+                navigationReactElement,
+                if (isWcmModeDisabled) content!! else AuthorWrapper("${resource.path}/content.html").toReactElement()
+        ).toReactElement()
     }
 
     fun getInitialStateJson(): String {
