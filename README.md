@@ -2,6 +2,7 @@
 
 The goal of this project is to develop approach for building [React](https://reactjs.org/) components for Adobe Experience Manager.
 The core AEM authoring functionality should be saved.
+Server-side rendering should be supported.
 
 ## Motivation
 
@@ -22,6 +23,47 @@ The idea is to separate frontend and backend development as much as possible. Th
 Backend developers should get the following features:
 * No need to think about HTML/CSS/JS at all.
 * Another notion of component comparing to AEM components, this approach should help to build reusable components.
+
+## Implementation Details
+
+Two different views should be supported for AEM:
+* editor view(used on author environment for /editor interface)
+* publish view(used on author and publisher, end-user view)
+
+In most cases component looks the same for both authoring and publisher views, but for some components it is not true.
+The typical example is image gallery component, if we consider classic AEM approach, the component should have parsys and author should be able
+to insert new slides to this parsys and then configure each item. From end-user perspective the component looks very different and have nothing
+common with author view.
+
+The idea is to create two independent interfaces for both views for every component. The editor interface uses AEM components(scripts under /apps) as usual
+while publish mode does not use scripts under /apps at all. As was mentioned above, most components looks the same for both views and it is obvious
+that code should NOT be duplicated to support editor/preview modes.
+
+HTL Script for simplest AEM component will look like this:
+
+```
+<div data-sly-use.model="com.project.components.models.ComponentModel"
+     data-author-component="true"
+     data-config='${model.toJson}'>
+
+</div>
+```
+
+So it only renders data needed to render React component on client-side.
+HTL script for non-trivial component might look like this
+
+```
+<div data-sly-resource="${'slides' @ resourceType='wcm/foundation/components/parsys'}"></div>
+```
+
+Script for item rendering:
+
+```
+<div>
+    <h2>Image gallery Item (Authoring view)</h2>
+    <img src="${properties['original']}"/>
+</div>
+```
 
 ## Development
 
@@ -45,12 +87,9 @@ npm run dev-next
     ```
     mvn clean install -P autoInstallBundle,autoInstallPackage
     ```
-* using package manager
-
-    JCR package could be loaded from releases tab
 
 ## Built With
-* [AEM] (https://www.adobe.com/marketing/experience-manager.html)
+* [AEM](https://www.adobe.com/marketing/experience-manager.html)
 * [ReactJS](https://reactjs.org/)
 * [Kotlin](https://kotlinlang.org/) - kotlin is used mostly because of its ability for building DSLs
 * [NextJS](https://github.com/zeit/next.js/) - used as developer environment for frontend developers
