@@ -105,6 +105,7 @@ Authoring Check list:
 - [ ] Carefully check parsys policies. Need to develop some complex components and provide policies for them. Make sure that they work as expected.
 - [ ] Develop editable component that is located outside the parsys.
 
+
 ## Advantages of the approach
 
 Frontend is independent from AEM, React components don't care about AEM. Frontend developers could concentrate on developing features using their usual stack.
@@ -118,7 +119,7 @@ I guess it would be honest to say that code splitting is the one of things that 
 The approach presented in this project allows to easily implement route-based code splitting by creating js/css bundles, it is still manual work but at least without much chances to make a mistake.
 There is actually another approach for code-splitting, component-based, this approach assumes that components are loaded asynchronously when they needed,
 the approach allows to reduce bundle size and avoid manual code splitting. Component-based code splitting is quite complicated to implement in classic AEM approach,
-but it is possible in approach presented in this project(POC is needed).
+but it is possible in approach presented in this project(**POC is needed**).
 
 TODO List
 
