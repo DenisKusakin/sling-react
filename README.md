@@ -65,6 +65,7 @@ Script for item rendering:
 </div>
 ```
 
+To provide authoring experience we just use classic AEM approach for components, so there is almost nothing React specific here.
 React implementation of component does NOT need to fit specific requirements and it has nothing AEM specific.
 In this code image-gallery implementation is just third-party [react-image-gallery](https://www.npmjs.com/package/react-image-gallery) with NO specific adaptations.
 
@@ -88,7 +89,7 @@ This project does NOT use AEM client libraries since they don't bring any advant
 The project tries to bring React components into AEM authoring, the goal is to not loose AEM authoring functionality.
 The implementation contains not too much authoring customizations that's why there is hope that all OOTB feature should still work.
 
-Check list:
+Authoring Check list:
 - [x] Simple component with dialog support. The component should be updated after edit.
 - [x] Parsys component. Insert component into parsys.
 - [x] Parsys component. Delete component from parsys.
@@ -100,7 +101,36 @@ Check list:
 - [x] Complex component(Image Gallery). Delete item.
 - [x] Complex component(Image Gallery). Move item.
 - [x] Complex component(Image Gallery). Copy item.
-- [ ] Drag and drop asset into parsys. Need to check that it can be converted into image component.
+- [ ] Drag and drop an asset into parsys. Need to check that it can be converted into image component.
+- [ ] Carefully check parsys policies. Need to develop some complex components and provide policies for them. Make sure that they work as expected.
+
+## Advantages of the approach
+
+Frontend is independent from AEM, React components don't care about AEM. Frontend developers could concentrate on developing features using their usual stack.
+There is no restrictions on js/css files provided by frontend developers, it could be a single js/css file or multiple ones, does not matter.
+
+AEM is good for managing content-centric sites, there might be many sites with many pages but usually most of them use the same component library,
+and of course you don't want to load all js/css for some small page, this is the case for code splitting.
+In classic AEM approach this usually solved by creating separate clientlib for particular pages, the problem is that this is manual error prone work that requires a lot of effort.
+I guess it would be honest to say that code splitting is the one of things that is quite complicated to be done in classic AEM approach.
+
+The approach presented in this project allows to easily implement route-based code splitting by creating js/css bundles, it is still manual work but at least without much chances to make a mistake.
+There is actually another approach for code-splitting, component-based, this approach assumes that components are loaded asynchronously when they needed,
+the approach allows to reduce bundle size and avoid manual code splitting. Component-based code splitting is quite complicated to implement in classic AEM approach,
+but it is possible in approach presented in this project.
+
+TODO List
+
+- [ ] Implement POC for component-based code-splitting(react-loadable). Consider creating SPA, so no SSR required.
+- [ ] Implement POC for component-based code-splitting(react-loadable). Application with SSR.
+
+## How to Install
+
+* build from sources
+
+    ```
+    mvn clean install -P autoInstallBundle,autoInstallPackage
+    ```
 
 ## Development
 
@@ -116,14 +146,6 @@ Go to sling-react-js/src/main/js
 ```
 npm run dev-next
 ```
-
-## How to Install
-
-* build from sources
-
-    ```
-    mvn clean install -P autoInstallBundle,autoInstallPackage
-    ```
 
 ## Built With
 * [AEM](https://www.adobe.com/marketing/experience-manager.html) >= 6.4
