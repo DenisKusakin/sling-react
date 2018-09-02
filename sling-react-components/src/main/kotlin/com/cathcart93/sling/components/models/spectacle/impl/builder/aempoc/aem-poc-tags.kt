@@ -38,7 +38,7 @@ class Navigation(private val links: List<Link>) : ReactTag {
                         "links" to ArrayProp(
                                 links.map {
                                     ObjectProps(mapOf(
-                                            "href" to it.href.toReactProp(),
+                                            "link" to it.href.toReactProp(),
                                             "title" to it.title.toReactProp()
                                     ))
                                 }
