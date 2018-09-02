@@ -1,9 +1,7 @@
-# Spectacle Sling Application
+# React component for AEM
 
-The goal of this project is to develop authoring environment for [Spectacle](https://formidable.com/open-source/spectacle/) library.
-Spectacle - [React](https://reactjs.org/) based library for creating presentations.
-Apache Sling framework is used as backend framework.
-Actually, this project is not only about Spectacle library, this is mostly a POC project about using [React](https://reactjs.org/) with Apache Sling or AEM.
+The goal of this project is to develop approach for building [React](https://reactjs.org/) components for Adobe Experience Manager.
+The core AEM authoring functionality should be saved.
 
 ## Motivation
 
@@ -13,7 +11,7 @@ In many projects frontend developers still have to have their own developer AEM 
 There are some projects which tries to bring modern frontend libraries into AEM like [aem-react](https://github.com/sinnerschrader/aem-react) which allows you to use React along with other components which
 is really good for existing projects since they could involve React components into their code but it is still too AEM specific.
 
-Backend developers have their own disadvantages in AEM component model, among them: developer have to deal with HTML frequently, it is hard to reuse components and dialogs.
+Backend developers have their own disadvantages in AEM component model, among them: developer have to deal with HTML frequently, it is hard to reuse components.
 
 This project use another approach for bringing modern frontend into AEM. The approach is rather trivial, actually.
 The idea is to separate frontend and backend development as much as possible. The goal is to provide frontend developers with following features:
@@ -24,7 +22,6 @@ The idea is to separate frontend and backend development as much as possible. Th
 AEM developers should get the following features:
 * No need to think about HTML/CSS/JS at all.
 * Another notion of component comparing to AEM components, this approach should help to build reusable components.
-* More convenient approach for building configurable components comparing to AEM.
 
 ## Development
 
@@ -53,9 +50,7 @@ npm run dev-next
     JCR package could be loaded from releases tab
 
 ## Built With
-
-* [Apache Sling](https://sling.apache.org/)
+* [AEM] (https://www.adobe.com/marketing/experience-manager.html)
 * [ReactJS](https://reactjs.org/)
-* [Material UI](https://material-ui.com/) - used for building authoring dialogs
 * [Kotlin](https://kotlinlang.org/) - kotlin is used mostly because of its ability for building DSLs
 * [NextJS](https://github.com/zeit/next.js/) - used as developer environment for frontend developers
