@@ -19,7 +19,7 @@ The idea is to separate frontend and backend development as much as possible. Th
 * Own lightweight development environment.
 * Ability to use any desired tools.
 
-AEM developers should get the following features:
+Backend developers should get the following features:
 * No need to think about HTML/CSS/JS at all.
 * Another notion of component comparing to AEM components, this approach should help to build reusable components.
 
