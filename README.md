@@ -86,10 +86,21 @@ This project does NOT use AEM client libraries since they don't bring any advant
 ## Supported Features
 
 The project tries to bring React components into AEM authoring, the goal is to not loose AEM authoring functionality.
-The implementation contains not too much authoring customizations that's why there is hope that all OOTB feature should still work
+The implementation contains not too much authoring customizations that's why there is hope that all OOTB feature should still work.
 
 Check list:
-- [X] task1
+- [x] Simple component with dialog support. The component should be updated after edit.
+- [x] Parsys component. Insert component into parsys.
+- [x] Parsys component. Delete component from parsys.
+- [x] Parsys component. Move component within parsys.
+- [x] Parsys component. Copy component within parsys.
+- [x] Parsys component. Drag and drop component from side bar.
+- [x] Complex component(Image Gallery). Insert into main page parsys.
+- [x] Complex component(Image Gallery). Edit item.
+- [x] Complex component(Image Gallery). Delete item.
+- [x] Complex component(Image Gallery). Move item.
+- [x] Complex component(Image Gallery). Copy item.
+- [ ] Drag and drop asset into parsys. Need to check that it can be converted into image component.
 
 ## Development
 
