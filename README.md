@@ -103,6 +103,7 @@ Authoring Check list:
 - [x] Complex component(Image Gallery). Copy item.
 - [ ] Drag and drop an asset into parsys. Need to check that it can be converted into image component.
 - [ ] Carefully check parsys policies. Need to develop some complex components and provide policies for them. Make sure that they work as expected.
+- [ ] Develop editable component that is located outside the parsys.
 
 ## Advantages of the approach
 
@@ -131,6 +132,8 @@ TODO List
     ```
     mvn clean install -P autoInstallBundle,autoInstallPackage
     ```
+
+Sample content is included: ```/content/aem-react-poc```
 
 ## Development
 
