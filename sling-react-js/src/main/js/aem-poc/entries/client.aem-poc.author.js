@@ -6,8 +6,10 @@ const AUTHOR_API = {
     afterEditComponent: (component) => {
         console.log("After Edit!");
         const elem = component.dom.find("[data-author-component]")[0];
-        const {dataset: {config, confUrl}} = elem;
-        ReactDOM.render(<AemAuthorComponent previewUrl={confUrl} previewConfig={null} editConfig={JSON.parse(config)} />, elem);
+        if(elem){
+            const {dataset: {config, confUrl}} = elem;
+            ReactDOM.render(<AemAuthorComponent previewUrl={confUrl} previewConfig={null} editConfig={JSON.parse(config)} />, elem);
+        }
     }
 };
 

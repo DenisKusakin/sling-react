@@ -1,8 +1,6 @@
 import React from 'react'
-import Link from 'next/link';
 
-export default ({ links, isNext }) => {
-    // const A = (isNext ? Link : 'a');
+export default ({ links }) => {
     return (<div className="preview-menu">
         <div className="preview-menu-h">Pages</div>
             {

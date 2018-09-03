@@ -38,7 +38,10 @@ class AemReactPageModel : AEMReactModel {
         val content = resource.getChild("content")?.adaptTo(ParsysModel::class.java)?.toReact()
         reactRoot = Page(
                 navigationReactElement,
-                if (isWcmModeDisabled) content!! else AuthorWrapper("${resource.path}/content.html").toReactElement()
+                if (isWcmModeDisabled) content!!
+                else {
+                    AuthorWrapper("${resource.path}/content.html?forceeditcontext=true").toReactElement()
+                }
         ).toReactElement()
     }
 
