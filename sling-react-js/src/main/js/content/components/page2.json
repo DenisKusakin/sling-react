@@ -1,8 +1,8 @@
 {
   "__type": "Page",
   "navigation": {
-    "__type": "Menu",
-    "pages": [
+    "__type": "Navigation",
+    "links": [
       {
         "title": "page1",
         "link": "/"

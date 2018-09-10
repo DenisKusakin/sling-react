@@ -1,15 +1,19 @@
 {
   "__type": "Page",
   "navigation": {
-    "__type": "Menu",
-    "pages": [
+    "__type": "Navigation",
+    "links": [
       {
-        "title": "page1",
-        "link": "/"
+        "link": "/content/aem-react-poc/subpage-1.html",
+        "title": "AEM-React POC Root Page"
       },
       {
-        "title": "page2",
-        "link": "/page2"
+        "link": "/content/aem-react-poc/subpage-2.html",
+        "title": "AEM-React POC Root Page"
+      },
+      {
+        "link": "/content/aem-react-poc/subpage-3.html",
+        "title": "AEM-React POC Root Page"
       }
     ]
   },
@@ -18,23 +22,44 @@
     "children": [
       {
         "__type": "Heading",
-        "heading": "test1"
+        "heading": " 4632132133"
       },
       {
-        "__type": "NarrowBanner",
-        "title": "Narrow Banner"
+        "__type": "Heading",
+        "heading": "New Heading 3 5 6 "
       },
       {
-        "__type": "Accordeon",
-        "headline": "Accoordeon Component",
-        "header": "Accoordeon Header",
-        "isOpen": true,
-        "children": [
+        "__type": "Heading",
+        "heading": "7777"
+      },
+      {
+        "__type": "Heading",
+        "heading": "Last Heading 3"
+      },
+      {
+        "__type": "ImageGallery",
+        "images": [
           {
-            "__type": "Heading",
-            "heading": "Acordeon Content"
+            "original": "https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg",
+            "thumbnail": "https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"
+          },
+          {
+            "original": "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg",
+            "thumbnail": "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"
+          },
+          {
+            "original": "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg",
+            "thumbnail": "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"
           }
         ]
+      },
+      {
+        "__type": "Heading",
+        "heading": "dsfds f dsf f"
+      },
+      {
+        "__type": "Heading",
+        "heading": "New Heading 5"
       }
     ]
   }

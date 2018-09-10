@@ -1,5 +1,7 @@
 import Cookie from 'js-cookie';
 
+const parsysStore = {};
+
 export default {
     upadeIframe: () => {
         if (window && window.parent) {
