@@ -13,18 +13,21 @@ class AuthorComponent extends React.Component {
     }
 
     componentDidMount() {
+        if (!AuthorHooks.isEditMode()) {
+            this.updatePreviewConfig();
+        }
         AuthorHooks.onLayerToggle(this.updatePreviewConfig, this.updateEditConfig);
     };
 
     updateEditConfig() {
         this.setState({ config: this.props.editConfig });
-        AuthorHooks.upadeIframe();
+        // AuthorHooks.upadeIframe();
     };
 
     updatePreviewConfig() {
         axios.get(`${this.props.previewUrl}?wcmmode=disabled`).then(response => {
             this.setState({ config: response.data });
-            AuthorHooks.upadeIframe();
+            // AuthorHooks.upadeIframe();
         });
     }
 
