@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-import AuthorHooks from '../utils/authorHooks';
+import AuthorHooks from '../../utils/authorHooks';
 import ReactDOM from 'react-dom';
 import TreeContainer from './TreeContainer';
-import Components from './index';
+import Components from '../_componentsMap/clientComponentsMap';
 
 class AuthorWrapperComponent extends React.Component {
     constructor(props) {

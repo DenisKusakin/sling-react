@@ -1,8 +1,8 @@
 import React from 'react';
-import AemAuthorComponent from './../components/aem-author-component';
+import AemAuthorComponent from './../components/_core/aem-author-component';
 import ReactDOM from 'react-dom';
-import Components from '../components';
-import TreeContainer from '../components/TreeContainer';
+import Components from '../components/_componentsMap/clientComponentsMap';
+import TreeContainer from '../components/_core/TreeContainer';
 
 const AUTHOR_API = {
     afterEditComponent: (component) => {

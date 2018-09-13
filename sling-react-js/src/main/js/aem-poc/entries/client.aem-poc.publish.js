@@ -1,5 +1,5 @@
 import React from 'react'
-import AemPublishRootComponent from './../components/aem-publish-component'
+import AemPublishRootComponent from '../components/_core/aem-publish-component'
 import ReactDOM from 'react-dom'
 
 document.addEventListener("DOMContentLoaded", () => {

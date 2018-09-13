@@ -1,8 +1,8 @@
 import React from 'react'
 import TreeContainer from './TreeContainer'
-import Components from './index.js'
+import Components from '../_componentsMap/clientComponentsMap'
 import axios from 'axios/index';
-import AuthorHooks from '../utils/authorHooks';
+import AuthorHooks from '../../utils/authorHooks';
 
 class AuthorComponent extends React.Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class AuthorComponent extends React.Component {
     updatePreviewConfig() {
         axios.get(`${this.props.previewUrl}?wcmmode=disabled`).then(response => {
             this.setState({ config: response.data });
-            // AuthorHooks.upadeIframe();
+            AuthorHooks.upadeIframe();
         });
     }
 
