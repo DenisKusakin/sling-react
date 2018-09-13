@@ -1,8 +1,8 @@
 import React from 'react'
 import TreeContainer from './TreeContainer'
-import Components from './index.js'
+import Components from '../_componentsMap/clientComponentsMap'
 import axios from 'axios/index';
-import AuthorHooks from '../utils/authorHooks';
+import AuthorHooks from '../../utils/authorHooks';
 
 class AuthorComponent extends React.Component {
     constructor(props) {
@@ -13,12 +13,15 @@ class AuthorComponent extends React.Component {
     }
 
     componentDidMount() {
+        if (!AuthorHooks.isEditMode()) {
+            this.updatePreviewConfig();
+        }
         AuthorHooks.onLayerToggle(this.updatePreviewConfig, this.updateEditConfig);
     };
 
     updateEditConfig() {
         this.setState({ config: this.props.editConfig });
-        AuthorHooks.upadeIframe();
+        // AuthorHooks.upadeIframe();
     };
 
     updatePreviewConfig() {

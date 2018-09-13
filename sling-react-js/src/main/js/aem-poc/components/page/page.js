@@ -1,5 +1,6 @@
 import React from 'react';
-import "./previewPage/previewPage.less";
+import './layout.less';
+import './page.less';
 
 export default ({ navigation, content }) => <div>
     <div className="preview">
