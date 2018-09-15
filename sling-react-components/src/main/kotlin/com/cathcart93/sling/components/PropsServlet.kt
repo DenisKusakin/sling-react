@@ -42,7 +42,8 @@ class PropsServlet : SlingSafeMethodsServlet() {
             return
         }
         //val controller = request.adaptTo(PageController::class.java)
-        writer.append(model.toJson())
+        val isWcmModeDisabled = request.getParameter("wcmmode") == "disabled"
+        writer.append(model.toJson(!isWcmModeDisabled))
         response.contentType = "json"
     }
 

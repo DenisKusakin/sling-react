@@ -5,9 +5,13 @@ import com.cathcart93.sling.components.models.spectacle.impl.builder.react.React
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJson
 
 interface AEMReactModel {
-    fun toReact(): ReactElement
+    fun toReact(isEditMode: Boolean = false): ReactElement
+
+    fun toJson(isEditMode: Boolean): String {
+        return toReact(isEditMode).toJson()
+    }
 
     fun toJson(): String {
-        return toReact().toJson()
+        return toReact(true).toJson()
     }
 }

@@ -17,7 +17,7 @@ class NavigationModel : AEMReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(): ReactElement {
+    override fun toReact(isEditMode: Boolean): ReactElement {
         val links = resource.parent?.children
                 ?.filter { "cq:Page" == (it.adaptTo(ValueMap::class.java)!!)["jcr:primaryType"] }
                 ?.map {

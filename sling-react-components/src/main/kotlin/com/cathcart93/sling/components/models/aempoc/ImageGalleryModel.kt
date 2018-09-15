@@ -18,7 +18,7 @@ class ImageGalleryModel : AEMReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(): ReactElement {
+    override fun toReact(isEditMode: Boolean): ReactElement {
         val items = resource.getChild("slides")?.children
                 ?.mapNotNull { it.adaptTo(ImageGalleryItemModel::class.java) }
                 ?.map { ImageGalleryItem(original = it.original, thumbnail = it.thumbnail) } ?: emptyList()

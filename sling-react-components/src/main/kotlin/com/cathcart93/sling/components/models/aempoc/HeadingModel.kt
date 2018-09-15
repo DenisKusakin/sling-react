@@ -18,7 +18,7 @@ class HeadingModel : AEMReactModel {
     @ValueMapValue
     var text: String = ""
 
-    override fun toReact(): ReactElement {
+    override fun toReact(isEditMode: Boolean): ReactElement {
         return Heading(text).toReactElement()
     }
 

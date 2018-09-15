@@ -19,8 +19,8 @@ class ParsysModel : AEMReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(): ReactElement {
-        return Parsys(resource.children.mapNotNull { it.adaptTo(AEMReactModel::class.java)?.toReact() })
+    override fun toReact(isEditMode: Boolean): ReactElement {
+        return Parsys(resource.children.mapNotNull { it.adaptTo(AEMReactModel::class.java)?.toReact(isEditMode) })
                 .toReactElement()
     }
 

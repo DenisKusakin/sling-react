@@ -35,11 +35,12 @@ class AemReactPageModel : AEMReactModel {
         resource = request.resource
         val navigationReactElement = resource.adaptTo(NavigationModel::class.java)!!.toReact()
         val isWcmModeDisabled = request.getParameter("wcmmode") == "disabled"
-        val content = resource.getChild("content")?.adaptTo(ParsysModel::class.java)?.toReact()
+        val content = resource.getChild("content")?.adaptTo(ParsysModel::class.java)?.toReact(!isWcmModeDisabled)
         reactRoot = Page(
                 navigationReactElement,
                 if (isWcmModeDisabled) content!!
                 else {
+                    //TODO: forceeditcontext=true is required for authoring, but it is not clear how exactly it works, investigation is required.
                     AuthorWrapper("${resource.path}/content.html?forceeditcontext=true").toReactElement()
                 }
         ).toReactElement()
@@ -53,7 +54,7 @@ class AemReactPageModel : AEMReactModel {
         return reactSsrService.renderToHtmlString(resource.resourceResolver, jsFilePath, reactRoot!!.toJson())
     }
 
-    override fun toReact(): ReactElement {
+    override fun toReact(isEditMode: Boolean): ReactElement {
         return reactRoot!!
     }
 }

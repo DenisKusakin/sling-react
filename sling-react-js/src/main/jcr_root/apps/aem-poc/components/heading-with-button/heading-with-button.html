@@ -1,0 +1,9 @@
+<div>
+    <div data-sly-use.model="com.cathcart93.sling.components.models.aempoc.HeadingWithButtonModel"
+         data-author-component="true"
+         style="min-height:50px;"
+         data-config='${model.toJson}'>
+    </div>
+    <div style="display: none;" data-editable-id="${resource.path}/button"
+         data-sly-resource="${'button' @ resourceType='aem-poc/components/button'}"></div>
+</div>

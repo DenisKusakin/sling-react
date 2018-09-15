@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import TreeContainer from './TreeContainer';
 import Components from '../_componentsMap/clientComponentsMap';
 
-class AuthorWrapperComponent extends React.Component {
+class AuthorWrapperV2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,18 +21,25 @@ class AuthorWrapperComponent extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(this.props.url)
-            .then(response => {
-                this.setState({html: response.data, isPending: false});
-            })
+        // axios.get(this.props.url)
+        //     .then(response => {
+        //         this.setState({html: response.data, isPending: false});
+        //     })
 
-
+        const htmlElement = $(`[data-editable-id="${this.props.id}"]`)[0];
+        if (!htmlElement) {
+            console.error("Editable not found", this.props.id);
+            return;
+        }
+        const htmlContent = $(htmlElement).html();
+        $(htmlElement).remove();
+        this.setState({html: htmlContent, isPending: false});
     };
 
     initAuthorComponents() {
         const node = this.el;
-        if(node){
-            $(node).find("[data-author-component]").each(function(){
+        if (node) {
+            $(node).find("[data-author-component]").each(function () {
                 const elem = this;
                 const {dataset: {config}} = elem;
                 if(!config){
@@ -45,8 +52,9 @@ class AuthorWrapperComponent extends React.Component {
     };
 
     render() {
-        return !this.state.isPending && <div ref={el => this.el = el} dangerouslySetInnerHTML={{__html: this.state.html}}/>;
+        return !this.state.isPending &&
+            <div ref={el => this.el = el} dangerouslySetInnerHTML={{__html: this.state.html}}/>;
     }
 }
 
-export default AuthorWrapperComponent;
+export default AuthorWrapperV2;

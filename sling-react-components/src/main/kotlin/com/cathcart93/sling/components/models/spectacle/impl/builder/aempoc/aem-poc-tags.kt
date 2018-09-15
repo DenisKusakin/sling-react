@@ -1,9 +1,6 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc
 
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ArrayProp
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ObjectProps
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toReactProp
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.*
 
 interface ReactTag {
     fun toReactElement(): ReactElement
@@ -14,6 +11,24 @@ class Heading(private val text: String) : ReactTag {
         return ReactElement(
                 name = "Heading",
                 props = mapOf("heading" to text.toReactProp())
+        )
+    }
+}
+
+class HeadingWithButtonButton(private val title: String) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "heading-with-button/button",
+                props = mapOf("title" to title.toReactProp())
+        )
+    }
+}
+
+class HeadingWithButton(private val text: String, private val button: ReactProp) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "HeadingWithButton",
+                props = mapOf("heading" to text.toReactProp(), "button" to button)
         )
     }
 }
@@ -54,6 +69,15 @@ class AuthorWrapper(private val url: String) : ReactTag {
         return ReactElement(
                 name = "AuthorWrapper",
                 props = mapOf("url" to url.toReactProp())
+        )
+    }
+}
+
+class AuthorWrapperV2(private val id: String) : ReactTag {
+    override fun toReactElement(): ReactElement {
+        return ReactElement(
+                name = "AuthorWrapperV2",
+                props = mapOf("id" to id.toReactProp())
         )
     }
 }
