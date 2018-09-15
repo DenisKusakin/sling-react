@@ -2,7 +2,6 @@ package com.cathcart93.sling.components.models.aempoc
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.AuthorWrapperV2
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.HeadingWithButton
-import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.HeadingWithButtonButton
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toReactProp
 import org.apache.sling.api.resource.Resource
@@ -33,6 +32,9 @@ class HeadingWithButtonModel : AEMReactModel {
     }
 
     override fun toReact(isEditMode: Boolean): ReactElement {
+        if (isEditMode) {
+            return HeadingWithButton(text, AuthorWrapperV2(resource!!.path + "/button").toReactElement()).toReactElement()
+        }
         return HeadingWithButton(text, if (button == null) false.toReactProp() else button!!).toReactElement()
     }
 

@@ -1,5 +1,7 @@
-<div data-sly-use.model="com.cathcart93.sling.components.models.aempoc.HeadingButton"
-     data-author-component="true"
-     data-config='${model.toJson}'>
-    <p>Configure Button Here</p>
+<div>
+    <div data-sly-use.model="com.cathcart93.sling.components.models.aempoc.HeadingButton"
+         data-author-component="true"
+         data-config='${model.toJson}'>
+    </div>
+    <p data-sly-test="${!properties['title']}">Configure Button Here</p>
 </div>

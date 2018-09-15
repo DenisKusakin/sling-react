@@ -3,6 +3,7 @@ package com.cathcart93.sling.components.models.aempoc
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.AuthorWrapperV2
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.HeadingWithButtonButton
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJson
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -23,7 +24,12 @@ class HeadingButton : AEMReactModel {
     var resource: Resource? = null
 
     override fun toReact(isEditMode: Boolean): ReactElement {
-        return (if (!isEditMode) HeadingWithButtonButton(title) else AuthorWrapperV2(resource!!.path)).toReactElement()
+//        return (if (!isEditMode) HeadingWithButtonButton(title) else AuthorWrapperV2(resource!!.path)).toReactElement()
+        return HeadingWithButtonButton(title).toReactElement()
+    }
+
+    fun toPreviewJson(): String {
+        return HeadingWithButtonButton(title).toReactElement().toJson();
     }
 
 }
