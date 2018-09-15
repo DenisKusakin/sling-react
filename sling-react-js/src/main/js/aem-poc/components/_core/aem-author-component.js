@@ -20,7 +20,8 @@ class AuthorComponent extends React.Component {
     };
 
     updateEditConfig() {
-        this.setState({ config: this.props.editConfig });
+        window.location.reload();
+        //this.setState({ config: this.props.editConfig });
         // AuthorHooks.upadeIframe();
     };
 

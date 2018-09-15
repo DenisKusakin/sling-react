@@ -1,6 +1,7 @@
 package com.cathcart93.sling.components.models.aempoc
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.AuthorWrapper
+import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.AuthorWrapperV2
 import com.cathcart93.sling.components.models.spectacle.impl.builder.aempoc.Page
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJson
@@ -41,7 +42,8 @@ class AemReactPageModel : AEMReactModel {
                 if (isWcmModeDisabled) content!!
                 else {
                     //TODO: forceeditcontext=true is required for authoring, but it is not clear how exactly it works, investigation is required.
-                    AuthorWrapper("${resource.path}/content.html?forceeditcontext=true").toReactElement()
+                    //AuthorWrapper("${resource.path}/content.html?forceeditcontext=true").toReactElement()
+                    AuthorWrapperV2("${resource.path}/content").toReactElement()
                 }
         ).toReactElement()
     }
