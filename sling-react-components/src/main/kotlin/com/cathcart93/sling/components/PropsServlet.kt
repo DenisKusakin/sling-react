@@ -27,7 +27,7 @@ import org.apache.sling.api.SlingHttpServletResponse
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet
 import org.slf4j.LoggerFactory
 
-@SlingServlet(resourceTypes = ["sling-react/page", "sling-react/client-page"], extensions = ["json"])
+@SlingServlet(resourceTypes = ["sling-react/page", "sling-react/client-page", "spectacle/meduza-spectacle"], extensions = ["json"])
 @Properties(Property(name = "service.description", value = "Props Servlet"), Property(name = "service.vendor", value = "Cathcart 93"))
 class PropsServlet : SlingSafeMethodsServlet() {
 
