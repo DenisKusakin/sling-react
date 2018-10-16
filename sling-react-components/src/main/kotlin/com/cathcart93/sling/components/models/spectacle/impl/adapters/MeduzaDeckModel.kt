@@ -124,7 +124,7 @@ class MeduzaDeckModel : ReactModel {
                 val title = elem.getElementsByTagName("title").item(0).textContent
                 val link = elem.getElementsByTagName("link").item(0).textContent
                 val description = elem.getElementsByTagName("description").item(0).textContent
-                val image = elem.getElementsByTagName("enclosure").item(0).attributes.getNamedItem("url").textContent
+                val image = elem.getElementsByTagName("enclosure").item(0).attributes.getNamedItem("renderUrl").textContent
                 resultItems += NewsItem(title, link, description, image)
             }
         }

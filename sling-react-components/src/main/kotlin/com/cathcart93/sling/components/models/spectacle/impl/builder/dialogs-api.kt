@@ -60,7 +60,7 @@ class Container(
                         "moveInfo" to ArrayProp(
                                 moveInfo.map {
                                     ObjectProps(mapOf(
-                                            "url" to it.url.toReactProp(),
+                                            "renderUrl" to it.url.toReactProp(),
                                             "nodeName" to it.name.toReactProp()
                                     ))
                                 }
@@ -163,7 +163,7 @@ class SlidePropertiesButton(val title: String, val editUrl: String, val props: L
 class AddSlideButton(val resourcePath: String) : SpectacleTag {
     override fun toReactElement(): ReactElement {
         return ReactElement(name = "AddSlideButton", props = mapOf(
-                "url" to resourcePath.toReactProp(),
+                "renderUrl" to resourcePath.toReactProp(),
                 "props" to ObjectProps(mapOf(
                         ":nameHint" to "slide".toReactProp()
                 ))
@@ -174,7 +174,7 @@ class AddSlideButton(val resourcePath: String) : SpectacleTag {
 class DeleteSlideButton(val resourcePath: String) : SpectacleTag {
     override fun toReactElement(): ReactElement {
         return ReactElement(name = "DeleteSlideButton", props = mapOf(
-                "url" to resourcePath.toReactProp()
+                "renderUrl" to resourcePath.toReactProp()
         ))
     }
 }

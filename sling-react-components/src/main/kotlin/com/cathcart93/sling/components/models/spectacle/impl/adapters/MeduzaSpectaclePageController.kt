@@ -39,7 +39,7 @@ class MeduzaSpectaclePageController : PageController {
         isPreviewMode = request.getParameter("preview") != null
         val container = resource.adaptTo(MeduzaDeckModel::class.java)?.toReact(!isPreviewMode)
         val rootReactElement = if (!isPreviewMode) ReactElement("SpectacleAuthorRoot", mapOf(
-                "url" to "${resource.path}.json".toReactProp(),
+                "renderUrl" to "${resource.path}.json".toReactProp(),
                 "content" to container!!.toReactElement()
         )) else container!!.toReactElement()
         props = rootReactElement.toJson()
