@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 import java.net.HttpURLConnection
 import java.net.URL
 
-@SlingServlet(resourceTypes = ["sling-react/next"], extensions = ["html"])
+@SlingServlet(resourceTypes = ["sling-react/next"], extensions = ["html"], generateService = true)
 @Properties(
         Property(name = "service.description", value = ["Next Render Servlet"]),
         Property(name = "service.vendor", value = ["Denis Kusakin"])
@@ -31,7 +31,7 @@ class NextJSRenderServlet : SlingSafeMethodsServlet() {
         val nextJsConnection = URL(nextJsPage.renderUrl()).openConnection() as HttpURLConnection
         response.contentType = nextJsConnection.contentType
         response.setStatus(nextJsConnection.responseCode)
-        //TODO: rework
+
         val responseOs = response.outputStream
         val nextJsIs = nextJsConnection.inputStream
         IOUtils.copy(nextJsIs, responseOs)

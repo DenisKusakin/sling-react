@@ -14,6 +14,20 @@ object InheritAlign : TextAlign()
 object StartAlign : TextAlign()
 object EndAlign : TextAlign()
 
+fun String.toTextAlign(): TextAlign {
+    return when (this) {
+        "center" -> CenterAlign
+        "justify" -> JustifyAlign
+        "left" -> LeftAlign
+        "right" -> RightAlign
+        "inherit" -> InheritAlign
+        "auto" -> AutoAlign
+        "start" -> StartAlign
+        "end" -> EndAlign
+        else -> AutoAlign
+    }
+}
+
 fun TextAlign.toReactProp(): ReactProp {
     return when (this) {
         is CenterAlign -> "center"

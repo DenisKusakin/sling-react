@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -31,7 +32,8 @@ class HeadingModel : BaseModel(), ReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
+        val isEditMode = context.isEditMode
         val component = heading(text) {
             size = this@HeadingModel.size
             fit = this@HeadingModel.fit
@@ -45,7 +47,7 @@ class HeadingModel : BaseModel(), ReactModel {
                 textColor = HexColor(this@HeadingModel.textColor!!)
             }
         }.appear(shouldAppear)
-        return if (isEditMode) component.edit(resource) {
+        return (if (isEditMode) component.edit(resource) {
             text(name = "text", title = "Text", value = text)
             select(
                     name = "size",
@@ -69,7 +71,7 @@ class HeadingModel : BaseModel(), ReactModel {
                     )
             )
             checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
-        } else component
+        } else component).render()
     }
 
 }

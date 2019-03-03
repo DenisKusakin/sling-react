@@ -22,20 +22,20 @@ class NextJSDelegatingServlet : SlingSafeMethodsServlet() {
 
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
-        val nextJsPage = request.resource.adaptTo(NextJSEndpoint::class.java)
-        if (nextJsPage == null) {
+        val url = request.resource.valueMap.get("url", String::class.java)
+        if (url == null) {
             response.setStatus(500)
             response.writer.write("Failed to resolve NextJS endpoint")
             return
         }
         val queryString = if (request.queryString == null) "" else "?${request.queryString}"
-        val urlString = "${nextJsPage.baseUrl()}${request.requestPathInfo.suffix}$queryString"
+        val urlString = "$url${request.requestPathInfo.suffix}$queryString"
         val nextJsConnection = URL(urlString).openConnection() as HttpURLConnection
         val nextJsResponse = nextJsConnection.inputStream
         val responseOs = response.outputStream
         response.contentType = nextJsConnection.contentType
         response.setStatus(nextJsConnection.responseCode)
-        //TODO: rework
+
         copy(nextJsResponse, responseOs)
         nextJsResponse.close()
         responseOs.close()

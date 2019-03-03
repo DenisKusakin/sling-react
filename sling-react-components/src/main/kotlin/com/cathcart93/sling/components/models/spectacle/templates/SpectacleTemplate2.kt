@@ -1,11 +1,11 @@
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 
-fun spectacleTemplate(text: String = "Test"): ReactElement {
+fun spectacleTemplate2(text: String = "Test"): ReactElement {
     return deck(DarkTheme) {
         transition = SlideTransition(listOf(SlideTransitionType, ZoomTransitionType))
         slide {
-            heading(text) {
+            heading(text = text) {
                 fit = true
                 size = 1
             }

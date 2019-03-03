@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -41,10 +42,11 @@ class SlideModel : ReactModel, BaseModel() {
             ContainerComponent(title = "Markdown", description = "Markdown", resourceType = ResourceTypesConstants.MARKDOWN)
     )
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
+        val isEditMode = context.isEditMode
         val children = resource.children
                 .mapNotNull { it.adaptTo(ReactModel::class.java) }
-                .map { it.toReact(isEditMode) }
+                .map { it.render(context) }
         val deckPropertiesButton = resource.parent?.adaptTo(DeckModel::class.java)!!.propertiesButton()
         val systemButtons by lazy {
             SystemButtonsContainer(
@@ -113,12 +115,19 @@ class SlideModel : ReactModel, BaseModel() {
             notes = this@SlideModel.notes
             bgColor = this@SlideModel.bgColor
             if (isEditMode) {
-                comp(Container(children = children, components = components, resourcePath = "${resource.path}/", moveInfo = resource.toMoveInfo()))
-                comp(systemButtons)
+                comp(
+                        Container(
+                                children = children,
+                                components = components,
+                                resourcePath = "${resource.path}/",
+                                moveInfo = resource.toMoveInfo()
+                        ).render()
+                )
+                comp(systemButtons.render())
             } else {
                 children.forEach { comp(it) }
             }
-        }
+        }.render()
     }
 
     private fun String.toSlideAlign(): SlideAlign {

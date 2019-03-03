@@ -12,5 +12,8 @@ class ResourceTypesConstants {
         const val LINK = "spectacle/components/Link"
         const val IMAGE = "spectacle/components/Image"
         const val MARKDOWN = "spectacle/components/Markdown"
+        const val DECK = "spectacle/components/Deck"
+        const val TEMPLATE_DECK = "spectacle/components/Template-Deck"
+        const val MEDUZA_DECK = "spectacle/components/Meduza-Deck"
     }
 }

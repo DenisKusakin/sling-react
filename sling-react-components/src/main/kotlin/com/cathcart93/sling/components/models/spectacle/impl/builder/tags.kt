@@ -6,12 +6,12 @@ import com.cathcart93.sling.components.models.spectacle.impl.builder.react.*
 annotation class TagMarker
 
 interface SpectacleTag {
-    fun toReactElement(): ReactElement
+    fun render(): ReactElement
 }
 
 //@TagMarker
 class Deck(val theme: ExtendedDefaultTheme) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val colors = mutableMapOf(
                 "primary" to theme.primaryColor?.toReactProp(),
                 "secondary" to theme.secondaryColor?.toReactProp(),
@@ -31,10 +31,10 @@ class Deck(val theme: ExtendedDefaultTheme) : SpectacleTag {
                 "fonts" to ObjectProps(fonts)
         ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
 
-        return ReactElement(name = "Deck", children = slides.map { it.toReactElement() }, props = props)
+        return ReactElement(name = "Deck", children = slides, props = props)
     }
 
-    val slides: MutableList<Slide> = mutableListOf()
+    val slides: MutableList<ReactElement> = mutableListOf()
     var transition: SlideTransition? = null
     var transitionDuration: Int? = null
     var progress: Progress? = null
@@ -80,7 +80,7 @@ abstract class BaseTag {
 
 //@TagMarker
 class Slide : SpectacleTag, BaseTag() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val props = mutableMapOf(
                 "align" to align?.toReactProp(),
                 "transition" to transition?.toReactProp(),
@@ -91,12 +91,12 @@ class Slide : SpectacleTag, BaseTag() {
         props.putAll(baseProps())
         return ReactElement(
                 name = "Slide",
-                children = children.map { it.toReactElement() },
+                children = children,
                 props = props.filter { it.value != null }.map { it.key to it.value!! }.toMap()
         )
     }
 
-    val children: MutableList<SpectacleTag> = mutableListOf()
+    val children: MutableList<ReactElement> = mutableListOf()
     var align: SlideAlign? = null
     var transition: SlideTransition? = null
     var transitionDuration: Int? = null
@@ -105,7 +105,7 @@ class Slide : SpectacleTag, BaseTag() {
 }
 
 class Heading(private val text: String) : SpectacleTag, BaseTag() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val props = mutableMapOf(
                 "fit" to fit?.toReactProp(),
                 "lineHeight" to lineHeight?.toReactProp(),
@@ -125,9 +125,9 @@ class Heading(private val text: String) : SpectacleTag, BaseTag() {
 }
 
 class BlockQuote : BaseTag(), SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val children: List<SpectacleTag> = listOfNotNull(quote, cite)
-        return ReactElement(name = "BlockQuote", children = children.map { it.toReactElement() })
+        return ReactElement(name = "BlockQuote", children = children.map { it.render() })
     }
 
     var quote: Quote? = null
@@ -135,19 +135,19 @@ class BlockQuote : BaseTag(), SpectacleTag {
 }
 
 class Quote(val quote: String) : BaseTag(), SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "Quote", children = quote.toReactProp(), props = baseProps())
     }
 }
 
 class Cite(val cite: String) : BaseTag(), SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "Cite", children = cite.toReactProp(), props = baseProps())
     }
 }
 
 class Image(val src: String) : SpectacleTag, BaseTag() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val ownProps = mutableMapOf(
                 "src" to src.toReactProp(),
                 "height" to height?.toReactProp(),
@@ -164,7 +164,7 @@ class Image(val src: String) : SpectacleTag, BaseTag() {
 }
 
 class Link(val href: String, val text: String) : SpectacleTag, BaseTag() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val ownProps = mutableMapOf(
                 "href" to href.toReactProp(),
                 "target" to target?.toReactProp()
@@ -178,7 +178,7 @@ class Link(val href: String, val text: String) : SpectacleTag, BaseTag() {
 }
 
 class Text(val text: String) : SpectacleTag, BaseTag() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val ownProps = mutableMapOf(
                 "fit" to fit?.toReactProp(),
                 "lineHeight" to lineHeight?.toReactProp()
@@ -193,18 +193,18 @@ class Text(val text: String) : SpectacleTag, BaseTag() {
 }
 
 class Appear(val child: SpectacleTag) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         val props = mapOf(
                 "transitionDuration" to transitionDuration?.toReactProp()
         ).filter { it.value != null }.map { it.key to it.value!! }.toMap()
-        return ReactElement(name = "Appear", props = props, children = child.toReactElement())
+        return ReactElement(name = "Appear", props = props, children = child.render())
     }
 
     var transitionDuration: Int? = null
 }
 
 class CodePane(val source: String, val lang: CodeLang, val theme: CodeTheme = DarkCodeTheme) : SpectacleTag, BaseTag() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "CodePane", props = mapOf(
                 "source" to source.toReactProp(),
                 "lang" to lang.toPrismValue().toReactProp(),
@@ -214,7 +214,7 @@ class CodePane(val source: String, val lang: CodeLang, val theme: CodeTheme = Da
 }
 
 class Markdown(val source: String) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "Markdown", props = mapOf(
                 "source" to source.toReactProp()
         ))
@@ -225,10 +225,10 @@ class Markdown(val source: String) : SpectacleTag {
 fun Deck.slide(block: Slide.() -> Unit) {
     val slide = Slide()
     block(slide)
-    this.slides.add(slide)
+    this.slides.add(slide.render())
 }
 
-fun Deck.slide(slide: Slide) {
+fun Deck.slide(slide: ReactElement) {
     this.slides.add(slide)
 }
 
@@ -236,49 +236,50 @@ fun Deck.slide(slide: Slide) {
 fun Slide.heading(text: String, block: Heading.() -> Unit) {
     val heading = Heading(text)
     block(heading)
-    this.children.add(heading)
+    this.children.add(heading.render())
 }
 
 fun Slide.blockQuote(block: BlockQuote.() -> Unit) {
     val blockQuote = BlockQuote()
     block(blockQuote)
-    this.children.add(blockQuote)
+    this.children.add(blockQuote.render())
 }
 
-fun Slide.image(src: String, block: Image.() -> Unit) {
+fun Slide.image(src: String, block: Image.() -> Unit) : Image {
     val image = Image(src)
     block(image)
-    this.children.add(image)
+    this.children.add(image.render())
+    return image
 }
 
 fun Slide.link(href: String, text: String, block: Link.() -> Unit) {
     val link = Link(href, text)
     block(link)
-    this.children.add(link)
+    this.children.add(link.render())
 }
 
 fun Slide.appear(child: SpectacleTag, block: Appear.() -> Unit) {
     val appear = Appear(child)
     block(appear)
-    this.children.add(appear)
+    this.children.add(appear.render())
 }
 
 fun Slide.text(text: String, block: Text.() -> Unit) {
     val textTag = Text(text)
     block(textTag)
-    this.children.add(textTag)
+    this.children.add(textTag.render())
 }
 
-fun Slide.comp(child: SpectacleTag) {
+fun Slide.comp(child: ReactElement) {
     this.children.add(child)
 }
 
 fun Slide.code(source: String, lang: CodeLang, theme: CodeTheme = DarkCodeTheme) {
-    this.children.add(CodePane(source = source, lang = lang, theme = theme))
+    this.children.add(CodePane(source = source, lang = lang, theme = theme).render())
 }
 
 fun Slide.markdown(source: String) {
-    this.children.add(Markdown(source))
+    this.children.add(Markdown(source).render())
 }
 
 fun BlockQuote.quote(text: String, block: Quote.() -> Unit) {

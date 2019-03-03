@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -14,7 +15,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
         adapters = [TextModel::class, ReactModel::class],
         resourceType = [ResourceTypesConstants.TEXT]
 )
-class TextModel :  BaseModel(), ReactModel {
+class TextModel : BaseModel(), ReactModel {
     @ValueMapValue
     private var text: String? = null
 
@@ -27,7 +28,8 @@ class TextModel :  BaseModel(), ReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
+        val isEditMode = context.isEditMode
         val component = text(if (text == null) "" else text!!) {
             lineHeight = this@TextModel.lineHeight
             fit = this@TextModel.fit
@@ -40,7 +42,7 @@ class TextModel :  BaseModel(), ReactModel {
                 textColor = HexColor(this@TextModel.textColor!!)
             }
         }.appear(shouldAppear)
-        return if (isEditMode)
+        return (if (isEditMode)
             component.edit(resource) {
                 text(name = "text", title = "Text", value = if (text == null) "" else text!!)
                 checkbox(name = "fit", title = "Fit", value = if (fit == null) false else fit!!)
@@ -61,6 +63,6 @@ class TextModel :  BaseModel(), ReactModel {
                 )
                 checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
             }
-        else component
+        else component).render()
     }
 }

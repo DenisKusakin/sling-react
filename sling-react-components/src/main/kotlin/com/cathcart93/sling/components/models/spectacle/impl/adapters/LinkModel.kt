@@ -1,12 +1,13 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
+import com.cathcart93.sling.components.models.spectacle.impl.builder.*
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
-import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 
 @Model(
         adaptables = [Resource::class],
@@ -28,8 +29,9 @@ class LinkModel : BaseModel(), ReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
-        val component = link(if (href == null) "" else href!!, if (text == null) "" else text!!) {
+    override fun render(context: RenderContext): ReactElement {
+        val isEditMode = context.isEditMode
+        val component = link(href ?: "", text ?: "") {
             target = this@LinkModel.target?.toLinkTarget()
             italic = this@LinkModel.italic
             bold = this@LinkModel.bold
@@ -40,7 +42,7 @@ class LinkModel : BaseModel(), ReactModel {
                 textColor = HexColor(this@LinkModel.textColor!!)
             }
         }.appear(shouldAppear)
-        return if (!isEditMode)
+        return (if (!isEditMode)
             component
         else
             component.edit(resource) {
@@ -73,7 +75,7 @@ class LinkModel : BaseModel(), ReactModel {
                         )
                 )
                 checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
-            }
+            }).render()
     }
 
     private fun String.toLinkTarget(): LinkTarget {

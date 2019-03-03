@@ -38,7 +38,7 @@ open class SpectacleTagsTest {
                 ))
         ))
 
-        Assert.assertEquals(expectedReactElement, deck.toReactElement())
+        Assert.assertEquals(expectedReactElement, deck.render())
     }
 
     @Test
@@ -58,7 +58,7 @@ open class SpectacleTagsTest {
 
         val expectedReactElement = ReactElement(name = "Deck", props = expectedProps, children = emptyList())
 
-        Assert.assertEquals(expectedReactElement, deck.toReactElement())
+        Assert.assertEquals(expectedReactElement, deck.render())
     }
 
     @Test
@@ -76,7 +76,7 @@ open class SpectacleTagsTest {
                 ReactElement(name = "Quote", children = "Test".toReactProp()),
                 ReactElement(name = "Cite", children = "Test Cite".toReactProp())
         ))
-        Assert.assertEquals(expectedReactElement, blockQuote.toReactElement())
+        Assert.assertEquals(expectedReactElement, blockQuote.render())
     }
 
     @Test
@@ -96,7 +96,7 @@ open class SpectacleTagsTest {
                 ),
                 props = mapOf("transitionDuration" to 500.toReactProp()))
 
-        Assert.assertEquals(expectedReactElement, appear.toReactElement())
+        Assert.assertEquals(expectedReactElement, appear.render())
     }
 
     @Test
@@ -113,6 +113,6 @@ open class SpectacleTagsTest {
                 "textAlign" to CenterAlign.toReactProp()
         ), children = "Google".toReactProp())
 
-        Assert.assertEquals(expectedReactElement, link.toReactElement())
+        Assert.assertEquals(expectedReactElement, link.render())
     }
 }

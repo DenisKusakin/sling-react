@@ -1,69 +1,33 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
-import com.cathcart93.sling.components.models.PageController
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toJson
-//import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toMap
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.toReactProp
-//import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate
-//import com.cathcart93.sling.components.models.spectacle.templates.spectacleTemplate2
-import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.Model
-import org.apache.sling.models.annotations.injectorspecific.OSGiService
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
-import spectacleTemplate
-import javax.annotation.PostConstruct
 
 /**
  * Created by Kusak on 7/15/2017.
  */
 @Model(
-        adaptables = [Resource::class, SlingHttpServletRequest::class],
-        adapters = [PageController::class],
+        adaptables = [Resource::class],
+        adapters = [ReactModel::class],
         resourceType = ["sling-spectacle/client-page"]
 )
-class SpectaclePageController : PageController {
+class SpectaclePageController : ReactModel {
 
     @SlingObject
     private lateinit var resource: Resource
 
-    @SlingObject
-    private lateinit var request: SlingHttpServletRequest
+    private val contentNodeName = "content"
 
-    private lateinit var props: String
-
-    private val authorJsUrl = "/etc/sling-spectacle/spectacle.client.author.js"
-
-    private val previewJsUrl = "/etc/sling-spectacle/spectacle.client.js"
-
-    private var isPreviewMode = false
-
-    @PostConstruct
-    fun init() {
-        isPreviewMode = request.getParameter("preview") != null
-        val container = resource.adaptTo(DeckModel::class.java)?.toReact(!isPreviewMode)
-//                val container = if (textFromRequest == null)
-//            spectacleTemplate()
-//        val container = spectacleTemplate(resource)
-//        val container = spectacleTemplate("Spectacle Template")
-//        props = beanSerializer.convertToMap(App("${resource.path}.json?isEdit=$isEditMode", isEditMode, container?.toReactElement()?.toMap()))
-        val rootReactElement = if (!isPreviewMode) ReactElement("SpectacleAuthorRoot", mapOf(
+    override fun render(context: RenderContext): ReactElement {
+        val isPreviewMode = !context.isEditMode
+        val content = resource.getChild(contentNodeName)?.adaptTo(ReactModel::class.java)?.render(context)
+        //val container = resource.adaptTo(DeckModel::class.java)?.render(context)
+        return if (!isPreviewMode) ReactElement("SpectacleAuthorRoot", mapOf(
                 "url" to "${resource.path}.json".toReactProp(),
-                "content" to container!!.toReactElement()
-        )) else container!!.toReactElement()
-        props = rootReactElement.toJson()
-    }
-
-    fun getData(): String {
-        return props
-    }
-
-    fun getJsUrl(): String {
-        return if (isPreviewMode) previewJsUrl else authorJsUrl
-    }
-
-    override fun getProps(): String {
-        return props
+                "content" to content!!
+        )) else content!!
     }
 }

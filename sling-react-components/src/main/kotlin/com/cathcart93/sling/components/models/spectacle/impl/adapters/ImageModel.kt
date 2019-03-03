@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.*
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -28,12 +29,13 @@ class ImageModel : BaseModel(), ReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
+        val isEditMode = context.isEditMode
         val component = image(src) {
             height = this@ImageModel.height
             width = this@ImageModel.width
         }.appear(shouldAppear)
-        return if (!isEditMode)
+        return (if (!isEditMode)
             component
         else
             component.edit(resource) {
@@ -41,7 +43,7 @@ class ImageModel : BaseModel(), ReactModel {
                 text(name = "height", title = "Height", value = if (height == null) "" else height!!)
                 text(name = "width", title = "Width", value = if (width == null) "" else width!!)
                 checkbox(name = "shouldAppear", title = "Should Appear", value = shouldAppear)
-            }
+            }).render()
     }
 
 }

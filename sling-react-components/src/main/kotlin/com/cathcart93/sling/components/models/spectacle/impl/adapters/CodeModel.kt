@@ -2,6 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -28,13 +29,13 @@ class CodeModel : BaseModel(), ReactModel {
     @SlingObject
     private lateinit var resource: Resource
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
         val component = code(source = if (source == null) "" else source!!, lang = lang.toCodeLang(), theme = theme.toTheme()) {
             italic = this@CodeModel.italic
             bold = this@CodeModel.bold
             caps = this@CodeModel.caps
         }
-        return if (!isEditMode)
+        return (if (!context.isEditMode)
             component
         else
             component.edit(resource) {
@@ -49,7 +50,7 @@ class CodeModel : BaseModel(), ReactModel {
                         SelectOption(label = "Light", value = "light"),
                         SelectOption(label = "External", value = "external")
                 ))
-            }
+            }).render()
     }
 
     private fun String.toCodeLang(): CodeLang {

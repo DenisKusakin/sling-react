@@ -1,14 +1,21 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import com.cathcart93.sling.components.models.spectacle.impl.builder.Number
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.SlingObject
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL, adapters = [DeckModel::class])
+@Model(
+        adaptables = [Resource::class],
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+        adapters = [DeckModel::class, ReactModel::class],
+        resourceType = [ResourceTypesConstants.DECK]
+)
 class DeckModel : ReactModel {
 
     @SlingObject
@@ -29,12 +36,14 @@ class DeckModel : ReactModel {
     @ValueMapValue
     private var theme: String = "default"
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
+        val isEditMode = context.isEditMode
         val slides = resource.children
                 .mapNotNull { it.adaptTo(SlideModel::class.java) }
-                .map { (it as ReactModel).toReact(isEditMode) }
-                .filter { it is Slide }
-                .map { it as Slide }
+
+//                .map { (it as ReactModel).render(isEditMode) }
+//                .filter { it is Slide }
+//                .map { it as Slide }
 
         val lastSlide = slide {
             val lastSlide = slides.lastOrNull()
@@ -44,15 +53,16 @@ class DeckModel : ReactModel {
             text("This Slide does not exist in content. Would you like to create it?") {
 
             }
-            comp(AddSlideButton(resourcePath = "${resource.path}/"))
-        }
+            comp(AddSlideButton(resourcePath = "${resource.path}/").render())
+        }.render()
+        val slideReactElements = slides.map { it.render(context) }
         return deck(theme.toTheme()) {
             transitionDuration = this@DeckModel.transitionDuration
             transition = this@DeckModel.transition?.toSlideTransition()
             controls = this@DeckModel.controls
             progress = this@DeckModel.progress?.toProgress()
-            (if (!isEditMode) slides else slides + lastSlide).forEach { slide(it) }
-        }
+            (if (!isEditMode) slideReactElements else slideReactElements + lastSlide).forEach { slide(it) }
+        }.render()
     }
 
     fun propertiesButton(): SlidePropertiesButton {

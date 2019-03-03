@@ -12,8 +12,11 @@ data class ReactElement(
         override val name: String,
         override val props: Map<String, ReactProp> = mutableMapOf(),
         override val children: ReactChildren = NoChildren) : IReactElement, ReactProp {
-    constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: ReactProp) : this(name, props, OnlyChild(children))
-    constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: List<ReactElement>) : this(name, props, ChildrenList(children))
+    constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: ReactProp)
+            : this(name, props, OnlyChild(children))
+
+    constructor(name: String, props: Map<String, ReactProp> = mutableMapOf(), children: List<ReactElement>)
+            : this(name, props, ChildrenList(children))
 }
 
 sealed class ReactChildren

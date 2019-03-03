@@ -8,11 +8,11 @@ open class SimpleDialogBuilder {
 }
 
 class EditDialog : SpectacleTag, SimpleDialogBuilder() {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         if (component == null) {
             return ReactElement("Error")
         }
-        val componentReactElement = component!!.toReactElement()
+        val componentReactElement = component!!.render()
         val props = mutableMapOf<String, ReactProp?>(
                 "editUrl" to editUrl?.toReactProp(),
                 "deleteUrl" to deleteUrl?.toReactProp(),
@@ -34,14 +34,14 @@ class EditDialog : SpectacleTag, SimpleDialogBuilder() {
 data class MoveInfoItem(val name: String, val url: String)
 
 class Container(
-        val children: List<SpectacleTag>,
+        val children: List<ReactElement>,
         val resourcePath: String,
         val components: List<ContainerComponent> = mutableListOf(),
         val moveInfo: List<MoveInfoItem> = emptyList()) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(
                 name = "Container",
-                children = children.map { it.toReactElement() },
+                children = children,
                 props = mapOf(
                         "resourcePath" to resourcePath.toReactProp(),
                         "components" to ArrayProp(
@@ -139,19 +139,19 @@ fun SimpleDialogBuilder.select(name: String, title: String, value: String, optio
 data class SelectOption(val label: String, val value: String)
 
 object EditModeToggler : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "EditModeToggler")
     }
 }
 
 class SystemButtonsContainer(private vararg val buttons: SpectacleTag) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
-        return ReactElement(name = "SystemButtonsContainer", children = buttons.map { it.toReactElement() })
+    override fun render(): ReactElement {
+        return ReactElement(name = "SystemButtonsContainer", children = buttons.map { it.render() })
     }
 }
 
 class SlidePropertiesButton(val title: String, val editUrl: String, val props: List<ReactProp>) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "SlidePropertiesButton", props = mapOf(
                 "editUrl" to editUrl.toReactProp(),
                 "editDialog" to ArrayProp(this.props),
@@ -161,7 +161,7 @@ class SlidePropertiesButton(val title: String, val editUrl: String, val props: L
 }
 
 class AddSlideButton(val resourcePath: String) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "AddSlideButton", props = mapOf(
                 "renderUrl" to resourcePath.toReactProp(),
                 "props" to ObjectProps(mapOf(
@@ -172,7 +172,7 @@ class AddSlideButton(val resourcePath: String) : SpectacleTag {
 }
 
 class DeleteSlideButton(val resourcePath: String) : SpectacleTag {
-    override fun toReactElement(): ReactElement {
+    override fun render(): ReactElement {
         return ReactElement(name = "DeleteSlideButton", props = mapOf(
                 "renderUrl" to resourcePath.toReactProp()
         ))

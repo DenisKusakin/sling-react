@@ -1,12 +1,14 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
+import com.cathcart93.sling.components.models.spectacle.impl.builder.HexColor
+import com.cathcart93.sling.components.models.spectacle.impl.builder.toTextAlign
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue
 
 @Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-abstract class BaseModel {
+open class BaseModel {
     @ValueMapValue
     var italic: Boolean? = false
 
@@ -42,5 +44,4 @@ abstract class BaseModel {
 
     @ValueMapValue
     var shouldAppear: Boolean = false
-
 }

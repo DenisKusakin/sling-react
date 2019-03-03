@@ -1,7 +1,9 @@
 package com.cathcart93.sling.components.models.spectacle.impl.adapters
 
+import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import com.cathcart93.sling.components.models.spectacle.impl.builder.*
 import com.cathcart93.sling.components.models.spectacle.impl.builder.Number
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.ReactElement
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
@@ -15,7 +17,12 @@ import org.xml.sax.InputSource
 import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 
-@Model(adaptables = [Resource::class], defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL, adapters = [MeduzaDeckModel::class])
+@Model(
+        adaptables = [Resource::class],
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+        adapters = [MeduzaDeckModel::class, ReactModel::class],
+        resourceType = [ResourceTypesConstants.MEDUZA_DECK]
+)
 class MeduzaDeckModel : ReactModel {
 
     @SlingObject
@@ -39,7 +46,7 @@ class MeduzaDeckModel : ReactModel {
     @ValueMapValue
     private var xml: String? = null
 
-    override fun toReact(isEditMode: Boolean): SpectacleTag {
+    override fun render(context: RenderContext): ReactElement {
         val slides = getNewsItems()
                 .map {
                     slide {
@@ -48,23 +55,23 @@ class MeduzaDeckModel : ReactModel {
 
                         }
                         text(text = it.title) {}
-                        comp(propertiesButton())
-                    }
+                        comp(propertiesButton().render())
+                    }.render()
                 }
 
         val lastSlide = slide {
             text("XML is empty. Configure it in the dialog") {
 
             }
-            comp(propertiesButton())
-        }
+            comp(propertiesButton().render())
+        }.render()
         return deck(theme.toTheme()) {
             transitionDuration = this@MeduzaDeckModel.transitionDuration
             transition = this@MeduzaDeckModel.transition?.toSlideTransition()
             controls = this@MeduzaDeckModel.controls
             progress = this@MeduzaDeckModel.progress?.toProgress()
             (if (slides.isEmpty()) listOf(lastSlide) else slides).forEach { slide(it) }
-        }
+        }.render()
     }
 
     private fun propertiesButton(): SlidePropertiesButton {
@@ -124,7 +131,7 @@ class MeduzaDeckModel : ReactModel {
                 val title = elem.getElementsByTagName("title").item(0).textContent
                 val link = elem.getElementsByTagName("link").item(0).textContent
                 val description = elem.getElementsByTagName("description").item(0).textContent
-                val image = elem.getElementsByTagName("enclosure").item(0).attributes.getNamedItem("renderUrl").textContent
+                val image = elem.getElementsByTagName("enclosure").item(0).attributes.getNamedItem("url").textContent
                 resultItems += NewsItem(title, link, description, image)
             }
         }
