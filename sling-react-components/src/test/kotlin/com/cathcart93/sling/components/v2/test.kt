@@ -72,7 +72,7 @@ open class Test {
                             "Value from context",
                             createElement(
                                     context.consumer,
-                                    { valueFromContext ->
+                                    { valueFromContext: String ->
                                         createElement(
                                                 h2,
                                                 valueFromContext
@@ -95,7 +95,7 @@ open class Test {
         val context = createContext<String>()
 
         val functionalComponent: (String) -> ElementDescriptor = {
-            createElement(context.consumer, { titleFromContext ->
+            createElement(context.consumer, { titleFromContext: String ->
                 createElement(h1, titleFromContext)
             })
         }

@@ -2,7 +2,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.r
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.AtomElementDescriptor
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.ElementDescriptor
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.FunctionalElementWithPropsAndChildrenDescriptor
+import com.google.gson.Gson
 
 class ReactJsonRenderer : ElementConsumer<String> {
     override fun render(element: ElementDescriptor): String {
@@ -27,11 +27,19 @@ class ReactJsonRenderer : ElementConsumer<String> {
         return ""
     }
 
+//    private fun elemToJson(type: String, ) : String{
+//
+//    }
+
+    data class RenderResult(val type: String, val props: Any?, val children: List<RenderResult>)
+
+    private fun elemToRenderResult(elem: AtomElementDescriptor): RenderResult {
+        return RenderResult(elem.name, elem.props, elem.children.map { elemToRenderResult(it as AtomElementDescriptor) })
+    }
+
     private fun renderAtomElement(elem: AtomElementDescriptor): String {
-        return """{
-                    type: ${elem.name},
-                    children: [${elem.children.joinToString(",") { renderAtomElement(it as AtomElementDescriptor) }}]
-                }
-        """.trimIndent()
+        val renderResult = elemToRenderResult(elem)
+        val gson = Gson()
+        return gson.toJson(renderResult)
     }
 }
