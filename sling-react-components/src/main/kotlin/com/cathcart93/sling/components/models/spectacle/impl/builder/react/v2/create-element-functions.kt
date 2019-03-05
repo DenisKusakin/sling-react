@@ -2,12 +2,11 @@ package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2
 
 fun <T, U> createElement(component: Component<T, U>, props: T, children: U): ElementDescriptor {
 //    val childrenList = ArrayList<ElementDescriptor>()
-    val newElement = FunctionalElementWithPropsAndChildrenDescriptor(component, props, children)
 //    for (element in children) {
 //        childrenList.add(element)
 //        element.parent = newElement
 //    }
-    return newElement
+    return FunctionalElementWithPropsAndChildrenDescriptor(component, props, children)
 }
 
 //private class FunctionalComponentWithPropsAndChildren<T>(
@@ -37,18 +36,26 @@ object NoProps
 ///**
 // *
 // */
-//fun <T> createElement(
-//        component: (T, List<ElementDescriptor>) -> ElementDescriptor,
-//        props: T,
-//        vararg children: ElementDescriptor): ElementDescriptor {
-//    return createElement(FunctionalComponentWithPropsAndChildren(component), props, *children)
-//}
+fun <T> createElement(
+        component: (T, List<ElementDescriptor>) -> ElementDescriptor,
+        props: T,
+        vararg children: ElementDescriptor): ElementDescriptor {
+    return createElement(createComponent(component), props, children.toList())
+}
+
+fun <T> createElement(
+        name: String,
+        props: T,
+        children: List<ElementDescriptor> = emptyList()
+): ElementDescriptor {
+    return AtomElementDescriptor(name = name, props = props, children = children)
+}
 //
 //fun <T> createElement(
 //        component: (T) -> ElementDescriptor,
 //        props: T
 //) : ElementDescriptor {
-//    return createElement(FunctionalComponentsWithProps(component), props)
+//    return createElement<T>(createComponent(component), props, emptyArray<ElementDescriptor>())
 //}
 //
 //fun createElement(

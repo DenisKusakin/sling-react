@@ -6,8 +6,8 @@ import com.google.gson.Gson
 
 class ReactJsonRenderer : ElementConsumer<String> {
     override fun render(element: ElementDescriptor): String {
-        val resultElement = element.render()
-        System.out.println(renderAtomElement(resultElement))
+//        val resultElement = element.render()
+//        System.out.println(renderAtomElement(resultElement))
 
 //        when (element) {
 //            is AtomElementDescriptor -> """

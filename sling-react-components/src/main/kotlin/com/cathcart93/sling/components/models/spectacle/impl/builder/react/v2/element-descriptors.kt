@@ -1,7 +1,5 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2
 
-interface ChildrenDescriptor
-
 interface ElementDescriptor {
     //val children: List<ElementDescriptor>
 }
@@ -23,7 +21,7 @@ data class FunctionalElementWithPropsAndChildrenDescriptor<T, U>(
 data class AtomElementDescriptor(
         val name: String,
         val props: Any? = null,
-        val children: List<AtomElementDescriptor>
+        val children: List<ElementDescriptor>
 ) : ElementDescriptor {
 //    override var parent: ElementDescriptor? = null
 //
@@ -88,9 +86,9 @@ data class ContextConsumerElementDescriptor<T>(
 /**
  * Primitive properties descriptors
  */
-interface PropertyDescriptor
-
-class StringPropertyDescriptor(val value: String) : PropertyDescriptor
-class NumberPropertyDescriptor(val value: Number) : PropertyDescriptor
-class BooleanPropertyDescriptor(val value: Boolean) : PropertyDescriptor
-class ObjectPropertyDescriptor(val value: Map<String, PropertyDescriptor>) : PropertyDescriptor
+//interface PropertyDescriptor
+//
+//class StringPropertyDescriptor(val value: String) : PropertyDescriptor
+//class NumberPropertyDescriptor(val value: Number) : PropertyDescriptor
+//class BooleanPropertyDescriptor(val value: Boolean) : PropertyDescriptor
+//class ObjectPropertyDescriptor(val value: Map<String, PropertyDescriptor>) : PropertyDescriptor

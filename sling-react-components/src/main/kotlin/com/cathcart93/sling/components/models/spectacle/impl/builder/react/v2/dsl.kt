@@ -1,88 +1,23 @@
-package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.Component
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.ElementDescriptor
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.NoProps
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.createElement
 
-class ElWrapper<T>(val component: Component<T>, val props: T) {
-    val children = ArrayList<ElementDescriptor>()
-//    fun <U> elc(component: ComponentWithProps<U>, props: U, block: ElWrapper<U>.() -> Unit): ElementDescriptor {
-//        val element = el(component, props, block)
-//        children.add(element)
-//        return element
-//    }
-
-    //fun <U> with(com)
-
-    fun toElementDescriptor(): ElementDescriptor {
-        return FunctionalElementWithPropsAndChildrenDescriptor(component, props, children)
+class ComponentWithProps<T, U>(val component: Component<T, U>, val props: T) {
+    operator fun invoke(childrenProducer: () -> U) : ElementDescriptor{
+        return createElement(component, props, childrenProducer())
     }
 }
 
-class AtomElWrapper(val componentName: String, val props: ObjectPropertyDescriptor) {
-    val children = ArrayList<ElementDescriptor>()
-
-    fun toElementDescriptor(): ElementDescriptor {
-        return AtomElementDescriptor(componentName, props, children)
-    }
+fun <T, U> Component<T, U>.with(props: T, children: () -> U): ElementDescriptor {
+    return createElement(this, props, children())//ComponentWithProps(this, props)
 }
 
-fun <T, U> ElWrapper<T>.el(component: Component<U>, props: U, block: ElWrapper<U>.() -> Unit): ElementDescriptor {
-    val newWrapper = ElWrapper(component, props)
-    block(newWrapper)
-    val newElement = newWrapper.toElementDescriptor()
-    this.children.add(newElement)
-    return newElement
-    //this.children.ad
+fun <T> Component<T, NoProps>.with(props: T) {
+
 }
 
-//fun <T> AtomElWrapper.el(component: ComponentWithProps<T>, props: T, block: ElWrapper<T>.() -> Unit): ElementDescriptor {
-//    val newWrapper = ElWrapper(component, props)
-//    block(newWrapper)
-//    val newElement = newWrapper.toElementDescriptor()
-//    this.children.add(newElement)
-//    return newElement
-//}
+operator fun <T> Component<NoProps, T>.invoke(t: () -> Unit){
 
-//fun <T> el(wrapper: ElWrapper<T>, component: Component<T>, props: T, block: ElWrapper<T>.() -> Unit): ElementDescriptor {
-//    val elWrapper = ElWrapper<T>()
-//    block(elWrapper)
-//
-//}
-
-fun <T> Component<T>.with(props: T, block: ElWrapper<T>.() -> Unit): ElementDescriptor {
-    val elWrapper = ElWrapper(this, props)
-    block(elWrapper)
-    return elWrapper.toElementDescriptor()
 }
 
-fun <T> el(component: Component<T>, props: T, block: ElWrapper<T>.() -> Unit): ElementDescriptor {
-    val elWrapper = ElWrapper(component, props)
-    block(elWrapper)
-    return elWrapper.toElementDescriptor()
-}
-
-//fun el(componentName: String, props: ObjectPropertyDescriptor, block: AtomElWrapper.() -> Unit): ElementDescriptor {
-//
-//}
-
-/**
- * Props DSL
- */
-
-//class ObjectPropsBuilder {
-//    val map = mutableMapOf<String, PropertyDescriptor>()
-//    fun toPropertyDescriptor(): ObjectPropertyDescriptor {
-//        TODO("")
-//    }
-//
-//    fun String.to(value: String) {
-//        map[this] = value
-//    }
-//}
-//
-//fun props(block: ObjectPropsBuilder.() -> Unit): ObjectPropertyDescriptor {
-//    val propsBuilder = ObjectPropsBuilder()
-//    block(propsBuilder)
-//    return propsBuilder.toPropertyDescriptor()
-//}
-
-/**
- * End of DSL
- */

@@ -1,35 +1,40 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2
 
 
-object Comp1 : Component<String> {
+object Comp1 : Component<String, List<ElementDescriptor>> {
     override fun render(props: String, children: List<ElementDescriptor>): ElementDescriptor {
         val testContext = createContext<String>()
         return createElement(
                 testContext.provider, "context value",
-                createElement(Comp2, "test")
+                createElement(Comp2, "test", emptyList())
         )
     }
 
 }
 
-object Comp2 : Component<String> {
+object Comp2 : Component<String, List<ElementDescriptor>> {
     override fun render(props: String, children: List<ElementDescriptor>): ElementDescriptor {
         val testContext = createContext<String>()
         return createElement(
                 testContext.consumer,
+                NoProps,
                 { value: String ->
                     createElement(
-                            Comp3, value,
-                            createElement(Comp1, props))
+                            comp3,
+                            value, NoProps)
                 })
     }
 }
 
-object Comp3 : Component<String> {
-    override fun render(props: String, children: List<ElementDescriptor>): ElementDescriptor {
-        return createElement(comp4, "Test Title")
-    }
+val comp3 = createComponent { title: String ->
+    AtomElementDescriptor("h1", title, emptyList())
 }
+
+//object Comp3 : Component<String, List<ElementDescriptor>> {
+//    override fun render(props: String, children: List<ElementDescriptor>): ElementDescriptor {
+//        return //createElement(comp4, "Test Title")
+//    }
+//}
 
 //TODO: Implement
 //object Comp4 : ComponentWithProps<String> {
@@ -42,7 +47,7 @@ object Comp3 : Component<String> {
 //    }
 //}
 
-val comp4: (String) -> ElementDescriptor = { title: String ->
-    val props = ObjectPropertyDescriptor(mapOf("title" to StringPropertyDescriptor(title)))
-    createElement("test", props)
-}
+//val comp4: (String) -> ElementDescriptor = { title: String ->
+//    val props = ObjectPropertyDescriptor(mapOf("title" to StringPropertyDescriptor(title)))
+//    createElement("test", props)
+//}
