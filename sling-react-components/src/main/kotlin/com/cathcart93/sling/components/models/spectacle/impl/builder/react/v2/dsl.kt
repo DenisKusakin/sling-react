@@ -28,3 +28,6 @@ operator fun <T> Component<NoProps, T>.invoke(t: () -> T) : ElementDescriptor{
  TODO("")
 }
 
+//operator fun <T> Component<NoProps, T>.invoke(props: T): ElementDescriptor {
+//    TODO("")
+//}
