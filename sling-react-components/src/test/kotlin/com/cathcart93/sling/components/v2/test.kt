@@ -109,6 +109,9 @@ open class Test {
             })
         }
 
+        val re = context.provider.with("Value from Context") {
+            functionalComponent.with("Test")
+        }
 
         val rootElement = createElement(
                 context.provider,
@@ -130,13 +133,11 @@ open class Test {
         val provider = context.provider
         val consumer = context.consumer
         provider.with("Value from context") {
-            ((consumer) {
+            consumer {
                 { title: String ->
                     h1.with(title)
                 }
-
-            })
-            TODO("")
+            }
         }
     }
 }
