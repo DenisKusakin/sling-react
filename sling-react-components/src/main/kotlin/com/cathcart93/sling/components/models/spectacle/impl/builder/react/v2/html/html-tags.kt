@@ -3,6 +3,7 @@ package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.h
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.createComponent
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.createElement
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.props
+import with
 
 data class HProps(val title: String)
 
@@ -43,4 +44,12 @@ val link = createComponent { props: LinkProps ->
         }
         "title" to props.title
     }, emptyList())
+}
+
+val newWindowLink = createComponent { (title, href): Pair<String, String> ->
+    link.with(LinkProps(href, Blank, title))
+}
+
+val googleLink = createComponent {
+    link.with(LinkProps(title = "Google", href = "https://google.com", target = Blank))
 }
