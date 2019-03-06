@@ -19,8 +19,8 @@ data class FunctionalElementWithPropsAndChildrenDescriptor<T, U>(
 }
 
 data class AtomElementDescriptor(
-        val name: String,
-        val props: Any? = null,
+        val type: String,
+        val props: ObjectProperty,
         val children: List<ElementDescriptor>
 ) : ElementDescriptor {
 //    override var parent: ElementDescriptor? = null

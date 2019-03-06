@@ -43,12 +43,12 @@ fun <T> createElement(
     return createElement(createComponent(component), props, children.toList())
 }
 
-fun <T> createElement(
-        name: String,
-        props: T,
+fun createElement(
+        type: String,
+        props: ObjectProperty,
         children: List<ElementDescriptor> = emptyList()
 ): ElementDescriptor {
-    return AtomElementDescriptor(name = name, props = props, children = children)
+    return AtomElementDescriptor(type, props, children)
 }
 //
 //fun <T> createElement(

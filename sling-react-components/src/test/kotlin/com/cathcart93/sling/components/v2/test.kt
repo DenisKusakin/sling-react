@@ -140,4 +140,25 @@ open class Test {
             }
         }
     }
+
+    @Test
+    fun test5() {
+        val propsObj = props {
+            "prop1" to "Value1 1"
+            "prop2" to "Value 2"
+            "prop3" to true
+            "prop4" to props {
+                "subprop1" to true
+                "subprop2" to 4
+                "subprop3" to list {
+                    +("test" to "test")
+                    +list{
+                        (1..5).forEach { +("prop$it" to "$it") }
+                    }
+
+                }
+            }
+        }
+        System.out.println(propsObj)
+    }
 }
