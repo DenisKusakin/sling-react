@@ -1,15 +1,11 @@
-package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.html
+package com.cathcart93.sling.components.v2
 
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.createComponent
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.createElement
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.props
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.*
 import with
 
 data class HProps(val title: String)
 
 val h1 = createComponent { props: HProps ->
-    //val tagProperties = HtmlTagProps(tagName = "h1", attributes = props.attributes)
-    //createElement("h1", tagProperties, children)
     createElement("components/h1", props {
         "title" to props.title
     }, emptyList())
@@ -52,4 +48,12 @@ val newWindowLink = createComponent { (title, href): Pair<String, String> ->
 
 val googleLink = createComponent {
     link.with(LinkProps(title = "Google", href = "https://google.com", target = Blank))
+}
+
+val googleLinkWithTitle = createComponent { title: String ->
+    link.with(LinkProps(title = title, href = "https://google.com", target = Blank))
+}
+
+val container = createComponent<NoProps, ListElement> { _, children ->
+    createElement("components/container", BasicElementProperty(), children)
 }

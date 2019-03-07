@@ -6,7 +6,7 @@ data class StringProperty(val value: String) : AtomProperty()
 data class BooleanProperty(val value: Boolean) : AtomProperty()
 data class NumberProperty(val value: Number) : AtomProperty()
 data class ArrayProperty(val value: List<AtomProperty>) : AtomProperty()
-data class ObjectProperty(val value: Map<String, AtomProperty>) : AtomProperty()
+data class BasicElementProperty(val value: Map<String, AtomProperty> = emptyMap()) : AtomProperty()
 
 class PropsBuilder {
     private val map = mutableMapOf<String, AtomProperty>()
@@ -34,8 +34,8 @@ class PropsBuilder {
         return prop
     }
 
-    fun toObjectProperty(): ObjectProperty {
-        return ObjectProperty(map)
+    fun toObjectProperty(): BasicElementProperty {
+        return BasicElementProperty(map)
     }
 }
 
@@ -51,7 +51,7 @@ class ArrayPropBuilder {
     }
 }
 
-fun props(block: PropsBuilder.() -> Unit): ObjectProperty {
+fun props(block: PropsBuilder.() -> Unit): BasicElementProperty {
     val propsBuilder = PropsBuilder()
     block(propsBuilder)
     return propsBuilder.toObjectProperty()

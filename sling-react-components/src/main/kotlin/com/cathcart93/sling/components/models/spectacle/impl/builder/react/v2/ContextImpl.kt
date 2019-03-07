@@ -1,21 +1,21 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2
 
-class ContextProviderComponent<T>(private val context: Context<T>) : Component<T, ElementDescriptor> {
-    override fun render(props: T, children: ElementDescriptor): ElementDescriptor {
-        return ContextProviderElementDescriptor(context, props, children)
+class ContextProviderComponent<T>(private val context: Context<T>) : Component<T, Element> {
+    override fun render(props: T, children: Element): Element {
+        return ContextProviderElement(context, props, children)
     }
 }
 
-class ContextConsumerComponent<T>(private val context: Context<T>) : Component<NoProps, (T) -> ElementDescriptor> {
-    override fun render(props: NoProps, children: (T) -> ElementDescriptor): ElementDescriptor {
-        return ContextConsumerElementDescriptor(context, children)
+class ContextConsumerComponent<T>(private val context: Context<T>) : Component<NoProps, (T) -> Element> {
+    override fun render(props: NoProps, children: (T) -> Element): Element {
+        return ContextConsumerElement(context, children)
     }
 
 }
 
 class ContextImpl<T> : Context<T> {
-    override val provider: Component<T, ElementDescriptor>
+    override val provider: Component<T, Element>
         get() = ContextProviderComponent(this)
-    override val consumer: Component<NoProps, (T) -> ElementDescriptor>
+    override val consumer: Component<NoProps, (T) -> Element>
         get() = ContextConsumerComponent(this)
 }

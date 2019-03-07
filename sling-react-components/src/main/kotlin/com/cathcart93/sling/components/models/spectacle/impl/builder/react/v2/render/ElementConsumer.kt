@@ -1,7 +1,7 @@
 package com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.render
 
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.ElementDescriptor
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.Element
 
-interface ElementConsumer<T> {
-    fun render(element: ElementDescriptor): T
+interface ElementConsumer {
+    fun render(element: Element): Element
 }
