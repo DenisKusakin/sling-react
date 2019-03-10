@@ -14,8 +14,11 @@ class ContextConsumerComponent<T>(private val context: Context<T>) : Component<N
 }
 
 class ContextImpl<T> : Context<T> {
+    private val providerComponent = ContextProviderComponent(this)
+    private val consumerComponent = ContextConsumerComponent(this)
+
     override val provider: Component<T, Element>
-        get() = ContextProviderComponent(this)
+        get() = providerComponent
     override val consumer: Component<NoProps, (T) -> Element>
-        get() = ContextConsumerComponent(this)
+        get() = consumerComponent
 }

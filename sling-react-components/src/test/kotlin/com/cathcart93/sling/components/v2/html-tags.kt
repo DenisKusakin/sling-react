@@ -6,9 +6,9 @@ import with
 data class HProps(val title: String)
 
 val h1 = createComponent { props: HProps ->
-    createElement("components/h1", props {
+    "components/h1".with(props {
         "title" to props.title
-    }, emptyList())
+    })
 }
 
 val h2 = createComponent { props: HProps ->
@@ -54,6 +54,6 @@ val googleLinkWithTitle = createComponent { title: String ->
     link.with(LinkProps(title = title, href = "https://google.com", target = Blank))
 }
 
-val container = createComponent<NoProps, ListElement> { _, children ->
+val container = createComponent<NoProps, List<Element>> { _, children ->
     createElement("components/container", BasicElementProperty(), children)
 }

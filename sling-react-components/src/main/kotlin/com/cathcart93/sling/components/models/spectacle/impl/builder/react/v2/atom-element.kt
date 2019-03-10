@@ -34,6 +34,12 @@ class PropsBuilder {
         return prop
     }
 
+    infix fun String.to(array: List<AtomProperty>): AtomProperty {
+        val prop = ArrayProperty(array)
+        map[this] = prop
+        return prop
+    }
+
     fun toObjectProperty(): BasicElementProperty {
         return BasicElementProperty(map)
     }
@@ -44,6 +50,10 @@ class ArrayPropBuilder {
 
     operator fun AtomProperty.unaryPlus() {
         list.add(this)
+    }
+
+    operator fun String.unaryPlus() {
+        list.add(StringProperty(this))
     }
 
     fun toArrayProperty(): ArrayProperty {

@@ -9,14 +9,14 @@ object NoProps
 //fun <T> createElement(
 //        component: (T, List<Element>) -> Element,
 //        props: T,
-//        vararg children: Element): Element {
-//    return createElement(createComponent(component), props, children.toList())
+//        vararg childrenProp: Element): Element {
+//    return createElement(createComponent(component), props, childrenProp.toList())
 //}
 
 fun createElement(
         type: String,
         props: BasicElementProperty,
-        children: List<Element>
+        children: List<Element> = emptyList()
 ): Element {
     return BasicElement(type, props, children)
 }
@@ -24,7 +24,7 @@ fun createElement(
 //fun createElement(
 //        type: String,
 //        props: BasicElementProperty,
-//        children: List<Element>
+//        childrenProp: List<Element>
 //) : Element{
-//    return BasicElementWithMultipleChildren(type, props, children)
+//    return BasicElementWithMultipleChildren(type, props, childrenProp)
 //}

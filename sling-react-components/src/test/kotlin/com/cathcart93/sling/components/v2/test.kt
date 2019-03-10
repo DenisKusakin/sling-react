@@ -2,10 +2,8 @@ package com.cathcart93.sling.components.v2
 
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.*
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.render.ReactRenderer
-import invoke
 import org.junit.Test
 import with
-import kotlin.test.assertEquals
 
 open class Test {
     val renderer = ReactRenderer()
@@ -20,8 +18,8 @@ open class Test {
 //        createElement("h2", HProps(title))
 //    }
 //
-//    val container = createComponent { _: NoProps, children: List<Element> ->
-//        createElement(name = "div", children = children, props = NoProps)
+//    val container = createComponent { _: NoProps, childrenProp: List<Element> ->
+//        createElement(name = "div", childrenProp = childrenProp, props = NoProps)
 //    }
 //
 //    val noProps = createComponent { x: NoProps, y: NoProps ->
@@ -41,100 +39,12 @@ open class Test {
     }
 
     @Test
-    fun test2() {
-
-        val functionalComponent = createComponent<String> {
-            h1.with(HProps(it))
-        }
-
-        val rootElement = createElement(
-                container,
-                NoProps,
-                listOf(createElement(
-                        functionalComponent,
-                        "Test",
-                        NoProps
-                ))
-        )
-        val result = renderer.render(rootElement)
-        //assertEquals("""{type: h1, props: {title: "Test"}}""", result)
-    }
-
-    @Test
-    fun test3() {
-        val context = createContext<String>()
-        val component = createComponent {
-            createElement(
-                    container,
-                    NoProps,
-                    listOf(
-                            createElement(
-                                    h1,
-                                    HProps("First Header"),
-                                    NoProps
-                            ),
-                            createElement(
-                                    context.provider,
-                                    "Value from context",
-                                    createElement(
-                                            context.consumer,
-                                            NoProps,
-                                            { valueFromContext: String ->
-                                                createElement(
-                                                        h2,
-                                                        HProps(valueFromContext),
-                                                        NoProps
-                                                )
-                                            }
-                                    )
-                            ),
-                            createElement(
-                                    h1,
-                                    HProps("Last Header"),
-                                    NoProps
-                            )
-                    )
-            )
-        }
-        val rootElement = createElement(component, NoProps, NoProps)
-        renderer.render(rootElement)
-    }
-
-    @Test
-    fun contextTest() {
-        val context = createContext<String>()
-
-        val functionalComponent = createComponent<String> {
-            createElement(context.consumer, NoProps, { titleFromContext: String ->
-                createElement(h1, HProps(titleFromContext), NoProps)
-            })
-        }
-
-        val re = context.provider.with("Value from Context") {
-            functionalComponent.with("Test")
-        }
-
-        val rootElement = createElement(
-                context.provider,
-                "Value from context",
-                createElement(
-                        functionalComponent,
-                        "Test",
-                        NoProps
-                )
-        )
-
-        val result = renderer.render(rootElement)
-        //assertEquals("""{type: h1, props: {title: "Test"}}""", result)
-    }
-
-    @Test
     fun test4() {
         val context = createContext<String>()
         val provider = context.provider
         val consumer = context.consumer
         provider.with("Value from context") {
-            consumer {
+            consumer.with {
                 { title: String ->
                     h1.with(HProps(title))
                 }
@@ -144,6 +54,34 @@ open class Test {
 
     @Test
     fun test5() {
+        val el = "compoonents/text".with(props {
+            "prop1" to "Value1"
+        }) {
+            +"components/test2".with(props {
+                "prop2" to "Value 2"
+                "listProp" to list {
+                    +"list element 1"
+                    +props {
+                        "pr1" to "pr2"
+                        "pr2" to list {
+                            +"text 1"
+                            +"text 2"
+                            +"text 3"
+                            +"components/test4".with(props {
+                                "pr1" to "val 1"
+                            }) {
+                                +"Child"
+                            }
+                        }
+                    }
+                }
+            }) {
+                +"components/test3".with(props {
+                    "prop4" to "value 4"
+                    "prop5" to "Value 5"
+                })
+            }
+        }
         val propsObj = props {
             "prop1" to "Value1 1"
             "prop2" to "Value 2"
@@ -152,7 +90,7 @@ open class Test {
                 "subprop1" to true
                 "subprop2" to 4
                 "subprop3" to list {
-                    +("test" to "test")
+                    +("text" to "text")
                     +list {
                         (1..5).forEach { +("prop$it" to "$it") }
                     }

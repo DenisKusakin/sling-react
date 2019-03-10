@@ -70,7 +70,7 @@ fun ReactElement.toJson(): String {
             map[t] = reactPropToValue(u)
         }
 
-        map["children"] = when (element.children) {
+        map["childrenProp"] = when (element.children) {
             is ChildrenList -> element.children.children.map { reactPropToValue(it) }
             is OnlyChild -> reactPropToValue(element.children.child)
             is NoChildren -> null
