@@ -30,34 +30,34 @@ open class SimpleComponentTestsV2 {
     @Test
     fun test3() {
         val context = createContext<String>()
-        val consumer: Component<NoProps, (String) -> Element> = context.consumer
         val el2 = container {
-            h1(HProps("First Header"))
-
-//            val element = consumer { valueFromContext: String ->
+            val elements = mutableListOf<Element>()
+            listOf(
+                    h1(HProps("First Header")),
+                    context.provider("Value from context") {
+                        context.consumer {
+                            { valueFromContext: String ->
+                                container {
+                                    listOf(
+                                            h2(HProps(valueFromContext)),
+                                            h1(HProps("$valueFromContext Changed"))
+                                    )
+                                }
+                            }
+                        }
+                    },
+                    h1(HProps("Last Header"))
+            )
+        }
+//        val el2 = container {
+//            h1(HProps("First Header"))
+//            context.provider("Value from context", context.consumer(NoProps) { valueFromContext: String ->
 //                container {
 //                    h2(HProps(valueFromContext))
 //                    h1(HProps("$valueFromContext Changed"))
 //                }
-//            }
-
-//            context.provider("Value from context", element)
-        }
-
-        val el = container.with {
-            +h1.with(HProps("First Header"))
-            +context.provider.with("Value from context") {
-                context.consumer.with {
-                    { valueFromContext: String ->
-                        container.with {
-                            +h2.with(HProps(valueFromContext))
-                            +h1.with(HProps("$valueFromContext Changed"))
-                        }
-                    }
-                }
-            }
-            +h1.with(HProps("Last Header"))
-        }
+//            })
+//        }
 
         val expectedRenderResult = "components/container".with(BasicElementProperty()) {
             +"components/h1".with(props {
@@ -77,8 +77,8 @@ open class SimpleComponentTestsV2 {
         }
 
         val renderer = ReactRenderer()
-        val elRenderResult = renderer.render(el)
-        assertEquals(elRenderResult, expectedRenderResult)
+        val elRenderResult = renderer.render(el2)
+        assertEquals(expectedRenderResult, elRenderResult)
     }
 
     @Test
