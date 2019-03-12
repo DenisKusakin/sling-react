@@ -1,9 +1,6 @@
 package com.cathcart93.sling.components.v2
 
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.Component
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.Element
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.createComponent
-import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.invoke
+import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.*
 import com.cathcart93.sling.components.models.spectacle.impl.builder.react.v2.render.ReactRenderer
 import org.junit.Test
 
@@ -19,6 +16,8 @@ open class TestCases {
             }
         }
 
+        val context = createContext<String>()
+
         val componentWithoutProps = createComponent {
             h2(HProps("Test"))
         }
@@ -33,6 +32,10 @@ open class TestCases {
 
                 container {
                     h2(HProps("Test Test Test"))
+                }
+
+                context.consumer(NoProps) { title: String ->
+                    h2(HProps("test $title"))
                 }
             }
 

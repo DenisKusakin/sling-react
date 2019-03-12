@@ -41,10 +41,6 @@ operator fun Component<NoProps, List<Element>>.invoke(block: ChildrenBuilderV2.(
     return createElement(this, NoProps, childrenBuilderV2.children)
 }
 
-operator fun <T> ContextConsumerComponent<T>.invoke(block: (T) -> Element): Element {
-    return createElement(this, NoProps, block)
-}
-
 class ChildrenBuilderV2 {
     val children = mutableListOf<Element>()
 
