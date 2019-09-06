@@ -13,11 +13,11 @@ import javax.annotation.PostConstruct
 /**
  * Created by Kusak on 7/15/2017.
  */
-@Model(
-        adaptables = [Resource::class, SlingHttpServletRequest::class],
-        adapters = [PageController::class],
-        resourceType = ["spectacle/meduza-spectacle"]
-)
+//@Model(
+//        adaptables = [Resource::class, SlingHttpServletRequest::class],
+//        adapters = [PageController::class],
+//        resourceType = ["spectacle/meduza-spectacle"]
+//)
 class MeduzaSpectaclePageController : PageController {
 
     @SlingObject

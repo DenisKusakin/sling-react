@@ -1,3 +1,5 @@
+package com.cathcart93.sling.components.v2
+
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -18,36 +20,38 @@ class SimpleRecursiveRenderer : JsonRenderer {
     }
 
     private fun <T> renderContextProviderElement(
-        element: ContextProviderElement<T>,
-        contextProviders: List<ContextProviderElement<*>>
+            element: ContextProviderElement<T>,
+            contextProviders: List<ContextProviderElement<*>>
     ): JsonElement {
         return render(element.children, contextProviders + element)
     }
 
     private fun <T> renderContextConsumerElement(
-        element: ContextConsumerElement<T>,
-        contextProviders: List<ContextProviderElement<*>>
+            element: ContextConsumerElement<T>,
+            contextProviders: List<ContextProviderElement<*>>
     ): JsonElement {
         val contextProvider = (contextProviders.asReversed()
-            .find { it.context!!.javaClass == element.contextType }
-            ?: throw IllegalArgumentException("Context is not provided for ${element.contextType}"))
+                .find { it.context!!.javaClass == element.contextType }
+                ?: throw IllegalArgumentException("Context is not provided for ${element.contextType}"))
                 as ContextProviderElement<T>
         return render(element.consumer(contextProvider.context), contextProviders)
     }
 
     private fun renderBasicElement(
-        element: BasicElement,
-        contextProviders: List<ContextProviderElement<*>>
+            element: BasicElement,
+            contextProviders: List<ContextProviderElement<*>>
     ): JsonElement {
         val jsonObject = JsonObject()
         jsonObject.add("__type", JsonPrimitive(element.type))
-        jsonObject.add("props", renderPrimitive(element.props, contextProviders))
+        val props = renderPrimitive(element.props, contextProviders) as JsonObject
+        props.entrySet().forEach { jsonObject.add(it.key, it.value) }
+        //jsonObject.add("props", renderPrimitive(element.props, contextProviders))
         return jsonObject
     }
 
     private fun <T> renderFunctionalElement(
-        element: FunctionalElement<T>,
-        contextProviders: List<ContextProviderElement<*>>
+            element: FunctionalElement<T>,
+            contextProviders: List<ContextProviderElement<*>>
     ): JsonElement {
         return render(element.component.render(element.props), contextProviders)
     }
@@ -65,7 +69,7 @@ class SimpleRecursiveRenderer : JsonRenderer {
             is ObjectProp -> {
                 val jsonObject = JsonObject()
                 prop.value
-                    .forEach { (name, value) -> jsonObject.add(name, renderPrimitive(value, contextProviders)) }
+                        .forEach { (name, value) -> jsonObject.add(name, renderPrimitive(value, contextProviders)) }
                 return jsonObject
             }
             is ElementProp -> render(prop.value, contextProviders)

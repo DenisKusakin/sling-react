@@ -1,3 +1,6 @@
+package com.cathcart93.sling.components.v2
+
+import com.cathcart93.sling.components.v2.JsonRenderer
 import com.google.gson.JsonElement
 
 class TreeRenderer : JsonRenderer {

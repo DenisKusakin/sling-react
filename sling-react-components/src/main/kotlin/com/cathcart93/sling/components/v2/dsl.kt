@@ -1,3 +1,5 @@
+package com.cathcart93.sling.components.v2
+
 operator fun String.invoke(init: ObjectPropsBuilder.() -> Unit): BasicElement {
     val propsBuilder = ObjectPropsBuilder()
     init(propsBuilder)
@@ -27,6 +29,11 @@ class ObjectPropsBuilder {
         return ElementProp(value)
     }
 
+    infix fun String.to(value: PrimitiveProp): PrimitiveProp {
+        map[this] = value
+        return value
+    }
+
     infix fun String.to(value: List<PrimitiveProp>): ArrayProp {
         map[this] = ArrayProp(value)
         return ArrayProp(value)
@@ -44,7 +51,7 @@ class ObjectPropsBuilder {
     }
 }
 
-operator fun <T> Component<T>.invoke(init: () -> T): FunctionalElement<T> {
+operator fun <T> ComponentV2<T>.invoke(init: () -> T): FunctionalElement<T> {
     return FunctionalElement(this, init())
 }
 
