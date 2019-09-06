@@ -14,7 +14,7 @@ object MeduzaSpectacle : ComponentV2<String> {
                     content = Deck {
                         slides = getNewsItems(props).map {
                             Slide {
-                                slides = listOf(Text {
+                                components = listOf(Text {
                                     text = it.title
                                 })
                             }
