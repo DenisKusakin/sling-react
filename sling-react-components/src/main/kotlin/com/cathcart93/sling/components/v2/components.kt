@@ -175,4 +175,22 @@ class CiteProps : BaseProps() {
     var text: String = ""
 }
 
+class HeadingProps : BaseProps() {
+    var fit: Boolean? = null
+    var lineHeight: Int? = null
+    var size: Int? = null
+}
+
+class ImageProps : BaseProps() {
+    var alt: String? = null
+    var display: String? = null
+    var src: String? = null
+    var width: Int? = null
+}
+
+class LinkProps : BaseProps() {
+    var href: String? = null
+    var target: String? = null
+}
+
 data class RootComponentProps(val content: Element, val url: String)
