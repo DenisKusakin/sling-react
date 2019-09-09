@@ -1,5 +1,5 @@
 package com.cathcart93.sling.components.v2
 
-interface ComponentV2<T> {
+interface Component<T> {
     fun render(props: T): Element
 }

@@ -46,12 +46,40 @@ class ObjectPropsBuilder {
         return propsBuilder.toObjectProp()
     }
 
+    infix fun String.list(listBuilder: ListBuilder.() -> Unit) {
+        val builder = ListBuilder()
+        listBuilder(builder)
+        map[this] = ArrayProp(builder.list)
+    }
+
     fun toObjectProp(): ObjectProp {
         return ObjectProp(map)
     }
 }
 
-operator fun <T> ComponentV2<T>.invoke(init: () -> T): FunctionalElement<T> {
+class ListBuilder {
+    val list = mutableListOf<PrimitiveProp>()
+
+    infix fun item(value: String) {
+        list += StringProp(value)
+    }
+
+    infix fun item(value: Number) {
+        list += NumberProp(value)
+    }
+
+    infix fun item(value: PrimitiveProp) {
+        list += value
+    }
+
+    fun item(value: ObjectPropsBuilder.() -> Unit) {
+        val propsBuilder = ObjectPropsBuilder()
+        value(propsBuilder)
+        list += propsBuilder.toObjectProp()
+    }
+}
+
+operator fun <T> Component<T>.invoke(init: () -> T): FunctionalElement<T> {
     return FunctionalElement(this, init())
 }
 

@@ -1,15 +1,15 @@
 package com.cathcart93.sling.components.v2
 
-object RootComponentV2 : ComponentV2<RootComponentProps> {
+object RootComponentV2 : Component<RootComponentProps> {
     override fun render(props: RootComponentProps): Element {
         return "SpectacleAuthorRoot" {
-            "url" to props.url
+            "url" to "${props.url}.json"
             "content" to props.content
         }
     }
 }
 
-object Deck : ComponentV2<DeckProps> {
+object Deck : Component<DeckProps> {
     override fun render(props: DeckProps): Element {
         return "Deck" {
             "colors" to {
@@ -35,7 +35,7 @@ object Deck : ComponentV2<DeckProps> {
 
 }
 
-object Slide : ComponentV2<SlideProps> {
+object Slide : Component<SlideProps> {
     override fun render(props: SlideProps): Element {
         return "Slide" {
             props.asProps().value.forEach { (t: String, u: PrimitiveProp) -> t to u }
@@ -54,7 +54,7 @@ object Slide : ComponentV2<SlideProps> {
 
 }
 
-object Text : ComponentV2<TextProps> {
+object Text : Component<TextProps> {
     override fun render(props: TextProps): Element {
         return "Text" {
             props.asProps().value.forEach { (t: String, u: PrimitiveProp) -> t to u }
@@ -65,7 +65,7 @@ object Text : ComponentV2<TextProps> {
     }
 }
 
-object BlockQuote : ComponentV2<BlockQuoteProps> {
+object BlockQuote : Component<BlockQuoteProps> {
     override fun render(props: BlockQuoteProps): Element {
         return "BlockQuote" {
             "children" to ArrayProp(listOf(
@@ -83,6 +83,40 @@ object BlockQuote : ComponentV2<BlockQuoteProps> {
 
 }
 
+object Heading : Component<HeadingProps> {
+    override fun render(props: HeadingProps): Element {
+        return "Heading" {
+            props.asProps().value.forEach { (t: String, u: PrimitiveProp) -> t to u }
+            "children" to (props.text ?: "")
+            "size" to props.size
+        }
+    }
+
+}
+
+object Image : Component<ImageProps> {
+    override fun render(props: ImageProps): Element {
+        return "Image" {
+            props.asProps().value.forEach { (t: String, u: PrimitiveProp) -> t to u }
+            props.alt?.let { "alt" to it }
+            props.src?.let { "src" to it }
+            props.display?.let { "display" to it }
+            props.width?.let { "width" to it }
+        }
+    }
+
+}
+
+object Link : Component<LinkProps> {
+    override fun render(props: LinkProps): Element {
+        return "Link" {
+            props.asProps().value.forEach { (t: String, u: PrimitiveProp) -> t to u }
+            props.target?.let { "target" to it }
+            props.href?.let { "href" to it }
+            props.content?.let { "children" to it }
+        }
+    }
+}
 
 /*
 DSL
@@ -108,6 +142,24 @@ operator fun Text.invoke(propsBuilder: TextProps.() -> Unit): Element {
 
 operator fun BlockQuote.invoke(propsBuilder: BlockQuoteProps.() -> Unit): Element {
     val props = BlockQuoteProps()
+    propsBuilder(props)
+    return FunctionalElement(this, props)
+}
+
+operator fun Heading.invoke(propsBuilder: HeadingProps.() -> Unit): Element {
+    val props = HeadingProps()
+    propsBuilder(props)
+    return FunctionalElement(this, props)
+}
+
+operator fun Image.invoke(propsBuilder: ImageProps.() -> Unit): Element {
+    val props = ImageProps()
+    propsBuilder(props)
+    return FunctionalElement(this, props)
+}
+
+operator fun Link.invoke(propsBuilder: LinkProps.() -> Unit): Element {
+    val props = LinkProps()
     propsBuilder(props)
     return FunctionalElement(this, props)
 }
@@ -179,6 +231,7 @@ class HeadingProps : BaseProps() {
     var fit: Boolean? = null
     var lineHeight: Int? = null
     var size: Int? = null
+    var text: String? = ""
 }
 
 class ImageProps : BaseProps() {
@@ -191,6 +244,7 @@ class ImageProps : BaseProps() {
 class LinkProps : BaseProps() {
     var href: String? = null
     var target: String? = null
+    var content: Element? = null
 }
 
 data class RootComponentProps(val content: Element, val url: String)

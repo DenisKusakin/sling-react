@@ -3,7 +3,7 @@ package com.cathcart93.sling.components.v2
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import org.apache.sling.api.resource.Resource
 
-object ResourceDeck : ComponentV2<Resource> {
+object ResourceDeck : Component<Resource> {
     override fun render(props: Resource): Element {
         return RootComponentV2 {
             RootComponentProps(
@@ -23,13 +23,13 @@ object ResourceDeck : ComponentV2<Resource> {
                         }
                         slides = listOf(TestSlide { null }) + props.children.map { ResourceSlide { it } }
                     },
-                    url = "test"
+                    url = props.path
             )
         }
     }
 }
 
-object TestSlide : ComponentV2<String?> {
+object TestSlide : Component<String?> {
     override fun render(props: String?): Element {
         return Slide {
             components = listOf(
@@ -52,7 +52,7 @@ object TestSlide : ComponentV2<String?> {
 
 }
 
-object ResourceSlide : ComponentV2<Resource> {
+object ResourceSlide : Component<Resource> {
     override fun render(props: Resource): Element {
         return Slide {
             initBaseProps(props, this)
@@ -68,14 +68,43 @@ object ResourceSlide : ComponentV2<Resource> {
                 asInt("transitionDuration")?.let { transitionDuration = it }
                 asInt("transitionDuration")?.let { transitionDuration = it }
             }
-            components = props.children.map {
-                AbstractResourceComponent { it }
-            }
+            components = listOf(
+                    "Container" {
+                        "resourcePath" to "${props.path}/"
+                        "components" to ArrayProp(emptyList())
+                        "moveInfo" to {
+
+                        }
+                        "children" to props.children.map {
+                            AbstractResourceComponent { it }
+                        }.map { ElementProp(it) }
+                        "components" list {
+                            item {
+                                "title" to "Text"
+                                "description" to "Text component"
+                                "props" to {
+                                    ":nameHint" to "spectacle/components/Text"
+                                    ":order" to "last"
+                                    "sling:resourceType" to "spectacle/components/Text"
+                                }
+                            }
+                            item {
+                                "title" to "Heading"
+                                "description" to "Heading component"
+                                "props" to {
+                                    ":nameHint" to "spectacle/components/Heading"
+                                    ":order" to "last"
+                                    "sling:resourceType" to "spectacle/components/Heading"
+                                }
+                            }
+                        }
+                    }
+            )
         }
     }
 }
 
-object ResourceText : ComponentV2<Resource> {
+object ResourceText : Component<Resource> {
     override fun render(props: Resource): Element {
         return Text {
             initBaseProps(props, this)
@@ -86,23 +115,108 @@ object ResourceText : ComponentV2<Resource> {
             }
         }
     }
+}
+
+object ResourceHeading : Component<Resource> {
+    override fun render(props: Resource): Element {
+        return Heading {
+            initBaseProps(props, this)
+            with(props.valueMap) {
+                asString("text")?.let { text = it }
+                asInt("size")?.let { this@Heading.size = it }
+            }
+        }
+    }
 
 }
 
-object AbstractResourceComponent : ComponentV2<Resource> {
-    override fun render(props: Resource): Element {
-        return when (props.valueMap.asString("sling:resourceType")) {
-            ResourceTypesConstants.TEXT -> ResourceText {
-                props
-            }
-            else -> UnknownComponent {
-                props
-            }
+/**
+ * Dialogs
+ */
+
+val EditableText = ResourceText.editableComponent { resource: Resource ->
+    text("text") {
+        value = resource.valueMap.asString("text")
+        title = "Text"
+    }
+    basicDialog(this, resource)
+}
+
+val EditableHeading = ResourceHeading.editableComponent { resource: Resource ->
+    text("text") {
+        value = resource.valueMap.asString("text")
+        title = "Title"
+    }
+    select("size") {
+        value = resource.valueMap.asString("size") ?: "1"
+        title = "Size"
+        options = (1..6).map { SelectOptions.Option(label = "H$it", value = "$it") }
+    }
+    basicDialog(this, resource)
+}
+
+fun basicDialog(dialog: Dialog, resource: Resource) {
+    with(dialog) {
+        checkbox("italic") {
+            value = resource.valueMap.asBoolean("italic") ?: false
+            title = "Italic"
+        }
+        checkbox("bold") {
+            value = resource.valueMap.asBoolean("bold") ?: false
+            title = "Bold"
+        }
+        checkbox("caps") {
+            value = resource.valueMap.asBoolean("caps") ?: false
+            title = "Caps"
+        }
+        text("margin") {
+            value = resource.valueMap.asString("margin")
+            title = "Margin"
+        }
+        text("padding") {
+            value = resource.valueMap.asString("padding")
+            title = "Padding"
+        }
+        color("textColor") {
+            value = resource.valueMap.asString("textColor")
+            title = "Text Color"
+        }
+        text("textSize") {
+            value = resource.valueMap.asString("textSize")
+            title = "Text Size"
+        }
+        color("bgColor") {
+            value = resource.valueMap.asString("bgColor")
+            title = "Background Color"
+        }
+        text("bgGradient") {
+            value = resource.valueMap.asString("bgGradient")
+            title = "Background Gradient"
+        }
+        text("height") {
+            value = resource.valueMap.asString("height")
+            title = "Height"
         }
     }
 }
 
-object UnknownComponent : ComponentV2<Resource> {
+/**
+ * END Dialogs
+ */
+
+object AbstractResourceComponent : Component<Resource> {
+    override fun render(props: Resource): Element {
+        return when (props.valueMap.asString("sling:resourceType")) {
+            ResourceTypesConstants.TEXT -> EditableText
+            ResourceTypesConstants.HEADING -> EditableHeading
+            else -> UnknownComponent
+        }{
+            props
+        }
+    }
+}
+
+object UnknownComponent : Component<Resource> {
     override fun render(props: Resource): Element {
         return Text {
             text = "Unknown component: ${props.path}"
