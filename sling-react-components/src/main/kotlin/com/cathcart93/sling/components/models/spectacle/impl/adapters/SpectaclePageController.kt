@@ -35,15 +35,27 @@ class SpectaclePageController : PageController {
 
     @PostConstruct
     fun init() {
+        isPreviewMode = request.requestPathInfo.selectorString?.contains("preview") ?: false
         val renderer = SimpleRecursiveRenderer()
+
+        val images = mutableSetOf<String>()
+        val ImageContext = ImageSrcContext(buildUrl = { src ->
+            images += src
+            src
+        })
+
         val element = (resource.valueMap.asString("xml"))?.let {
             MeduzaSpectacle { it }
-        } ?: ResourceDeck {
-            resource
+        } ?: withContext(ImageContext) {
+            withContext(EditModeContext(!isPreviewMode), {
+                DeckComponent {
+                    resource
+                }
+            })
         }
         val gson = Gson()
-
-        props = gson.toJson(renderer.render(element))
+        val renderResult = renderer.render(element)
+        props = gson.toJson(renderResult)
     }
 
     fun getData(): String {
@@ -51,7 +63,7 @@ class SpectaclePageController : PageController {
     }
 
     fun getJsUrl(): String {
-        return if (isPreviewMode) previewJsUrl else authorJsUrl
+        return authorJsUrl//if (isPreviewMode) previewJsUrl else authorJsUrl
     }
 
     override fun getProps(): String {

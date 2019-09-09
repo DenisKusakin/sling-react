@@ -12,5 +12,6 @@ class ResourceTypesConstants {
         const val LINK = "spectacle/components/Link"
         const val IMAGE = "spectacle/components/Image"
         const val MARKDOWN = "spectacle/components/Markdown"
+        const val DECK = "spectacle/components/Deck"
     }
 }

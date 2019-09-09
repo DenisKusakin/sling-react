@@ -3,56 +3,83 @@ package com.cathcart93.sling.components.v2
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import org.apache.sling.api.resource.Resource
 
-object ResourceDeck : Component<Resource> {
+object AuthorResourceDeck : Component<Resource> {
     override fun render(props: Resource): Element {
         return RootComponentV2 {
             RootComponentProps(
-                    content = Deck {
-                        with(props.valueMap) {
-                            asBoolean("autoplay")?.let { autoplay = it }
-                            asInt("autoplayDuration")?.let { autoplayDuration = it }
-                            asBoolean("autoplayLoop")?.let { autoplayLoop = it }
-                            asBoolean("autoplayOnStart")?.let { autoplayOnStart = it }
-                            asBoolean("controls")?.let { controls = it }
-                            asInt("contentHeight")?.let { contentHeight = it }
-                            asInt("contentWidth")?.let { contentWidth = it }
-                            asBoolean("disableKeyboardControls")?.let { disableKeyboardControls = it }
-                            asString("progress")?.let { progress = it }
-                            asBoolean("showFullscreenControl")?.let { showFullscreenControl = it }
-                            asInt("transitionDuration")?.let { transitionDuration = it }
-                        }
-                        slides = listOf(TestSlide { null }) + props.children.map { ResourceSlide { it } }
-                    },
+                    content = ResourceDeck { props },
                     url = props.path
             )
         }
     }
 }
 
-object TestSlide : Component<String?> {
-    override fun render(props: String?): Element {
+object ResourceDeck : Component<Resource> {
+    override fun render(props: Resource): Element {
+        return Deck {
+            with(props.valueMap) {
+                asBoolean("autoplay")?.let { autoplay = it }
+                asInt("autoplayDuration")?.let { autoplayDuration = it }
+                asBoolean("autoplayLoop")?.let { autoplayLoop = it }
+                asBoolean("autoplayOnStart")?.let { autoplayOnStart = it }
+                asBoolean("controls")?.let { controls = it }
+                asInt("contentHeight")?.let { contentHeight = it }
+                asInt("contentWidth")?.let { contentWidth = it }
+                asBoolean("disableKeyboardControls")?.let { disableKeyboardControls = it }
+                asString("progress")?.let { progress = it }
+                asBoolean("showFullscreenControl")?.let { showFullscreenControl = it }
+                asInt("transitionDuration")?.let { transitionDuration = it }
+            }
+            slides = props.children.map { SlideComponent { it } }
+        }
+    }
+}
+
+object DeckComponent : Component<Resource> {
+    override fun render(props: Resource): Element {
+        return isEditMode { isEditMode ->
+            (if (isEditMode) AuthorResourceDeck else ResourceDeck) {
+                props
+            }
+        }
+    }
+}
+
+object ResourceSlide : Component<Resource> {
+    override fun render(props: Resource): Element {
         return Slide {
-            components = listOf(
-                    Text {
-                        text = "Test Slide"
-                    },
-                    BlockQuote {
-                        quote {
-                            textColor = "green"
-                            text = "Quote"
-                        }
-                        cite {
-                            text = "Cite"
-                            textColor = "blue"
-                        }
-                    }
-            )
+            initBaseProps(props, this)
+            with(props.valueMap) {
+                asString("align")?.let { align = it }
+                asString("controlColor")?.let { controlColor = it }
+                asInt("goTo")?.let { goTo = it }
+                asString("id")?.let { id = it }
+                asInt("maxHeight")?.let { maxHeight = it }
+                asInt("maxWidth")?.let { maxWidth = it }
+                asString("notes")?.let { notes = it }
+                asString("state")?.let { state = it }
+                asInt("transitionDuration")?.let { transitionDuration = it }
+                asInt("transitionDuration")?.let { transitionDuration = it }
+            }
+            components = props.children.map {
+                AbstractResourceComponent { it }
+            }
+        }
+    }
+}
+
+object SlideComponent : Component<Resource> {
+    override fun render(props: Resource): Element {
+        return isEditMode { isEditMode ->
+            (if (isEditMode) EditableSlide else ResourceSlide) {
+                props
+            }
         }
     }
 
 }
 
-object ResourceSlide : Component<Resource> {
+object EditableSlide : Component<Resource> {
     override fun render(props: Resource): Element {
         return Slide {
             initBaseProps(props, this)
@@ -97,6 +124,15 @@ object ResourceSlide : Component<Resource> {
                                     "sling:resourceType" to "spectacle/components/Heading"
                                 }
                             }
+                            item {
+                                "title" to "Image"
+                                "description" to "Image component"
+                                "props" to {
+                                    ":nameHint" to "image"
+                                    ":order" to "last"
+                                    "sling:resourceType" to ResourceTypesConstants.IMAGE
+                                }
+                            }
                         }
                     }
             )
@@ -130,6 +166,22 @@ object ResourceHeading : Component<Resource> {
 
 }
 
+object ResourceImage : Component<Resource> {
+    override fun render(props: Resource): Element {
+        return consumeContext(ImageSrcContext::class.java) { imageSrcContext ->
+            val (buildUrl) = imageSrcContext
+            Image {
+                initBaseProps(props, this)
+                with(props.valueMap) {
+                    asString("src")?.let { src = buildUrl(it) }
+                    asString("alt")?.let { alt = it }
+                }
+            }
+        }
+    }
+
+}
+
 /**
  * Dialogs
  */
@@ -155,8 +207,20 @@ val EditableHeading = ResourceHeading.editableComponent { resource: Resource ->
     basicDialog(this, resource)
 }
 
+val EditableImage = ResourceImage.editableComponent { resource: Resource ->
+    text("src") {
+        value = resource.valueMap.asString("src")
+        title = "Source Url"
+    }
+    basicDialog(this, resource)
+}
+
 fun basicDialog(dialog: Dialog, resource: Resource) {
     with(dialog) {
+        text("href") {
+            value = resource.valueMap.asString("href")
+            title = "Href"
+        }
         checkbox("italic") {
             value = resource.valueMap.asBoolean("italic") ?: false
             title = "Italic"
@@ -206,13 +270,24 @@ fun basicDialog(dialog: Dialog, resource: Resource) {
 
 object AbstractResourceComponent : Component<Resource> {
     override fun render(props: Resource): Element {
-        return when (props.valueMap.asString("sling:resourceType")) {
-            ResourceTypesConstants.TEXT -> EditableText
-            ResourceTypesConstants.HEADING -> EditableHeading
-            else -> UnknownComponent
-        }{
-            props
+        return isEditMode { isEditMode ->
+            when (props.valueMap.asString("sling:resourceType")) {
+                ResourceTypesConstants.TEXT -> if (isEditMode) EditableText else ResourceText
+                ResourceTypesConstants.HEADING -> if (isEditMode) EditableHeading else ResourceHeading
+                ResourceTypesConstants.IMAGE -> if (isEditMode) EditableImage else ResourceImage
+                else -> UnknownComponent
+            }{
+                props
+            }.let { element ->
+                props.valueMap.asString("href")?.let {
+                    Link {
+                        href = it
+                        content = element
+                    }
+                } ?: element
+            }
         }
+
     }
 }
 
