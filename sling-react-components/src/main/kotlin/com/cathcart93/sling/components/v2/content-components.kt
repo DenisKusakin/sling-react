@@ -158,8 +158,10 @@ object ResourceHeading : Component<Resource> {
         return Heading {
             initBaseProps(props, this)
             with(props.valueMap) {
+                asBoolean("fit")?.let { fit = it }
                 asString("text")?.let { text = it }
                 asInt("size")?.let { this@Heading.size = it }
+                asInt("lineHeight")?.let { this@Heading.lineHeight = it }
             }
         }
     }
@@ -195,6 +197,10 @@ val EditableText = ResourceText.editableComponent { resource: Resource ->
 }
 
 val EditableHeading = ResourceHeading.editableComponent { resource: Resource ->
+    checkbox("fit") {
+        value = resource.valueMap.asBoolean("fit") ?: false
+        title = "Fit"
+    }
     text("text") {
         value = resource.valueMap.asString("text")
         title = "Title"

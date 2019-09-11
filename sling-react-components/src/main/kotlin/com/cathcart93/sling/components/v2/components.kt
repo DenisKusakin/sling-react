@@ -89,6 +89,7 @@ object Heading : Component<HeadingProps> {
             props.asProps().value.forEach { (t: String, u: PrimitiveProp) -> t to u }
             "children" to (props.text ?: "")
             "size" to props.size
+            props.fit?.let { "fit" to it }
         }
     }
 
