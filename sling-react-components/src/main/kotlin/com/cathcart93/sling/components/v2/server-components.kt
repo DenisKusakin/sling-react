@@ -5,41 +5,29 @@ import com.google.gson.Gson
 object SpectaclePage : Component<SpectaclePageProps> {
     override fun render(props: SpectaclePageProps): Element {
         return "html" {
-            "children" list {
-                item(
-                        "head" {
-                            "children" to ("title" {
-                                "children" to "Sling React Spectacle V2"
-                            })
+            "children" to mutableListOf<Element>().apply {
+                this += "head" {
+                    "children" to ("title" {
+                        "children" to "Sling React Spectacle V3"
+                    })
+                }
+                this += "body" {
+                    "children" to mutableListOf<Element>().apply {
+                        this += "div" {
+                            "id" to "app"
                         }
-                )
-                item(
-                        "body" {
-                            "children" list {
-                                item(
-                                        "div" {
-                                            "id" to "app"
-                                        }
-                                )
-                                item(
-                                        SpectacleScript {
-                                            props.content
-                                        }
-                                )
-                                item (
-                                        SpectacleJsScript {
-                                            props.jsUrl
-                                        }
-                                )
-                                item (
-                                        "script" {
-                                            "children" to "console.log('Hello, World!')"
-                                        }
-                                )
-                            }
+                        this += SpectacleDataJsonScript {
+                            props.content
                         }
-                )
-            }
+                        this += SpectacleJsScript {
+                            props.jsUrl
+                        }
+                        this += "script" {
+                            "children" to "console.log('Hello, World!')"
+                        }
+                    }.map { ElementProp(it) }
+                }
+            }.map { ElementProp(it) }
         }
     }
 
@@ -47,12 +35,13 @@ object SpectaclePage : Component<SpectaclePageProps> {
 
 data class SpectaclePageProps(val content: Element, val jsUrl: String)
 
-object SpectacleScript : Component<Element> {
+object SpectacleDataJsonScript : Component<Element> {
     override fun render(props: Element): Element {
         val jsonRenderer = SimpleRecursiveRenderer()
         val json = jsonRenderer.render(props)
         val gson = Gson()
         val jsonString = gson.toJson(json)
+
         return "script" {
             "children" to "window.__DATA=$jsonString"
         }

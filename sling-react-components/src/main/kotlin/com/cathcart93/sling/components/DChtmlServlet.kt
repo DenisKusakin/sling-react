@@ -36,34 +36,21 @@ class DChtmlServlet : SlingSafeMethodsServlet() {
 
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
-//        val writer = response.writer
-//        val controller = request.adaptTo(PageController::class.java)
-//        writer.append(controller!!.getProps())
+
         val authorJsUrl = "/etc/sling-spectacle/spectacle.client.author.js"
         val isPreviewMode = request.requestPathInfo.selectorString?.contains("preview") ?: false
         val resource = request.resource
-        val images = mutableSetOf<String>()
-        val ImageContext = ImageSrcContext(buildUrl = { src ->
-            images += src
-            src
-        })
-
-        val element = (resource.valueMap.asString("xml"))?.let {
-            MeduzaSpectacle { it }
-        } ?: withContext(ImageContext) {
-            withContext(EditModeContext(!isPreviewMode), {
-                DeckComponent {
-                    resource
-                }
-            })
-        }
 
         val pageElement = SpectaclePage {
-            SpectaclePageProps(content = element, jsUrl = authorJsUrl)
+            SpectaclePageProps(content = Spectacle {
+                SpectacleProps(resource = resource, isPreviewMode = isPreviewMode)
+            }, jsUrl = authorJsUrl)
         }
 
         val htmlRenderer = RecursiveHtmlRenderer()
         val html = htmlRenderer.render(pageElement)
+
+
         response.contentType = "text/html; charset=utf-8"
         response.setStatus(200)
         val os = response.outputStream
@@ -72,8 +59,6 @@ class DChtmlServlet : SlingSafeMethodsServlet() {
         IOUtils.copy(iS, os)
         iS.close()
         os.close()
-//        response.contentType = "text/html; charset=utf-8"
-//        response.setStatus(200)
     }
 
 }

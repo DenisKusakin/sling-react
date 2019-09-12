@@ -18,7 +18,11 @@
  */
 package com.cathcart93.sling.components
 
-import com.cathcart93.sling.components.models.PageController
+import com.cathcart93.sling.components.v2.SimpleRecursiveRenderer
+import com.cathcart93.sling.components.v2.Spectacle
+import com.cathcart93.sling.components.v2.SpectacleProps
+import com.cathcart93.sling.components.v2.invoke
+import com.google.gson.Gson
 import org.apache.felix.scr.annotations.Properties
 import org.apache.felix.scr.annotations.Property
 import org.apache.felix.scr.annotations.sling.SlingServlet
@@ -36,8 +40,14 @@ class PropsServlet : SlingSafeMethodsServlet() {
     override fun doGet(request: SlingHttpServletRequest,
                        response: SlingHttpServletResponse) {
         val writer = response.writer
-        val controller = request.adaptTo(PageController::class.java)
-        writer.append(controller!!.getProps())
+        val element = Spectacle {
+            SpectacleProps(true, request.resource)
+        }
+        val jsonRenderer = SimpleRecursiveRenderer()
+        writer.append(jsonRenderer.render(element).let {
+            val gson = Gson()
+            gson.toJson(it)
+        })
         response.contentType = "json"
         //TODO: rework
         response.setHeader("Access-Control-Allow-Origin", "*")

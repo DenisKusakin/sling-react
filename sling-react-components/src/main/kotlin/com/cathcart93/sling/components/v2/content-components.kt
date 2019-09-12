@@ -3,6 +3,27 @@ package com.cathcart93.sling.components.v2
 import com.cathcart93.sling.components.models.spectacle.api.ResourceTypesConstants
 import org.apache.sling.api.resource.Resource
 
+object Spectacle : Component<SpectacleProps> {
+    override fun render(props: SpectacleProps): Element {
+        val ImageContext = ImageSrcContext(buildUrl = { src ->
+            src
+        })
+
+        return (props.resource.valueMap.asString("xml"))?.let {
+            MeduzaSpectacle { it }
+        } ?: withContext(ImageContext) {
+            withContext(EditModeContext(!props.isPreviewMode), {
+                DeckComponent {
+                    props.resource
+                }
+            })
+        }
+    }
+
+}
+
+data class SpectacleProps(val isPreviewMode: Boolean, val resource: Resource)
+
 object AuthorResourceDeck : Component<Resource> {
     override fun render(props: Resource): Element {
         return RootComponentV2 {

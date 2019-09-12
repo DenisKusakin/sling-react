@@ -38,20 +38,8 @@ class SpectaclePageController : PageController {
         isPreviewMode = request.requestPathInfo.selectorString?.contains("preview") ?: false
         val renderer = SimpleRecursiveRenderer()
 
-        val images = mutableSetOf<String>()
-        val ImageContext = ImageSrcContext(buildUrl = { src ->
-            images += src
-            src
-        })
-
-        val element = (resource.valueMap.asString("xml"))?.let {
-            MeduzaSpectacle { it }
-        } ?: withContext(ImageContext) {
-            withContext(EditModeContext(!isPreviewMode), {
-                DeckComponent {
-                    resource
-                }
-            })
+        val element = Spectacle {
+            SpectacleProps(isPreviewMode, resource)
         }
         val gson = Gson()
         val renderResult = renderer.render(element)
