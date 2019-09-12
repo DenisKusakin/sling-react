@@ -72,6 +72,10 @@ class ListBuilder {
         list += value
     }
 
+    infix fun item(value: Element) {
+        list += ElementProp(value)
+    }
+
     fun item(value: ObjectPropsBuilder.() -> Unit) {
         val propsBuilder = ObjectPropsBuilder()
         value(propsBuilder)
